@@ -3,16 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice MCQ Quiz</title>
+    <title>Lokraj Awasthi - Kailali Model Quiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="quiz-container">
-        <h2>Practice MCQ Quiz</h2>
-        <div id="question-box" class="question">Loading Question...</div>
-        <div id="options-box" class="options"></div>
-        <button id="next-btn" class="btn" style="display: none;">Next Question</button>
-        <div id="score-box" class="score" style="display: none;"></div>
+        <!-- Background Audio -->
+        <audio id="bg-music" loop>
+            <source src="https://soundhelix.com" type="audio/mpeg">
+        </audio>
+
+        <!-- Music Button -->
+        <div class="music-control">
+            <button id="music-toggle-btn" class="control-btn">🎵 Music: OFF</button>
+        </div>
+
+        <!-- Screen 1: Name & School Login -->
+        <div id="auth-screen" class="screen">
+            <!-- 🔱 तपाईंको नाम र स्कुलको नाम यहाँ सेट गरिएको छ 🔱 -->
+            <h1>Lokraj Awasthi</h1>
+            <h3>Kailali Model Secondary School</h3>
+            <h2>MCQ Quiz Arena</h2>
+            <p>Please enter your identity to start</p>
+            <input type="text" id="username-input" placeholder="Enter Your Name..." autocomplete="off">
+            <button id="start-auth-btn" class="action-btn">Proceed</button>
+        </div>
+
+        <!-- Screen 2: Topics Grid -->
+        <div id="topic-screen" class="screen hide">
+            <h2>Hello, Player</span>! 👋</h2>
+            <p>Choose a Topic to Play (10 Random Questions)</p>
+            <div class="topic-grid">
+                <button class="topic-btn" data-topic="class10">📚 Class 10</button>
+                <button class="topic-btn" data-topic="class11">🎓 Class 11</button>
+                <button class="topic-btn" data-topic="samanyagyan">🌏 Samanya Gyan</button>
+                <button class="topic-btn" data-topic="allscience">🧪 All Science</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Gameplay -->
+        <div id="game-screen" class="screen hide">
+            <div class="game-header">
+                <span id="question-counter">Question: 1/10</span>
+                <div id="timer-box">⏳ Time: <span id="seconds-left">10</span>s</div>
+            </div>
+            <div id="question-text">Loading...</div>
+            <div id="options-container"></div>
+            <button id="next-question-btn" class="action-btn hide">Next Question</button>
+        </div>
+
+        <!-- Screen 4: Report -->
+        <div id="report-screen" class="screen hide">
+            <h2>Performance Report</h2>
+            <div id="score-summary"></div>
+            <div id="detailed-report"></div>
+            <button id="restart-game-btn" class="action-btn">Play Again</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

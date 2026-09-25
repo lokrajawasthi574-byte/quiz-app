@@ -1,6 +1,6 @@
 :root {
     --bg-color: #0b0f19;
-    --card-bg: rgba(21, 29, 48, 0.85); /* Transparent style */
+    --card-bg: rgba(21, 29, 48, 0.85); /* Glassmorphism transparent effect */
     --text-color: #f8fafc;
     --success-color: #10b981;
     --danger-color: #ef4444;
@@ -16,7 +16,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* 🔱 Background Mahadev High Quality Photo Effect 🔱 */
+   
+    /* 🔱 Background Mahadev High Quality Digital Art Image 🔱 */
     background: linear-gradient(rgba(11, 15, 25, 0.65), rgba(11, 15, 25, 0.85)),
                 url('https://unsplash.com') no-repeat center center fixed;
     background-size: cover;
@@ -165,7 +166,7 @@ input[type="text"]:focus {
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* 🔥 MIX COLORFUL TOUCH EFFECT */
+/* 🔥 TOUCHED / SELECTED OPTION: MIX COLORFUL GRADIENT GLOW ANIMATION */
 .option-btn.selected, .option-btn:active {
     background: var(--gradient-mix) !important;
     background-size: 300% 300% !important;
@@ -204,3 +205,5 @@ input[type="text"]:focus {
 
 .text-success { color: var(--success-color); font-weight: bold; }
 .text-danger { color: var(--danger-color); font-weight: bold; }
+
+ 

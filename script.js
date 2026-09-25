@@ -1,27 +1,24 @@
-// URL of the cloud database containing 1000 high-quality mixed questions
-const QUESTIONS_JSON_URL = "https://opentdb.com";
-
-// Local backup pool of hard mixed questions to ensure 100% uptime
-let hardMixedQuestions = [
-    { question: "Which treaty officially ended the Anglo-Nepalese War (1814-1816) resulting in major territorial loss for Nepal?", options: ["Sugauli Treaty", "Treaty of Segauli", "Treaty of Kathmandu", "Lal Mohar Treaty"], correct: 0 },
-    { question: "According to the current Constitution of Nepal, which organ holds the residual powers of the state?", options: ["Federal Parliament", "Federal Executive (Council of Ministers)", "Supreme Court", "Provincial Assembly"], correct: 1 },
-    { question: "In terms of geological structural zones of Nepal, which zone lies between the Main Central Thrust (MCT) and Main Boundary Thrust (MBT)?", options: ["Terai Zone", "Sub-Himalaya (Chure)", "Lesser Himalaya (Mahabharat)", "Higher Himalaya"], correct: 2 },
-    { question: "Which Nepalese Prime Minister was assassinated during the infamous Kot Massacre of 1903 BS?", options: ["Bhimsen Thapa", "Mathabar Singh Thapa", "Fateh Jung Shah", "Jung Bahadur Ranafactory"], correct: 2 },
-    { question: "What is the correct biological designation of the sub-alpine vegetation zone of Nepal in terms of altitude range?", options: ["1000m - 2000m", "2000m - 3000m", "3000m - 4100m", "Above 4100m"], correct: 2 },
-    { question: "Which pass acts as the traditional trans-Himalayan trade link between Humla district of Nepal and Tibet?", options: ["Nangpa La", "Hilsa (Nara Lagna)", "Rasuwagadhi", "Kodari"], correct: 1 },
-    { question: "During the Lichchhavi period of Nepal, what was the administrative court responsible for tax collection?", options: ["Kuther", "Shulli", "Maling", "Purbadhikaran"], correct: 0 },
-    { question: "What climate condition allows the Rara Lake to retain its unique ultra-oligotrophic clarity?", options: ["High sulfur content", "Low nutrient level and low phytoplankton productivity", "Glacial silt suspension", "Excessive calcium carbonate precipitation"], correct: 1 },
-    { question: "The conceptual 'Saptagandaki' river system loses which tributary before crossing the Mahabharat range?", options: ["Trishuli", "Budhi Gandaki", "Marsyangdi", "None, all major seven merge before the plains"], correct: 3 },
-    { question: "Under the local governance framework of Nepal, which commission handles fiscal equalization?", options: ["National Natural Resources and Fiscal Commission", "National Planning Commission", "Finance Ministry Directorate", "Local Government Restructuring Board"], correct: 0 }
+// Database of hard mixed questions (General Knowledge + Advanced Science)
+const hardMixedQuestions = [
+    { question: "Which treaty officially ended the Anglo-Nepalese War (1814-1816)?", options: ["Sugauli Treaty", "Treaty of Segauli", "Treaty of Kathmandu", "Lal Mohar Treaty"], correct: 0 },
+    { question: "According to the Constitution of Nepal, who holds residual powers?", options: ["Federal Parliament", "Federal Executive (Council of Ministers)", "Supreme Court", "Provincial Assembly"], correct: 1 },
+    { question: "Which zone lies between Main Central Thrust (MCT) and Main Boundary Thrust (MBT)?", options: ["Terai Zone", "Sub-Himalaya (Chure)", "Lesser Himalaya (Mahabharat)", "Higher Himalaya"], correct: 2 },
+    { question: "Which Nepalese Prime Minister was assassinated during the Kot Massacre?", options: ["Bhimsen Thapa", "Mathabar Singh Thapa", "Fateh Jung Shah", "Jung Bahadur Rana"], correct: 2 },
+    { question: "What climate condition allows Rara Lake to retain its unique clarity?", options: ["High sulfur content", "Low nutrient level and low phytoplankton productivity", "Glacial silt suspension", "Excessive calcium carbonate precipitation"], correct: 1 },
+    { question: "What is the capital city of Nepal?", options: ["Pokhara", "Kathmandu", "Lalitpur", "Biratnagar"], correct: 1 },
+    { question: "Which is the highest peak in the world?", options: ["K2", "Kangchenjunga", "Mount Everest", "Lhotse"], correct: 2 },
+    { question: "What is the chemical symbol for Water?", options: ["CO2", "H2O", "O2", "NaCl"], correct: 1 },
+    { question: "Which is the largest lake in Nepal?", options: ["Phewa Lake", "Rara Lake", "Tilicho Lake", "Begnas Lake"], correct: 1 },
+    { question: "Who is known as the Light of Asia?", options: ["Prithvi Narayan Shah", "Bhanubhakta Acharya", "Gautam Buddha", "King Janak"], correct: 2 }
 ];
 
-// Dynamically generate additional structured mock items to cross 1000+ pool size programmatically safely
+// Scaled programmatically to 1000+ safe test database entries
 for (let i = 1; i  {
         if (!musicPlaying) {
             bgMusic.play().then(() => {
                 musicPlaying = true;
                 musicToggleBtn.innerText = "🎵 Music: ON";
-            }).catch(err => console.log("Audio playback interaction requirement triggered."));
+            }).catch(err => console.log("Audio load blocked."));
         } else {
             bgMusic.pause();
             musicPlaying = false;
@@ -30,7 +27,6 @@ for (let i = 1; i  {
     });
 }
 
-// User Authentication Validation
 if (startAuthBtn) {
     startAuthBtn.addEventListener("click", () => {
         const enteredName = usernameInput.value.trim();
@@ -38,14 +34,24 @@ if (startAuthBtn) {
             alert("Please enter your name/identity to proceed!");
             return;
         }
+        localStorage.setItem("quizPlayerName", enteredName);
         playerName = enteredName;
-        playerIdentity.innerText = playerName;
-        authScreen.classList.add("hide");
-        topicScreen.classList.remove("hide");
+        if (playerIdentity) playerIdentity.innerText = playerName;
+        if (authScreen) authScreen.classList.add("hide");
+        if (topicScreen) topicScreen.classList.remove("hide");
     });
 }
 
-// Category Activation
+function checkSavedIdentity() {
+    const savedName = localStorage.getItem("quizPlayerName");
+    if (savedName && authScreen && topicScreen && playerIdentity) {
+        playerName = savedName;
+        playerIdentity.innerText = playerName;
+        authScreen.classList.add("hide");
+        topicScreen.classList.remove("hide");
+    }
+}
+
 document.querySelectorAll(".topic-btn").forEach(button => {
     button.addEventListener("click", () => {
         activeTopicKey = button.getAttribute("data-topic");
@@ -53,23 +59,15 @@ document.querySelectorAll(".topic-btn").forEach(button => {
     });
 });
 
-// Selection of 10 Absolute Non-Repeated Random Questions
 function startQuizSession() {
     const rawDB = allQuestionsDatabase[activeTopicKey] || [];
-   
-    // Filter out historical tracks to strictly prevent repetition
     let freshQuestions = rawDB.filter(q => !usedQuestionsPool.includes(q.question));
-   
-    // Safety fallback: if the pool finishes, flush history to keep the game endless
     if (freshQuestions.length < 10) {
         usedQuestionsPool = [];
         freshQuestions = [...rawDB];
     }
-   
     let shuffled = freshQuestions.sort(() => 0.5 - Math.random());
     currentQuestionsList = shuffled.slice(0, 10);
-   
-    // Feed current items into history tracking array
     currentQuestionsList.forEach(q => usedQuestionsPool.push(q.question));
 
     activeIndex = 0;
@@ -81,7 +79,6 @@ function startQuizSession() {
     launchQuestion();
 }
 
-// 10 Seconds Escape Timer Engine
 function startCountdown() {
     clearInterval(timerInterval);
     let timeLeft = 10;
@@ -92,15 +89,14 @@ function startCountdown() {
         if (secondsLeft) secondsLeft.innerText = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            userChoices[activeIndex] = undefined; // Trigger auto escape/timeout
+            userChoices[activeIndex] = undefined;
             handleNextTransition();
         }
     }, 1000);
 }
 
-// Layout Populator
 function launchQuestion() {
-    if (!optionsContainer || !nextQuestionBtn) return;
+    if (!optionsContainer || !nextQuestionBtn || !questionText) return;
     optionsContainer.innerHTML = "";
     nextQuestionBtn.classList.add("hide");
    
@@ -111,14 +107,14 @@ function launchQuestion() {
     }
    
     if (questionCounter) questionCounter.innerText = `Question: ${activeIndex + 1}/10`;
-    if (questionText) questionText.innerText = `Q${activeIndex + 1}. ${activeQuestion.question}`;
+    questionText.innerText = `Q${activeIndex + 1}. ${activeQuestion.question}`;
 
     activeQuestion.options.forEach((option, index) => {
         const btn = document.createElement("button");
         btn.innerText = option;
         btn.classList.add("option-btn");
         btn.addEventListener("click", () => {
-            clearInterval(timerInterval); // Halt countdown on user choice
+            clearInterval(timerInterval);
             document.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
             btn.classList.add("selected");
             userChoices[activeIndex] = index;
@@ -126,7 +122,6 @@ function launchQuestion() {
         });
         optionsContainer.appendChild(btn);
     });
-
     startCountdown();
 }
 
@@ -146,12 +141,10 @@ function handleNextTransition() {
     }
 }
 
-// Evaluation Summary Compiler Dashboard
 function generateFinalReport() {
     if (!gameScreen || !reportScreen || !scoreSummary || !detailedReport) return;
     gameScreen.classList.add("hide");
     reportScreen.classList.remove("hide");
-
     score = 0;
     let reportMarkup = "";
 
@@ -159,9 +152,26 @@ function generateFinalReport() {
         let userChoice = userChoices[index];
         let correctChoice = item.correct;
         let isCorrect = userChoice === correctChoice;
-
         if (isCorrect) score++;
 
         reportMarkup += `
             <div class="report-item ${isCorrect ? 'correct-ans' : 'wrong-ans'}">
                 <strong>Q${index + 1}: ${item.question}</strong><br>
+                Your Choice: <span class="${isCorrect ? 'text-success' : 'text-danger'}">${userChoice !== undefined ? item.options[userChoice] : 'Skipped/Timeout'}</span><br>
+                Correct Option: <span class="text-success">${item.options[correctChoice]}</span>
+            </div>`;
+    });
+    scoreSummary.innerHTML = `<h3>${playerName}, you scored ${score} / 10</h3>`;
+    detailedReport.innerHTML = reportMarkup;
+}
+
+if (restartGameBtn) {
+    restartGameBtn.addEventListener("click", () => {
+        startQuizSession();
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    checkSavedIdentity();
+});
+checkSavedIdentity();
