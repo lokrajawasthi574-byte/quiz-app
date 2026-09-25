@@ -1,65 +1,206 @@
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: rgba(21, 29, 48, 0.85); /* Transparent style */
+    --text-color: #f8fafc;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --gradient-mix: linear-gradient(45deg, #ff007f, #7f00ff, #00f0ff, #ff007f);
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #eef2f3;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    padding: 20px;
+    /* 🔱 Background Mahadev High Quality Photo Effect 🔱 */
+    background: linear-gradient(rgba(11, 15, 25, 0.65), rgba(11, 15, 25, 0.85)),
+                url('https://unsplash.com') no-repeat center center fixed;
+    background-size: cover;
 }
+
 .quiz-container {
+    background-color: var(--card-bg);
+    padding: 35px 25px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+    width: 90%;
+    max-width: 480px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.music-control {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
     background: white;
-    padding: 30px;
+    color: black;
+}
+
+.screen {
+    text-align: center;
+}
+
+.hide {
+    display: none !important;
+}
+
+h1, h2 {
+    background: linear-gradient(to right, #00f0ff, #ff007f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 10px;
+}
+
+input[type="text"] {
+    width: 85%;
+    padding: 14px;
+    margin: 25px 0;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    max-width: 550px;
-    width: 100%;
-}
-h2 { text-align: center; margin-top: 0; color: #2c3e50; }
-.question { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; text-align: left; }
-.options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-.option-btn {
-    text-align: left;
-    background-color: #f8f9fa;
-    border: 2px solid #e9ecef;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.2s;
-}
-.option-btn:hover { background-color: #e9ecef; }
-.selected {
-    background-color: #3498db !important;
+    border: 2px solid #27354f;
+    background-color: #0b0f19;
     color: white;
-    border-color: #2980b9;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: 0.3s;
 }
-.btn {
-    display: block;
+
+input[type="text"]:focus {
+    border-color: #00f0ff;
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.action-btn, .option-btn, .topic-btn {
     width: 100%;
-    background-color: #2ecc71;
-    color: white;
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 14px;
     border: none;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-sizing: border-box;
 }
-.btn:hover { background-color: #27ae60; }
-.score { font-size: 24px; font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 20px; }
-.report-item {
-    background: #fdfdfd;
-    border-left: 5px solid #ccc;
-    padding: 15px;
+
+.action-btn {
+    background: linear-gradient(90deg, #7f00ff, #ff007f);
+    color: white;
     margin-top: 15px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    text-align: left;
+    box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3);
 }
-.report-item.correct-ans { border-left-color: #2ecc71; }
-.report-item.wrong-ans { border-left-color: #e74c3c; }
-.report-text { font-size: 14px; margin-top: 5px; }
-.text-success { color: #27ae60; font-weight: bold; }
-.text-danger { color: #c0392b; font-weight: bold; }
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 127, 0.5);
+}
+
+.topic-btn {
+    background-color: rgba(30, 41, 59, 0.9);
+    color: white;
+    text-align: left;
+    padding-left: 25px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.topic-btn:hover {
+    background: var(--gradient-mix);
+    background-size: 300% 300%;
+    animation: gradientMove 3s infinite;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+#timer-box {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+#question-text {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.option-btn {
+    background-color: rgba(30, 41, 66, 0.9);
+    color: #e2e8f0;
+    text-align: left;
+    padding-left: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 🔥 MIX COLORFUL TOUCH EFFECT */
+.option-btn.selected, .option-btn:active {
+    background: var(--gradient-mix) !important;
+    background-size: 300% 300% !important;
+    animation: gradientMove 2s infinite linear;
+    color: #ffffff !important;
+    font-weight: bold;
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(127, 0, 255, 0.6), 0 0 10px rgba(0, 240, 255, 0.4);
+    border: none !important;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.report-item {
+    background-color: rgba(26, 35, 61, 0.9);
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 12px;
+    text-align: left;
+    border-left: 6px solid #64748b;
+}
+
+.report-item.correct-ans {
+    border-left-color: var(--success-color);
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+}
+
+.report-item.wrong-ans {
+    border-left-color: var(--danger-color);
+    background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
+}
+
+.text-success { color: var(--success-color); font-weight: bold; }
+.text-danger { color: var(--danger-color); font-weight: bold; }
