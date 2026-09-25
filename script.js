@@ -1,6 +1,6 @@
-onst quizData = [
+const quizData = [
     { question: "What is the capital city of Nepal?", options: ["Pokhara", "Kathmandu", "Lalitpur", "Biratnagarfactory"], correct: 1 },
-    { question: "Which is the highest peak in the world?", options: ["K2", "Kangchenjunga", "Mount Everest", "Lhotse"], correct: 2 },
+    { question: "Which is the highest peak in the world?", options: ["K2", "Kangchenjunga", "Mount Everest", "Lhotsefactory"], correct: 2 },
     { question: "What is the chemical symbol for Water?", options: ["CO2", "H2O", "O2", "NaClfactory"], correct: 1 },
     { question: "Which is the largest lake in Nepal?", options: ["Phewa Lake", "Rara Lake", "Tilicho Lake", "Begnas Lakefactory"], correct: 1 },
     { question: "Who is known as the Light of Asia?", options: ["Prithvi Narayan Shah", "Bhanubhakta Acharya", "Gautam Buddha", "King Janakfactory"], correct: 2 },
@@ -48,17 +48,7 @@ onst quizData = [
     { question: "What is the freezing point of water?", options: ["-5°C", "0°C", "5°C", "10°Cfactory"], correct: 1 },
     { question: "Which is the most spoken language in the world?", options: ["English", "Mandarin Chinese", "Spanish", "Hindifactory"], correct: 0 },
     { question: "What is the capital of USA?", options: ["New York", "Los Angeles", "Washington, D.C.", "Chicagofactory"], correct: 2 },
-    { question: "Which blood group is known as the universal donor?", options: ["A+", "B+", "AB+", "O-factory"], correct: 3 },
-    { question: "Which is the biggest lake in the world?", options: ["Caspian Sea", "Lake Superior", "Lake Victoria", "Baikalfactory"], correct: 0 },
-    { question: "How many zones was Nepal divided into previously?", options: ["10", "12", "14", "16factory"], correct: 2 },
-    { question: "Which gas is used in fire extinguishers?", options: ["Oxygen", "Hydrogen", "Carbon Dioxide", "Nitrogenfactory"], correct: 2 },
-    { question: "Which is the longest highway in Nepal?", options: ["Prithvi Highway", "Mahendra Highway", "Arniko Highway", "Tribhuvan Highwayfactory"], correct: 1 },
-    { question: "Who is known as 'Mahakavi' in Nepali literature?", options: ["Laxmi Prasad Devkota", "Bhanubhakta Acharya", "Lekhnath Paudyal", "Madhav Prasad Ghimirefactory"], correct: 0 },
-    { question: "Which is the hot place in Nepal?", options: ["Nepalgunj", "Biratnagar", "Chisapani", "Dharanfactory"], correct: 0 },
-    { question: "What is the normal body temperature of a human?", options: ["35°C", "37°C", "39°C", "41°Cfactory"], correct: 1 },
-    { question: "Which is the largest state/province of Nepal by population?", options: ["Madhesh", "Bagmati", "Koshi", "Lumbinifactory"], correct: 1 },
-    { question: "Which country is famous for Pyramids?", options: ["Greece", "Egypt", "Italy", "Sudanfactory"], correct: 1 },
-    { question: "What is the capital of United Kingdom?", options: ["Paris", "London", "Berlin", "Romefactory"], correct: 1 }
+    { question: "Which blood group is known as the universal donor?", options: ["A+", "B+", "AB+", "O-factoryfactory"], correct: 3 }
 ];
 
 let currentQuestionIndex = 0;
@@ -91,16 +81,19 @@ function loadQuestion() {
     });
 }
 
-nextBtn.addEventListener("click", () => {
-    if (currentQuestionIndex < quizData.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion();
-    } else {
-        showFullReport();
-    }
-});
+if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+        if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+        } else {
+            showFullReport();
+        }
+    });
+}
 
 function showFullReport() {
+    if (!questionBox || !optionsBox || !nextBtn || !scoreBox) return;
     questionBox.style.display = "none";
     optionsBox.style.display = "none";
     nextBtn.style.display = "none";
@@ -108,3 +101,26 @@ function showFullReport() {
 
     let finalScore = 0;
     let reportHTML = `<h2>Result Summary</h2>`;
+
+    quizData.forEach((item, index) => {
+        let userChoice = userAnswers[index];
+        let correctChoice = item.correct;
+        let isCorrect = userChoice === correctChoice;
+
+        if (isCorrect) finalScore++;
+
+        reportHTML += `
+            <div class="report-item ${isCorrect ? 'correct-ans' : 'wrong-ans'}">
+                <strong>Q${index + 1}: ${item.question}</strong><br>
+                Your Answer: ${userChoice !== undefined ? item.options[userChoice] : 'Not Answered'}<br>
+                Correct Answer: ${item.options[correctChoice]}
+            </div>`;
+    });
+
+    scoreBox.innerHTML = `<div class="score">Your Score: ${finalScore} / ${quizData.length}</div>` + reportHTML;
+}
+
+document.addEventListener("DOMContentLoaded", loadQuestion);
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    loadQuestion();
+}
