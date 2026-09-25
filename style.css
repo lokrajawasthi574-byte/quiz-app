@@ -1,3 +1,4 @@
+/* 🔱 LOKRAJ AWASTHI - ULTIMATE VIRAL LOKSEWA STYLE ARCHITECTURE 🔱 */
 :root {
     --bg-color: #02040a;
     --card-bg: rgba(6, 11, 25, 0.9);
@@ -10,7 +11,7 @@
 body {
     margin: 0; padding: 0; font-family: 'Poppins', sans-serif; color: var(--text-color);
     display: flex; justify-content: center; align-items: center; min-height: 100vh;
-    /* 🔱 भगवान महादेवको भव्य, दिव्य र आकर्षक लाइभ एनिमेटेड ब्याकग्राउण्ड - सुरुदेखि अन्तिमसम्म स्थिर रहने */
+    /* 🔱 भगवान महादेवको भव्य, दिव्य र आकर्षक लाइभ एनिमेटेड ब्याकग्राउण्ड - सुरुदेखि अन्त्यसम्म स्थिर रहने */
     background: linear-gradient(rgba(2, 4, 10, 0.65), rgba(2, 4, 10, 0.9)),
                 url('https://unsplash.com') no-repeat center center fixed !important;
     background-size: cover !important;
@@ -38,7 +39,7 @@ p { text-align: center; color: #cbd5e1; }
 
 .topic-grid { display: flex; flex-direction: column; width: 100%; }
 
-/* 🔥 बटनहरूलाई स्पष्ट ठूलो प्रिमियम बाकस बनाउने कोड (First Click Clickable Layer) */
+/* 🔥 बटनहरूलाई ब्लक र स्पष्ट ठूलो प्रिमियम बाकस बनाउने अनिवार्य नयाँ बुट्टा */
 .action-btn, .option-btn, .topic-btn {
     display: block !important;
     width: 100% !important;
@@ -67,9 +68,9 @@ p { text-align: center; color: #cbd5e1; }
 .option-btn { background-color: #162036 !important; color: #cbd5e1 !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .option-btn:hover:not([disabled]) { background: rgba(0, 240, 255, 0.2) !important; border: 1px solid #00f0ff !important; color: white !important; }
 
-/* 🟢 सही हुँदा हरियो बत्ती */
+/* 🟢 सही हुँदा हरियो बत्ती चम्किने प्रणाली */
 .option-btn.correct-glow { background: linear-gradient(45deg, #10b981, #059669) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important; }
-/* 🔴 गलत हुँदा रातो बत्ती */
+/* 🔴 गलत हुँदा रातो बत्ती चम्किने प्रणाली */
 .option-btn.wrong-danger { background: linear-gradient(45deg, #ef4444, #dc2626) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(239, 68, 68, 0.8) !important; }
 
 .google-ad-box { margin-top: 15px; padding: 5px; background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 12px; }
