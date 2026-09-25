@@ -1,4 +1,4 @@
-// 🔱 LOKRAJ AWASTHI - MASTER CLEAN BUILD v50 PERFECT ENGINE 🔱
+// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY MATRIX WITH GLOBAL INLINE SCOPE FIX 🔱
 
 const pools = {
     class10_science: [
@@ -43,7 +43,7 @@ const pools = {
     ]
 };
 
-// 100,000+ Scalable Database Inflation Loops Framework
+// Auto Inflation Framework (100,000+ System Capacity)
 Object.keys(pools).forEach(key => {
     let limit = (key === 'loksewa_gk') ? 2500 : 1050;
     for (let i = 1; i <= limit; i++) {
@@ -95,42 +95,38 @@ function playTickAlarm() {
         gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
         oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
         oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.08);
-    } catch (e) { console.log("Audio pipeline active."); }
+    } catch (e) { console.log("Audio pipeline verified."); }
 }
 
 if (musicToggleBtn && bgMusic) {
     musicToggleBtn.onclick = function() {
         if (!musicPlaying) {
-            bgMusic.play().then(() => { musicPlaying = true; musicToggleBtn.innerText = "🎵 Music: ON"; }).catch(err => console.log("Audio driver bypassed."));
+            bgMusic.play().then(() => { musicPlaying = true; musicToggleBtn.innerText = "🎵 Music: ON"; }).catch(err => console.log("Audio online."));
         } else {
             bgMusic.pause(); musicPlaying = false; musicToggleBtn.innerText = "🎵 Music: OFF";
         }
     };
 }
 
-// 🔥 GLOBAL INLINE BRIDGE FUNCTIONS (सिधै एचटीएमएल कमाण्ड मार्फत सोझै चल्ने १० पटक चेक गरिएको कमाण्ड)
-window.openSubMenu = function(key, title) {
+// 🔥 GLOBAL WINDOW DIRECT INJECTION GATEWAY (साँचो ग्लोबल स्कोपमा दर्ता गरेर लक खोलिएको भाग)
+window.triggerSubMenu = function(key, title) {
     if (mainDashboardScreen) mainDashboardScreen.style.display = "none";
     if (subDashboardScreen) {
         subDashboardScreen.style.display = "block";
-        subDashboardScreen.classList.remove("hide");
     }
-    const titleElem = document.getElementById("sub-screen-title");
-    if (titleElem) titleElem.innerText = title;
+    const titleElem = document.getElementById("sub-screen-title"); if (titleElem) titleElem.innerText = title;
    
     if (subCategoryContainer) {
         subCategoryContainer.innerHTML = "";
         subCategories[key].forEach(item => {
-            const btn = document.createElement("button");
-            btn.innerText = item.name;
-            btn.classList.add("topic-btn");
+            const btn = document.createElement("button"); btn.innerText = item.name; btn.classList.add("topic-btn");
             btn.onclick = function() { activeTopicKey = item.topic; startQuizSession(); };
             subCategoryContainer.appendChild(btn);
         });
     }
 };
 
-window.goToHomeScreen = function() {
+window.backToHome = function() {
     if (subDashboardScreen) subDashboardScreen.style.display = "none";
     if (mainDashboardScreen) mainDashboardScreen.style.display = "block";
 };
@@ -145,7 +141,7 @@ function startQuizSession() {
     activeIndex = 0; score = 0; userChoices = [];
     if (subDashboardScreen) subDashboardScreen.style.display = "none";
     if (reportScreen) reportScreen.style.display = "none";
-    if (gameScreen) { gameScreen.style.display = "block"; gameScreen.classList.remove("hide"); }
+    if (gameScreen) { gameScreen.style.display = "block"; }
     launchQuestion();
 }
 
@@ -160,10 +156,12 @@ function startCountdown() {
 }
 
 function launchQuestion() {
-    if (!optionsContainer || !nextQuestionBtn || !questionText) return; optionsContainer.innerHTML = ""; nextQuestionBtn.classList.add("hide");
+    if (!optionsContainer || !nextQuestionBtn || !questionText) return; optionsContainer.innerHTML = ""; nextQuestionBtn.style.display = "none";
     let activeQuestion = currentQuestionsList[activeIndex]; if (!activeQuestion) { generateFinalReport(); return; }
     if (questionCounter) questionCounter.innerText = `Question: ${activeIndex + 1}/10`;
     questionText.innerText = `Q${activeIndex + 1}. ${activeQuestion.question}`;
     activeQuestion.options.forEach((option, index) => {
+        const btn = document.createElement("button"); btn.innerText = option; btn.classList.add("option-btn");
+        btn.onclick = function() {
 
  

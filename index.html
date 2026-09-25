@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokraj Awasthi - Ultimate Quiz Arena</title>
-    <!-- 🔱 नयाँ रिफ्रेस टोकन जसले पुरानो अड्किएको सबै लेआउट र डिजाइन मेमोरी जरैदेखि तोड्छ -->
-    <link rel="stylesheet" href="style.css?v=master_build_v50_perfect">
+    <title>Lokraj Awasthi - Master Quiz Arena</title>
+    <!-- 🔱 नयाँ रिफ्रेस टोकन जसले पुरानो अड्किएको सबै डिजाइन मेमोरी सर्भरबाटै तोड्छ -->
+    <link rel="stylesheet" href="style.css?v=clean_master_v60_perfect">
 </head>
 <body>
     <div class="quiz-container">
@@ -19,39 +19,38 @@
             <button id="music-toggle-btn" class="control-btn">🎵 Music: OFF</button>
         </div>
 
-        <!-- 🚀 SCREEN 1: सुरुको मुख्य ड्यासबोर्ड (सर्त अनुसार जम्मा ४ वटा मुख्य बाकस - सिधै चल्ने कमाण्ड) -->
+        <!-- 🚀 SCREEN 1: सुरुको मुख्य ड्यासबोर्ड (६ महिना फ्री ब्यानर पूर्ण रूपमा हटाइएको सफा रूप) -->
         <div id="main-dashboard-screen" class="screen">
             <h1>Quiz Hub</h1>
-            <p class="viral-free-tag">🔥 ६ महिनासम्म पूरै फ्री ट्रायल चालू छ !</p>
            
             <div class="topic-grid">
-                <button class="topic-btn main-cat-btn" onclick="openSubMenu('class10', 'Class 10 Special Series')">📚 Class 10 Series</button>
-                <button class="topic-btn main-cat-btn" onclick="openSubMenu('class11', 'Class 11 Special Series')">🎓 Class 11 Series</button>
-                <button class="topic-btn main-cat-btn" onclick="openSubMenu('gk', 'Loksewa General Knowledge')">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
-                <button class="topic-btn main-cat-btn" onclick="openSubMenu('science', 'General Science Matrix')">🔬 सामान्य विज्ञान (Out Included)</button>
+                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('class10', 'Class 10 Special Series')">📚 Class 10 Series</button>
+                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('class11', 'Class 11 Special Series')">🎓 Class 11 Series</button>
+                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('gk', 'Loksewa General Knowledge')">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
+                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('science', 'General Science Matrix')">🔬 सामान्य विज्ञान (Out Included)</button>
             </div>
         </div>
 
-        <!-- 📂 SCREEN 2: भित्री पब्लिकेसन स्क्रिन (मुख्य बाकस थिचेपछि मात्र खुल्ने ठाउँ) -->
-        <div id="sub-dashboard-screen" class="screen hide">
-            <button onclick="goToHomeScreen()" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
+        <!-- 📂 SCREEN 2: भित्री पब्लिकेसन स्क्रिन (क्लिक गरेपछि मात्र खुल्ने ठाउँ) -->
+        <div id="sub-dashboard-screen" class="screen" style="display: none;">
+            <button onclick="window.backToHome()" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
             <h2 id="sub-screen-title">Select Publication</h2>
             <div class="topic-grid" id="sub-category-container">
-                <!-- यहाँ भित्री बटनहरू जावास्क्रिप्टबाट स्वतः लोड हुनेछन् -->
+                <!-- यहाँ भित्री बटनहरू स्वतः लोड हुनेछन् -->
             </div>
         </div>
 
         <!-- SCREEN 3: Active Gameplay Window -->
-        <div id="game-screen" class="screen hide">
+        <div id="game-screen" class="screen" style="display: none;">
             <div class="game-header">
                 <span id="question-counter">Question: 1/10</span>
                 <div id="timer-box">⏳ Time Left: <span id="seconds-left">30</span>s</div>
             </div>
             <div id="question-text">Loading Question Matrix...</div>
             <div id="options-container"></div>
-            <button id="next-question-btn" class="action-btn hide">Next Question</button>
+            <button id="next-question-btn" class="action-btn" style="display: none;">Next Question</button>
 
-            <!-- 📢 विज्ञापन बस्ने बाकस (भ्युजबाट पैसा आउने ठाउँ) -->
+            <!-- 📢 विज्ञापन बस्ने बाकस -->
             <div class="google-ad-box">
                 <p style="font-size: 0.75rem; color: #555; margin: 2px 0;">Sponsored Advertisement</p>
                 <div class="ad-banner-mock">गुगल विज्ञापन (Ad Unit Area)</div>
@@ -59,7 +58,7 @@
         </div>
 
         <!-- SCREEN 4: Professional Performance Report Card -->
-        <div id="report-screen" class="screen hide">
+        <div id="report-screen" class="screen" style="display: none;">
             <h2>Score Assessment Card</h2>
             <div id="score-summary"></div>
             <div id="detailed-report"></div>
@@ -67,7 +66,7 @@
         </div>
     </div>
     <!-- 🔥 नयाँ जावास्क्रिप्ट रिफ्रेस टोकन -->
-    <script src="script.js?v=master_build_v50_perfect"></script>
+    <script src="script.js?v=clean_master_v60_perfect"></script>
 </body>
 </html>
 
