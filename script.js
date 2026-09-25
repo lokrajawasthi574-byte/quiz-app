@@ -1,3 +1,4 @@
+// 🔱 1000+ Hard Mixed Questions Database (GK + Science) 🔱
 const hardMixedQuestions = [
     { question: "Which treaty officially ended the Anglo-Nepalese War (1814-1816)?", options: ["Sugauli Treaty", "Treaty of Segauli", "Treaty of Kathmandu", "Lal Mohar Treaty"], correct: 0 },
     { question: "According to the Constitution of Nepal, who holds residual powers?", options: ["Federal Parliament", "Federal Executive (Council of Ministers)", "Supreme Court", "Provincial Assembly"], correct: 1 },
@@ -26,7 +27,7 @@ for (let i = 1; i  {
     });
 }
 
-// 🔥 Automatic Initialization & Bypass Interface Engine
+// 🔥 Master Initialization & Bypass Interface Engine
 function autoBypassAuthentication() {
     if (playerIdentity) playerIdentity.innerText = playerName;
    
@@ -49,8 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
             startQuizSession();
         });
     });
-    // Trigger auto entry immediately on load
-    setTimeout(autoBypassAuthentication, 500);
 });
 
 function startQuizSession() {
@@ -145,6 +144,10 @@ function generateFinalReport() {
 }
 
 if (restartGameBtn) { restartGameBtn.addEventListener("click", () => { startQuizSession(); }); }
-setTimeout(autoBypassAuthentication, 200);
+
+// 🔥 FIXED: ब्राउजरमा सबै डेटा लोड हुने बित्तिकै सिधै ४ वटा टपिक खोल्ने नयाँ मास्टर इन्जिन
+window.onload = function() {
+    autoBypassAuthentication();
+};
 
  
