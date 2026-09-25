@@ -1,4 +1,4 @@
-// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY MATRIX WITH FIXED DIRECT CLICK ENGINE 🔱
+// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY BUILD WITH FIXED INJECTION ENGINE 🔱
 
 const pools = {
     class10_science: [
@@ -90,16 +90,15 @@ const questionCounter = document.getElementById("question-counter"); const secon
 function playTickAlarm() {
     try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
+        const oscillator = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
         oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(900, audioCtx.currentTime);
         gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
         oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
         oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.08);
-    } catch (e) { console.log("Audio pipeline verified."); }
+    } catch (e) { console.log("Audio ctx ready."); }
 }
 
-// 🔥 DIRECT LAUNCH MASTER CLICK ENGINE (कोष्ठक चिन्ह पूर्ण रूपमा सच्याइएको भाग)
+// 🔥 FIXED DIRECT ATTTACH ENGINE (ID मिलान गरी सिधै कमाण्ड अन गर्ने)
 function initializeClickEngine() {
     const btnC10 = document.getElementById("btn-c10");
     const btnC11 = document.getElementById("btn-c11");
@@ -117,13 +116,8 @@ document.addEventListener("DOMContentLoaded", initializeClickEngine);
 
 function showSubDashboard(key, title) {
     if(mainDashboardScreen) mainDashboardScreen.style.display = "none";
-    if(subDashboardScreen) {
-        subDashboardScreen.style.display = "block";
-        subDashboardScreen.classList.remove("hide");
-    }
-    const titleElem = document.getElementById("sub-screen-title");
-    if(titleElem) titleElem.innerText = title;
-   
+    if(subDashboardScreen) { subDashboardScreen.style.display = "block"; subDashboardScreen.classList.remove("hide"); }
+    const titleElem = document.getElementById("sub-screen-title"); if(titleElem) titleElem.innerText = title;
     if(subCategoryContainer) {
         subCategoryContainer.innerHTML = "";
         subCategories[key].forEach(item => {
@@ -141,10 +135,8 @@ function startQuizSession() {
     let playedHistory = JSON.parse(localStorage.getItem(`played_${activeTopicKey}`)) || [];
     let freshQuestions = rawDB.filter(q => !playedHistory.includes(q.question));
     if (freshQuestions.length < 10) { playedHistory = []; localStorage.removeItem(`played_${activeTopicKey}`); freshQuestions = [...rawDB]; }
-    let shuffled = freshQuestions.sort(() => 0.5 - Math.random());
-    currentQuestionsList = shuffled.slice(0, 10);
-    currentQuestionsList.forEach(q => playedHistory.push(q.question));
-    localStorage.setItem(`played_${activeTopicKey}`, JSON.stringify(playedHistory));
+    let shuffled = freshQuestions.sort(() => 0.5 - Math.random()); currentQuestionsList = shuffled.slice(0, 10);
+    currentQuestionsList.forEach(q => playedHistory.push(q.question)); localStorage.setItem(`played_${activeTopicKey}`, JSON.stringify(playedHistory));
     activeIndex = 0; score = 0; userChoices = [];
     if(subDashboardScreen) subDashboardScreen.style.display = "none";
     if (reportScreen) reportScreen.style.display = "none";
@@ -156,16 +148,13 @@ function startCountdown() {
     clearInterval(timerInterval); let timeLeft = 30; if (secondsLeft) secondsLeft.innerText = timeLeft;
     timerInterval = setInterval(() => {
         timeLeft--; if (secondsLeft) secondsLeft.innerText = timeLeft;
-        if (timeLeft <= 7 && timeLeft > 0) {
-            playTickAlarm();
-            if (secondsLeft) { secondsLeft.style.color = "#ef4444"; secondsLeft.style.fontWeight = "bold"; }
-        } else {
-            if (secondsLeft) secondsLeft.style.color = "#f59e0b";
-        }
+        if (timeLeft <= 7 && timeLeft > 0) { playTickAlarm(); if (secondsLeft) { secondsLeft.style.color = "#ef4444"; secondsLeft.style.fontWeight = "bold"; } }
+        else { if (secondsLeft) secondsLeft.style.color = "#f59e0b"; }
         if (timeLeft <= 0) { clearInterval(timerInterval); userChoices[activeIndex] = undefined; revealCorrectAnswerAuto(); }
     }, 1000);
 }
 
 function launchQuestion() {
+    if (!optionsContainer || !nextQuestionBtn || !questionText) return; optionsContainer.innerHTML = ""; nextQuestionBtn.classList.add("hide");
 
  
