@@ -1,6 +1,6 @@
 :root {
     --bg-color: #050811;
-    --card-bg: rgba(13, 20, 38, 0.82);
+    --card-bg: rgba(13, 20, 38, 0.85);
     --text-color: #f1f5f9;
     --success-color: #10b981;
     --danger-color: #ef4444;
@@ -13,13 +13,14 @@ body {
     color: var(--text-color);
     display: flex; justify-content: center; align-items: center;
     min-height: 100vh;
-    background: linear-gradient(rgba(5, 8, 17, 0.55), rgba(5, 8, 17, 0.75)),
-                url('https://unsplash.com') no-repeat center center fixed;
-    background-size: cover;
+    /* 🔱 भगवान महादेवको भव्य र उच्च गुणस्तरको कलात्मक ब्याकग्राउण्ड */
+    background: linear-gradient(rgba(5, 8, 17, 0.5), rgba(5, 8, 17, 0.7)),
+                url('https://unsplash.com') no-repeat center center fixed !important;
+    background-size: cover !important;
 }
 
 .quiz-container {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg) !important;
     padding: 35px 25px; border-radius: 24px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.6);
     width: 90%; max-width: 480px;
@@ -57,11 +58,11 @@ p { text-align: center; color: #cbd5e1; }
 .action-btn:hover { transform: translateY(-2px); }
 
 .topic-btn {
-    background-color: rgba(21, 29, 48, 0.85); color: white;
+    background-color: rgba(21, 29, 48, 0.85) !important; color: white !important;
     text-align: left; padding-left: 25px; border: 1px solid rgba(255,255,255,0.05);
 }
 .topic-btn:hover {
-    background: var(--gradient-mix); background-size: 300% 300%;
+    background: var(--gradient-mix) !important; background-size: 300% 300% !important;
     animation: gradientMove 3s infinite; transform: scale(1.02);
 }
 
