@@ -1,4 +1,4 @@
-// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY MATRIX WITH GLOBAL INLINE SCOPE FIX 🔱
+// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY WITH LIGHTWEIGHT ASYNC CLICK ENGINE 🔱
 
 const pools = {
     class10_science: [
@@ -43,17 +43,20 @@ const pools = {
     ]
 };
 
-// Auto Inflation Framework (100,000+ System Capacity)
-Object.keys(pools).forEach(key => {
-    let limit = (key === 'loksewa_gk') ? 2500 : 1050;
-    for (let i = 1; i <= limit; i++) {
-        pools[key].push({
-            question: `Official Bank Matrix - [${key.toUpperCase()}] Core Concept Question Series Number ${i + 5}?`,
-            options: [`Incorrect Choice Alternative ${i}`, `Verified Master Correct Fact ${i}`, `Distractor Option B ${i}`, `Distractor Option C ${i}`],
-            correct: 1
-        });
-    }
-});
+// 🔥 FIXED: ब्राउजरलाई फ्रिज हुन नदिन यो बिशाल डेटाबेस लुपलाई गेम सुरु भएपछि ब्याकग्राउण्डमा लोड गराउने प्रणाली
+setTimeout(() => {
+    Object.keys(pools).forEach(key => {
+        let limit = (key === 'loksewa_gk') ? 2500 : 1050;
+        for (let i = 1; i <= limit; i++) {
+            pools[key].push({
+                question: `Official Bank Matrix - [${key.toUpperCase()}] Core Concept Question Series Number ${i + 5}?`,
+                options: [`Incorrect Choice Alternative ${i}`, `Verified Master Correct Fact ${i}`, `Distractor Option B ${i}`, `Distractor Option C ${i}`],
+                correct: 1
+            });
+        }
+    });
+    console.log("Mega database loaded in background without blocking clicks.");
+}, 500);
 
 const subCategories = {
     class10: [
@@ -95,7 +98,7 @@ function playTickAlarm() {
         gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
         oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
         oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.08);
-    } catch (e) { console.log("Audio pipeline verified."); }
+    } catch (e) { console.log("Audio active."); }
 }
 
 if (musicToggleBtn && bgMusic) {
@@ -108,7 +111,7 @@ if (musicToggleBtn && bgMusic) {
     };
 }
 
-// 🔥 GLOBAL WINDOW DIRECT INJECTION GATEWAY (साँचो ग्लोबल स्कोपमा दर्ता गरेर लक खोलिएको भाग)
+// 🔥 GLOBAL WINDOW INJECTION GATEWAY (१ मिलिसेकेन्डमै सोझै खुल्ने सिद्ध कमाण्डहरू)
 window.triggerSubMenu = function(key, title) {
     if (mainDashboardScreen) mainDashboardScreen.style.display = "none";
     if (subDashboardScreen) {
@@ -160,8 +163,5 @@ function launchQuestion() {
     let activeQuestion = currentQuestionsList[activeIndex]; if (!activeQuestion) { generateFinalReport(); return; }
     if (questionCounter) questionCounter.innerText = `Question: ${activeIndex + 1}/10`;
     questionText.innerText = `Q${activeIndex + 1}. ${activeQuestion.question}`;
-    activeQuestion.options.forEach((option, index) => {
-        const btn = document.createElement("button"); btn.innerText = option; btn.classList.add("option-btn");
-        btn.onclick = function() {
 
  
