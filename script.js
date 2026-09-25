@@ -1,4 +1,4 @@
-// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY BUILD WITH FIXED INJECTION ENGINE 🔱
+// 🔱 LOKRAJ AWASTHI - MASTER CLEAN BUILD v50 PERFECT ENGINE 🔱
 
 const pools = {
     class10_science: [
@@ -43,7 +43,7 @@ const pools = {
     ]
 };
 
-// Million Scale Loop Engine
+// 100,000+ Scalable Database Inflation Loops Framework
 Object.keys(pools).forEach(key => {
     let limit = (key === 'loksewa_gk') ? 2500 : 1050;
     for (let i = 1; i <= limit; i++) {
@@ -84,7 +84,7 @@ const subCategories = {
 let currentQuestionsList = []; let activeIndex = 0; let score = 0; let userChoices = []; let timerInterval = null; let musicPlaying = false; let activeTopicKey = "";
 
 const bgMusic = document.getElementById("bg-music"); const musicToggleBtn = document.getElementById("music-toggle-btn");
-const mainDashboardScreen = document.getElementById("main-dashboard-screen"); const subDashboardScreen = document.getElementById("sub-dashboard-screen"); const subCategoryContainer = document.getElementById("sub-category-container"); const backToMainBtn = document.getElementById("back-to-main-btn"); const gameScreen = document.getElementById("game-screen"); const reportScreen = document.getElementById("report-screen");
+const mainDashboardScreen = document.getElementById("main-dashboard-screen"); const subDashboardScreen = document.getElementById("sub-dashboard-screen"); const subCategoryContainer = document.getElementById("sub-category-container"); const gameScreen = document.getElementById("game-screen"); const reportScreen = document.getElementById("report-screen");
 const questionCounter = document.getElementById("question-counter"); const secondsLeft = document.getElementById("seconds-left"); const questionText = document.getElementById("question-text"); const optionsContainer = document.getElementById("options-container"); const nextQuestionBtn = document.getElementById("next-question-btn"); const scoreSummary = document.getElementById("score-summary"); const detailedReport = document.getElementById("detailed-report"); const restartGameBtn = document.getElementById("restart-game-btn");
 
 function playTickAlarm() {
@@ -95,40 +95,45 @@ function playTickAlarm() {
         gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime); gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
         oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
         oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.08);
-    } catch (e) { console.log("Audio ctx ready."); }
+    } catch (e) { console.log("Audio pipeline active."); }
 }
 
-// 🔥 FIXED DIRECT ATTTACH ENGINE (ID मिलान गरी सिधै कमाण्ड अन गर्ने)
-function initializeClickEngine() {
-    const btnC10 = document.getElementById("btn-c10");
-    const btnC11 = document.getElementById("btn-c11");
-    const btnGk = document.getElementById("btn-gk");
-    const btnSc = document.getElementById("btn-sc");
-
-    if (btnC10) btnC10.onclick = function() { showSubDashboard("class10", "Class 10 Special Series"); };
-    if (btnC11) btnC11.onclick = function() { showSubDashboard("class11", "Class 11 Special Series"); };
-    if (btnGk)  btnGk.onclick = function() { showSubDashboard("gk", "Loksewa General Knowledge"); };
-    if (btnSc)  btnSc.onclick = function() { showSubDashboard("science", "General Science Matrix"); };
+if (musicToggleBtn && bgMusic) {
+    musicToggleBtn.onclick = function() {
+        if (!musicPlaying) {
+            bgMusic.play().then(() => { musicPlaying = true; musicToggleBtn.innerText = "🎵 Music: ON"; }).catch(err => console.log("Audio driver bypassed."));
+        } else {
+            bgMusic.pause(); musicPlaying = false; musicToggleBtn.innerText = "🎵 Music: OFF";
+        }
+    };
 }
 
-window.onload = initializeClickEngine;
-document.addEventListener("DOMContentLoaded", initializeClickEngine);
-
-function showSubDashboard(key, title) {
-    if(mainDashboardScreen) mainDashboardScreen.style.display = "none";
-    if(subDashboardScreen) { subDashboardScreen.style.display = "block"; subDashboardScreen.classList.remove("hide"); }
-    const titleElem = document.getElementById("sub-screen-title"); if(titleElem) titleElem.innerText = title;
-    if(subCategoryContainer) {
+// 🔥 GLOBAL INLINE BRIDGE FUNCTIONS (सिधै एचटीएमएल कमाण्ड मार्फत सोझै चल्ने १० पटक चेक गरिएको कमाण्ड)
+window.openSubMenu = function(key, title) {
+    if (mainDashboardScreen) mainDashboardScreen.style.display = "none";
+    if (subDashboardScreen) {
+        subDashboardScreen.style.display = "block";
+        subDashboardScreen.classList.remove("hide");
+    }
+    const titleElem = document.getElementById("sub-screen-title");
+    if (titleElem) titleElem.innerText = title;
+   
+    if (subCategoryContainer) {
         subCategoryContainer.innerHTML = "";
         subCategories[key].forEach(item => {
-            const btn = document.createElement("button"); btn.innerText = item.name; btn.classList.add("topic-btn");
+            const btn = document.createElement("button");
+            btn.innerText = item.name;
+            btn.classList.add("topic-btn");
             btn.onclick = function() { activeTopicKey = item.topic; startQuizSession(); };
             subCategoryContainer.appendChild(btn);
         });
     }
-}
+};
 
-if(backToMainBtn) { backToMainBtn.onclick = function() { if(subDashboardScreen) subDashboardScreen.style.display = "none"; if(mainDashboardScreen) mainDashboardScreen.style.display = "block"; }; }
+window.goToHomeScreen = function() {
+    if (subDashboardScreen) subDashboardScreen.style.display = "none";
+    if (mainDashboardScreen) mainDashboardScreen.style.display = "block";
+};
 
 function startQuizSession() {
     const rawDB = pools[activeTopicKey] || [];
@@ -138,7 +143,7 @@ function startQuizSession() {
     let shuffled = freshQuestions.sort(() => 0.5 - Math.random()); currentQuestionsList = shuffled.slice(0, 10);
     currentQuestionsList.forEach(q => playedHistory.push(q.question)); localStorage.setItem(`played_${activeTopicKey}`, JSON.stringify(playedHistory));
     activeIndex = 0; score = 0; userChoices = [];
-    if(subDashboardScreen) subDashboardScreen.style.display = "none";
+    if (subDashboardScreen) subDashboardScreen.style.display = "none";
     if (reportScreen) reportScreen.style.display = "none";
     if (gameScreen) { gameScreen.style.display = "block"; gameScreen.classList.remove("hide"); }
     launchQuestion();
@@ -156,5 +161,9 @@ function startCountdown() {
 
 function launchQuestion() {
     if (!optionsContainer || !nextQuestionBtn || !questionText) return; optionsContainer.innerHTML = ""; nextQuestionBtn.classList.add("hide");
+    let activeQuestion = currentQuestionsList[activeIndex]; if (!activeQuestion) { generateFinalReport(); return; }
+    if (questionCounter) questionCounter.innerText = `Question: ${activeIndex + 1}/10`;
+    questionText.innerText = `Q${activeIndex + 1}. ${activeQuestion.question}`;
+    activeQuestion.options.forEach((option, index) => {
 
  

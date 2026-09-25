@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lokraj Awasthi - Ultimate Quiz Arena</title>
-    <!-- 🔱 ब्राउजरको पुरानो सबै गल्ती मेमोरी जरैदेखि तोड्नका लागि नयाँ फाइनल भर्सन टोकन -->
-    <link rel="stylesheet" href="style.css?v=final_tested_build_100">
+    <!-- 🔱 नयाँ रिफ्रेस टोकन जसले पुरानो अड्किएको सबै लेआउट र डिजाइन मेमोरी जरैदेखि तोड्छ -->
+    <link rel="stylesheet" href="style.css?v=master_build_v50_perfect">
 </head>
 <body>
     <div class="quiz-container">
-        <!-- Background Audio -->
+        <!-- Background Audio Grid -->
         <audio id="bg-music" loop>
             <source src="https://soundhelix.com" type="audio/mpeg">
         </audio>
@@ -19,25 +19,25 @@
             <button id="music-toggle-btn" class="control-btn">🎵 Music: OFF</button>
         </div>
 
-        <!-- 🚀 SCREEN 1: सुरुको मुख्य पेज (जम्मा ४ वटा मुख्य प्रिमियम बाकस मात्र) -->
+        <!-- 🚀 SCREEN 1: सुरुको मुख्य ड्यासबोर्ड (सर्त अनुसार जम्मा ४ वटा मुख्य बाकस - सिधै चल्ने कमाण्ड) -->
         <div id="main-dashboard-screen" class="screen">
             <h1>Quiz Hub</h1>
-            <p class="viral-free-tag">🔥 ६ महिनासम्म पूरै फ्री TRIAL चालू छ !</p>
+            <p class="viral-free-tag">🔥 ६ महिनासम्म पूरै फ्री ट्रायल चालू छ !</p>
            
             <div class="topic-grid">
-                <button class="topic-btn main-cat-btn" id="btn-c10">📚 Class 10 Series</button>
-                <button class="topic-btn main-cat-btn" id="btn-c11">🎓 Class 11 Series</button>
-                <button class="topic-btn main-cat-btn" id="btn-gk">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
-                <button class="topic-btn main-cat-btn" id="btn-sc">🔬 सामान्य विज्ञान (Out Included)</button>
+                <button class="topic-btn main-cat-btn" onclick="openSubMenu('class10', 'Class 10 Special Series')">📚 Class 10 Series</button>
+                <button class="topic-btn main-cat-btn" onclick="openSubMenu('class11', 'Class 11 Special Series')">🎓 Class 11 Series</button>
+                <button class="topic-btn main-cat-btn" onclick="openSubMenu('gk', 'Loksewa General Knowledge')">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
+                <button class="topic-btn main-cat-btn" onclick="openSubMenu('science', 'General Science Matrix')">🔬 सामान्य विज्ञान (Out Included)</button>
             </div>
         </div>
 
-        <!-- 📂 SCREEN 2: भित्री उप-क्याटगोरी स्क्रिन (मुख्य बाकस थिचेपछि मात्र खुल्ने पब्लिकेसनहरू) -->
+        <!-- 📂 SCREEN 2: भित्री पब्लिकेसन स्क्रिन (मुख्य बाकस थिचेपछि मात्र खुल्ने ठाउँ) -->
         <div id="sub-dashboard-screen" class="screen hide">
-            <button id="back-to-main-btn" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
+            <button onclick="goToHomeScreen()" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
             <h2 id="sub-screen-title">Select Publication</h2>
             <div class="topic-grid" id="sub-category-container">
-                <!-- भित्री बटनहरू स्वतः लोड हुनेछन् -->
+                <!-- यहाँ भित्री बटनहरू जावास्क्रिप्टबाट स्वतः लोड हुनेछन् -->
             </div>
         </div>
 
@@ -51,7 +51,7 @@
             <div id="options-container"></div>
             <button id="next-question-btn" class="action-btn hide">Next Question</button>
 
-            <!-- 📢 विज्ञापन बस्ने बाकस -->
+            <!-- 📢 विज्ञापन बस्ने बाकस (भ्युजबाट पैसा आउने ठाउँ) -->
             <div class="google-ad-box">
                 <p style="font-size: 0.75rem; color: #555; margin: 2px 0;">Sponsored Advertisement</p>
                 <div class="ad-banner-mock">गुगल विज्ञापन (Ad Unit Area)</div>
@@ -66,8 +66,8 @@
             <button id="restart-game-btn" class="action-btn">Attempt Another Set</button>
         </div>
     </div>
-    <!-- 🔱 FIXED: scripi.js को ठाउँमा 'script.js' शुद्ध बनाइएको लिंक -->
-    <script src="script.js?v=final_tested_build_100"></script>
+    <!-- 🔥 नयाँ जावास्क्रिप्ट रिफ्रेस टोकन -->
+    <script src="script.js?v=master_build_v50_perfect"></script>
 </body>
 </html>
 
