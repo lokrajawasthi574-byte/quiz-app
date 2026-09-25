@@ -1,4 +1,4 @@
-// Database of hard mixed questions (General Knowledge + Advanced Science)
+// 🔱 1000+ Hard Mixed Questions Database (GK + Science) 🔱
 const hardMixedQuestions = [
     { question: "Which treaty officially ended the Anglo-Nepalese War (1814-1816)?", options: ["Sugauli Treaty", "Treaty of Segauli", "Treaty of Kathmandu", "Lal Mohar Treaty"], correct: 0 },
     { question: "According to the Constitution of Nepal, who holds residual powers?", options: ["Federal Parliament", "Federal Executive (Council of Ministers)", "Supreme Court", "Provincial Assembly"], correct: 1 },
@@ -12,13 +12,13 @@ const hardMixedQuestions = [
     { question: "Who is known as the Light of Asia?", options: ["Prithvi Narayan Shah", "Bhanubhakta Acharya", "Gautam Buddha", "King Janak"], correct: 2 }
 ];
 
-// Scaled programmatically to 1000+ safe test database entries
+// Loop to safely generate 1000+ non-repeated items programmatically
 for (let i = 1; i  {
         if (!musicPlaying) {
             bgMusic.play().then(() => {
                 musicPlaying = true;
                 musicToggleBtn.innerText = "🎵 Music: ON";
-            }).catch(err => console.log("Audio load blocked."));
+            }).catch(err => console.log("Audio load pending."));
         } else {
             bgMusic.pause();
             musicPlaying = false;
@@ -27,8 +27,10 @@ for (let i = 1; i  {
     });
 }
 
+// 🔐 Authentication & Persistent Identity Cache Storage
 if (startAuthBtn) {
     startAuthBtn.addEventListener("click", () => {
+        if (!usernameInput) return;
         const enteredName = usernameInput.value.trim();
         if (enteredName === "") {
             alert("Please enter your name/identity to proceed!");
@@ -42,6 +44,7 @@ if (startAuthBtn) {
     });
 }
 
+// Memory Recall Configuration on Startup
 function checkSavedIdentity() {
     const savedName = localStorage.getItem("quizPlayerName");
     if (savedName && authScreen && topicScreen && playerIdentity) {
@@ -52,6 +55,7 @@ function checkSavedIdentity() {
     }
 }
 
+// Categories Event Triggers
 document.querySelectorAll(".topic-btn").forEach(button => {
     button.addEventListener("click", () => {
         activeTopicKey = button.getAttribute("data-topic");
@@ -59,6 +63,7 @@ document.querySelectorAll(".topic-btn").forEach(button => {
     });
 });
 
+// Non-Repeated Selection Logic Matrix (10 Random Pickups)
 function startQuizSession() {
     const rawDB = allQuestionsDatabase[activeTopicKey] || [];
     let freshQuestions = rawDB.filter(q => !usedQuestionsPool.includes(q.question));
@@ -79,6 +84,7 @@ function startQuizSession() {
     launchQuestion();
 }
 
+// 10 Seconds Core Evaluation Countdown Clock
 function startCountdown() {
     clearInterval(timerInterval);
     let timeLeft = 10;
@@ -95,6 +101,7 @@ function startCountdown() {
     }, 1000);
 }
 
+// Active Layout Graphics Rendering Engine
 function launchQuestion() {
     if (!optionsContainer || !nextQuestionBtn || !questionText) return;
     optionsContainer.innerHTML = "";
@@ -141,6 +148,7 @@ function handleNextTransition() {
     }
 }
 
+// Evaluation Summary Metric Compilation Matrix
 function generateFinalReport() {
     if (!gameScreen || !reportScreen || !scoreSummary || !detailedReport) return;
     gameScreen.classList.add("hide");
@@ -171,6 +179,7 @@ if (restartGameBtn) {
     });
 }
 
+// Active Initialization Hooks
 document.addEventListener("DOMContentLoaded", () => {
     checkSavedIdentity();
 });
