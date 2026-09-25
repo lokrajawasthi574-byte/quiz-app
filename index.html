@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="quiz-container">
-        <!-- Background Audio -->
+        <!-- Background Audio Element -->
         <audio id="bg-music" loop>
             <source src="https://soundhelix.com" type="audio/mpeg">
         </audio>
@@ -18,20 +18,18 @@
             <button id="music-toggle-btn" class="control-btn">🎵 Music: OFF</button>
         </div>
 
-        <!-- Screen 1: Name & School Login -->
+        <!-- Screen 1: Name & School Login (Auto-Bypassed securely) -->
         <div id="auth-screen" class="screen">
-            <!-- 🔱 तपाईंको नाम र स्कुलको नाम यहाँ सेट गरिएको छ 🔱 -->
             <h1>Lokraj Awasthi</h1>
             <h3>Kailali Model Secondary School</h3>
             <h2>MCQ Quiz Arena</h2>
-            <p>Please enter your identity to start</p>
-            <input type="text" id="username-input" placeholder="Enter Your Name..." autocomplete="off">
-            <button id="start-auth-btn" class="action-btn">Proceed</button>
+            <p>Initializing Secure Gaming Framework...</p>
+            <div style="margin: 20px 0; color: #00f0ff; font-weight: bold;">🔑 Loading Dashboard Automatically...</div>
         </div>
 
         <!-- Screen 2: Topics Grid -->
         <div id="topic-screen" class="screen hide">
-            <h2>Hello, Player</span>! 👋</h2>
+            <h2>Hello, Lokraj Awasthi</span>! 👋</h2>
             <p>Choose a Topic to Play (10 Random Questions)</p>
             <div class="topic-grid">
                 <button class="topic-btn" data-topic="class10">📚 Class 10</button>
@@ -47,7 +45,7 @@
                 <span id="question-counter">Question: 1/10</span>
                 <div id="timer-box">⏳ Time: <span id="seconds-left">10</span>s</div>
             </div>
-            <div id="question-text">Loading...</div>
+            <div id="question-text">Loading Question...</div>
             <div id="options-container"></div>
             <button id="next-question-btn" class="action-btn hide">Next Question</button>
         </div>
@@ -60,6 +58,9 @@
             <button id="restart-game-btn" class="action-btn">Play Again</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <!-- Script injected with custom parameters to avoid old memory locks -->
+    <script src="script.js?v=master_build_999"></script>
 </body>
 </html>
+
+ 

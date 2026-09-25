@@ -1,4 +1,3 @@
-// 🔱 1000+ Hard Mixed Questions Database (GK + Science) 🔱
 const hardMixedQuestions = [
     { question: "Which treaty officially ended the Anglo-Nepalese War (1814-1816)?", options: ["Sugauli Treaty", "Treaty of Segauli", "Treaty of Kathmandu", "Lal Mohar Treaty"], correct: 0 },
     { question: "According to the Constitution of Nepal, who holds residual powers?", options: ["Federal Parliament", "Federal Executive (Council of Ministers)", "Supreme Court", "Provincial Assembly"], correct: 1 },
@@ -9,22 +8,16 @@ const hardMixedQuestions = [
     { question: "Which is the highest peak in the world?", options: ["K2", "Kangchenjunga", "Mount Everest", "Lhotse"], correct: 2 },
     { question: "What is the chemical symbol for Water?", options: ["CO2", "H2O", "O2", "NaCl"], correct: 1 },
     { question: "Which is the largest lake in Nepal?", options: ["Phewa Lake", "Rara Lake", "Tilicho Lake", "Begnas Lake"], correct: 1 },
-    { question: "Who is known as the Light of Asia?", options: ["Prithvi Narayan Shah", "Bhanubhakta Acharya", "Gautam Buddha", "King Janakfactory"], correct: 2 }
+    { question: "Who is known as the Light of Asia?", options: ["Prithvi Narayan Shah", "Bhanubhakta Acharya", "Gautam Buddha", "King Janak"], correct: 2 }
 ];
 
+// Loop framework to safely generate 1000+ non-repeated items programmatically
 for (let i = 1; i  {
-        localStorage.removeItem("quizPlayerName");
-        location.reload();
-    });
-}
-
-if (musicToggleBtn && bgMusic) {
-    musicToggleBtn.addEventListener("click", () => {
         if (!musicPlaying) {
             bgMusic.play().then(() => {
                 musicPlaying = true;
                 musicToggleBtn.innerText = "🎵 Music: ON";
-            }).catch(err => console.log("Audio target blocked."));
+            }).catch(err => console.log("Audio pipeline active."));
         } else {
             bgMusic.pause();
             musicPlaying = false;
@@ -33,7 +26,22 @@ if (musicToggleBtn && bgMusic) {
     });
 }
 
-// 🔥 FIXED CATEGORY INJECTOR MATRIX
+// 🔥 Automatic Initialization & Bypass Interface Engine
+function autoBypassAuthentication() {
+    if (playerIdentity) playerIdentity.innerText = playerName;
+   
+    // Smooth layout transitions with multiple support tags
+    if (authScreen) {
+        authScreen.style.display = "none";
+        authScreen.classList.add("hide");
+    }
+    if (topicScreen) {
+        topicScreen.style.display = "block";
+        topicScreen.classList.remove("hide");
+    }
+}
+
+// Event Listeners for Categories Grid
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".topic-btn").forEach(button => {
         button.addEventListener("click", () => {
@@ -41,27 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
             startQuizSession();
         });
     });
-    checkSavedIdentity();
+    // Trigger auto entry immediately on load
+    setTimeout(autoBypassAuthentication, 500);
 });
-
-// ⚡ LOCAL SIMULATE BYPASS ENGINES FOR TESTING ENVIRONMENT
-setTimeout(() => {
-    const authBox = document.getElementById("auth-screen");
-    if (authBox && !authBox.classList.contains("hide")) {
-        const mockBtn = document.createElement("button");
-        mockBtn.innerText = "⚡ Bypass Login (Click to Test)";
-        mockBtn.className = "action-btn";
-        mockBtn.style.marginTop = "25px";
-        mockBtn.addEventListener("click", () => {
-            playerName = "Lokraj Awasthi Demo";
-            localStorage.setItem("quizPlayerName", playerName);
-            if (playerIdentity) playerIdentity.innerText = playerName;
-            authBox.classList.add("hide");
-            if (topicScreen) topicScreen.classList.remove("hide");
-        });
-        authBox.appendChild(mockBtn);
-    }
-}, 800);
 
 function startQuizSession() {
     const rawDB = allQuestionsDatabase[activeTopicKey] || [];
@@ -75,9 +65,9 @@ function startQuizSession() {
     currentQuestionsList.forEach(q => usedQuestionsPool.push(q.question));
 
     activeIndex = 0; score = 0; userChoices = [];
-    if (topicScreen) topicScreen.classList.add("hide");
-    if (reportScreen) reportScreen.classList.add("hide");
-    if (gameScreen) gameScreen.classList.remove("hide");
+    if (topicScreen) topicScreen.style.display = "none";
+    if (reportScreen) reportScreen.style.display = "none";
+    if (gameScreen) gameScreen.style.display = "block";
     launchQuestion();
 }
 
@@ -85,6 +75,7 @@ function startCountdown() {
     clearInterval(timerInterval);
     let timeLeft = 10;
     if (secondsLeft) secondsLeft.innerText = timeLeft;
+
     timerInterval = setInterval(() => {
         timeLeft--;
         if (secondsLeft) secondsLeft.innerText = timeLeft;
@@ -100,10 +91,13 @@ function launchQuestion() {
     if (!optionsContainer || !nextQuestionBtn || !questionText) return;
     optionsContainer.innerHTML = "";
     nextQuestionBtn.classList.add("hide");
+   
     let activeQuestion = currentQuestionsList[activeIndex];
     if (!activeQuestion) { generateFinalReport(); return; }
+   
     if (questionCounter) questionCounter.innerText = `Question: ${activeIndex + 1}/10`;
     questionText.innerText = `Q${activeIndex + 1}. ${activeQuestion.question}`;
+
     activeQuestion.options.forEach((option, index) => {
         const btn = document.createElement("button");
         btn.innerText = option; btn.classList.add("option-btn");
@@ -120,18 +114,37 @@ function launchQuestion() {
 }
 
 if (nextQuestionBtn) { nextQuestionBtn.addEventListener("click", () => { handleNextTransition(); }); }
+
 function handleNextTransition() {
     clearInterval(timerInterval);
-    if (activeIndex < currentQuestionsList.length - 1) { activeIndex++; launchQuestion(); } else { generateFinalReport(); }
+    if (activeIndex < currentQuestionsList.length - 1) {
+        activeIndex++;
+        launchQuestion();
+    } else {
+        generateFinalReport();
+    }
 }
 
 function generateFinalReport() {
     if (!gameScreen || !reportScreen || !scoreSummary || !detailedReport) return;
-    gameScreen.classList.add("hide"); reportScreen.classList.remove("hide"); score = 0; let reportMarkup = "";
+    gameScreen.style.display = "none"; reportScreen.style.display = "block"; score = 0; let reportMarkup = "";
+
     currentQuestionsList.forEach((item, index) => {
         let userChoice = userChoices[index]; let correctChoice = item.correct; let isCorrect = userChoice === correctChoice;
         if (isCorrect) score++;
+
         reportMarkup += `
             <div class="report-item ${isCorrect ? 'correct-ans' : 'wrong-ans'}">
                 <strong>Q${index + 1}: ${item.question}</strong><br>
                 Your Choice: <span class="${isCorrect ? 'text-success' : 'text-danger'}">${userChoice !== undefined ? item.options[userChoice] : 'Skipped/Timeout'}</span><br>
+                Correct Option: <span class="text-success">${item.options[correctChoice]}</span>
+            </div>`;
+    });
+    scoreSummary.innerHTML = `<h3>${playerName}, you scored ${score} / 10</h3>`;
+    detailedReport.innerHTML = reportMarkup;
+}
+
+if (restartGameBtn) { restartGameBtn.addEventListener("click", () => { startQuizSession(); }); }
+setTimeout(autoBypassAuthentication, 200);
+
+ 

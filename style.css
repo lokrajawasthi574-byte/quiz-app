@@ -1,7 +1,7 @@
 :root {
-    --bg-color: #0b0f19;
-    --card-bg: rgba(21, 29, 48, 0.85); /* Glassmorphism transparent effect */
-    --text-color: #f8fafc;
+    --bg-color: #050811;
+    --card-bg: rgba(13, 20, 38, 0.75);
+    --text-color: #f1f5f9;
     --success-color: #10b981;
     --danger-color: #ef4444;
     --gradient-mix: linear-gradient(45deg, #ff007f, #7f00ff, #00f0ff, #ff007f);
@@ -16,11 +16,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-   
-    /* 🔱 Background Mahadev High Quality Digital Art Image 🔱 */
-    background: linear-gradient(rgba(11, 15, 25, 0.65), rgba(11, 15, 25, 0.85)),
+    /* 🎨 High Quality Digital Art Background */
+    background: linear-gradient(rgba(5, 8, 17, 0.55), rgba(5, 8, 17, 0.75)),
                 url('https://unsplash.com') no-repeat center center fixed;
     background-size: cover;
+    overflow-x: hidden;
 }
 
 .quiz-container {
@@ -32,8 +32,8 @@ body {
     max-width: 480px;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 .music-control {
@@ -43,54 +43,33 @@ body {
 }
 
 .control-btn {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 6px 14px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 0.8rem;
     backdrop-filter: blur(5px);
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .control-btn:hover {
     background: white;
     color: black;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
-.screen {
-    text-align: center;
-}
+.screen { text-align: center; }
+.hide { display: none !important; }
 
-.hide {
-    display: none !important;
-}
-
-h1, h2 {
+h1, h2, h3 {
     background: linear-gradient(to right, #00f0ff, #ff007f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-top: 10px;
-}
-
-input[type="text"] {
-    width: 85%;
-    padding: 14px;
-    margin: 25px 0;
-    border-radius: 12px;
-    border: 2px solid #27354f;
-    background-color: #0b0f19;
-    color: white;
-    font-size: 1.1rem;
-    text-align: center;
-    transition: 0.3s;
-}
-
-input[type="text"]:focus {
-    border-color: #00f0ff;
-    outline: none;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .action-btn, .option-btn, .topic-btn {
@@ -119,7 +98,7 @@ input[type="text"]:focus {
 }
 
 .topic-btn {
-    background-color: rgba(30, 41, 59, 0.9);
+    background-color: rgba(21, 29, 48, 0.85);
     color: white;
     text-align: left;
     padding-left: 25px;
@@ -131,7 +110,7 @@ input[type="text"]:focus {
     background-size: 300% 300%;
     animation: gradientMove 3s infinite;
     transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 20px rgba(127, 0, 255, 0.4);
 }
 
 .game-header {
@@ -140,7 +119,6 @@ input[type="text"]:focus {
     margin-bottom: 25px;
     font-weight: bold;
     color: #cbd5e1;
-    font-size: 0.95rem;
 }
 
 #timer-box {
@@ -148,33 +126,32 @@ input[type="text"]:focus {
     background: rgba(245, 158, 11, 0.2);
     padding: 4px 12px;
     border-radius: 20px;
-    border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 #question-text {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     margin-bottom: 30px;
     line-height: 1.6;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .option-btn {
-    background-color: rgba(30, 41, 66, 0.9);
+    background-color: rgba(30, 41, 66, 0.8);
     color: #e2e8f0;
     text-align: left;
     padding-left: 20px;
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* 🔥 TOUCHED / SELECTED OPTION: MIX COLORFUL GRADIENT GLOW ANIMATION */
-.option-btn.selected, .option-btn:active {
+/* 🔥 MIX COLORFUL TOUCH & ACTIVE GLOW EFFECT */
+.option-btn.selected, .option-btn:hover, .option-btn:active {
     background: var(--gradient-mix) !important;
     background-size: 300% 300% !important;
     animation: gradientMove 2s infinite linear;
     color: #ffffff !important;
     font-weight: bold;
     transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(127, 0, 255, 0.6), 0 0 10px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 25px rgba(127, 0, 255, 0.6);
     border: none !important;
 }
 
@@ -185,24 +162,15 @@ input[type="text"]:focus {
 }
 
 .report-item {
-    background-color: rgba(26, 35, 61, 0.9);
+    background-color: rgba(26, 35, 61, 0.85);
     padding: 18px;
     margin: 15px 0;
     border-radius: 12px;
     text-align: left;
-    border-left: 6px solid #64748b;
 }
 
-.report-item.correct-ans {
-    border-left-color: var(--success-color);
-    background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
-}
-
-.report-item.wrong-ans {
-    border-left-color: var(--danger-color);
-    background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
-}
-
+.report-item.correct-ans { border-left: 6px solid var(--success-color); }
+.report-item.wrong-ans { border-left: 6px solid var(--danger-color); }
 .text-success { color: var(--success-color); font-weight: bold; }
 .text-danger { color: var(--danger-color); font-weight: bold; }
 
