@@ -1,6 +1,6 @@
 :root {
     --bg-color: #050811;
-    --card-bg: rgba(13, 20, 38, 0.75);
+    --card-bg: rgba(13, 20, 38, 0.82);
     --text-color: #f1f5f9;
     --success-color: #10b981;
     --danger-color: #ef4444;
@@ -8,151 +8,74 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    margin: 0; padding: 0;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
     color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
     min-height: 100vh;
-    /* 🎨 High Quality Digital Art Background */
     background: linear-gradient(rgba(5, 8, 17, 0.55), rgba(5, 8, 17, 0.75)),
                 url('https://unsplash.com') no-repeat center center fixed;
     background-size: cover;
-    overflow-x: hidden;
 }
 
 .quiz-container {
     background-color: var(--card-bg);
-    padding: 35px 25px;
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
-    width: 90%;
-    max-width: 480px;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    padding: 35px 25px; border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    width: 90%; max-width: 480px;
+    position: relative; border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
 }
 
-.music-control {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
+.music-control { position: absolute; top: 20px; right: 20px; }
 .control-btn {
-    background: rgba(255, 255, 255, 0.12);
-    color: white;
+    background: rgba(255, 255, 255, 0.12); color: white;
     border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 6px 14px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    backdrop-filter: blur(5px);
+    padding: 6px 14px; border-radius: 50px; cursor: pointer; font-size: 0.8rem;
     transition: all 0.3s ease;
 }
-
-.control-btn:hover {
-    background: white;
-    color: black;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-}
-
-.screen { text-align: center; }
+.control-btn:hover { background: white; color: black; }
 .hide { display: none !important; }
 
 h1, h2, h3 {
     background: linear-gradient(to right, #00f0ff, #ff007f);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-weight: 700;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin: 8px 0; font-weight: 700; text-align: center;
 }
+p { text-align: center; color: #cbd5e1; }
 
 .action-btn, .option-btn, .topic-btn {
-    width: 100%;
-    padding: 16px;
-    margin: 12px 0;
-    border-radius: 14px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-sizing: border-box;
+    width: 100%; padding: 16px; margin: 12px 0;
+    border-radius: 14px; border: none; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s ease; box-sizing: border-box;
 }
 
 .action-btn {
-    background: linear-gradient(90deg, #7f00ff, #ff007f);
-    color: white;
-    margin-top: 15px;
+    background: linear-gradient(90deg, #7f00ff, #ff007f); color: white;
     box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3);
 }
-
-.action-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 0, 127, 0.5);
-}
+.action-btn:hover { transform: translateY(-2px); }
 
 .topic-btn {
-    background-color: rgba(21, 29, 48, 0.85);
-    color: white;
-    text-align: left;
-    padding-left: 25px;
-    border: 1px solid rgba(255,255,255,0.05);
+    background-color: rgba(21, 29, 48, 0.85); color: white;
+    text-align: left; padding-left: 25px; border: 1px solid rgba(255,255,255,0.05);
 }
-
 .topic-btn:hover {
-    background: var(--gradient-mix);
-    background-size: 300% 300%;
-    animation: gradientMove 3s infinite;
-    transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(127, 0, 255, 0.4);
+    background: var(--gradient-mix); background-size: 300% 300%;
+    animation: gradientMove 3s infinite; transform: scale(1.02);
 }
 
-.game-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-    font-weight: bold;
-    color: #cbd5e1;
-}
-
-#timer-box {
-    color: #f59e0b;
-    background: rgba(245, 158, 11, 0.2);
-    padding: 4px 12px;
-    border-radius: 20px;
-}
-
-#question-text {
-    font-size: 1.25rem;
-    margin-bottom: 30px;
-    line-height: 1.6;
-    font-weight: 500;
-}
+.game-header { display: flex; justify-content: space-between; margin-bottom: 25px; }
+#timer-box { color: #f59e0b; background: rgba(245, 158, 11, 0.2); padding: 4px 12px; border-radius: 20px; }
+#question-text { font-size: 1.25rem; margin-bottom: 30px; line-height: 1.6; text-align: center; }
 
 .option-btn {
-    background-color: rgba(30, 41, 66, 0.8);
-    color: #e2e8f0;
-    text-align: left;
-    padding-left: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba(30, 41, 66, 0.8); color: #e2e8f0;
+    text-align: left; padding-left: 20px; border: 1px solid rgba(255, 255, 255, 0.08);
 }
-
-/* 🔥 MIX COLORFUL TOUCH & ACTIVE GLOW EFFECT */
-.option-btn.selected, .option-btn:hover, .option-btn:active {
-    background: var(--gradient-mix) !important;
-    background-size: 300% 300% !important;
-    animation: gradientMove 2s infinite linear;
-    color: #ffffff !important;
-    font-weight: bold;
-    transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(127, 0, 255, 0.6);
-    border: none !important;
+.option-btn.selected, .option-btn:hover {
+    background: var(--gradient-mix) !important; background-size: 300% 300% !important;
+    animation: gradientMove 2s infinite linear; color: #ffffff !important;
 }
 
 @keyframes gradientMove {
@@ -161,14 +84,7 @@ h1, h2, h3 {
     100% { background-position: 0% 50%; }
 }
 
-.report-item {
-    background-color: rgba(26, 35, 61, 0.85);
-    padding: 18px;
-    margin: 15px 0;
-    border-radius: 12px;
-    text-align: left;
-}
-
+.report-item { background-color: rgba(26, 35, 61, 0.85); padding: 18px; margin: 15px 0; border-radius: 12px; }
 .report-item.correct-ans { border-left: 6px solid var(--success-color); }
 .report-item.wrong-ans { border-left: 6px solid var(--danger-color); }
 .text-success { color: var(--success-color); font-weight: bold; }
