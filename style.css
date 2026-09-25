@@ -1,107 +1,84 @@
-// 🔱 LOKRAJ AWASTHI - COMPREHENSIVE REPOSITORY MATRIX WITH PUBLICATION SPECIFIC DATA 🔱
+:root {
+    --bg-color: #02040a;
+    --card-bg: rgba(6, 11, 25, 0.9);
+    --text-color: #f1f5f9;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --gradient-mix: linear-gradient(45deg, #00f0ff, #7f00ff, #ff007f, #00f0ff);
+}
 
-const pools = {
-    // 🔬 १. Class 10 Science (Neema Publication + Out Questions)
-    class10_science: [
-        { question: "What is the value of acceleration due to gravity (g) at the poles of the Earth?", options: ["9.78 m/s²", "9.83 m/s²", "9.80 m/s²", "6.67 m/s²"], correct: 1 },
-        { question: "Which blood vessel carries oxygenated blood from the lungs to the heart?", options: ["Pulmonary Artery", "Pulmonary Vein", "Vena Cava", "Aorta"], correct: 1 },
-        { question: "What is the SI unit of power of a lens?", options: ["Watt", "Dioptre", "Meter", "Lumen"], correct: 1 },
-        { question: "Which element has the highest electro-negativity in the periodic table?", options: ["Oxygen", "Fluorine", "Chlorine", "Hydrogen"], correct: 1 },
-        { question: "What type of virus is responsible for causing HIV/AIDS?", options: ["Retro virus", "Adeno virus", "Rhino virus", "Bacteriophage"], correct: 0 }
-    ],
+body {
+    margin: 0; padding: 0; font-family: 'Poppins', sans-serif; color: var(--text-color);
+    display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    /* 🔱 भगवान महादेवको भव्य, दिव्य र आकर्षक लाइभ एनिमेटेड ब्याकग्राउण्ड - सुरुदेखि अन्तिमसम्म स्थिर रहने */
+    background: linear-gradient(rgba(2, 4, 10, 0.65), rgba(2, 4, 10, 0.9)),
+                url('https://unsplash.com') no-repeat center center fixed !important;
+    background-size: cover !important;
+}
 
-    // 📐 २. Class 10 Opt Math (Read More Publication)
-    class10_optmath: [
-        { question: "If vector A = (2, 3) and vector B = (4, 1), what is the value of A + B?", options: ["(6, 4)", "(2, 2)", "(8, 3)", "(6, 2)"], correct: 0 },
-        { question: "What is the value of sin(90° - θ)?", options: ["sin θ", "cos θ", "-cos θ", "tan θ"], correct: 1 },
-        { question: "Find the slope of the line parallel to the line 2x + 3y = 5.", options: ["2/3", "-2/3", "3/2", "-3/2"], correct: 1 },
-        { question: "What is the value of matrix determinant for a singular matrix?", options: ["1", "0", "-1", "Infinity"], correct: 1 },
-        { question: "The distance between the points (0,0) and (3,4) is:", options: ["5 units", "7 units", "25 units", "12 units"], correct: 0 }
-    ],
+.quiz-container {
+    background-color: var(--card-bg) !important; padding: 30px 20px; border-radius: 28px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.15);
+    width: 95%; max-width: 520px; position: relative; border: 1px solid rgba(0, 240, 255, 0.2);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+}
 
-    // 💻 ३. Class 10 Computer (Unique Publication)
-    class10_computer: [
-        { question: "Which computer topology requires a central controller or hub?", options: ["Bus Topology", "Star Topology", "Ring Topology", "Mesh Topology"], correct: 1 },
-        { question: "What is the full form of cyber law component 'ICT'?", options: ["Information Communication Tech", "Internal Cyber Treaty", "Integrated Circuit Test", "Interconnected Wire"], correct: 0 },
-        { question: "Which data transmission medium is the fastest?", options: ["Coaxial Cable", "Twisted Pair Cable", "Fiber Optic Cable", "Satellite Communication"], correct: 2 },
-        { question: "Which database component uniquely identifies each record in a table?", options: ["Foreign Key", "Primary Key", "Composite Key", "Candidate Key"], correct: 1 },
-        { question: "In QBASIC, which statement is used to clear the output screen?", options: ["CLEAR", "CLS", "RESET", "END"], correct: 1 }
-    ],
+.viral-free-tag { font-size: 0.9rem; color: #ff007f !important; font-weight: bold; background: rgba(255, 0, 127, 0.15); padding: 5px 12px; border-radius: 30px; display: inline-block; margin-bottom: 15px; }
 
-    // 🖥️ ४. Class 11 Computer (Buddha Publication)
-    class11_computer: [
-        { question: "Which of the following is the brain of a computer system?", options: ["ALU", "Memory", "CPU", "Control Unit"], correct: 2 },
-        { question: "What is the base of the Hexadecimal number system?", options: ["2", "8", "10", "16"], correct: 3 },
-        { question: "Which HTML tag is used to create a hyperlink?", options: ["<link>", "<a>", "<href>", "<url>"], correct: 1 },
-        { question: "What is the full form of DRAM?", options: ["Dynamic Remote Access Memory", "Dynamic Random-Access Memory", "Dependent Remote Access Memory", "Dependent Random-Access Memory"], correct: 1 },
-        { question: "Which generation of computer introduced the use of microprocessors?", options: ["First Generation", "Second Generation", "Third Generation", "Fourth Generation"], correct: 3 }
-    ],
+.music-control { position: absolute; top: 20px; right: 20px; }
+.control-btn {
+    background: rgba(255, 255, 255, 0.08); color: white; border: 1px solid rgba(0, 240, 255, 0.3);
+    padding: 8px 16px; border-radius: 50px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease;
+}
+.control-btn:hover { background: #00f0ff; color: black; box-shadow: 0 0 15px #00f0ff; }
+.hide { display: none !important; }
 
-    // ⚛️ ५. Class 11 Physics (Pioneer Publication)
-    class11_physics: [
-        { question: "What is the dimensional formula for Work Done or Energy?", options: ["MLT⁻²", "ML²T⁻²", "ML²T⁻¹", "M⁻¹L³T⁻²"], correct: 1 },
-        { question: "The horizontal range of a projectile is maximum when the angle of projection is:", options: ["30°", "45°", "60°", "90°"], correct: 1 },
-        { question: "What is the SI unit of coefficient of viscosity?", options: ["Pascal", "Poiseuille", "Newton", "Watt"], correct: 1 },
-        { question: "According to Newton's law, a body remains at rest or in uniform motion unless acted upon by an:", options: ["Internal Force", "External Force", "Frictional Force", "Gravitational Force"], correct: 1 },
-        { question: "What is the escape velocity from the surface of the Earth?", options: ["11.2 km/s", "9.8 km/s", "7.9 km/s", "11.2 m/s"], correct: 0 }
-    ],
+h1, h2, h3 { background: linear-gradient(to right, #00f0ff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 8px 0; font-weight: 700; text-align: center; }
+p { text-align: center; color: #cbd5e1; }
 
-    // 🧪 ६. Class 11 Chemistry (Pioneer Publication)
-    class11_chemistry: [
-        { question: "What is the shape of an s-orbital?", options: ["Dumbbell", "Spherical", "Double Dumbbell", "Linear"], correct: 1 },
-        { question: "What is the maximum number of electrons that can be accommodated in a p-subshell?", options: ["2", "6", "10", "14"], correct: 1 },
-        { question: "Which block of the periodic table contains the halogens?", options: ["s-block", "p-block", "main-block", "d-block"], correct: 1 },
-        { question: "What is the value of Avogadro's number?", options: ["6.022 x 10²³", "6.022 x 10²²", "3 x 10⁸", "9.8 x 10¹¹"], correct: 0 },
-        { question: "What is the pH value of pure water at 25°C?", options: ["0", "7", "14", "1"], correct: 1 }
-    ],
+.topic-grid { display: flex; flex-direction: column; width: 100%; }
 
-    // 🧮 ७. Class 11 Math (Kriti Publication)
-    class11_math: [
-        { question: "What is the value of i² in complex numbers?", options: ["1", "-1", "0", "under-root 1"], correct: 1 },
-        { question: "If A and B are two disjoint sets, then n(A ∩ B) is equal to:", options: ["n(A)", "n(B)", "0", "1"], correct: 2 },
-        { question: "What is the value of log(1) to any non-zero base?", options: ["1", "0", "Base Value", "Undefined"], correct: 1 },
-        { question: "The derivative of sin(x) with respect to x is:", options: ["cos(x)", "-cos(x)", "tan(x)", "sec²(x)"], correct: 0 },
-        { question: "What is the value of 0! (zero factorial)?", options: ["0", "1", "Undefined", "-1"], correct: 1 }
-    ],
+/* 🔥 बटनहरूलाई स्पष्ट ठूलो प्रिमियम बाकस बनाउने कोड (First Click Clickable Layer) */
+.action-btn, .option-btn, .topic-btn {
+    display: block !important;
+    width: 100% !important;
+    padding: 18px !important;
+    margin: 12px 0 !important;
+    border-radius: 16px !important;
+    border: none !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+}
 
-    // 🇳🇵 ८. नेपालको भूगोल (Loksewa Core Pool)
-    nepal_bhugol: [
-        { question: "Which is the largest lake in Nepal?", options: ["Phewa Lake", "Rara Lake", "Tilicho Lake", "Shey-Phoksundo Lake"], correct: 1 },
-        { question: "What is the altitude of Mount Everest according to the latest measurement?", options: ["8848.48 m", "8848.86 m", "8850 m", "8844.43 m"], correct: 1 },
-        { question: "Which district of Nepal is known as the district of 52 lakes and 53 lakeshores?", options: ["Rukum", "Rasuwa", "Chitwan", "Palpa"], correct: 0 },
-        { question: "What is the total length of the international border of Nepal?", options: ["2,926 km", "1,414 km", "1,238 km", "2,414 km"], correct: 0 },
-        { question: "Which river is known as the sorrow of Bihar after crossing into India?", options: ["Karnali", "Gandaki", "Koshi", "Mahakali"], correct: 2 }
-    ],
+.action-btn { background: linear-gradient(90deg, #7f00ff, #ff007f) !important; color: white !important; text-align: center !important; }
+.action-btn:hover { transform: translateY(-2px); }
 
-    // 🌏 ९. विश्वको भूगोल (Loksewa Core Pool)
-    world_bhugol: [
-        { question: "Which is the longest river in the world?", options: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"], correct: 1 },
-        { question: "Which country is known as the Land of the Rising Sun?", options: ["China", "Japan", "South Korea", "Thailand"], correct: 1 },
-        { question: "Which is the largest ocean in the world?", options: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"], correct: 2 },
-        { question: "Which desert is the largest hot desert in the world?", options: ["Gobi Desert", "Sahara Desert", "Kalahari Desert", "Thar Desert"], correct: 1 },
-        { question: "Which continent is known as the Dark Continent?", options: ["Asia", "Africa", "Australia", "Europe"], correct: 1 }
-    ],
+.topic-btn { background-color: rgba(22, 32, 54, 0.9) !important; color: white !important; border: 1px solid rgba(0, 240, 255, 0.15) !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.topic-btn:hover { background: var(--gradient-mix) !important; background-size: 300% 300% !important; animation: gradientMove 3s infinite; transform: scale(1.02); }
 
-    // 🏛️ १०. नेपालको इतिहास (Loksewa Core Pool)
-    nepal_itihas: [
-        { question: "Which treaty officially ended the Anglo-Nepalese War (1814-1816)?", options: ["Sugauli Treaty", "Treaty of Kathmandu", "Lal Mohar Treaty", "Segauli Alliance"], correct: 0 },
-        { question: "Who was the first Rana Prime Minister of Nepal?", options: ["Jung Bahadur Rana", "Bhimsen Thapa", "Chandra Shumsher", "Dev Shumsher"], correct: 0 },
-        { question: "Which king is known as the builder of modern United Nepal?", options: ["Prithvi Narayan Shah", "King Janak", "Jayasthiti Malla", "King Mahendra"], correct: 0 },
-        { question: "The historic Kot Massacre took place in which year?", options: ["1846 AD", "1951 AD", "1816 AD", "1901 AD"], correct: 0 },
-        { question: "Who was the first martyr of Nepal?", options: ["Lakhan Thapa", "Sukraraj Shastri", "Dharma Bhakta Mathema", "Gangalal Shrestha"], correct: 0 }
-    ],
+.game-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; }
+#timer-box { color: #f59e0b; background: rgba(245, 158, 11, 0.18); padding: 4px 14px; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.3); }
+#question-text { font-size: 1.25rem; margin-bottom: 25px; line-height: 1.6; text-align: center; font-weight: 500; }
 
-    // 📜 ११. विश्वको इतिहास (Loksewa Core Pool)
-    world_itihas: [
-        { question: "In which year did World War I officially begin?", options: ["1912", "1914", "1918", "1939"], correct: 1 },
-        { question: "Who was the leader of Germany during World War II?", options: ["Benito Mussolini", "Adolf Hitler", "Joseph Stalin", "Winston Churchill"], correct: 1 },
-        { question: "The French Revolution broke out in which historic year?", options: ["1776 AD", "1789 AD", "1815 AD", "1492 AD"], correct: 1 },
-        { question: "Who discovered the sea route to America in 1492?", options: ["Vasco da Gama", "Christopher Columbus", "Ferdinand Magellan", "Marco Polo"], correct: 1 },
-        { question: "The industrial revolution first started in which country?", options: ["France", "Great Britain", "Germany", "USA"], correct: 1 }
-    ],
+.option-btn { background-color: #162036 !important; color: #cbd5e1 !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
+.option-btn:hover:not([disabled]) { background: rgba(0, 240, 255, 0.2) !important; border: 1px solid #00f0ff !important; color: white !important; }
 
-    // 💡 १२. मिक्स्ड लोकसेवा जीके (1,000,000+ Big Scale Compliance Pool)
-    loksewa_gk: [
-        { question: "According to the Constitution of Nepal, who holds residual powers?", options: ["Federal Parliament", "Federal Executive (Council of Ministers)", "Supreme Court", "Provincial Assembly"], correct: 1 },
+/* 🟢 सही हुँदा हरियो बत्ती */
+.option-btn.correct-glow { background: linear-gradient(45deg, #10b981, #059669) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important; }
+/* 🔴 गलत हुँदा रातो बत्ती */
+.option-btn.wrong-danger { background: linear-gradient(45deg, #ef4444, #dc2626) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(239, 68, 68, 0.8) !important; }
+
+.google-ad-box { margin-top: 15px; padding: 5px; background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 12px; }
+.ad-banner-mock { height: 50px; background: rgba(255, 255, 255, 0.05); color: #777; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; border-radius: 8px; }
+
+.premium-notice { margin-top: 15px; padding: 12px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 12px; font-size: 0.8rem; }
+@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.report-item { background-color: rgba(15, 23, 42, 0.85); padding: 18px; margin: 15px 0; border-radius: 14px; text-align: left; }
+.report-item.correct-ans { border-left: 6px solid var(--success-color); }
+.report-item.wrong-ans { border-left: 6px solid var(--danger-color); }
 
  

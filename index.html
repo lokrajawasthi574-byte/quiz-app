@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokraj Awasthi - Mega Loksewa & Academic Quiz Arena</title>
-    <!-- 🔱 ब्राउजरको पुरानो सबै अड्किएको मेमोरी तोड्नका लागि नयाँ फाइनल भर्सन टोकन -->
-    <link rel="stylesheet" href="style.css?v=final_perfect_build_777">
+    <title>Lokraj Awasthi - Ultimate Quiz Arena</title>
+    <!-- 🔱 ब्राउजरको पुरानो सबै गल्ती मेमोरी जरैदेखि तोड्नका लागि नयाँ फाइनल भर्सन टोकन -->
+    <link rel="stylesheet" href="style.css?v=ultimate_perfect_build_999">
 </head>
 <body>
     <div class="quiz-container">
@@ -19,61 +19,59 @@
             <button id="music-toggle-btn" class="control-btn">🎵 Music: OFF</button>
         </div>
 
-        <!-- 🚀 12 Category Architecture Dashboard -->
+        <!-- 🚀 SCREEN 1: सुरुको मुख्य पेज (जम्मा ४ वटा मुख्य प्रिमियम बाकस) -->
         <div id="main-dashboard-screen" class="screen">
-            <h1>Lokraj Awasthi</h1>
-            <h3>Kailali Model Secondary School</h3>
-            <h2>Loksewa & Academic Pro Arena</h2>
+            <h1>Quiz Hub</h1>
             <p class="viral-free-tag">🔥 ६ महिनासम्म पूरै फ्री ट्रायल चालू छ !</p>
            
             <div class="topic-grid">
-                <button class="topic-btn" data-topic="class10_science">🔬 Class 10 Science (Neema + Out)</button>
-                <button class="topic-btn" data-topic="class10_optmath">📐 Class 10 Opt Math (Read More)</button>
-                <button class="topic-btn" data-topic="class10_computer">💻 Class 10 Computer (Unique)</button>
-                <button class="topic-btn" data-topic="class11_computer">🖥️ Class 11 Computer (Buddha)</button>
-                <button class="topic-btn" data-topic="class11_physics">⚛️ Class 11 Physics (Pioneer)</button>
-                <button class="topic-btn" data-topic="class11_chemistry">🧪 Class 11 Chemistry (Pioneer)</button>
-                <button class="topic-btn" data-topic="class11_math">🧮 Class 11 Math (Kriti)</button>
-                <button class="topic-btn" data-topic="nepal_bhugol">🇳🇵 नेपालको भूगोल (Loksewa)</button>
-                <button class="topic-btn" data-topic="world_bhugol">🌏 विश्वको भूगोल (Loksewa)</button>
-                <button class="topic-btn" data-topic="nepal_itihas">🏛️ नेपालको इतिहास (Loksewa)</button>
-                <button class="topic-btn" data-topic="world_itihas">📜 विश्वको इतिहास (Loksewa)</button>
-                <button class="topic-btn" data-topic="loksewa_gk">💡 मिक्स्ड लोकसेवा जीके (1,000,000+ Pool)</button>
+                <button class="topic-btn main-cat-btn" id="btn-c10">📚 Class 10 Series</button>
+                <button class="topic-btn main-cat-btn" id="btn-c11">🎓 Class 11 Series</button>
+                <button class="topic-btn main-cat-btn" id="btn-gk">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
+                <button class="topic-btn main-cat-btn" id="btn-sc">🔬 सामान्य विज्ञान (Out Included)</button>
             </div>
         </div>
 
-        <!-- SCREEN 2: Active Gameplay Window -->
+        <!-- 📂 SCREEN 2: भित्री उप-क्याटगोरी स्क्रिन (क्लिक गरेपछि मात्र खुल्ने पब्लिकेसनहरू) -->
+        <div id="sub-dashboard-screen" class="screen hide">
+            <button id="back-to-main-btn" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
+            <h2 id="sub-screen-title">Select Publication</h2>
+            <div class="topic-grid" id="sub-category-container">
+                <!-- भित्री बटनहरू स्वतः लोड हुनेछन् -->
+            </div>
+        </div>
+
+        <!-- SCREEN 3: Active Gameplay Window -->
         <div id="game-screen" class="screen hide">
             <div class="game-header">
                 <span id="question-counter">Question: 1/10</span>
                 <div id="timer-box">⏳ Time Left: <span id="seconds-left">30</span>s</div>
             </div>
-            <div id="question-text">Loading Real-Time Publication Question Matrix...</div>
+            <div id="question-text">Loading Question Matrix...</div>
             <div id="options-container"></div>
             <button id="next-question-btn" class="action-btn hide">Next Question</button>
 
-            <!-- 📢 GOOGLE ADSENSE PLACEHOLDER (भ्युजबाट पैसा आउने ठाउँ) -->
+            <!-- 📢 विज्ञापन बस्ने बाकस (भ्युजबाट पैसा आउने ठाउँ) -->
             <div class="google-ad-box">
                 <p style="font-size: 0.75rem; color: #555; margin: 2px 0;">Sponsored Advertisement</p>
                 <div class="ad-banner-mock">गुगल विज्ञापन (Ad Unit Area)</div>
             </div>
         </div>
 
-        <!-- SCREEN 3: Professional Performance Report Card -->
+        <!-- SCREEN 4: Professional Performance Report Card -->
         <div id="report-screen" class="screen hide">
-            <h2>Loksewa Score Assessment Card</h2>
+            <h2>Score Assessment Card</h2>
             <div id="score-summary"></div>
             <div id="detailed-report"></div>
             <button id="restart-game-btn" class="action-btn">Attempt Another Set</button>
            
-            <!-- 💸 FUTURE PREMIUM PAYWALL BANNER -->
             <div class="premium-notice">
-                <p>🔒 ६ महिनापछि यसै ठाउँमा eSewa / Khalti पेमेंट र गुगल विज्ञापन एक्टिभ हुनेछ।</p>
+                <p>🔒 ६ महिनापछि यसै ठाउँमा eSewa पेमेंट र गुगल विज्ञापन एक्टिभ हुनेछ।</p>
             </div>
         </div>
     </div>
     <!-- 🔥 नयाँ जावास्क्रिप्ट फाइनल परफेक्ट बिल्ड टोकन -->
-    <script src="script.js?v=final_perfect_build_777"></script>
+    <script src="script.js?v=ultimate_perfect_build_999"></script>
 </body>
 </html>
 
