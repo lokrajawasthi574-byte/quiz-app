@@ -4,8 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lokraj Awasthi - Ultimate Quiz Arena</title>
-    <!-- 🔱 नयाँ रिफ्रेस टोकन जसले पुराना सबै अड्किएका डिजाइनहरू सर्भरबाटै तोड्छ -->
-    <link rel="stylesheet" href="style.css?v=v60_har_har_mahadev_100">
+    <style>
+        /* 🔱 LOKRAJ AWASTHI - COMPREHENSIVE STYLE MASTER BUILD 🔱 */
+        :root {
+            --bg-color: #02040a;
+            --card-bg: rgba(6, 11, 25, 0.9);
+            --text-color: #f1f5f9;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --gradient-mix: linear-gradient(45deg, #00f0ff, #7f00ff, #ff007f, #00f0ff);
+        }
+
+        body {
+            margin: 0; padding: 0; font-family: 'Poppins', sans-serif; color: var(--text-color);
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            background: linear-gradient(rgba(2, 4, 10, 0.65), rgba(2, 4, 10, 0.9)),
+                        url('https://unsplash.com') no-repeat center center fixed !important;
+            background-size: cover !important;
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg) !important; padding: 30px 20px; border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.15);
+            width: 95%; max-width: 520px; position: relative; border: 1px solid rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 10 !important;
+        }
+
+        .viral-free-tag { font-size: 1.1rem; color: #ff007f !important; font-weight: bold; background: rgba(255, 0, 127, 0.15); padding: 6px 16px; border-radius: 30px; display: inline-block; margin-bottom: 20px; text-align: center; width: auto; }
+
+        .music-control { position: absolute; top: 20px; right: 20px; z-index: 99999 !important; }
+        .control-btn {
+            background: rgba(255, 255, 255, 0.08); color: white; border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 8px 16px; border-radius: 50px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease;
+            position: relative; z-index: 99999 !important;
+        }
+        .control-btn:hover { background: #00f0ff; color: black; box-shadow: 0 0 15px #00f0ff; }
+        .hide { display: none !important; }
+
+        h1, h2, h3 { background: linear-gradient(to right, #00f0ff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 8px 0; font-weight: 700; text-align: center; }
+        p { text-align: center; color: #cbd5e1; }
+
+        .topic-grid { display: flex; flex-direction: column; width: 100%; position: relative; z-index: 9999 !important; }
+
+        /* 🔥 बटनहरूलाई सबै अदृश्य तहभन्दा माथि राखेर पहिलो टचमै सोझै अनलक गराउने अचूक मास्टर डिजाइन */
+        .action-btn, .option-btn, .topic-btn {
+            display: block !important;
+            position: relative !important;
+            z-index: 999999 !important;
+            width: 100% !important;
+            padding: 18px !important;
+            margin: 12px 0 !important;
+            border-radius: 16px !important;
+            border: none !important;
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-sizing: border-box !important;
+            text-align: left !important;
+        }
+
+        .action-btn { background: linear-gradient(90deg, #7f00ff, #ff007f) !important; color: white !important; text-align: center !important; }
+        .action-btn:hover { transform: translateY(-2px); }
+
+        .topic-btn { background-color: rgba(22, 32, 54, 0.9) !important; color: white !important; border: 1px solid rgba(0, 240, 255, 0.15) !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .topic-btn:hover { background: var(--gradient-mix) !important; background-size: 300% 300% !important; animation: gradientMove 3s infinite; transform: scale(1.02); }
+
+        .game-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; }
+        #timer-box { color: #f59e0b; background: rgba(245, 158, 11, 0.18); padding: 4px 14px; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.3); }
+        #question-text { font-size: 1.25rem; margin-bottom: 25px; line-height: 1.6; text-align: center; font-weight: 500; }
+
+        .option-btn { background-color: #162036 !important; color: #cbd5e1 !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
+        .option-btn:hover:not([disabled]) { background: rgba(0, 240, 255, 0.2) !important; border: 1px solid #00f0ff !important; color: white !important; }
+
+        /* 🟢 हरियो चम्किलो लाइट */
+        .option-btn.correct-glow { background: linear-gradient(45deg, #10b981, #059669) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important; }
+        /* 🔴 रातो खतरा लाइट */
+        .option-btn.wrong-danger { background: linear-gradient(45deg, #ef4444, #dc2626) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(239, 68, 68, 0.8) !important; }
+
+        .google-ad-box { margin-top: 15px; padding: 5px; background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 12px; }
+        .ad-banner-mock { height: 50px; background: rgba(255, 255, 255, 0.05); color: #777; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; border-radius: 8px; }
+
+        .premium-notice { margin-top: 15px; padding: 12px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 12px; font-size: 0.8rem; }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .report-item { background-color: rgba(15, 23, 42, 0.85); padding: 18px; margin: 15px 0; border-radius: 14px; text-align: left; }
+        .report-item.correct-ans { border-left: 6px solid var(--success-color); }
+        .report-item.wrong-ans { border-left: 6px solid var(--danger-color); }
+    </style>
 </head>
 <body>
     <div class="quiz-container">
@@ -19,27 +106,24 @@
             <button id="music-toggle-btn" class="control-btn">🎵 Music: OFF</button>
         </div>
 
-        <!-- 🚀 SCREEN 1: सुरुको मुख्य ड्यासबोर्ड (तपाईँको सर्त अनुसार 'हर हर महादेव' थपिएको शुद्ध रूप) -->
+        <!-- 🚀 SCREEN 1: सुरुको मुख्य ड्यासबोर्ड (६ महिना फ्री ब्यानर हटाई 'हर हर महादेव' थपिएको शुद्ध रूप) -->
         <div id="main-dashboard-screen" class="screen">
             <h1>Quiz Hub</h1>
-            <!-- 🔱 यहाँ तपाइँको इच्छा अनुसार पवित्र शिव मन्त्र चम्किनेछ -->
-            <p class="viral-free-tag">🔱 हर हर महादेव 🔱</p>
+            <center><p class="viral-free-tag">🔱 हर हर महादेव 🔱</p></center>
            
             <div class="topic-grid">
-                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('class10', 'Class 10 Special Series')">📚 Class 10 Series</button>
-                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('class11', 'Class 11 Special Series')">🎓 Class 11 Series</button>
-                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('gk', 'Loksewa General Knowledge')">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
-                <button class="topic-btn main-cat-btn" onclick="window.triggerSubMenu('science', 'General Science Matrix')">🔬 सामान्य विज्ञान (Out Included)</button>
+                <button class="topic-btn main-cat-btn" onclick="triggerSubMenu('class10', 'Class 10 Special Series')">📚 Class 10 Series</button>
+                <button class="topic-btn main-cat-btn" onclick="triggerSubMenu('class11', 'Class 11 Special Series')">🎓 Class 11 Series</button>
+                <button class="topic-btn main-cat-btn" onclick="triggerSubMenu('gk', 'Loksewa General Knowledge')">🇳🇵 लोकसेवा सामान्य ज्ञान</button>
+                <button class="topic-btn main-cat-btn" onclick="triggerSubMenu('science', 'General Science Matrix')">🔬 सामान्य विज्ञान (Out Included)</button>
             </div>
         </div>
 
         <!-- 📂 SCREEN 2: भित्री पब्लिकेसन स्क्रिन (क्लिक गरेपछि मात्र खुल्ने ठाउँ) -->
         <div id="sub-dashboard-screen" class="screen" style="display: none;">
-            <button onclick="window.backToHome()" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
+            <button onclick="backToHome()" class="control-btn" style="position: static; margin-bottom: 15px;">⬅️ Back to Main</button>
             <h2 id="sub-screen-title">Select Publication</h2>
-            <div class="topic-grid" id="sub-category-container">
-                <!-- भित्री बटनहरू स्वतः लोड हुनेछन् -->
-            </div>
+            <div class="topic-grid" id="sub-category-container"></div>
         </div>
 
         <!-- SCREEN 3: Active Gameplay Window -->
@@ -52,7 +136,7 @@
             <div id="options-container"></div>
             <button id="next-question-btn" class="action-btn" style="display: none;">Next Question</button>
 
-            <!-- 📢 विज्ञापन बस्ने बाकस (भ्युजबाट पैसा आउने ठाउँ) -->
+            <!-- 📢 विज्ञापन बस्ने बाकस -->
             <div class="google-ad-box">
                 <p style="font-size: 0.75rem; color: #555; margin: 2px 0;">Sponsored Advertisement</p>
                 <div class="ad-banner-mock">गुगल विज्ञापन (Ad Unit Area)</div>
@@ -60,16 +144,21 @@
         </div>
 
         <!-- SCREEN 4: Professional Performance Report Card -->
-        <div id="report-screen" class="screen style="display: none;">
+        <div id="report-screen" class="screen" style="display: none;">
             <h2>Score Assessment Card</h2>
             <div id="score-summary"></div>
             <div id="detailed-report"></div>
             <button id="restart-game-btn" class="action-btn">Attempt Another Set</button>
         </div>
     </div>
-    <!-- 🔥 नयाँ जावास्क्रिप्ट फाइनल परफेक्ट बिल्ड टोकन -->
-    <script src="script.js?v=v60_har_har_mahadev_100"></script>
-</body>
-</html>
+
+    <script>
+        // 🔱 LOKRAJ AWASTHI - FULL INTEGRATED INTERNAL ENGINE 🔱
+        const pools = {
+            class10_science: [
+                { question: "What is the acceleration due to gravity (g) at the poles of the Earth?", options: ["9.78 m/s²", "9.83 m/s²", "9.80 m/s²", "6.67 m/s²"], correct: 1 },
+                { question: "Which blood vessel carries oxygenated blood from the lungs to the heart?", options: ["Pulmonary Artery", "Pulmonary Vein", "Vena Cava", "Aorta"], correct: 1 }
+            ],
+            class10_optmath: [
 
  
