@@ -1,5 +1,5 @@
 // =========================================================================
-// ANTI-CRASH SINGLE-FILE ENGINE (100% FIXED CLICK GUARANTEE)
+// ORIGINAL WORKING QUIZ ENGINE - 100% FIXED CLICK ACTION (RESTORED VERSION)
 // Developed for: Lok Raj Awasthi
 // =========================================================================
 
@@ -8,7 +8,7 @@ const quizDatabase = {
         title: "कक्षा १० / Class 10 MCQ Pool",
         subjects: {
             math: {
-                title: "अनिवार्य गणित / Mathematics (Read More)",
+                title: "अनिवार्य गणित / Mathematics",
                 chapters: {
                     c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
                         { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
@@ -17,7 +17,7 @@ const quizDatabase = {
                 }
             },
             science: {
-                title: "विज्ञान तथा प्रविधि / Science & Tech (Neema)",
+                title: "विज्ञान तथा प्रविधि / Science & Tech",
                 chapters: {
                     c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
                         { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 }
@@ -30,11 +30,11 @@ const quizDatabase = {
         title: "कक्षा ११ / Class 11 MCQ Pool",
         subjects: {
             physics: {
-                title: "भौतिक विज्ञान / Physics (Pioneer)",
+                title: "भौतिक विज्ञान / Physics",
                 chapters: {
-                    c1: { title: "अध्याय १: मापन र विमीय विश्लेषण / Chapter 1: Dimensions", questions: [
-                        { qNp: "कार्य (Work Done) को विमीय सूत्र (Dimensional Formula) कुन हो?", qEn: "What is the dimensional formula for Work Done?", options: ["[MLT^-2]", "[ML^2T^-2]", "[ML^-1T^-2]", "[M^2LT^-2]"], correct: 1 }
-                    ] }
+                    c1: { title: "अध्याय १: मेकानिक्स / Chapter 1: Mechanics", questions: [
+                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
+                    ]}
                 }
             }
         }
@@ -46,8 +46,8 @@ const quizDatabase = {
                 title: "भूगोल / Geography",
                 chapters: {
                     c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
-                    ] }
+                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["लालतपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
+                    ]}
                 }
             }
         }
@@ -58,9 +58,9 @@ const quizDatabase = {
             biology: {
                 title: "जीव विज्ञान / General Biology",
                 chapters: {
-                    c1: { title: "मानव शरीर प्रणाली / Human Body System", questions: [
+                    c1: { title: "मानव शरीर / Human Body System", questions: [
                         { qNp: "मानव शरीरको सबैभन्दा ठूलो ग्रन्थि (Gland) कुन हो?", qEn: "Which is the largest gland in the human body?", options: ["Pancreas", "Liver", "Thyroid", "Pituitary"], correct: 1 }
-                    ] }
+                    ]}
                 }
             }
         }
@@ -71,9 +71,9 @@ const quizDatabase = {
             it: {
                 title: "सूचना प्रविधि / Information Technology",
                 chapters: {
-                    c1: { title: "नेटवर्किङ र सुरक्षा / Computer Networks", questions: [
+                    c1: { title: "नेटवर्किङ / Computer Networks", questions: [
                         { qNp: "नेटवर्कको सन्दर्भमा 'IP' को पूरा रूप के हो?", qEn: "What is the full form of 'IP' in computer networking?", options: ["Internet Protocol", "Internal Protocol", "Instant Provider", "Inter Link"], correct: 0 }
-                    ] }
+                    ]}
                 }
             }
         }
