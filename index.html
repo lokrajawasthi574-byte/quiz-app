@@ -1,294 +1,105 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Quiz Nepal</title>
-
-  <meta
-    name="description"
-    content="Quiz Nepal - Class 10, Class 11, General Knowledge and One vs One Quiz"
-  >
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Quiz Hub - By Lok Raj Awasthi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <!-- Overlay to ensure readability over the background image -->
+    <div class="bg-overlay"></div>
 
-  <!-- =====================================================
-       BACKGROUND
-  ====================================================== -->
+    <div class="quiz-container">
+        <!-- App Header with Creator Name -->
+        <header class="app-header">
+            <span class="creator-tag">Designed & Developed by: <strong>Lok Raj Awasthi</strong></span>
+        </header>
 
-  <div class="background-overlay"></div>
-
-
-  <!-- =====================================================
-       MAIN APP
-  ====================================================== -->
-
-  <main id="app">
-
-
-    <!-- ===================================================
-         LOGIN PAGE
-    ==================================================== -->
-
-    <section
-      id="loginPage"
-      class="page login-page active"
-    >
-
-      <div class="login-card">
-
-        <div class="mahadev-symbol">
-          🔱
+        <!-- Main Navigation Screen -->
+        <div id="home-screen" class="screen active">
+            <h1>🔱 Ultimate Quiz Hub</h1>
+            <p class="welcome-text">Prepare for Class 10, 11, and Lok Sewa GK Exams</p>
+            <div class="category-grid">
+                <button class="btn main-btn" onclick="showScreen('class10-screen')">Class 10 Prep</button>
+                <button class="btn main-btn" onclick="showScreen('class11-screen')">Class 11 Prep</button>
+                <button class="btn main-btn" onclick="showScreen('gk-screen')">Lok Sewa GK (1M+ Pool)</button>
+                <button class="btn multiplayer-btn" disabled>⚔️ 1 vs 1 / Play with Friends (Requires Server)</button>
+            </div>
         </div>
 
-        <h1>
-          Quiz Nepal
-        </h1>
-
-        <h2>
-          हर हर महादेव 🔱
-        </h2>
-
-        <p class="login-subtitle">
-          Quiz Nepal मा स्वागत छ
-        </p>
-
-        <p class="login-subtitle en-text">
-          Welcome to Quiz Nepal
-        </p>
-
-
-        <button
-          id="googleLoginBtn"
-          type="button"
-          class="google-login-btn"
-        >
-
-          <span class="google-icon">
-            G
-          </span>
-
-          <span>
-            Continue with Google
-          </span>
-
-        </button>
-
-
-        <p
-          id="loginMessage"
-          class="login-message"
-        ></p>
-
-
-        <div class="creator-box">
-
-          <span>
-            Created by
-          </span>
-
-          <strong>
-            Lok Raj Awasthi
-          </strong>
-
+        <!-- Class 10 Subjects -->
+        <div id="class10-screen" class="screen">
+            <h2>Class 10 Subjects</h2>
+            <div class="category-grid">
+                <button class="btn sub-btn" onclick="loadChapters('Class 10', 'Science')">Science</button>
+                <button class="btn sub-btn" onclick="loadChapters('Class 10', 'Computer')">Computer</button>
+                <button class="btn sub-btn" onclick="loadChapters('Class 10', 'Optional Math')">Optional Math</button>
+            </div>
+            <button class="btn back-btn" onclick="showScreen('home-screen')">🔙 Main Menu</button>
         </div>
 
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         HOME PAGE
-    ==================================================== -->
-
-    <section
-      id="homePage"
-      class="page home-page"
-    >
-
-      <header class="top-header">
-
-        <div class="brand">
-
-          <div class="brand-symbol">
-            🔱
-          </div>
-
-          <div>
-
-            <h1>
-              Mahadev
-            </h1>
-
-            <p>
-              हर हर महादेव 🔱
-            </p>
-
-          </div>
-
+        <!-- Class 11 Subjects -->
+        <div id="class11-screen" class="screen">
+            <h2>Class 11 Subjects</h2>
+            <div class="category-grid">
+                <button class="btn sub-btn" onclick="loadChapters('Class 11', 'Physics')">Physics</button>
+                <button class="btn sub-btn" onclick="loadChapters('Class 11', 'Chemistry')">Chemistry</button>
+                <button class="btn sub-btn" onclick="loadChapters('Class 11', 'Maths')">Maths</button>
+                <button class="btn sub-btn" onclick="loadChapters('Class 11', 'Computer')">Computer</button>
+            </div>
+            <button class="btn back-btn" onclick="showScreen('home-screen')">🔙 Main Menu</button>
         </div>
 
-
-        <div class="user-area">
-
-          <span id="userEmail"></span>
-
-          <button
-            id="logoutBtn"
-            type="button"
-            class="logout-btn"
-          >
-            Logout
-          </button>
-
+        <!-- GK Screen -->
+        <div id="gk-screen" class="screen">
+            <h2>Lok Sewa Samanya Gyan</h2>
+            <p>Accessing from 1,000,000 algorithmic non-repeating questions pool.</p>
+            <div class="category-grid">
+                <button class="btn sub-btn" onclick="startQuiz('GK', 'All', 'General Knowledge')">🚀 Start GK Mega Practice</button>
+            </div>
+            <button class="btn back-btn" onclick="showScreen('home-screen')">🔙 Main Menu</button>
         </div>
 
-      </header>
-
-
-
-      <!-- LANGUAGE -->
-
-      <div class="language-switch">
-
-        <button
-          id="neBtn"
-          type="button"
-        >
-          नेपाली 🇳🇵
-        </button>
-
-        <button
-          id="enBtn"
-          type="button"
-        >
-          English 🇬🇧
-        </button>
-
-        <button
-          id="bothBtn"
-          type="button"
-          class="active"
-        >
-          दुवै / Both
-        </button>
-
-      </div>
-
-
-
-      <!-- WELCOME -->
-
-      <div class="welcome-box">
-
-        <h2 id="chooseTitle">
-          आफ्नो Quiz छान्नुहोस्
-        </h2>
-
-        <p id="chooseDescription">
-          आफ्नो कक्षा वा Quiz category छानेर अभ्यास सुरु गर्नुहोस्।
-        </p>
-
-      </div>
-
-
-
-      <!-- STATS -->
-
-      <div class="stats-container">
-
-        <div class="stat-card">
-
-          <span
-            id="gamesPlayedLabel"
-            class="stat-label"
-          >
-            खेलेका Quiz
-          </span>
-
-          <strong id="gamesPlayedStat">
-            0
-          </strong>
-
+        <!-- Chapters Screen Dynamic -->
+        <div id="chapters-screen" class="screen">
+            <h2 id="chapters-title">Chapters</h2>
+            <div id="chapters-list" class="category-grid"></div>
+            <button class="btn back-btn" id="chapters-back-btn">🔙 Back to Subjects</button>
         </div>
 
-
-        <div class="stat-card">
-
-          <span
-            id="bestScoreLabel"
-            class="stat-label"
-          >
-            उत्कृष्ट Score
-          </span>
-
-          <strong id="bestScoreStat">
-            0
-          </strong>
-
+        <!-- Active Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <span id="question-counter">Question: 1/10</span>
+                <div id="timer-box">⏱️ <span id="timer">30</span>s</div>
+            </div>
+            <div id="alarm-banner" class="alarm-banner">🚨 Warning: Time is running out!</div>
+            <h3 id="question-text">Loading Question...</h3>
+            <div id="options-container" class="options-grid"></div>
+            <button id="next-btn" class="btn next-btn" onclick="nextQuestion()" style="display:none;">Next Question ➡️</button>
         </div>
 
-
-        <div class="stat-card">
-
-          <span
-            id="correctLabel"
-            class="stat-label"
-          >
-            कुल सही
-          </span>
-
-          <strong id="correctStat">
-            0
-          </strong>
-
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen">
+            <h2>🎉 Quiz Completed!</h2>
+            <div class="score-card">
+                <p>Total Questions Checked: <strong>10</strong></p>
+                <p class="correct">Correct Answers: <span id="correct-score">0</span></p>
+                <p class="incorrect">Incorrect/Unanswered: <span id="incorrect-score">0</span></p>
+            </div>
+            <div class="result-actions">
+                <button class="btn main-btn" onclick="restartCurrentQuiz()">Play Next Set (No Repetition)</button>
+                <button class="btn back-btn" onclick="showScreen('home-screen')">Exit to Main Menu</button>
+            </div>
         </div>
+    </div>
 
+    <!-- Alarm sound clip -->
+    <audio id="alarm-sound" src="https://mixkit.co" preload="auto"></audio>
 
-        <div class="stat-card">
+    <script src="script.js"></script>
+</body>
+</html>
 
-          <span
-            id="wrongLabel"
-            class="stat-label"
-          >
-            कुल गलत
-          </span>
-
-          <strong id="wrongStat">
-            0
-          </strong>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- QUIZ CATEGORIES -->
-
-      <div class="category-grid">
-
-
-        <!-- CLASS 10 -->
-
-        <button
-          type="button"
-          class="category-card"
-          data-category="class10"
-        >
-
-          <div class="category-icon 
-
+ 
