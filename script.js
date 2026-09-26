@@ -1,238 +1,81 @@
-// =========================================================================
-// ANTI-CRASH ORIGINAL QUIZ ENGINE - 100% FIXED CLICK ACTION (RESTORED VERSION)
-// Developed for: Lok Raj Awasthi (Premium AdSense Clean Architecture)
-// =========================================================================
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔱 हर हर महादेव क्विज प्लेटफर्म 🔱</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-const quizDatabase = {
-    class10: {
-        title: "कक्षा १० / Class 10 MCQ Pool",
-        subjects: {
-            math: {
-                title: "अनिवार्य गणित / Mathematics",
-                chapters: {
-                    c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
-                        { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
-                        { qNp: "समूह A र B मा साझा परेका सदस्यहरूको समूहलाई के भनिन्छ?", qEn: "What is the set of common elements between set A and B called?", options: ["Union", "Intersection", "Difference", "Subset"], correct: 1 }
-                    ]}
-                }
-            },
-            science: {
-                title: "विज्ञान तथा प्रविधि / Science & Tech",
-                chapters: {
-                    c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
-                        { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 }
-                    ]}
-                }
-            }
-        }
-    },
-    class11: {
-        title: "कक्षा ११ / Class 11 MCQ Pool",
-        subjects: {
-            physics: {
-                title: "भौतिक विज्ञान / Physics",
-                chapters: {
-                    c1: { title: "अध्याय १: मेकानिक्स / Chapter 1: Mechanics", questions: [
-                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
-                    ]}
-                }
-            }
-        }
-    },
-    gk: {
-        title: "सामान्य ज्ञान / Loksewa GK",
-        subjects: {
-            geography: {
-                title: "भूगोल / Geography",
-                chapters: {
-                    c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                        { qNp: "क्षेत्रफलको आधारमा Nepal को सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
-                    ]}
-                }
-            }
-        }
-    },
-    science: {
-        title: "बाह्य विज्ञान / Out Knowledge of Science",
-        subjects: {
-            biology: {
-                title: "जीव विज्ञान / General Biology",
-                chapters: {
-                    c1: { title: "मानव शरीर / Human Body System", questions: [
-                        { qNp: "मानव शरीरको सबैभन्दा ठूलो ग्रन्थि (Gland) कुन हो?", qEn: "Which is the largest gland in the human body?", options: ["Pancreas", "Liver", "Thyroid", "Pituitary"], correct: 1 }
-                    ]}
-                }
-            }
-        }
-    },
-    computer: {
-        title: "बाह्य कम्प्युटर / Out Knowledge of Computer",
-        subjects: {
-            it: {
-                title: "सूचना प्रविधि / Information Technology",
-                chapters: {
-                    c1: { title: "नेटवर्किङ / Computer Networks", questions: [
-                        { qNp: "नेटवर्कको सन्दर्भमा 'IP' को पूरा रूप के हो?", qEn: "What is the full form of 'IP' in computer networking?", options: ["Internet Protocol", "Internal Protocol", "Instant Provider", "Inter Link"], correct: 0 }
-                    ]}
-                }
-            }
-        }
-    }
-};
+    <div class="mahadev-bg-overlay"></div>
+    <div class="side-border left-border"></div>
+    <div class="side-border right-border"></div>
 
-let activeCategory = ""; let activeSubject = ""; let activeChapter = "";
-let gameQuestions = []; let currentIndex = 0; let score = 0;
-let timerRef; let countdown = 30;
+    <div class="quiz-main-container">
+        <header class="app-header">
+            <h1>🔱 हर हर महादेव 🔱</h1>
+        </header>
 
-function switchScreen(targetId) {
-    document.querySelectorAll('.quiz-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(targetId).classList.add('active');
-}
+        <!-- स्क्रिन १: गृहपृष्ठ -->
+        <section id="category-screen" class="quiz-panel active">
+            <div class="developer-profile">
+                <h3>👨‍💻 Developer Identity</h3>
+                <p><strong>Name:</strong> Lok Raj Awasthi</p>
+                <p><strong>System:</strong> Premium Chapter-wise Quiz (Bilingual)</p>
+            </div>
+            <h2>कृपया विधा छनोट गर्नुहोस् / Select Category:</h2>
+            <div class="grid-list">
+                <!-- फिक्स्ड: पाँचवटै बटनमा दुरुस्त क्लिक कमाण्ड सेट -->
+                <button class="menu-btn" onclick="navigateToSubjects('class10')">📚 Class 10 MCQ Pool</button>
+                <button class="menu-btn" onclick="navigateToSubjects('class11')">🎓 Class 11 MCQ Pool</button>
+                <button class="menu-btn" onclick="navigateToSubjects('gk')">🌍 सामान्य ज्ञान (Loksewa GK)</button>
+                <button class="menu-btn" onclick="navigateToSubjects('science')">🧪 Out Knowledge of Science</button>
+                <button class="menu-btn" onclick="navigateToSubjects('computer')">💻 Out Knowledge of Computer</button>
+            </div>
+        </section>
 
-function navigateToSubjects(catKey) {
-    activeCategory = catKey;
-    const catData = quizDatabase[catKey];
-    document.getElementById("subject-title").innerText = catData.title;
-   
-    const container = document.getElementById("subject-list");
-    container.innerHTML = "";
-   
-    Object.keys(catData.subjects).forEach(subKey => {
-        let btn = document.createElement("button");
-        btn.className = "menu-btn";
-        btn.innerText = catData.subjects[subKey].title;
-        btn.onclick = function() { navigateToChapters(subKey); };
-        container.appendChild(btn);
-    });
-   
-    switchScreen("subject-screen");
-}
+        <!-- स्क्रिन २: विषय छनोट पृष्ठ -->
+        <section id="subject-screen" class="quiz-panel">
+            <h2 id="subject-title">विषयहरू / Subjects</h2>
+            <div id="subject-list" class="grid-list"></div>
+            <button class="back-btn" onclick="backToCategories()">⬅️ Back</button>
+        </section>
 
-function navigateToChapters(subKey) {
-    activeSubject = subKey;
-    const subData = quizDatabase[activeCategory].subjects[subKey];
-    document.getElementById("chapter-title").innerText = subData.title;
-   
-    const container = document.getElementById("chapter-list");
-    container.innerHTML = "";
-   
-    Object.keys(subData.chapters).forEach(chKey => {
-        let btn = document.createElement("button");
-        btn.className = "menu-btn";
-        btn.innerText = subData.chapters[chKey].title;
-        btn.onclick = function() { launchQuizEngine(chKey); };
-        container.appendChild(btn);
-    });
+        <!-- स्क्रिन ३: च्याप्टर छनोट पृष्ठ -->
+        <section id="chapter-screen" class="quiz-panel">
+            <h2 id="chapter-title">अध्यायहरू / Chapters</h2>
+            <div id="chapter-list" class="grid-list"></div>
+            <button class="back-btn" onclick="backToSubjects()">⬅️ Back</button>
+        </section>
 
-    switchScreen("chapter-screen");
-}
+        <!-- स्क्रिन ४: मुख्य गेमप्ले -->
+        <section id="game-screen" class="quiz-panel">
+            <div class="game-status-bar">
+                <span id="q-progress">प्रश्न: १/१०</span>
+                <div id="countdown-clock" class="clock-display">३०</div>
+            </div>
+            <div class="question-box" id="display-question-text"></div>
+            <div id="display-options-box" class="options-vertical-grid"></div>
+            <button id="forward-btn" class="control-btn hidden" onclick="moveToNext()">Next ➡️</button>
+        </section>
 
-function launchQuizEngine(chKey) {
-    activeChapter = chKey;
-    let mainPool = quizDatabase[activeCategory].subjects[activeSubject].chapters[chKey].questions;
-    gameQuestions = [...mainPool];
-    currentIndex = 0; score = 0;
-    switchScreen("game-screen");
-    loadQuestion();
-}
+        <!-- स्क्रिन ५: नतिजा कार्ड -->
+        <section id="score-screen" class="quiz-panel">
+            <h2>📊 क्विजको अन्तिम नतिजा / Result</h2>
+            <div class="score-board">
+                <p>कुल खेलिएका प्रश्न / Total: <strong>१०</strong></p>
+                <p class="txt-success">सहि उत्तर / Correct: <span id="total-right">०</span></p>
+                <p class="txt-danger">गलत उत्तर / Incorrect: <span id="total-wrong">०</span></p>
+            </div>
+            <button class="control-btn" onclick="resetToHome()">Home 🏠</button>
+        </section>
+    </div>
 
-function loadQuestion() {
-    killClock();
-    document.getElementById("forward-btn").classList.add("hidden");
+    <audio id="beep-alarm" src="https://google.com" preload="auto"></audio>
 
-    let data = gameQuestions[currentIndex];
-    document.getElementById("q-progress").innerText = `प्रश्न: ${currentIndex + 1}/${gameQuestions.length}`;
-   
-    document.getElementById("display-question-text").innerHTML = `
-        <div style="color: #d35400; font-weight: bold; margin-bottom: 8px;">🇳🇵 ${data.qNp}</div>
-        <div style="color: #2c3e50; font-style: italic;">🇬🇧 ${data.qEn}</div>
-    `;
-
-    let targetBox = document.getElementById("display-options-box");
-    targetBox.innerHTML = "";
-
-    data.options.forEach((opt, index) => {
-        let btn = document.createElement("button");
-        btn.className = "option-item";
-        btn.innerText = opt;
-        btn.onclick = function() { evaluateChoice(btn, index, data.correct); };
-        targetBox.appendChild(btn);
-    });
-
-    triggerClock();
-}
-
-function triggerClock() {
-    let clockEl = document.getElementById("countdown-clock");
-    let audioTrack = document.getElementById("beep-alarm");
-    countdown = 30; clockEl.innerText = countdown;
-
-    timerRef = setInterval(() => {
-        countdown--;
-        clockEl.innerText = countdown;
-
-        if (countdown <= 7) {
-            clockEl.classList.add("critical");
-            try { audioTrack.play(); } catch (err) { }
-        }
-
-        if (countdown <= 0) {
-            clearInterval(timerRef);
-            lockOptionsOnTimeout();
-        }
-    }, 1000);
-}
-
-function evaluateChoice(element, chosenIdx, actualIdx) {
-    clearInterval(timerRef);
-    document.getElementById("beep-alarm").pause();
-
-    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
-    for (let button of list) { button.disabled = true; }
-
-    if (chosenIdx === actualIdx) {
-        element.classList.add("correct-choice");
-        score++;
-    } else {
-        element.classList.add("wrong-choice");
-        list[actualIdx].classList.add("correct-choice");
-    }
-    document.getElementById("forward-btn").classList.remove("hidden");
-}
-
-function lockOptionsOnTimeout() {
-    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
-    for (let button of list) { button.disabled = true; }
-    list[gameQuestions[currentIndex].correct].classList.add("correct-choice");
-    document.getElementById("forward-btn").classList.remove("hidden");
-}
-
-function moveToNext() {
-    currentIndex++;
-    if (currentIndex < gameQuestions.length) {
-        loadQuestion();
-    } else {
-        displayFinalResults();
-    }
-}
-
-function killClock() {
-    clearInterval(timerRef);
-    let clockEl = document.getElementById("countdown-clock");
-    clockEl.classList.remove("critical");
-    let audioTrack = document.getElementById("beep-alarm");
-    audioTrack.pause();
-    audioTrack.currentTime = 0;
-}
-
-function displayFinalResults() {
-    switchScreen("score-screen");
-    document.getElementById("total-right").innerText = score;
-    document.getElementById("total-wrong").innerText = gameQuestions.length - score;
-}
-
-function backToCategories() { switchScreen("category-screen"); }
-function backToSubjects() { navigateToSubjects(activeCategory); }
-function resetToHome() { switchScreen("category-screen"); }
+    <script src="script.js"></script>
+</body>
+</html>
 
  
