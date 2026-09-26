@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Har Har Mahadev Modular Quiz Platform</title>
+    <title>🔱 हर हर महादेव क्विज प्लेटफर्म 🔱</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,15 +22,15 @@
             <div class="developer-profile">
                 <h3>👨‍💻 Developer Identity</h3>
                 <p><strong>Name:</strong> Lok Raj Awasthi</p>
-                <p><strong>System:</strong> Chapter-wise Bilingual Quiz (नेपाली / English)</p>
+                <p><strong>System:</strong> Premium Chapter-wise Quiz (Bilingual)</p>
             </div>
             <h2>कृपया विधा छनोट गर्नुहोस् / Select Category:</h2>
             <div class="grid-list">
-                <button class="menu-btn" onclick="navigateToSubjects('class10')">📚 Class 10 MCQ Pool</button>
-                <button class="menu-btn" onclick="navigateToSubjects('class11')">🎓 Class 11 MCQ Pool</button>
-                <button class="menu-btn" onclick="navigateToSubjects('gk')">🌍 सामान्य ज्ञान (Loksewa GK)</button>
-                <button class="menu-btn" onclick="navigateToSubjects('science')">🧪 Out Knowledge of Science</button>
-                <button class="menu-btn" onclick="navigateToSubjects('computer')">💻 Out Knowledge of Computer</button>
+                <button class="menu-btn" onclick="handleCategoryClick('class10')">📚 Class 10 MCQ Pool</button>
+                <button class="menu-btn" onclick="handleCategoryClick('class11')">🎓 Class 11 MCQ Pool</button>
+                <button class="menu-btn" onclick="handleCategoryClick('gk')">🌍 सामान्य ज्ञान (Loksewa GK)</button>
+                <button class="menu-btn" onclick="handleCategoryClick('science')">🧪 Out Knowledge of Science</button>
+                <button class="menu-btn" onclick="handleCategoryClick('computer')">💻 Out Knowledge of Computer</button>
             </div>
         </section>
 
@@ -48,7 +48,7 @@
             <button class="back-btn" onclick="backToSubjects()">⬅️ Back</button>
         </section>
 
-        <!-- स्क्रिन ४: मुख्य गेमप्ले स्क्रिन -->
+        <!-- स्क्रिन ४: मुख्य गेमप्ले -->
         <section id="game-screen" class="quiz-panel">
             <div class="game-status-bar">
                 <span id="q-progress">प्रश्न: १/१०</span>

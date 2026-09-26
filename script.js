@@ -1,6 +1,6 @@
 const quizDatabase = {
     class10: {
-        title: "कक्षा १० / Class 10 (Neema/ReadMore/Unique)",
+        title: "कक्षा १० / Class 10 MCQ Pool",
         subjects: {
             math: {
                 title: "अनिवार्य गणित / Mathematics (Read More)",
@@ -8,6 +8,9 @@ const quizDatabase = {
                     c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
                         { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
                         { qNp: "समूह A र B मा साझा परेका सदस्यहरूको समूहलाई के भनिन्छ?", qEn: "What is the set of common elements between set A and B called?", options: ["Union", "Intersection", "Difference", "Subset"], correct: 1 }
+                    ]},
+                    c2: { title: "अध्याय २: चक्रीय ब्याज / Chapter 2: Compound Interest", questions: [
+                        { qNp: "वार्षिक चक्रीय मिश्रधन निकाल्ने सही सूत्र कुन हो?", qEn: "What is the correct formula for annual Compound Amount?", options: ["P(1+R/100)^T", "P(1-R/100)^T", "PTR/100", "P[(1+R/100)^T - 1]"], correct: 0 }
                     ]}
                 }
             },
@@ -22,13 +25,13 @@ const quizDatabase = {
         }
     },
     class11: {
-        title: "कक्षा ११ / Class 11 (Pioneer/Buddha/Kriti)",
+        title: "कक्षा ११ / Class 11 MCQ Pool",
         subjects: {
             physics: {
                 title: "भौतिक विज्ञान / Physics (Pioneer)",
                 chapters: {
-                    c1: { title: "अध्याय १: मेकानिक्स (यान्त्रिकी) / Chapter 1: Mechanics", questions: [
-                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "Physics (Mechanics): At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
+                    c1: { title: "अध्याय १: मेकानिक्स / Chapter 1: Mechanics", questions: [
+                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "Physics: At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
                     ]}
                 }
             },
@@ -49,7 +52,7 @@ const quizDatabase = {
                 title: "भूगोल / Geography",
                 chapters: {
                     c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर / Lalitpur", "भक्तपुर / Bhaktapur", "पर्वत / Parbat", "काठमाडौं / Kathmandu"], correct: 1 }
+                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
                     ]}
                 }
             }
@@ -83,26 +86,19 @@ const quizDatabase = {
     }
 };
 
-let activeCategory = "";
-let activeSubject = "";
-let activeChapter = "";
-let activePool = [];
-let gameQuestions = [];
-let currentIndex = 0;
-let score = 0;
-let timerRef;
-let countdown = 30;
+let activeCategory = ""; let activeSubject = ""; let activeChapter = "";
+let activePool = []; let gameQuestions = []; let currentIndex = 0;
+let score = 0; let timerRef; let countdown = 30;
 
 function switchScreen(targetId) {
     document.querySelectorAll('.quiz-panel').forEach(p => p.classList.remove('active'));
     document.getElementById(targetId).classList.add('active');
 }
 
-function navigateToSubjects(catKey) {
+function handleCategoryClick(catKey) {
     activeCategory = catKey;
     const catData = quizDatabase[catKey];
     document.getElementById("subject-title").innerText = catData.title;
-   
     const container = document.getElementById("subject-list");
     container.innerHTML = "";
    
@@ -110,19 +106,16 @@ function navigateToSubjects(catKey) {
         let btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = catData.subjects[subKey].title;
-        // फिक्स्ड: स्ट्रिङ पास गरेर सुरक्षित क्लिक इभेन्ट बाइन्डिङ
-        btn.setAttribute("onclick", `navigateToChapters('${subKey}')`);
+        btn.onclick = function() { handleSubjectClick(subKey); };
         container.appendChild(btn);
     });
-   
     switchScreen("subject-screen");
 }
 
-function navigateToChapters(subKey) {
+function handleSubjectClick(subKey) {
     activeSubject = subKey;
     const subData = quizDatabase[activeCategory].subjects[subKey];
     document.getElementById("chapter-title").innerText = subData.title;
-   
     const container = document.getElementById("chapter-list");
     container.innerHTML = "";
    
@@ -130,28 +123,18 @@ function navigateToChapters(subKey) {
         let btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = subData.chapters[chKey].title;
-        btn.setAttribute("onclick", `launchQuizEngine('${chKey}')`);
+        btn.onclick = function() { handleChapterClick(chKey); };
         container.appendChild(btn);
     });
-
     switchScreen("chapter-screen");
 }
 
-function launchQuizEngine(chKey) {
+function handleChapterClick(chKey) {
     activeChapter = chKey;
     activePool = [...quizDatabase[activeCategory].subjects[activeSubject].chapters[chKey].questions];
-   
-    if (activePool.length === 0) {
-        alert("त्रुटि: यस अध्यायमा प्रश्नहरू थप्न बाँकी छ!");
-        return;
-    }
-
     activePool.sort(() => Math.random() - 0.5);
     gameQuestions = activePool.slice(0, 10);
-
-    currentIndex = 0;
-    score = 0;
-   
+    currentIndex = 0; score = 0;
     switchScreen("game-screen");
     loadQuestion();
 }
@@ -159,102 +142,61 @@ function launchQuizEngine(chKey) {
 function loadQuestion() {
     killClock();
     document.getElementById("forward-btn").classList.add("hidden");
-
     let data = gameQuestions[currentIndex];
-    document.getElementById("q-progress").innerText = `प्रश्न / Question: ${currentIndex + 1}/${gameQuestions.length}`;
-   
-    document.getElementById("display-question-text").innerHTML = `
-        <div style="color: #d35400; font-weight: bold; margin-bottom: 8px;">🇳🇵 ${data.qNp}</div>
-        <div style="color: #2c3e50; font-style: italic;">🇬🇧 ${data.qEn}</div>
-    `;
-
-    let targetBox = document.getElementById("display-options-box");
+    document.getElementById("q-progress").innerText = `प्रश्न: ${currentIndex + 1}/${gameQuestions.length}`;
+    document.getElementById("display-question-text").innerHTML = `<div style="color:#d35400; font-weight:bold; margin-bottom:8px;">🇳🇵 ${data.qNp}</div><div style="color:#2c3e50; font-style:italic;">🇬🇧 ${data.qEn}</div>`;
+    const targetBox = document.getElementById("display-options-box");
     targetBox.innerHTML = "";
-
     data.options.forEach((opt, index) => {
         let btn = document.createElement("button");
         btn.className = "option-item";
         btn.innerText = opt;
-        btn.setAttribute("onclick", `evaluateChoice(this, ${index}, ${data.correct})`);
+        btn.onclick = function() { evaluateChoice(btn, index, data.correct); };
         targetBox.appendChild(btn);
     });
-
     triggerClock();
 }
 
 function triggerClock() {
     let clockEl = document.getElementById("countdown-clock");
     let audioTrack = document.getElementById("beep-alarm");
-    countdown = 30;
-    clockEl.innerText = countdown;
-
+    countdown = 30; clockEl.innerText = countdown;
     timerRef = setInterval(() => {
-        countdown--;
-        clockEl.innerText = countdown;
-
-        if (countdown <= 7) {
-            clockEl.classList.add("critical");
-            try { audioTrack.play(); } catch (err) { }
-        }
-
-        if (countdown <= 0) {
-            clearInterval(timerRef);
-            lockOptionsOnTimeout();
-        }
+        countdown--; clockEl.innerText = countdown;
+        if (countdown <= 7) { clockEl.classList.add("critical"); try { audioTrack.play(); } catch (err) {} }
+        if (countdown <= 0) { clearInterval(timerRef); lockOptionsOnTimeout(); }
     }, 1000);
 }
 
 function evaluateChoice(element, chosenIdx, actualIdx) {
-    clearInterval(timerRef);
-    document.getElementById("beep-alarm").pause();
-
+    clearInterval(timerRef); document.getElementById("beep-alarm").pause();
     let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
     for (let button of list) { button.disabled = true; }
-
-    if (chosenIdx === actualIdx) {
-        element.classList.add("correct-choice");
-        score++;
-    } else {
-        element.classList.add("wrong-choice");
-        list[actualIdx].classList.add("correct-choice");
-    }
+    if (chosenIdx === actualIdx) { element.classList.add("correct-choice"); score++; }
+    else { element.classList.add("wrong-choice"); list[actualIdx].classList.add("correct-choice"); }
     document.getElementById("forward-btn").classList.remove("hidden");
 }
 
 function lockOptionsOnTimeout() {
     let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
-    let data = gameQuestions[currentIndex];
     for (let button of list) { button.disabled = true; }
-    list[data.correct].classList.add("correct-choice");
+    list[gameQuestions[currentIndex].correct].classList.add("correct-choice");
     document.getElementById("forward-btn").classList.remove("hidden");
 }
 
 function moveToNext() {
     currentIndex++;
-    if (currentIndex < gameQuestions.length) {
-        loadQuestion();
-    } else {
-        displayFinalResults();
+    if (currentIndex < gameQuestions.length) { loadQuestion(); }
+    else {
+        switchScreen("score-screen");
+        document.getElementById("total-right").innerText = score;
+        document.getElementById("total-wrong").innerText = gameQuestions.length - score;
     }
 }
 
-function killClock() {
-    clearInterval(timerRef);
-    let clockEl = document.getElementById("countdown-clock");
-    clockEl.classList.remove("critical");
-    let audioTrack = document.getElementById("beep-alarm");
-    audioTrack.pause();
-    audioTrack.currentTime = 0;
-}
-
-function displayFinalResults() {
-    switchScreen("score-screen");
-    document.getElementById("total-right").innerText = score;
-    document.getElementById("total-wrong").innerText = gameQuestions.length - score;
-}
-
+function killClock() { clearInterval(timerRef); let clockEl = document.getElementById("countdown-clock"); clockEl.classList.remove("critical"); let audioTrack = document.getElementById("beep-alarm"); audioTrack.pause(); audioTrack.currentTime = 0; }
 function backToCategories() { switchScreen("category-screen"); }
-function backToSubjects() { navigateToSubjects(activeCategory); }
+function backToSubjects() { handleCategoryClick(activeCategory); }
 function resetToHome() { switchScreen("category-screen"); }
 
  
