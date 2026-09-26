@@ -6,26 +6,28 @@ let timerRef;
 let countdown = 30;
 const gameLimit = 10;
 
-// खेल सुरु गर्ने र १० वटा र्‍यान्डम प्रश्न फिल्टर गर्ने फङ्सन
 function initializeQuiz(mode) {
-    if (mode === 'class10') {
+    // विन्डो ग्लोबल स्कोपबाट सही एरे तान्ने सुरक्षा जाँच
+    if (mode === 'class10' && typeof questionsClass10 !== 'undefined') {
         selectedPool = [...questionsClass10];
-    } else if (mode === 'class11') {
+    } else if (mode === 'class11' && typeof questionsClass11 !== 'undefined') {
         selectedPool = [...questionsClass11];
-    } else if (mode === 'gk') {
+    } else if (mode === 'gk' && typeof questionsSamanyaGyan !== 'undefined') {
         selectedPool = [...questionsSamanyaGyan];
-    } else if (mode === 'science') {
+    } else if (mode === 'science' && typeof questionsOutScience !== 'undefined') {
         selectedPool = [...questionsOutScience];
-    } else if (mode === 'computer') {
+    } else if (mode === 'computer' && typeof questionsOutComputer !== 'undefined') {
         selectedPool = [...questionsOutComputer];
+    } else {
+        selectedPool = [];
     }
 
     if (selectedPool.length === 0) {
-        alert("त्रुटि: यो क्याटेगोरीमा प्रश्नहरू उपलब्ध छैनन्!");
+        alert("त्रुटि: प्रश्न भण्डार लोड हुन सकेन! कृपया फाइलहरू सही नाममा सेभ भएको जाँच गर्नुहोस्। / Error: Question pool empty!");
         return;
     }
 
-    // प्रश्नहरूलाई अनपेक्षित रूपमा र्‍यान्डम (Shuffle) गर्ने भिडियो गेम मेकानिक्स
+    // प्रश्नहरू र्‍यान्डम गर्ने
     selectedPool.sort(() => Math.random() - 0.5);
     gameQuestions = selectedPool.slice(0, gameLimit);
 
@@ -38,14 +40,18 @@ function initializeQuiz(mode) {
     renderCurrentQuestion();
 }
 
-// प्रश्न र अप्सन स्क्रिनमा लोड गर्ने
 function renderCurrentQuestion() {
     killClock();
     document.getElementById("forward-btn").classList.add("hidden");
 
     let data = gameQuestions[currentIndex];
-    document.getElementById("q-progress").innerText = `प्रश्न: ${currentIndex + 1}/${gameLimit}`;
-    document.getElementById("display-question-text").innerText = data.question;
+    document.getElementById("q-progress").innerText = `प्रश्न / Question: ${currentIndex + 1}/${gameLimit}`;
+   
+    // नेपाली र अंग्रेजी दुवै भाषालाई लाइन ब्रेक गरेर देखाउने सुन्दर व्यवस्था
+    document.getElementById("display-question-text").innerHTML = `
+        <div style="color: #d35400; font-weight: bold; margin-bottom: 8px;">🇳🇵 ${data.questionNp}</div>
+        <div style="color: #2c3e50; font-style: italic;">🇬🇧 ${data.questionEn}</div>
+    `;
 
     let targetBox = document.getElementById("display-options-box");
     targetBox.innerHTML = "";
@@ -61,7 +67,6 @@ function renderCurrentQuestion() {
     triggerClock();
 }
 
-// ३० सेकेन्डको टाइमर र अन्तिम ७ सेकेन्ड अलार्म लोजिक
 function triggerClock() {
     let clockEl = document.getElementById("countdown-clock");
     let audioTrack = document.getElementById("beep-alarm");
@@ -72,15 +77,11 @@ function triggerClock() {
         countdown--;
         clockEl.innerText = countdown;
 
-        // अन्तिम ७ सेकेन्डमा अलार्म बजाउने
         if (countdown <= 7) {
             clockEl.classList.add("critical");
-            try {
-                audioTrack.play();
-            } catch (err) { console.log("अडियो प्ले ब्लक भयो"); }
+            try { audioTrack.play(); } catch (err) { }
         }
 
-        // समय शून्य हुँदा स्वतः लक हुने
         if (countdown <= 0) {
             clearInterval(timerRef);
             lockOptionsOnTimeout();
@@ -88,35 +89,27 @@ function triggerClock() {
     }, 1000);
 }
 
-// उत्तर सही वा गलत भएको जाँच्ने (हरियो/रातो डेकोरेसन)
 function evaluateChoice(element, chosenIdx, actualIdx) {
     clearInterval(timerRef);
     document.getElementById("beep-alarm").pause();
 
     let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
-    for (let button of list) {
-        button.disabled = true;
-    }
+    for (let button of list) { button.disabled = true; }
 
     if (chosenIdx === actualIdx) {
         element.classList.add("correct-choice");
         correctTally++;
     } else {
         element.classList.add("wrong-choice");
-        list[actualIdx].classList.add("correct-choice"); // सहि उत्तर फ्ल्यास गरिदिने
+        list[actualIdx].classList.add("correct-choice");
     }
-
     document.getElementById("forward-btn").classList.remove("hidden");
 }
 
-// समय सकिँदा स्वतः सहि उत्तर देखाउने संयन्त्र
 function lockOptionsOnTimeout() {
     let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
     let data = gameQuestions[currentIndex];
-
-    for (let button of list) {
-        button.disabled = true;
-    }
+    for (let button of list) { button.disabled = true; }
     list[data.correct].classList.add("correct-choice");
     document.getElementById("forward-btn").classList.remove("hidden");
 }
@@ -142,7 +135,6 @@ function killClock() {
 function displayFinalResults() {
     document.getElementById("game-screen").classList.remove("active");
     document.getElementById("score-screen").classList.add("active");
-
     document.getElementById("total-right").innerText = correctTally;
     document.getElementById("total-wrong").innerText = gameLimit - correctTally;
 }

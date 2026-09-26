@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
@@ -15,7 +15,6 @@ body {
     position: relative;
 }
 
-/* महाकाल पृष्ठभूमि चित्र व्यवस्था */
 .mahadev-bg-overlay {
     position: fixed;
     top: 0;
@@ -27,7 +26,6 @@ body {
     z-index: -1;
 }
 
-/* साइड डेकोरेसन (रंगीन आकर्षक बोर्डरहरू) */
 .side-border {
     position: fixed;
     top: 0;
@@ -40,7 +38,6 @@ body {
 .left-border { left: 0; }
 .right-border { right: 0; }
 
-/* मुख्य फ्रेम कन्टेनर */
 .quiz-main-container {
     width: 92%;
     max-width: 680px;
@@ -53,15 +50,12 @@ body {
     text-align: center;
 }
 
-/* ब्रान्डिङ टाइटल */
 .app-header h1 {
     color: #e65c00;
     font-size: 32px;
     margin-bottom: 20px;
-    letter-spacing: 1px;
 }
 
-/* प्रोफाइल आइडेन्टिटी कार्ड */
 .developer-profile {
     background: #fff3e0;
     border-left: 6px solid #e65c00;
@@ -70,21 +64,10 @@ body {
     text-align: left;
     margin-bottom: 25px;
 }
-.developer-profile h3 {
-    color: #d35400;
-    margin-bottom: 8px;
-}
-.developer-profile p {
-    font-size: 14.5px;
-    color: #333;
-    margin-bottom: 4px;
-}
 
-/* पेज डिस्प्ले कन्ट्रोल */
 .quiz-panel { display: none; }
 .quiz-panel.active { display: block; }
 
-/* विधा छनोट ग्रिड */
 .category-list {
     display: flex;
     flex-direction: column;
@@ -100,8 +83,7 @@ body {
     color: #333;
     border-radius: 8px;
     cursor: pointer;
-    text-align: left;
-    transition: all 0.2s ease;
+    transition: 0.2s;
 }
 .menu-btn:hover {
     background: #e65c00;
@@ -109,7 +91,6 @@ body {
     transform: translateX(5px);
 }
 
-/* स्टेटस र घडी */
 .game-status-bar {
     display: flex;
     justify-content: space-between;
@@ -131,18 +112,18 @@ body {
 }
 
 @keyframes pulse {
-    from { transform: scale(1); opacity: 1; }
-    to { transform: scale(1.08); opacity: 0.7; }
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
 }
 
 .question-box {
     margin-bottom: 30px;
-    font-size: 21px;
+    font-size: 20px;
     color: #1a1a1a;
     line-height: 1.6;
+    text-align: left;
 }
 
-/* विकल्पहरूको सूची ढाँचा */
 .options-vertical-grid {
     display: flex;
     flex-direction: column;
@@ -158,10 +139,8 @@ body {
     cursor: pointer;
     text-align: left;
     font-weight: 500;
-    transition: background 0.15s;
 }
 
-/* उत्तर प्रतिक्रिया रङहरू - कडा निर्देशन पालना */
 .option-item.correct-choice {
     background-color: #2ecc71 !important;
     color: #ffffff !important;
@@ -185,9 +164,7 @@ body {
     border-radius: 6px;
     cursor: pointer;
 }
-.control-btn:hover { background: #cd5200; }
 .hidden { display: none; }
-
 .score-board p { font-size: 19px; margin: 12px 0; }
 .txt-success { color: #27ae60; font-weight: bold; }
 .txt-danger { color: #c0392b; font-weight: bold; }
