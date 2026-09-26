@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Overlay to ensure readability over the background image -->
+    <!-- Dark Background Overlay for Readability -->
     <div class="bg-overlay"></div>
 
     <div class="quiz-container">
@@ -23,12 +23,12 @@
             <div class="category-grid">
                 <button class="btn main-btn" onclick="showScreen('class10-screen')">Class 10 Prep</button>
                 <button class="btn main-btn" onclick="showScreen('class11-screen')">Class 11 Prep</button>
-                <button class="btn main-btn" onclick="showScreen('gk-screen')">Lok Sewa GK (1M+ Pool)</button>
+                <button class="btn main-btn" onclick="showScreen('gk-screen')">Lok Sewa GK</button>
                 <button class="btn multiplayer-btn" disabled>⚔️ 1 vs 1 / Play with Friends (Requires Server)</button>
             </div>
         </div>
 
-        <!-- Class 10 Subjects -->
+        <!-- Class 10 Subjects Screen -->
         <div id="class10-screen" class="screen">
             <h2>Class 10 Subjects</h2>
             <div class="category-grid">
@@ -39,7 +39,7 @@
             <button class="btn back-btn" onclick="showScreen('home-screen')">🔙 Main Menu</button>
         </div>
 
-        <!-- Class 11 Subjects -->
+        <!-- Class 11 Subjects Screen -->
         <div id="class11-screen" class="screen">
             <h2>Class 11 Subjects</h2>
             <div class="category-grid">
@@ -54,7 +54,7 @@
         <!-- GK Screen -->
         <div id="gk-screen" class="screen">
             <h2>Lok Sewa Samanya Gyan</h2>
-            <p>Accessing from 1,000,000 algorithmic non-repeating questions pool.</p>
+            <p>Accessing dynamic non-repeating bilingual question banks.</p>
             <div class="category-grid">
                 <button class="btn sub-btn" onclick="startQuiz('GK', 'All', 'General Knowledge')">🚀 Start GK Mega Practice</button>
             </div>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <!-- Alarm sound clip -->
+    <!-- Alarm sound audio segment -->
     <audio id="alarm-sound" src="https://mixkit.co" preload="auto"></audio>
 
     <script src="script.js"></script>
