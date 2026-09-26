@@ -1,6 +1,6 @@
 // =========================================================================
-// ORIGINAL WORKING QUIZ ENGINE - 100% FIXED CLICK ACTION (RESTORED VERSION)
-// Developed for: Lok Raj Awasthi
+// ANTI-CRASH ORIGINAL QUIZ ENGINE - 100% FIXED CLICK ACTION (RESTORED VERSION)
+// Developed for: Lok Raj Awasthi (Premium AdSense Clean Architecture)
 // =========================================================================
 
 const quizDatabase = {
@@ -46,7 +46,7 @@ const quizDatabase = {
                 title: "भूगोल / Geography",
                 chapters: {
                     c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["लालतपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
+                        { qNp: "क्षेत्रफलको आधारमा Nepal को सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
                     ]}
                 }
             }
