@@ -1,77 +1,27 @@
 // =========================================================================
-// ANTI-CRASH MASSIVE BILINGUAL MCQ ENGINE (100% FIXED SYNTAX VERSION)
-// Developed for: Lok Raj Awasthi (Google AdSense Maximize Earning Version)
+// ANTI-CRASH SINGLE-FILE ENGINE (100% FIXED CLICK GUARANTEE)
+// Developed for: Lok Raj Awasthi
 // =========================================================================
-
-const generateMassivePool = (prefix, total = 100) => {
-    let pool = [];
-    const templates = [
-        { qNp: "को सही मान वा परिभाषा कुन हो?", qEn: "What is the correct value or definition of", options: ["सहि विकल्प ए / Option A", "विकल्प बी / Option B", "विकल्प सी / Option C", "विकल्प डी / Option D"], correct: 0 },
-        { qNp: "को सन्दर्भमा तलका मध्ये कुन भनाइ सत्य छ?", qEn: "Which of the following statements is true regarding", options: ["पहिलो कथन / Statement 1", "दोस्रो कथन / Statement 2", "तेस्रो कथन / Statement 3", "चौथो कथन / Statement 4"], correct: 1 },
-        { qNp: "को मुख्य सिद्धान्त वा आधार के हो?", qEn: "What is the core principle or foundation of", options: ["सिद्धान्त १ / Principle 1", "सिद्धान्त २ / Principle 2", "सिद्धान्त ३ / Principle 3", "सिद्धान्त ४ / Principle 4"], correct: 2 },
-        { qNp: "को विमीय सूत्र वा सही SI एकाइ कुन हो?", qEn: "What is the correct dimensional formula or SI unit of", options: ["एकाइ १ / Unit 1", "एकाइ २ / Unit 2", "एकाइ ३ / Unit 3", "एकाइ ४ / Unit 4"], correct: 0 },
-        { qNp: "लाई व्यावहारिक रूपमा कहाँ प्रयोग गरिन्छ?", qEn: "Where is it practically used or applied?", options: ["प्रयोग ए / Application A", "प्रयोग बी / Application B", "प्रयोग सी / Application C", "प्रयोग डी / Application D"], correct: 3 }
-    ];
-
-    for (let i = 1; i <= total; i++) {
-        let t = templates[(i + prefix.charCodeAt(0)) % templates.length];
-        pool.push({
-            qNp: `${prefix} सम्बन्धित महत्त्वपूर्ण प्रश्न नम्बर ${i}: ${t.qNp}`,
-            qEn: `${prefix} Related High-Yield Question No. ${i}: ${t.qEn} ${prefix}?`,
-            options: [...t.options],
-            correct: (i % 4)
-        });
-    }
-    return pool;
-};
 
 const quizDatabase = {
     class10: {
         title: "कक्षा १० / Class 10 MCQ Pool",
         subjects: {
             math: {
-                title: "अनिवार्य गणित / Mathematics",
+                title: "अनिवार्य गणित / Mathematics (Read More)",
                 chapters: {
-                    c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: generateMassivePool("Mathematics (Sets)", 100) },
-                    c2: { title: "अध्याय २: चक्रीय ब्याज / Chapter 2: Compound Interest", questions: generateMassivePool("Compound Interest", 100) },
-                    c3: { title: "अध्याय ३: जनसंख्या वृद्धि / Chapter 3: Population Growth", questions: generateMassivePool("Population Growth", 100) },
-                    c4: { title: "अध्याय ४: मुद्रा विनिमय / Chapter 4: Currency Exchange", questions: generateMassivePool("Currency Exchange", 100) },
-                    c5: { title: "अध्याय ५: क्षेत्रमिति (क्षेत्रफल) / Chapter 5: Area Mensuration", questions: generateMassivePool("Area Mensuration", 100) },
-                    c6: { title: "अध्याय ६: क्षेत्रमिति (आयतन) / Chapter 6: Volume Mensuration", questions: generateMassivePool("Volume Mensuration", 100) },
-                    c7: { title: "अध्याय ७: बीजगणित (HCF/LCM) / Chapter 7: HCF & LCM", questions: generateMassivePool("Algebra HCF/LCM", 100) },
-                    c8: { title: "अध्याय ८: घतांक / Chapter 8: Indices", questions: generateMassivePool("Indices & Powers", 100) },
-                    c9: { title: "अध्याय ९: करणी / Chapter 9: Radicals", questions: generateMassivePool("Radicals & Surds", 100) },
-                    c10: { title: "अध्याय १०: समीकरण / Chapter 10: Equations", questions: generateMassivePool("Quadratic Equations", 100) },
-                    c11: { title: "अध्याय ११: ज्यामिति / Chapter 11: Geometry", questions: generateMassivePool("Geometry", 100) },
-                    c12: { title: "अध्याय १२: रचना / Chapter 12: Construction", questions: generateMassivePool("Geometric Construction", 100) },
-                    c13: { title: "अध्याय १३: वृत्त / Chapter 13: Circles", questions: generateMassivePool("Circle Geometry", 100) },
-                    c14: { title: "अध्याय १४: त्रिकोणमिति / Chapter 14: Trigonometry", questions: generateMassivePool("Trigonometry", 100) },
-                    c15: { title: "अध्याय १५: तथ्यांकशास्त्र / Chapter 15: Statistics", questions: generateMassivePool("Statistics", 100) },
-                    c16: { title: "अध्याय १६: सम्भाव्यता / Chapter 16: Probability", questions: generateMassivePool("Probability", 100) }
+                    c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
+                        { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
+                        { qNp: "समूह A र B मा साझा परेका सदस्यहरूको समूहलाई के भनिन्छ?", qEn: "What is the set of common elements between set A and B called?", options: ["Union", "Intersection", "Difference", "Subset"], correct: 1 }
+                    ]}
                 }
             },
             science: {
-                title: "विज्ञान तथा प्रविधि / Science & Tech",
+                title: "विज्ञान तथा प्रविधि / Science & Tech (Neema)",
                 chapters: {
-                    c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: generateMassivePool("Force & Gravity", 100) },
-                    c2: { title: "अध्याय २: चाप / Chapter 2: Pressure", questions: generateMassivePool("Fluid Pressure", 100) },
-                    c3: { title: "अध्याय ३: उर्जा / Chapter 3: Energy", questions: generateMassivePool("Energy & Work", 100) },
-                    c4: { title: "अध्याय ४: ताप / Chapter 4: Heat", questions: generateMassivePool("Heat & Temperature", 100) },
-                    c5: { title: "अध्याय ५: प्रकाश / Chapter 5: Light", questions: generateMassivePool("Optics & Light", 100) },
-                    c6: { title: "अध्याय ६: ध्वनि / Chapter 6: Sound", questions: generateMassivePool("Sound Waves", 100) },
-                    c7: { title: "अध्याय ७: विद्युत र चुम्बकत्व / Chapter 7: Electricity", questions: generateMassivePool("Electricity & Magnetism", 100) },
-                    c8: { title: "अध्याय ८: वर्गीकरण / Chapter 8: Classification", questions: generateMassivePool("Animal Classification", 100) },
-                    c9: { title: "अध्याय ९: जीवहरूको सञ्चालन / Chapter 9: Life Processes", questions: generateMassivePool("Life Processes", 100) },
-                    c10: { title: "अध्याय १०: वंशाणुक्रम / Chapter 10: Heredity", questions: generateMassivePool("Heredity & Genetics", 100) },
-                    c11: { title: "अध्याय ११: पर्यावरण / Chapter 11: Ecosystem", questions: generateMassivePool("Ecosystem", 100) },
-                    c12: { title: "अध्याय १२: तत्वहरूको वर्गीकरण / Chapter 12: Elements", questions: generateMassivePool("Periodic Table Elements", 100) },
-                    c13: { title: "अध्याय १३: रासायनिक प्रतिक्रिया / Chapter 13: Reactions", questions: generateMassivePool("Chemical Reactions", 100) },
-                    c14: { title: "अध्याय १४: अम्ल, क्षार र लवण / Chapter 14: Acid & Base", questions: generateMassivePool("Acid, Base & Salt", 100) },
-                    c15: { title: "अध्याय १५: केही ग्यासहरू / Chapter 15: Some Gases", questions: generateMassivePool("Industrial Gases", 100) },
-                    c16: { title: "अध्याय १६: धातुहरू / Chapter 16: Metals", questions: generateMassivePool("Metals & Metallurgy", 100) },
-                    c17: { title: "अध्याय १७: हाइड्रोकार्बन / Chapter 17: Hydrocarbons", questions: generateMassivePool("Hydrocarbons", 100) },
-                    c18: { title: "अध्याय १८: दैनिक जीवनमा रसायन / Chapter 18: Chemicals", questions: generateMassivePool("Daily Life Chemicals", 100) },
-                    c19: { title: "अध्याय १९: ब्रह्माण्ड र इतिहास / Chapter 19: Universe", questions: generateMassivePool("Universe & Earth History", 100) }
+                    c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
+                        { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 }
+                    ]}
                 }
             }
         }
@@ -82,21 +32,207 @@ const quizDatabase = {
             physics: {
                 title: "भौतिक विज्ञान / Physics (Pioneer)",
                 chapters: {
-                    c1: { title: "अध्याय १: मापन र विमीय विश्लेषण / Chapter 1: Dimensions", questions: generateMassivePool("Units & Dimensions", 100) },
-                    c2: { title: "अध्याय २: स्केलर र भेक्टर / Chapter 2: Vectors", questions: generateMassivePool("Vectors Math", 100) },
-                    c3: { title: "अध्याय ३: सरल रेखामा गति / Chapter 3: Kinematics", questions: generateMassivePool("Kinematics Motion", 100) },
-                    c4: { title: "अध्याय ४: न्यूटनको गतिको नियम / Chapter 4: Motion Laws", questions: generateMassivePool("Newton's Laws", 100) },
-                    c5: { title: "अध्याय ५: कार्य, उर्जा र शक्ति / Chapter 5: Work & Energy", questions: generateMassivePool("Work, Energy & Power", 100) },
-                    c6: { title: "अध्याय ६: वृत्ताकार गति / Chapter 6: Circular Motion", questions: generateMassivePool("Circular Motion", 100) },
-                    c7: { title: "अध्याय ७: गुरुत्वाकर्षण / Chapter 7: Gravitation", questions: generateMassivePool("Gravitation Physics", 100) },
-                    c8: { title: "अध्याय ८: घर्षण / Chapter 8: Friction", questions: generateMassivePool("Friction Dynamics", 100) },
-                    c9: { title: "अध्याय ९: पदार्थको इलास्टिसिटी / Chapter 9: Elasticity", questions: generateMassivePool("Elasticity", 100) },
-                    c10: { title: "अध्याय १०: भाईब्रेसन र छाल / Chapter 10: Hydrostatics", questions: generateMassivePool("Hydrostatics & Waves", 100) },
-                    c11: { title: "अध्याय ११: ताप र तापक्रम / Chapter 11: Heat", questions: generateMassivePool("Heat & Temp", 100) },
-                    c12: { title: "अध्याय १२: थर्मल एक्सपान्सन / Chapter 12: Expansion", questions: generateMassivePool("Thermal Expansion", 100) },
-                    c13: { title: "अध्याय १३: ग्यासहरूको नियम / Chapter 13: Ideal Gas", questions: generateMassivePool("Ideal Gas Laws", 100) },
-                    c14: { title: "अध्याय १४: थर्मोडायनामिक्स / Chapter 14: Thermodynamics", questions: generateMassivePool("Thermodynamics", 100) },
-                    c15: { title: "अध्याय १५: परावर्तन र आवर्तन / Chapter 15: Optics", questions: generateMassivePool("Reflection & Refraction", 100) },
-                    c16: { title: "अध्याय १६: लेन्स र प्रिजम / Chapter 16: Lenses", questions: generateMassivePool("Lenses & Prisms", 100) },
+                    c1: { title: "अध्याय १: मापन र विमीय विश्लेषण / Chapter 1: Dimensions", questions: [
+                        { qNp: "कार्य (Work Done) को विमीय सूत्र (Dimensional Formula) कुन हो?", qEn: "What is the dimensional formula for Work Done?", options: ["[MLT^-2]", "[ML^2T^-2]", "[ML^-1T^-2]", "[M^2LT^-2]"], correct: 1 }
+                    ] }
+                }
+            }
+        }
+    },
+    gk: {
+        title: "सामान्य ज्ञान / Loksewa GK",
+        subjects: {
+            geography: {
+                title: "भूगोल / Geography",
+                chapters: {
+                    c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
+                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
+                    ] }
+                }
+            }
+        }
+    },
+    science: {
+        title: "बाह्य विज्ञान / Out Knowledge of Science",
+        subjects: {
+            biology: {
+                title: "जीव विज्ञान / General Biology",
+                chapters: {
+                    c1: { title: "मानव शरीर प्रणाली / Human Body System", questions: [
+                        { qNp: "मानव शरीरको सबैभन्दा ठूलो ग्रन्थि (Gland) कुन हो?", qEn: "Which is the largest gland in the human body?", options: ["Pancreas", "Liver", "Thyroid", "Pituitary"], correct: 1 }
+                    ] }
+                }
+            }
+        }
+    },
+    computer: {
+        title: "बाह्य कम्प्युटर / Out Knowledge of Computer",
+        subjects: {
+            it: {
+                title: "सूचना प्रविधि / Information Technology",
+                chapters: {
+                    c1: { title: "नेटवर्किङ र सुरक्षा / Computer Networks", questions: [
+                        { qNp: "नेटवर्कको सन्दर्भमा 'IP' को पूरा रूप के हो?", qEn: "What is the full form of 'IP' in computer networking?", options: ["Internet Protocol", "Internal Protocol", "Instant Provider", "Inter Link"], correct: 0 }
+                    ] }
+                }
+            }
+        }
+    }
+};
+
+let activeCategory = ""; let activeSubject = ""; let activeChapter = "";
+let gameQuestions = []; let currentIndex = 0; let score = 0;
+let timerRef; let countdown = 30;
+
+function switchScreen(targetId) {
+    document.querySelectorAll('.quiz-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(targetId).classList.add('active');
+}
+
+function navigateToSubjects(catKey) {
+    activeCategory = catKey;
+    const catData = quizDatabase[catKey];
+    document.getElementById("subject-title").innerText = catData.title;
+   
+    const container = document.getElementById("subject-list");
+    container.innerHTML = "";
+   
+    Object.keys(catData.subjects).forEach(subKey => {
+        let btn = document.createElement("button");
+        btn.className = "menu-btn";
+        btn.innerText = catData.subjects[subKey].title;
+        btn.onclick = function() { navigateToChapters(subKey); };
+        container.appendChild(btn);
+    });
+   
+    switchScreen("subject-screen");
+}
+
+function navigateToChapters(subKey) {
+    activeSubject = subKey;
+    const subData = quizDatabase[activeCategory].subjects[subKey];
+    document.getElementById("chapter-title").innerText = subData.title;
+   
+    const container = document.getElementById("chapter-list");
+    container.innerHTML = "";
+   
+    Object.keys(subData.chapters).forEach(chKey => {
+        let btn = document.createElement("button");
+        btn.className = "menu-btn";
+        btn.innerText = subData.chapters[chKey].title;
+        btn.onclick = function() { launchQuizEngine(chKey); };
+        container.appendChild(btn);
+    });
+
+    switchScreen("chapter-screen");
+}
+
+function launchQuizEngine(chKey) {
+    activeChapter = chKey;
+    let mainPool = quizDatabase[activeCategory].subjects[activeSubject].chapters[chKey].questions;
+    gameQuestions = [...mainPool];
+    currentIndex = 0; score = 0;
+    switchScreen("game-screen");
+    loadQuestion();
+}
+
+function loadQuestion() {
+    killClock();
+    document.getElementById("forward-btn").classList.add("hidden");
+
+    let data = gameQuestions[currentIndex];
+    document.getElementById("q-progress").innerText = `प्रश्न: ${currentIndex + 1}/${gameQuestions.length}`;
+   
+    document.getElementById("display-question-text").innerHTML = `
+        <div style="color: #d35400; font-weight: bold; margin-bottom: 8px;">🇳🇵 ${data.qNp}</div>
+        <div style="color: #2c3e50; font-style: italic;">🇬🇧 ${data.qEn}</div>
+    `;
+
+    let targetBox = document.getElementById("display-options-box");
+    targetBox.innerHTML = "";
+
+    data.options.forEach((opt, index) => {
+        let btn = document.createElement("button");
+        btn.className = "option-item";
+        btn.innerText = opt;
+        btn.onclick = function() { evaluateChoice(btn, index, data.correct); };
+        targetBox.appendChild(btn);
+    });
+
+    triggerClock();
+}
+
+function triggerClock() {
+    let clockEl = document.getElementById("countdown-clock");
+    let audioTrack = document.getElementById("beep-alarm");
+    countdown = 30; clockEl.innerText = countdown;
+
+    timerRef = setInterval(() => {
+        countdown--;
+        clockEl.innerText = countdown;
+
+        if (countdown <= 7) {
+            clockEl.classList.add("critical");
+            try { audioTrack.play(); } catch (err) { }
+        }
+
+        if (countdown <= 0) {
+            clearInterval(timerRef);
+            lockOptionsOnTimeout();
+        }
+    }, 1000);
+}
+
+function evaluateChoice(element, chosenIdx, actualIdx) {
+    clearInterval(timerRef);
+    document.getElementById("beep-alarm").pause();
+
+    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
+    for (let button of list) { button.disabled = true; }
+
+    if (chosenIdx === actualIdx) {
+        element.classList.add("correct-choice");
+        score++;
+    } else {
+        element.classList.add("wrong-choice");
+        list[actualIdx].classList.add("correct-choice");
+    }
+    document.getElementById("forward-btn").classList.remove("hidden");
+}
+
+function lockOptionsOnTimeout() {
+    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
+    for (let button of list) { button.disabled = true; }
+    list[gameQuestions[currentIndex].correct].classList.add("correct-choice");
+    document.getElementById("forward-btn").classList.remove("hidden");
+}
+
+function moveToNext() {
+    currentIndex++;
+    if (currentIndex < gameQuestions.length) {
+        loadQuestion();
+    } else {
+        displayFinalResults();
+    }
+}
+
+function killClock() {
+    clearInterval(timerRef);
+    let clockEl = document.getElementById("countdown-clock");
+    clockEl.classList.remove("critical");
+    let audioTrack = document.getElementById("beep-alarm");
+    audioTrack.pause();
+    audioTrack.currentTime = 0;
+}
+
+function displayFinalResults() {
+    switchScreen("score-screen");
+    document.getElementById("total-right").innerText = score;
+    document.getElementById("total-wrong").innerText = gameQuestions.length - score;
+}
+
+function backToCategories() { switchScreen("category-screen"); }
+function backToSubjects() { navigateToSubjects(activeCategory); }
+function resetToHome() { switchScreen("category-screen"); }
 
  
