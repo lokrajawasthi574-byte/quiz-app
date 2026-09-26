@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Har Har Mahadev Bilingual Quiz Platform</title>
+    <title>Har Har Mahadev Modular Quiz Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <!-- पृष्ठभूमि महादेव चित्र ओभरले -->
     <div class="mahadev-bg-overlay"></div>
 
-    <!-- रंगीन साइड डेकोरेसन बोर्डरहरू -->
+    <!-- रंगीन आकर्षक साइड डेकोरेसन बोर्डरहरू -->
     <div class="side-border left-border"></div>
     <div class="side-border right-border"></div>
 
@@ -21,48 +21,57 @@
             <h1>🔱 हर हर महादेव 🔱</h1>
         </header>
 
-        <!-- पृष्ठ १: गृहपृष्ठ र डेभलपर प्रोफाइल -->
-        <section id="welcome-screen" class="quiz-panel active">
+        <!-- स्क्रिन १: गृहपृष्ठ (५ वटा क्याटेगोरी र डेभलपर पहिचान) -->
+        <section id="category-screen" class="quiz-panel active">
             <div class="developer-profile">
                 <h3>👨‍💻 Developer Identity</h3>
                 <p><strong>Name:</strong> Lok Raj Awasthi</p>
-                <p><strong>Feature:</strong> Bilingual Quiz (नेपाली / English)</p>
+                <p><strong>System:</strong> Multi-Level Modular Bilingual Quiz</p>
             </div>
-
             <h2>कृपया विधा छनोट गर्नुहोस् / Select Category:</h2>
-            <div class="category-list">
-                <button class="menu-btn" onclick="initializeQuiz('class10')">📚 Class 10 MCQ Pool</button>
-                <button class="menu-btn" onclick="initializeQuiz('class11')">🎓 Class 11 MCQ Pool</button>
-                <button class="menu-btn" onclick="initializeQuiz('gk')">🌍 सामान्य ज्ञान (Loksewa GK)</button>
-                <button class="menu-btn" onclick="initializeQuiz('science')">🧪 Out Knowledge of Science</button>
-                <button class="menu-btn" onclick="initializeQuiz('computer')">💻 Out Knowledge of Computer</button>
+            <div class="grid-list">
+                <button class="menu-btn" onclick="navigateToSubjects('class10')">📚 Class 10 MCQ Pool</button>
+                <button class="menu-btn" onclick="navigateToSubjects('class11')">🎓 Class 11 MCQ Pool</button>
+                <button class="menu-btn" onclick="navigateToSubjects('gk')">🌍 सामान्य ज्ञान (Loksewa GK)</button>
+                <button class="menu-btn" onclick="navigateToSubjects('science')">🧪 Out Knowledge of Science</button>
+                <button class="menu-btn" onclick="navigateToSubjects('computer')">💻 Out Knowledge of Computer</button>
             </div>
         </section>
 
-        <!-- पृष्ठ २: मुख्य गेमप्ले स्क्रिन -->
+        <!-- स्क्रिन २: विषय छनोट पृष्ठ (Subjects Screen) -->
+        <section id="subject-screen" class="quiz-panel">
+            <h2 id="subject-title">विषयहरू / Subjects</h2>
+            <div id="subject-list" class="grid-list"></div>
+            <button class="back-btn" onclick="backToCategories()">⬅️ पछाडि फर्कनुहोस् / Back</button>
+        </section>
+
+        <!-- स्क्रिन ३: च्याप्टर छनोट पृष्ठ (Chapters Screen) -->
+        <section id="chapter-screen" class="quiz-panel">
+            <h2 id="chapter-title">अध्यायहरू / Chapters</h2>
+            <div id="chapter-list" class="grid-list"></div>
+            <button class="back-btn" onclick="backToSubjects()">⬅️ पछाडि फर्कनुहोस् / Back</button>
+        </section>
+
+        <!-- स्क्रिन ४: मुख्य गेमप्ले स्क्रिन (Bilingual Gameplay) -->
         <section id="game-screen" class="quiz-panel">
             <div class="game-status-bar">
                 <span id="q-progress">प्रश्न: १/१०</span>
                 <div id="countdown-clock" class="clock-display">३०</div>
             </div>
-           
-            <div class="question-box">
-                <!-- यहाँ दुवै भाषामा प्रश्न लोड हुनेछ -->
-                <h3 id="display-question-text">Loading question...</h3>
+            <div class="question-box" id="display-question-text">
+                <!-- प्रश्नहरू यहाँ डाइनामिक लोड हुनेछन् -->
             </div>
-
             <div id="display-options-box" class="options-vertical-grid">
-                <!-- जाभास्क्रिप्ट बटनहरू -->
+                <!-- विकल्प बटनहरू -->
             </div>
-
             <button id="forward-btn" class="control-btn hidden" onclick="moveToNext()">अर्को प्रश्न / Next ➡️</button>
         </section>
 
-        <!-- पृष्ठ ३: नतिजा कार्ड -->
+        <!-- स्क्रिन ५: नतिजा कार्ड -->
         <section id="score-screen" class="quiz-panel">
             <h2>📊 क्विजको अन्तिम नतिजा / Result</h2>
             <div class="score-board">
-                <p>कुल प्रश्न / Total Questions: <strong>१०</strong></p>
+                <p>कुल खेलिएका प्रश्न / Total: <strong>१०</strong></p>
                 <p class="txt-success">सहि उत्तर / Correct: <span id="total-right">०</span></p>
                 <p class="txt-danger">गलत उत्तर / Incorrect: <span id="total-wrong">०</span></p>
             </div>
@@ -70,12 +79,9 @@
         </section>
     </div>
 
-    <!-- ७ सेकेन्डमा बज्ने अलार्म टोन -->
+    <!-- अलार्म साउन्ड ट्र्याक (७ सेकेन्ड बाँकी हुँदा बज्ने) -->
     <audio id="beep-alarm" src="https://google.com" preload="auto"></audio>
 
-    <!-- स्क्रिप्ट फाइलहरू -->
-    <script src="questions10.js"></script>
-    <script src="questions11.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

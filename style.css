@@ -68,21 +68,24 @@ body {
 .quiz-panel { display: none; }
 .quiz-panel.active { display: block; }
 
-.category-list {
+.grid-list {
     display: flex;
     flex-direction: column;
     gap: 14px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
+
 .menu-btn {
     background: #ffffff;
     border: 2px solid #e65c00;
-    padding: 15px 20px;
-    font-size: 17px;
+    padding: 14px 20px;
+    font-size: 16.5px;
     font-weight: bold;
     color: #333;
     border-radius: 8px;
     cursor: pointer;
+    text-align: left;
     transition: 0.2s;
 }
 .menu-btn:hover {
@@ -90,6 +93,19 @@ body {
     color: #fff;
     transform: translateX(5px);
 }
+
+.back-btn {
+    background: #7f8c8d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.back-btn:hover { background: #95a5a6; }
 
 .game-status-bar {
     display: flex;
@@ -99,6 +115,7 @@ body {
     font-size: 19px;
     font-weight: bold;
 }
+
 .clock-display {
     background: #27ae60;
     color: #fff;
@@ -130,6 +147,7 @@ body {
     gap: 12px;
     margin-bottom: 25px;
 }
+
 .option-item {
     background: #f7f9fa;
     border: 2px solid #cfd8dc;
