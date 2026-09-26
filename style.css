@@ -1,85 +1,195 @@
-/* 🔱 LOKRAJ AWASTHI - ULTIMATE VIRAL LOKSEWA STYLE ARCHITECTURE 🔱 */
-:root {
-    --bg-color: #02040a;
-    --card-bg: rgba(6, 11, 25, 0.9);
-    --text-color: #f1f5f9;
-    --success-color: #10b981;
-    --danger-color: #ef4444;
-    --gradient-mix: linear-gradient(45deg, #00f0ff, #7f00ff, #ff007f, #00f0ff);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-    margin: 0; padding: 0; font-family: 'Poppins', sans-serif; color: var(--text-color);
-    display: flex; justify-content: center; align-items: center; min-height: 100vh;
-    /* 🔱 भगवान महादेवको भव्य, दिव्य र आकर्षक लाइभ एनिमेटेड ब्याकग्राउण्ड - सुरुदेखि अन्त्यसम्म स्थिर रहने */
-    background: linear-gradient(rgba(2, 4, 10, 0.65), rgba(2, 4, 10, 0.9)),
-                url('https://unsplash.com') no-repeat center center fixed !important;
-    background-size: cover !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0b0c10;
+    overflow-x: hidden;
+    position: relative;
 }
 
-.quiz-container {
-    background-color: var(--card-bg) !important; padding: 30px 20px; border-radius: 28px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 240, 255, 0.15);
-    width: 95%; max-width: 520px; position: relative; border: 1px solid rgba(0, 240, 255, 0.2);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+/* महाकाल पृष्ठभूमि चित्र व्यवस्था */
+.mahadev-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://unsplash.com') no-repeat center center/cover;
+    opacity: 0.22;
+    z-index: -1;
 }
 
-.viral-free-tag { font-size: 0.9rem; color: #ff007f !important; font-weight: bold; background: rgba(255, 0, 127, 0.15); padding: 5px 12px; border-radius: 30px; display: inline-block; margin-bottom: 15px; }
+/* साइड डेकोरेसन (रंगीन आकर्षक बोर्डरहरू) */
+.side-border {
+    position: fixed;
+    top: 0;
+    width: 15px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff4500, #ff8c00, #ffea00, #ff4500);
+    z-index: 99;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+}
+.left-border { left: 0; }
+.right-border { right: 0; }
 
-.music-control { position: absolute; top: 20px; right: 20px; }
+/* मुख्य फ्रेम कन्टेनर */
+.quiz-main-container {
+    width: 92%;
+    max-width: 680px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    border: 3px solid #ff8c00;
+    z-index: 10;
+    text-align: center;
+}
+
+/* ब्रान्डिङ टाइटल */
+.app-header h1 {
+    color: #e65c00;
+    font-size: 32px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* प्रोफाइल आइडेन्टिटी कार्ड */
+.developer-profile {
+    background: #fff3e0;
+    border-left: 6px solid #e65c00;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+.developer-profile h3 {
+    color: #d35400;
+    margin-bottom: 8px;
+}
+.developer-profile p {
+    font-size: 14.5px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+/* पेज डिस्प्ले कन्ट्रोल */
+.quiz-panel { display: none; }
+.quiz-panel.active { display: block; }
+
+/* विधा छनोट ग्रिड */
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+.menu-btn {
+    background: #ffffff;
+    border: 2px solid #e65c00;
+    padding: 15px 20px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+.menu-btn:hover {
+    background: #e65c00;
+    color: #fff;
+    transform: translateX(5px);
+}
+
+/* स्टेटस र घडी */
+.game-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 19px;
+    font-weight: bold;
+}
+.clock-display {
+    background: #27ae60;
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 30px;
+    min-width: 60px;
+}
+.clock-display.critical {
+    background: #d32f2f;
+    animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(1.08); opacity: 0.7; }
+}
+
+.question-box {
+    margin-bottom: 30px;
+    font-size: 21px;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+/* विकल्पहरूको सूची ढाँचा */
+.options-vertical-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.option-item {
+    background: #f7f9fa;
+    border: 2px solid #cfd8dc;
+    padding: 14px;
+    font-size: 16.5px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 500;
+    transition: background 0.15s;
+}
+
+/* उत्तर प्रतिक्रिया रङहरू - कडा निर्देशन पालना */
+.option-item.correct-choice {
+    background-color: #2ecc71 !important;
+    color: #ffffff !important;
+    border-color: #27ae60 !important;
+    font-weight: bold;
+}
+.option-item.wrong-choice {
+    background-color: #e74c3c !important;
+    color: #ffffff !important;
+    border-color: #c0392b !important;
+    font-weight: bold;
+}
+
 .control-btn {
-    background: rgba(255, 255, 255, 0.08); color: white; border: 1px solid rgba(0, 240, 255, 0.3);
-    padding: 8px 16px; border-radius: 50px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease;
+    background: #e65c00;
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
 }
-.control-btn:hover { background: #00f0ff; color: black; box-shadow: 0 0 15px #00f0ff; }
-.hide { display: none !important; }
+.control-btn:hover { background: #cd5200; }
+.hidden { display: none; }
 
-h1, h2, h3 { background: linear-gradient(to right, #00f0ff, #ff007f); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 8px 0; font-weight: 700; text-align: center; }
-p { text-align: center; color: #cbd5e1; }
-
-.topic-grid { display: flex; flex-direction: column; width: 100%; }
-
-/* 🔥 बटनहरूलाई ब्लक र स्पष्ट ठूलो प्रिमियम बाकस बनाउने अनिवार्य नयाँ बुट्टा */
-.action-btn, .option-btn, .topic-btn {
-    display: block !important;
-    width: 100% !important;
-    padding: 18px !important;
-    margin: 12px 0 !important;
-    border-radius: 16px !important;
-    border: none !important;
-    font-size: 1.05rem !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-sizing: border-box !important;
-    text-align: left !important;
-}
-
-.action-btn { background: linear-gradient(90deg, #7f00ff, #ff007f) !important; color: white !important; text-align: center !important; }
-.action-btn:hover { transform: translateY(-2px); }
-
-.topic-btn { background-color: rgba(22, 32, 54, 0.9) !important; color: white !important; border: 1px solid rgba(0, 240, 255, 0.15) !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-.topic-btn:hover { background: var(--gradient-mix) !important; background-size: 300% 300% !important; animation: gradientMove 3s infinite; transform: scale(1.02); }
-
-.game-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; }
-#timer-box { color: #f59e0b; background: rgba(245, 158, 11, 0.18); padding: 4px 14px; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.3); }
-#question-text { font-size: 1.25rem; margin-bottom: 25px; line-height: 1.6; text-align: center; font-weight: 500; }
-
-.option-btn { background-color: #162036 !important; color: #cbd5e1 !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
-.option-btn:hover:not([disabled]) { background: rgba(0, 240, 255, 0.2) !important; border: 1px solid #00f0ff !important; color: white !important; }
-
-/* 🟢 सही हुँदा हरियो बत्ती चम्किने प्रणाली */
-.option-btn.correct-glow { background: linear-gradient(45deg, #10b981, #059669) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important; }
-/* 🔴 गलत हुँदा रातो बत्ती चम्किने प्रणाली */
-.option-btn.wrong-danger { background: linear-gradient(45deg, #ef4444, #dc2626) !important; color: white !important; font-weight: bold !important; box-shadow: 0 0 25px rgba(239, 68, 68, 0.8) !important; }
-
-.google-ad-box { margin-top: 15px; padding: 5px; background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 12px; }
-.ad-banner-mock { height: 50px; background: rgba(255, 255, 255, 0.05); color: #777; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; border-radius: 8px; }
-
-.premium-notice { margin-top: 15px; padding: 12px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 12px; font-size: 0.8rem; }
-@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-.report-item { background-color: rgba(15, 23, 42, 0.85); padding: 18px; margin: 15px 0; border-radius: 14px; text-align: left; }
-.report-item.correct-ans { border-left: 6px solid var(--success-color); }
-.report-item.wrong-ans { border-left: 6px solid var(--danger-color); }
+.score-board p { font-size: 19px; margin: 12px 0; }
+.txt-success { color: #27ae60; font-weight: bold; }
+.txt-danger { color: #c0392b; font-weight: bold; }
 
  
