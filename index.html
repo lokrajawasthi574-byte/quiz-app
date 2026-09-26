@@ -3,253 +3,292 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Quiz Nepal</title>
 
-  <meta name="description"
-        content="Quiz Nepal - Class 10, Class 11, General Knowledge and One vs One Quiz">
+  <meta
+    name="description"
+    content="Quiz Nepal - Class 10, Class 11, General Knowledge and One vs One Quiz"
+  >
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
 
 <body>
 
-  <!-- =========================
-       PAGE 1 : GOOGLE LOGIN
-  ========================== -->
-  <section id="loginPage" class="page login-page">
+  <!-- =====================================================
+       BACKGROUND
+  ====================================================== -->
 
-    <div class="login-overlay"></div>
+  <div class="background-overlay"></div>
 
-    <div class="login-box">
 
-      <div class="logo-icon">📚</div>
+  <!-- =====================================================
+       MAIN APP
+  ====================================================== -->
 
-      <h1>Quiz Nepal</h1>
+  <main id="app">
 
-      <p class="tagline">
-        Learn • Practice • Compete
-      </p>
 
-      <div class="mahadev-login">
-        हर हर महादेव 🔱
+    <!-- ===================================================
+         LOGIN PAGE
+    ==================================================== -->
+
+    <section
+      id="loginPage"
+      class="page login-page active"
+    >
+
+      <div class="login-card">
+
+        <div class="mahadev-symbol">
+          🔱
+        </div>
+
+        <h1>
+          Quiz Nepal
+        </h1>
+
+        <h2>
+          हर हर महादेव 🔱
+        </h2>
+
+        <p class="login-subtitle">
+          Quiz Nepal मा स्वागत छ
+        </p>
+
+        <p class="login-subtitle en-text">
+          Welcome to Quiz Nepal
+        </p>
+
+
+        <button
+          id="googleLoginBtn"
+          type="button"
+          class="google-login-btn"
+        >
+
+          <span class="google-icon">
+            G
+          </span>
+
+          <span>
+            Continue with Google
+          </span>
+
+        </button>
+
+
+        <p
+          id="loginMessage"
+          class="login-message"
+        ></p>
+
+
+        <div class="creator-box">
+
+          <span>
+            Created by
+          </span>
+
+          <strong>
+            Lok Raj Awasthi
+          </strong>
+
+        </div>
+
       </div>
 
-      <p class="login-title">
-        Google Account बाट Login गर्नुहोस्
-      </p>
-
-      <button
-        id="googleLoginBtn"
-        class="google-button"
-        type="button">
-
-        <span class="google-g">G</span>
-
-        <span>
-          Continue with Google
-        </span>
-
-      </button>
-
-      <p id="loginMessage" class="login-message"></p>
-
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- =========================
-       PAGE 2 : HOME
-  ========================== -->
-  <section id="homePage" class="page home-page">
 
-    <header class="topbar">
+    <!-- ===================================================
+         HOME PAGE
+    ==================================================== -->
 
-      <div class="site-name">
-        Quiz Nepal
-      </div>
+    <section
+      id="homePage"
+      class="page home-page"
+    >
 
-      <div class="top-buttons">
+      <header class="top-header">
+
+        <div class="brand">
+
+          <div class="brand-symbol">
+            🔱
+          </div>
+
+          <div>
+
+            <h1>
+              Mahadev
+            </h1>
+
+            <p>
+              हर हर महादेव 🔱
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="user-area">
+
+          <span id="userEmail"></span>
+
+          <button
+            id="logoutBtn"
+            type="button"
+            class="logout-btn"
+          >
+            Logout
+          </button>
+
+        </div>
+
+      </header>
+
+
+
+      <!-- LANGUAGE -->
+
+      <div class="language-switch">
 
         <button
           id="neBtn"
-          class="language-btn active"
-          type="button">
+          type="button"
+        >
           नेपाली 🇳🇵
         </button>
 
         <button
           id="enBtn"
-          class="language-btn"
-          type="button">
+          type="button"
+        >
           English 🇬🇧
         </button>
 
         <button
           id="bothBtn"
-          class="language-btn"
-          type="button">
-          दुवै
-        </button>
-
-        <button
-          id="logoutBtn"
-          class="logout-button"
-          type="button">
-          Logout
+          type="button"
+          class="active"
+        >
+          दुवै / Both
         </button>
 
       </div>
 
-    </header>
 
 
-    <main class="home-container">
+      <!-- WELCOME -->
 
-      <!-- MAHADEV -->
-      <div class="mahadev-section">
+      <div class="welcome-box">
 
-        <div class="mahadev-text">
-          हर हर महादेव 🔱
-        </div>
+        <h2 id="chooseTitle">
+          आफ्नो Quiz छान्नुहोस्
+        </h2>
 
-        <div class="creator-text">
-          Lok Raj Awasthi
-        </div>
-
-        <div id="userEmail" class="user-email"></div>
+        <p id="chooseDescription">
+          आफ्नो कक्षा वा Quiz category छानेर अभ्यास सुरु गर्नुहोस्।
+        </p>
 
       </div>
 
 
-      <h2 id="chooseTitle" class="choose-title">
-        आफ्नो Quiz छान्नुहोस्
-      </h2>
+
+      <!-- STATS -->
+
+      <div class="stats-container">
+
+        <div class="stat-card">
+
+          <span
+            id="gamesPlayedLabel"
+            class="stat-label"
+          >
+            खेलेका Quiz
+          </span>
+
+          <strong id="gamesPlayedStat">
+            0
+          </strong>
+
+        </div>
 
 
-      <!-- 4 CATEGORIES -->
-      <div class="category-container">
+        <div class="stat-card">
+
+          <span
+            id="bestScoreLabel"
+            class="stat-label"
+          >
+            उत्कृष्ट Score
+          </span>
+
+          <strong id="bestScoreStat">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span
+            id="correctLabel"
+            class="stat-label"
+          >
+            कुल सही
+          </span>
+
+          <strong id="correctStat">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span
+            id="wrongLabel"
+            class="stat-label"
+          >
+            कुल गलत
+          </span>
+
+          <strong id="wrongStat">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- QUIZ CATEGORIES -->
+
+      <div class="category-grid">
+
 
         <!-- CLASS 10 -->
+
         <button
-          class="category-card class10"
+          type="button"
+          class="category-card"
           data-category="class10"
-          type="button">
+        >
 
-          <span class="category-icon">📘</span>
+          <div class="category-icon 
 
-          <span class="ne-text">
-            कक्षा १०
-          </span>
-
-          <span class="en-text">
-            Class 10
-          </span>
-
-        </button>
-
-
-        <!-- CLASS 11 -->
-        <button
-          class="category-card class11"
-          data-category="class11"
-          type="button">
-
-          <span class="category-icon">📗</span>
-
-          <span class="ne-text">
-            कक्षा ११
-          </span>
-
-          <span class="en-text">
-            Class 11
-          </span>
-
-        </button>
-
-
-        <!-- GK -->
-        <button
-          class="category-card gk"
-          data-category="gk"
-          type="button">
-
-          <span class="category-icon">🧠</span>
-
-          <span class="ne-text">
-            सामान्य ज्ञान
-          </span>
-
-          <span class="en-text">
-            General Knowledge
-          </span>
-
-        </button>
-
-
-        <!-- ONE VS ONE -->
-        <button
-          class="category-card one"
-          data-category="one"
-          type="button">
-
-          <span class="category-icon">⚔️</span>
-
-          <span class="ne-text">
-            एक विरुद्ध एक
-          </span>
-
-          <span class="en-text">
-            One vs One
-          </span>
-
-        </button>
-
-      </div>
-
-    </main>
-
-  </section>
-
-
-  <!-- =========================
-       PAGE 3 : SUBJECT
-  ========================== -->
-  <section id="subjectPage" class="page">
-
-    <header class="inside-header">
-
-      <button
-        id="subjectBackBtn"
-        class="back-button"
-        type="button">
-        ← Back
-      </button>
-
-      <h2 id="subjectTitle">
-        Subjects
-      </h2>
-
-      <div></div>
-
-    </header>
-
-    <main class="inside-container">
-
-      <div
-        id="subjectList"
-        class="selection-list">
-      </div>
-
-    </main>
-
-  </section>
-
-
-  <!-- =========================
-       PAGE 4 : CHAPTER
-  ========================== -->
-  <section id="chapterPage" class="page 
