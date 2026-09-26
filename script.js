@@ -1,274 +1,257 @@
 /**
-* Awasthi Quiz - Core Engine
+* ==========================================================================
+* AWASTHI QUIZ - APPLICATION ENGINE SYSTEM (PART 3)
 * Creator & Owner: Lok Raj Awasthi
-* Responsive, Client-side Randomized Engine for Educational Testing
+* Architectural Framework: Dynamic Multi-Module Front-End Prototype
+* ==========================================================================
 */
 
-// Global App States
-let currentQuestionIndex = 0;
-let quizQuestions = [];
-let score = 0;
-let xpPoints = 0;
-let timerInterval = null;
-let timeLeft = 30;
-let selectedLanguage = 'en';
-let answeredHistory = [];
-
-// Hard-coded architecture pointer for scale demonstration (Will connect to Firebase/Firestore APIs)
-const MOCK_DB_ENDPOINT = "assets/data/questions.json";
-
-// Initial Demo Questions Pool Structure
-const sampleQuestionsPool = [
-    {
-        id: 1,
-        category: "Class 10 - Science",
-        question_en: "Which element has the chemical symbol 'O'?",
-        question_np: "कुन तत्वको रासायनिक संकेत 'O' हो?",
-        options_en: ["Oxygen", "Gold", "Osmium", "Iron"],
-        options_np: ["अक्सिजन", "सुन", "अस्मियम", "फलाम"],
-        correctIndex: 0,
-        explanation_en: "Oxygen is represented by the symbol O and has atomic number 8.",
-        explanation_np: "अक्सिजनलाई संकेत O ले जनाइन्छ र यसको परमाणु संख्या ८ हुन्छ।"
+// --- Comprehensive Simulated Database (Scalable Architecture Design) ---
+const AWASTHI_QUIZ_DATABASE = {
+    classes: {
+        class10: {
+            science: [
+                {
+                    id: "c10_sci_ch1_1",
+                    question: "हाम्रो ब्रह्माण्डमा गुरुत्वाकर्षण बल (Gravitational Force) वस्तुको पिण्ड र दूरीमा कसरी निर्भर गर्दछ?",
+                    options: [
+                        "पिण्डको गुणनफलसँग समानुपातिक र दूरीको वर्गसँग व्युत्क्रमानुपातिक",
+                        "पिण्डको गुणनफलसँग व्युत्क्रमानुपातिक र दूरीसँग समानुपातिक",
+                        "पिण्ड र दूरी दुवैसँग सधैं समानुपातिक",
+                        "माथिका कुनै पनि भनाइ सत्य छैनन्"
+                    ],
+                    correct: 0,
+                    explanation: "न्युटनको गुरुत्वाकर्षण नियम अनुसार, बल वस्तुहरूको पिण्डको गुणनफलसँग समानुपातिक (Directly Proportional) र तिनीहरूको केन्द्रबीचको दूरीको वर्गसँग व्युत्क्रमानुपातिक (Inversely Proportional) हुन्छ।",
+                    difficulty: "medium"
+                },
+                {
+                    id: "c10_sci_ch1_2",
+                    question: "यदि पृथ्वीको अर्धव्यास (Radius) लाई आधा बनाउने हो भने यसको सतहमा गुरुत्वप्रवेग (g) को मान कति गुणाले परिवर्तन हुन्छ?",
+                    options: ["२ गुणा बढ्छ", "४ गुणा बढ्छ", "२ गुणा घट्छ", "समान रहन्छ"],
+                    correct: 1,
+                    explanation: "गुरुत्वप्रवेग g = GM/R² सूत्र अनुसार, अर्धव्यास (R) आधा गर्दा R² को मान १/४ हुन्छ, जसले गर्दा g को मान ४ गुणाले वृद्धि हुन जान्छ।",
+                    difficulty: "hard"
+                }
+            ],
+            computer: [
+                {
+                    id: "c10_comp_ch1_1",
+                    question: "कम्प्युटर नेटवर्किङमा प्रयोग हुने 'Topology' ले मुख्यतया केलाई बुझाउँछ?",
+                    options: [
+                        "नेटवर्कमा कम्प्युटरहरूको भौतिक वा तार्किक व्यवस्थापन (Layout)",
+                        "इन्टरनेट चलाउने एक विशेष सफ्टवेयर",
+                        "कम्प्युटर भाइरस नष्ट गर्ने एउटा विधि",
+                        "डाटा सेभ गर्ने हार्डडिस्कको प्रकार"
+                    ],
+                    correct: 0,
+                    explanation: "नेटवर्क टोपलोजी (Network Topology) भन्नाले नेटवर्कमा रहेका विभिन्न नोड वा कम्प्युटरहरू एकआपसमा जोडिने भौतिक वा तार्किक ढाँचा (Structure/Layout) लाई बुझाउँछ।",
+                    difficulty: "easy"
+                }
+            ],
+            optmath: []
+        },
+        class11: {
+            physics: [
+                {
+                    id: "c11_phy_ch1_1",
+                    question: "Which of the following dimensions correctly represents the Universal Gravitational Constant (G)?",
+                    options: ["[M⁻¹ L³ T⁻²]", "[M¹ L² T⁻²]", "[M⁻² L³ T⁻¹]", "[M⁻¹ L² T⁻³]"],
+                    correct: 0,
+                    explanation: "Since F = G*m1*m2/r², we have G = F*r²/(m1*m2). Substituting dimensions: [M L T⁻²] * [L²] / [M²] = [M⁻¹ L³ T⁻²].",
+                    difficulty: "hard"
+                }
+            ],
+            chemistry: [],
+            mathematics: [],
+            computer: []
+        }
     },
-    {
-        id: 2,
-        category: "Lok Sewa - Geography",
-        question_en: "Which is the highest peak in the world?",
-        question_np: "विश्वको सर्वोच्च शिखर कुन हो?",
-        options_en: ["K2", "Mount Everest", "Kangchenjunga", "Lhotse"],
-        options_np: ["केटु", "सगरमाथा", "कञ्चनजङ्घा", "लोत्से"],
-        correctIndex: 1,
-        explanation_en: "Mount Everest is Earth's highest mountain above sea level, located in Nepal.",
-        explanation_np: "सगरमाथा पृथ्वीको सबैभन्दा अग्लो हिमाल हो, जुन नेपालमा अवस्थित छ।"
-    }
-];
-
-// Sound Synthesizer System for strict cross-browser accessibility
-const soundControls = {
-    muted: false,
-    playWarning() {
-        if (this.muted) return;
-        // Frequency alert audio simulation for 7 seconds warning
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(600, ctx.currentTime);
-        gain.gain.setValueAtTime(0.1, ctx.currentTime);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.15);
+    generalKnowledge: {
+        nepal_history: [
+            {
+                id: "gk_nh_1",
+                question: "नेपालको इतिहासमा 'जनताका संकास्पद राजा' भनेर कुन मल्ल राजालाई चिनिन्छ?",
+                options: ["प्रताप मल्ल", "लक्ष्मीनरसिंह मल्ल", "योगनरेन्द्र मल्ल", "महेन्द्र मल्ल"],
+                correct: 2,
+                explanation: "राजा योगनरेन्द्र मल्ललाई जनताले विभिन्न कालखण्डमा शंकास्पद दृष्टिकोणले हेरेका र䀘 मृत्युको प्रसङ्ग पनि रहस्यमयी भएकाले इतिहासमा उनलाई सो नामले स्मरण गरिन्छ।",
+                difficulty: "medium"
+            }
+        ],
+        nepal_geography: [
+            {
+                id: "gk_ng_1",
+                question: "नेपालको सबैभन्दा गहिरो ताल रारा ताल समुद्र सतहबाट कति उचाइमा अवस्थित छ?",
+                options: ["२,९९० मिटर", "३,२०० मिटर", "२,५०० मिटर", "१,८०० मिटर"],
+                correct: 0,
+                explanation: "नेपालको मुगु जिल्लामा अवस्थित पर्यटकीय तथा प्राकृतिक रूपले महत्त्वपूर्ण रारा ताल समुद्र सतहबाट २,९९० मिटरको उचाइमा रहेको छ।",
+                difficulty: "easy"
+            }
+        ]
+    },
+    lokSewa: {
+        constitution: [
+            {
+                id: "ls_con_1",
+                question: "नेपालको वर्तमान संविधान (२०७२) मा कति वटा भाग, धारा र अनुसूचीहरू रहेका छन्?",
+                options: [
+                    "३५ भाग, ३०८ धारा, ९ अनुसूची",
+                    "३० भाग, ३०० धारा, ७ अनुसूची",
+                    "३२ भाग, ३१५ धारा, ८ अनुसूची",
+                    "३८ भाग, ३२५ धारा, १० अनुसूची"
+                ],
+                correct: 0,
+                explanation: "नेपालको संविधान (२०७२) असोज ३ गते जारी भएको हो, जसमा ३५ भाग, ३०८ धारा र ९ वटा अनुसूचीहरू समावेश गरिएका छन्।",
+                difficulty: "easy"
+            }
+        ]
     }
 };
 
+// --- Application Core Global State ---
+let APP_STATE = {
+    currentUser: null,
+    activeView: "home",
+    isAudioEnabled: true,
+    activeTheme: "dark",
+   
+    // Active Quiz Engine Runtime Data
+    quizRuntime: {
+        currentPool: [],
+        currentIndex: 0,
+        score: 0,
+        xpEarned: 0,
+        correctCount: 0,
+        incorrectCount: 0,
+        skippedCount: 0,
+        timerInterval: null,
+        timeLeft: 30,
+        startTime: null,
+        totalTimeSpent: 0,
+        userAnswers: [],
+        bookmarkedQuestions: new Set(),
+        mistakeBook: new Set()
+    },
+   
+    // User Metrics System
+    userProfile: {
+        username: "Guest User",
+        level: 1,
+        xp: 120,
+        points: 450,
+        streak: 3,
+        history: []
+    }
+};
+
+// --- Audio Asset Drivers ---
+const AudioEngine = {
+    playTick: () => { },
+    playAlarm: () => {
+        if (!APP_STATE.isAudioEnabled) return;
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(440, ctx.currentTime);
+        osc.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.15);
+    },
+    playFeedback: (isCorrect) => {
+        if (!APP_STATE.isAudioEnabled) return;
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(isCorrect ? 880 : 220, ctx.currentTime);
+        osc.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.2);
+    }
+};
+
+// --- Initialization & Document DOM Setup ---
 document.addEventListener("DOMContentLoaded", () => {
-    setupTheme();
-    setupEventListeners();
+    initViewRouter();
+    setupCoreInteractions();
+    loadDemoStatistics();
 });
 
-// Theme Toggle Engine
-function setupTheme() {
-    const currentTheme = localStorage.getItem("theme") || "dark";
-    document.documentElement.setAttribute("data-theme", currentTheme);
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    if(themeToggleBtn) {
-        themeToggleBtn.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
-    }
-}
-
-function toggleTheme() {
-    const activeTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = activeTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.getElementById("theme-toggle").innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
-}
-
-// Global Operations Triggers
-function setupEventListeners() {
-    // Landing screen transition
-    const welcomeScreen = document.getElementById("welcome-screen");
-    if (welcomeScreen) {
-        welcomeScreen.addEventListener("click", () => {
-            welcomeScreen.classList.add("hidden");
-            document.getElementById("auth-screen").classList.remove("hidden");
-        });
-    }
-
-    // Language Toggle
-    const langBtn = document.getElementById("lang-switch");
-    if(langBtn) {
-        langBtn.addEventListener("click", () => {
-            selectedLanguage = selectedLanguage === 'en' ? 'np' : 'en';
-            langBtn.innerText = selectedLanguage === 'en' ? 'नेपाली' : 'English';
-            // If active in quiz, re-render question node text
-            if(quizQuestions.length > 0 && currentQuestionIndex < quizQuestions.length) {
-                renderCurrentQuestion();
+// --- View Router & Screen Switching Logic ---
+function initViewRouter() {
+    document.querySelectorAll(".nav-link, .user-profile-trigger, .footer-links-col a").forEach(element => {
+        element.addEventListener("click", (e) => {
+            const targetView = element.getAttribute("data-view");
+            if (targetView) {
+                e.preventDefault();
+                switchView(targetView);
             }
         });
+    });
+}
+
+function switchView(viewId) {
+    if (!APP_STATE.currentUser && (viewId === 'dashboard' || viewId === 'admin')) {
+        viewId = 'auth';
     }
 
-    // Audio Mute System
-    const soundBtn = document.getElementById("sound-toggle");
-    if(soundBtn) {
-        soundBtn.addEventListener("click", () => {
-            soundControls.muted = !soundControls.muted;
-            soundBtn.innerText = soundControls.muted ? "🔇 Sound Off" : "🔊 Sound On";
-        });
+    APP_STATE.activeView = viewId;
+   
+    document.querySelectorAll(".app-view").forEach(view => {
+        view.classList.remove("active-view");
+    });
+   
+    const targetNode = document.getElementById(`${viewId}-view`);
+    if (targetNode) {
+        targetNode.classList.add("active-view");
+        window.scrollTo(0, 0);
     }
-}
-
-// Authentication Simulator Engine
-function authenticateUser(provider) {
-    console.log(`Authenticating via: ${provider}`);
-    document.getElementById("auth-screen").classList.add("hidden");
-    document.getElementById("main-dashboard").classList.remove("hidden");
-}
-
-function logoutUser() {
-    document.getElementById("main-dashboard").classList.add("hidden");
-    document.getElementById("auth-screen").classList.remove("hidden");
-}
-
-// Dynamic Core Quiz Lifecycle Engine
-function startQuizEngine(category) {
-    console.log(`Initializing question matrix for target: ${category}`);
    
-    // Filter logic or fallback validation mock up
-    quizQuestions = shuffleArray([...sampleQuestionsPool]).slice(0, 10);
-    currentQuestionIndex = 0;
-    score = 0;
-    xpPoints = 0;
-    answeredHistory = [];
-
-    document.getElementById("main-dashboard").classList.add("hidden");
-    document.getElementById("quiz-playground").classList.remove("hidden");
-    document.getElementById("result-screen").classList.add("hidden");
-   
-    renderCurrentQuestion();
-}
-
-function renderCurrentQuestion() {
-    resetTimer();
-    if (currentQuestionIndex >= quizQuestions.length) {
-        terminateQuizSession();
-        return;
-    }
-
-    const qData = quizQuestions[currentQuestionIndex];
-   
-    // Update Tracking DOM indicators
-    document.getElementById("current-question-num").innerText = currentQuestionIndex + 1;
-    document.getElementById("total-questions-count").innerText = quizQuestions.length;
-   
-    const progressPercent = ((currentQuestionIndex) / quizQuestions.length) * 100;
-    document.getElementById("quiz-progress-bar").style.width = `${progressPercent}%`;
-
-    // Render Text fields dynamically based on active localization setup
-    document.getElementById("question-text-node").innerText = selectedLanguage === 'en' ? qData.question_en : qData.question_np;
-   
-    const optionsContainer = document.getElementById("options-box-wrapper");
-    optionsContainer.innerHTML = "";
-
-    const operationalOptionsArray = selectedLanguage === 'en' ? qData.options_en : qData.options_np;
-   
-    operationalOptionsArray.forEach((optionText, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "quiz-option glass-panel font-medium text-left p-4 rounded-xl transition-all";
-        btn.innerText = optionText;
-        btn.onclick = () => evaluationSelection(idx, btn);
-        optionsContainer.appendChild(btn);
+    document.querySelectorAll(".nav-link").forEach(link => {
+        if (link.getAttribute("data-view") === viewId) {
+            link.classList.add("active");
+        } else {
+            link.classList.remove("active");
+        }
     });
 
-    document.getElementById("explanation-banner").classList.add("hidden");
-    document.getElementById("next-question-trigger").classList.add("hidden");
-   
-    initiateTimerCounter();
+    if (viewId === 'dashboard') populateDashboardUI();
+    if (viewId === 'leaderboard') renderLeaderboardData('global');
 }
 
-// Timer Controller Execution Node
-function initiateTimerCounter() {
-    timeLeft = 30;
-    const timerDisplay = document.getElementById("timer-countdown-text");
-    timerDisplay.classList.remove("warning");
-    timerDisplay.innerText = timeLeft;
-
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        timerDisplay.innerText = timeLeft;
-
-        if (timeLeft <= 7) {
-            timerDisplay.classList.add("warning");
-            soundControls.playWarning();
-        }
-
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            handleTimeoutExceeded();
-        }
-    }, 1000);
-}
-
-function resetTimer() {
-    if(timerInterval) clearInterval(timerInterval);
-}
-
-function handleTimeoutExceeded() {
-    // Process structural skip upon complete timeout expiry
-    evaluationSelection(-1, null);
-}
-
-// Selection Evaluator Engine
-function evaluationSelection(chosenIndex, targetButtonElement) {
-    resetTimer();
-    const qData = quizQuestions[currentQuestionIndex];
-    const optionsButtons = document.querySelectorAll("#options-box-wrapper .quiz-option");
-   
-    // Disable multiple inputs
-    optionsButtons.forEach(btn => btn.disabled = true);
-
-    const isCorrect = (chosenIndex === qData.correctIndex);
-   
-    if (chosenIndex === -1) {
-        // Skipped configuration
-        answeredHistory.push({ status: 'skipped', questionId: qData.id });
-    } else if (isCorrect) {
-        targetButtonElement.classList.add("correct");
-        score += 10;
-        xpPoints += 15;
-        answeredHistory.push({ status: 'correct', questionId: qData.id });
-    } else {
-        if(targetButtonElement) targetButtonElement.classList.add("incorrect");
-        optionsButtons[qData.correctIndex].classList.add("correct");
-        answeredHistory.push({ status: 'incorrect', questionId: qData.id });
+// --- Interaction Handlers Setup ---
+function setupCoreInteractions() {
+    // 1. Entrance Welcome Screen Dismissal
+    const enterBtn = document.getElementById("dismiss-welcome-btn");
+    if (enterBtn) {
+        enterBtn.addEventListener("click", () => {
+            const overlay = document.getElementById("welcome-overlay");
+            const mainApp = document.getElementById("main-app-interface");
+           
+            overlay.style.opacity = "0";
+            overlay.style.visibility = "hidden";
+            mainApp.style.display = "block";
+            setTimeout(() => mainApp.style.opacity = "1", 50);
+            switchView("home");
+        });
     }
 
-    // Display Explanatory text feedback matrix block
-    const expBanner = document.getElementById("explanation-banner");
-    const expText = document.getElementById("explanation-content-text");
-    expText.innerText = selectedLanguage === 'en' ? qData.explanation_en : qData.explanation_np;
-    expBanner.classList.remove("hidden");
+    // 2. Authentication Flow Handling
+    const loginForm = document.getElementById("auth-form-element");
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("auth-email-input").value;
+           
+            APP_STATE.currentUser = { email: email };
+            APP_STATE.userProfile.username = email.split('@')[0];
+           
+            document.getElementById("header-user-display-name").innerText = APP_STATE.userProfile.username;
+            switchView("dashboard");
+        });
+    }
 
-    document.getElementById("next-question-trigger").classList.remove("hidden");
-}
-
-function advanceNextQuestion() {
-    currentQuestionIndex++;
-    renderCurrentQuestion();
-}
-
-function skipActiveQuestion() {
-    evaluationSelection(-1, null);
-}
-
-// Performance Processing Dashboard Termination Node
-function terminateQuizSession() {
-    document.getElementById("quiz-playground").classList.add("hidden");
-    document.getElementById("result-screen").classList.remove("hidden");
-
-    const totalQuestions = quizQuestions.length;
-    const corrects = answeredHistory.filter(h => h.status === 'correct').length;
-    const incorrects = answeredHistory.filter(h => h.status === 'incorrect').length;
+    // 3. Audio & Theme Toggle Control Switches
+    document.getElementById("audio-toggle-btn").addEventListener("click", () => {
+        APP_STATE.isAudioEnabled = !APP_STATE.isAudioEnabled;
+        const icon = document.getElementById("audio-toggle-btn").querySelector("i");
 
  
