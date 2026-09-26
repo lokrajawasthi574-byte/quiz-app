@@ -4,174 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Awasthi Quiz - Premium Educational Platform</title>
-    <!-- Google Fonts & FontAwesome for Premium Icons -->
+    <!-- Fonts & Icons Google/FontAwesome CDN -->
     <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Premium Stylesheet Link -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme">
+<body>
 
-    <!-- Audio Elements for Quiz Feedback -->
-    <audio id="sound-correct" src="https://mixkit.co" preload="auto"></audio>
-    <audio id="sound-incorrect" src="https://mixkit.co" preload="auto"></audio>
-    <audio id="sound-warning" src="https://mixkit.co" preload="auto" loop></audio>
-
-    <!-- 1. MAHADEV WELCOME SCREEN (Splash) -->
-    <div id="splash-screen" class="splash-overlay">
-        <div class="splash-bg"></div>
-        <div class="splash-content">
+    <!-- ========================================== -->
+    <!-- 1. MAHADEV WELCOME SCREEN OVERLAY         -->
+    <!-- ========================================== -->
+    <div id="welcome-overlay">
+        <div class="welcome-content">
             <h1 class="mahadev-glowing-title">हर हर महादेव 🔱</h1>
-            <div class="branding-box">
-                <span class="brand-badge">Premium Platform</span>
-                <h2 class="app-title">Awasthi Quiz</h2>
-                <p class="owner-credits">Created & Owned by: <span>Lok Raj Awasthi</span></p>
-            </div>
-            <div class="splash-loader"></div>
-            <button id="btn-splash-continue" class="btn-gradient animated-btn">
-                <span>अगाडि बढ्नुहोस् / Continue</span> <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- 2. AUTHENTICATION MODULE (Email/Password Only) -->
-    <div id="auth-screen" class="auth-container hidden">
-        <div class="auth-card glass-card">
-            <div class="auth-header">
+            <div class="welcome-branding">
                 <h2>Awasthi Quiz</h2>
-                <p id="auth-subtitle">खाता लगइन गर्नुहोस् / Account Login</p>
+                <p>Created & Owned by Lok Raj Awasthi</p>
             </div>
-           
-            <!-- Login Form -->
-            <form id="form-login" class="auth-form">
-                <div class="input-group">
-                    <label><i class="fas fa-envelope"></i> इमेल / Email</label>
-                    <input type="email" id="login-email" required placeholder="example@gmail.com">
-                </div>
-                <div class="input-group">
-                    <label><i class="fas fa-lock"></i> पासवर्ड / Password</label>
-                    <input type="password" id="login-password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-gradient form-btn">लगइन / Login</button>
-                <div class="auth-links">
-                    <a href="#" id="link-goto-register">नयाँ खाता बनाउनुहोस् / Create Account</a>
-                    <a href="#" id="link-forgot-pass">पासवर्ड बिर्सनुभयो? / Forgot Password</a>
-                </div>
-            </form>
-
-            <!-- Register Form (Hidden initially) -->
-            <form id="form-register" class="auth-form hidden">
-                <div class="input-group">
-                    <label><i class="fas fa-user"></i> प्रयोगकर्ताको नाम / Username</label>
-                    <input type="text" id="reg-username" required placeholder="LokRajAwasthi">
-                </div>
-                <div class="input-group">
-                    <label><i class="fas fa-envelope"></i> इमेल / Email</label>
-                    <input type="email" id="reg-email" required placeholder="example@gmail.com">
-                </div>
-                <div class="input-group">
-                    <label><i class="fas fa-lock"></i> पासवर्ड / Password</label>
-                    <input type="password" id="reg-password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-gradient form-btn">दर्ता गर्नुहोस् / Register</button>
-                <div class="auth-links">
-                    <a href="#" id="link-goto-login">भइसकेको खाता लगइन गर्नुहोस् / Login here</a>
-                </div>
-            </form>
+            <div class="start-btn-container">
+                <!-- यही ID र Class मा समस्या भएकोले मोबाइलमा नचलेको हो, यसलाई मिलाइएको छ -->
+                <button id="dismiss-welcome-btn" class="gradient-btn mahadev-btn">
+                    अगाडि बढ्नुहोस् / Continue <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- MAIN PLATFORM STRUCTURE -->
-    <div id="main-platform" class="hidden">
+    <!-- ========================================== -->
+    <!-- 2. MAIN APP INTERFACE LAYER                -->
+    <!-- ========================================== -->
+    <div id="main-app-interface">
        
-        <!-- HEADER -->
-        <header class="main-header glass-card">
-            <div class="header-left">
-                <div class="logo-area">
-                    <i class="fas fa-om logo-icon"></i>
-                    <span class="logo-text">Awasthi <span class="accent-text">Quiz</span></span>
+        <!-- HEADER / NAVIGATION BAR -->
+        <header class="glass-panel premium-header">
+            <div class="header-container">
+                <div class="logo-block">
+                    <span class="logo-text" data-view="home" style="cursor:pointer;">Awasthi Quiz</span>
                 </div>
-            </div>
-            <nav class="nav-menu" id="nav-menu">
-                <a href="#" class="nav-item active" data-target="home-section"><i class="fas fa-home"></i> गृह / Home</a>
-                <a href="#" class="nav-item" data-target="classes-section"><i class="fas fa-graduation-cap"></i> कक्षाहरू / Classes</a>
-                <a href="#" class="nav-item" data-target="gk-loksewa-section"><i class="fas fa-book-open"></i> GK & Lok Sewa</a>
-                <a href="#" class="nav-item" data-target="multiplayer-section"><i class="fas fa-users"></i> साथीहरूसँग / Multiplayer</a>
-                <a href="#" class="nav-item" data-target="leaderboard-section"><i class="fas fa-trophy"></i> Leaderboard</a>
-                <a href="#" class="nav-item" data-target="admin-section" id="nav-admin-link"><i class="fas fa-user-shield"></i> Admin</a>
-            </nav>
-            <div class="header-right">
-                <button id="theme-toggle" class="icon-btn" title="Toggle Theme"><i class="fas fa-sun"></i></button>
-                <button id="sound-toggle" class="icon-btn" title="Toggle Sound"><i class="fas fa-volume-up"></i></button>
-                <div class="profile-summary" id="trigger-profile-modal">
-                    <img src="https://dicebear.com" alt="Avatar" id="header-avatar">
-                    <span class="user-level-badge">LV 12</span>
+                <nav class="main-navigation">
+                    <ul>
+                        <li><a class="nav-link active" data-view="home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a class="nav-link" data-view="classes"><i class="fas fa-graduation-cap"></i> Classes</a></li>
+                        <li><a class="nav-link" data-view="gk"><i class="fas fa-globe"></i> GK</a></li>
+                        <li><a class="nav-link" data-view="loksewa"><i class="fas fa-gavel"></i> Lok Sewa</a></li>
+                        <li><a class="nav-link" data-view="leaderboard"><i class="fas fa-trophy"></i> Leaderboard</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="action-icon-btn" id="audio-toggle-btn" title="Sound Mute/Unmute">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button class="action-icon-btn" id="theme-toggle-btn" title="Light/Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-profile-trigger" data-view="dashboard">
+                        <img class="nav-avatar" src="https://unsplash.com" alt="Avatar">
+                        <span class="nav-username" id="header-user-display-name">Sign In</span>
+                    </div>
                 </div>
             </div>
         </header>
 
-        <!-- MAIN LAYOUT WRAPPER -->
-        <main class="content-wrapper">
-           
-            <!-- SECTION: HOME -->
-            <section id="home-section" class="app-section">
-                <!-- Hero Section -->
-                <div class="hero-banner glass-card">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <h2 class="hero-mahadev-title">हर हर महादेव 🔱</h2>
-                        <h1>Awasthi Educational Quiz</h1>
-                        <p class="hero-tagline">Created & Owned by Lok Raj Awasthi. उत्कृष्ट र गुणस्तरीय सिकाइको डिजिटल गन्तव्य।</p>
-                        <div class="search-bar-container">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" id="quiz-search-input" placeholder="कुनै पनि विषय वा हाजिरीजवाफ खोज्नुहोस्...">
-                            <button class="btn-gradient">खोज्नुहोस्</button>
+        <!-- MAIN MAIN VIEWS CONTAINER -->
+        <main class="main-content-wrapper">
+
+            <!-- VIEW: HOMEPAGE -->
+            <section id="home-view" class="app-view active-view">
+                <div class="hero-showcase">
+                    <div class="hero-left">
+                        <div class="hero-tagline"><span>हर हर महादेव 🔱</span></div>
+                        <h1>Welcome to Awasthi Quiz</h1>
+                        <div class="hero-owner-badge">Created & Owned by Lok Raj Awasthi</div>
+                        <p class="hero-desc">यो एक modern, premium, colorful र रमाइलो शैक्षिक क्विज प्लेटफर्म हो। आफ्नो कक्षा, सामान्य ज्ञान र लोक सेवा तयारीको स्तर जाँच्नुहोस्।</p>
+                        <div class="hero-action-row">
+                            <button class="gradient-btn" onclick="switchView('classes')">Start Learning <i class="fas fa-play"></i></button>
+                            <div class="hero-search-box">
+                                <input type="text" placeholder="Search quizzes or topics...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Interactive Stats/Quick Start Grid -->
-                <div class="dashboard-grid">
-                    <!-- Learning Stats Card -->
-                    <div class="glass-card stat-card color-gradient-purple">
-                        <h3><i class="fas fa-chart-line"></i> तपाईंको प्रगति / Learning Stats</h3>
-                        <div class="stats-mini-flex">
-                            <div class="stat-box"><h5>XP</h5><p id="stat-xp">1,250</p></div>
-                            <div class="stat-box"><h5>Points</h5><p id="stat-points">450</p></div>
-                            <div class="stat-box"><h5>Streak</h5><p id="stat-streak">🔥 5 Days</p></div>
-                        </div>
-                        <div class="progress-container">
-                            <label>Level 12 Progress (80%)</label>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
-                        </div>
+               
+                <h2 class="section-headline"><i class="fas fa-star" style="color:#f9d423;"></i> मुख्य श्रेणीहरू (Categories)</h2>
+                <div class="category-matrix-grid">
+                    <div class="glass-panel matrix-item" onclick="routeToCategory('classes', 'class10')">
+                        <span class="matrix-icon">📚</span>
+                        <h4>Class 10</h4>
                     </div>
-
-                    <!-- Quick Start / Daily Challenge -->
-                    <div class="glass-card action-card color-gradient-blue">
-                        <h3><i class="fas fa-bolt"></i> Daily Challenge</h3>
-                        <p>आजको विशेष चुनौतीमा सहभागी हुनुहोस् र दोब्बर XP प्राप्त गर्नुहोस्।</p>
-                        <button class="btn-light-glow trigger-quick-quiz" data-category="daily-challenge">Start Challenge</button>
+                    <div class="glass-panel matrix-item" onclick="routeToCategory('classes', 'class11')">
+                        <span class="matrix-icon">🔬</span>
+                        <h4>Class 11</h4>
+                    </div>
+                    <div class="glass-panel matrix-item" onclick="routeToCategory('gk')">
+                        <span class="matrix-icon">🌏</span>
+                        <h4>सामान्य ज्ञान (GK)</h4>
+                    </div>
+                    <div class="glass-panel matrix-item" onclick="routeToCategory('loksewa')">
+                        <span class="matrix-icon">⚖️</span>
+                        <h4>Lok Sewa Preparation</h4>
                     </div>
                 </div>
+            </section>
 
-                <!-- Featured Categories Grid -->
-                <h3 class="section-heading"><i class="fas fa-star"></i> प्रमुख विधा तथा शाखाहरू / Top Categories</h3>
-                <div class="categories-grid">
-                    <div class="category-item-card glass-card dynamic-quiz-trigger" data-type="class10">
-                        <i class="fas fa-school icon-class"></i>
-                        <h4>कक्षा १० / Class 10</h4>
-                        <p>Science, Computer, Opt. Math</p>
+            <!-- VIEW: AUTHENTICATION (AUTHENTIC SHIELD) -->
+            <section id="auth-view" class="app-view">
+                <div class="glass-panel auth-container">
+                    <div class="auth-header">
+                        <h2>Register / Login</h2>
+                        <p>Awasthi Quiz मा स्वागत छ। अगाडि बढ्न लगइन गर्नुहोस्।</p>
                     </div>
-                    <div class="category-item-card glass-card dynamic-quiz-trigger" data-type="class11">
-                        <i class="fas fa-university icon-class"></i>
-                        <h4>कक्षा ११ / Class 11</h4>
-                        <p>Physics, Chemistry, Maths, Computer</p>
+                    <form id="auth-form-element">
+                        <div class="auth-form-group">
+                            <label>Email Address</label>
+                            <div class="auth-input-wrapper">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="auth-email-input" placeholder="example@email.com" required>
+                            </div>
+                        </div>
+                        <div class="auth-form-group">
+                            <label>Password</label>
+                            <div class="auth-input-wrapper">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="auth-password-input" placeholder="••••••••" required>
+                            </div>
+                        </div>
+                        <div class="auth-meta-links">
+                            <span class="auth-link">Forgot Password?</span>
+                            <span class="auth-link">Create Account</span>
+                        </div>
+                        <button type="submit" class="gradient-btn auth-submit-btn">Login / Sign In <i class="fas fa-sign-in-alt"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- VIEW: ACADEMIC BROWSER (CLASSES) -->
+            <section id="classes-view" class="app-view">
+                <div class="browser-layout">
+                    <aside class="glass-panel sidebar-filters">
+                        <div class="filter-group">
+                            <h4>तह / Classes</h4>
+                            <div class="filter-list">
+                                <button class="filter-btn active" data-class="class10"><i class="fas fa-school"></i> Class 10</button>
+                                <button class="filter-btn" data-class="class11"><i class="fas fa-university"></i> Class 11</button>
+                            </div>
+                        </div>
+                    </aside>
+                    <div id="academic-cards-grid" class="browser-cards-display">
+                        <!-- Cards dynamically built via script.js -->
                     </div>
-                    <div class="category-item-card glass-card dynamic-quiz-trigger" data-type="gk">
-                        <i class="fas fa-globe icon-gk"></i>
-                        <h4>सामान्य ज्ञान / GK</h4>
-                        <p>इतिहास, भूगोल, संविधान र समसामयिक</p>
-                    </div>
-                    <div class="category-item-card glass-card dynamic-quiz-trigger" data-type="loksewa">
-                        <i class="fas fa-landmark icon-ls"></i>
+                </div>
+            </section>
+
+            <!-- VIEW: GK BROWSER -->
+            <section id="gk-view" class="app-view">
+                <h2 class="section-headline">सामान्य ज्ञान (General Knowledge)</h2>
+                <div id="gk-cards-grid" class="browser-cards-display">
+                    <!-- Cards built dynamic -->
+                </div>
+            </section>
+
+            <!-- VIEW: LOK SEWA BROWSER -->
+            <section id="loksewa-view" class="app-view">
+                <h2 class="section-headline">Lok Sewa Examination Preparation</h2>
+                <div id="loksewa-cards-grid" class="browser-cards-display">
+                    <!-- Cards built dynamic -->
+                </div>
+            </section>
+
+            <!-- VIEW: IMAPERSIVE QUIZ ENGINE -->
+            <section id="quiz-engine-view" class="app-view">
+                <div class="quiz-engine-container">
+                    <div class="glass-panel quiz-top-bar">
+                        <div class="quiz-info-pill"><i class="fas fa-bookmark text-primary"></i> <span id="quiz-category-title-node">Category</span></div>
+                        <div class="quiz-info-pill"><i class="fas fa-layer-group"></i> Q: <span id="current-q-index-node">1</span>/<span id="total-q-count-node">10</span></div>
+                        <div class="timer-display-panel" id="quiz-timer-panel">
 
  
