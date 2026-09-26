@@ -1,8 +1,3 @@
-// =========================================================================
-// ANTI-CRASH SINGLE-FILE BILINGUAL ENGINE WITH HIGHEST ISOLATION
-// Developed for: Lok Raj Awasthi (Zero Bug Edition)
-// =========================================================================
-
 const quizDatabase = {
     class10: {
         title: "कक्षा १० / Class 10 (Neema/ReadMore/Unique)",
@@ -13,9 +8,6 @@ const quizDatabase = {
                     c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
                         { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
                         { qNp: "समूह A र B मा साझा परेका सदस्यहरूको समूहलाई के भनिन्छ?", qEn: "What is the set of common elements between set A and B called?", options: ["Union", "Intersection", "Difference", "Subset"], correct: 1 }
-                    ]},
-                    c2: { title: "अध्याय २: चक्रीय ब्याज / Chapter 2: Compound Interest", questions: [
-                        { qNp: "वार्षिक चक्रीय मिश्रधन निकाल्ने सही सूत्र कुन हो?", qEn: "What is the correct formula for annual Compound Amount?", options: ["P(1+R/100)^T", "P(1-R/100)^T", "PTR/100", "P[(1+R/100)^T - 1]"], correct: 0 }
                     ]}
                 }
             },
@@ -23,19 +15,7 @@ const quizDatabase = {
                 title: "विज्ञान तथा प्रविधि / Science & Tech (Neema)",
                 chapters: {
                     c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
-                        { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 },
-                        { qNp: "दुई पिण्डबीचको दुरीलाई दोब्बर बनाउँदा गुरुत्वाकर्षण बलमा के असर पर्छ?", qEn: "What happens to the gravitational force when the distance between two bodies is doubled?", options: ["४ गुणा बढ्छ", "२ गुणा घट्छ", "४ गुणा घट्छ", "२ गुणा बढ्छ"], correct: 2 }
-                    ]},
-                    c2: { title: "अध्याय २: चाप / Chapter 2: Pressure", questions: [
-                        { qNp: "तरल पदार्थको चाप पत्ता लगाउने सही सूत्र कुन हो?", qEn: "What is the correct formula to calculate liquid pressure?", options: ["P = hdg", "P = F/A", "P = m/v", "P = W/t"], correct: 0 }
-                    ]}
-                }
-            },
-            computer: {
-                title: "कम्प्युटर विज्ञान / Computer Science (Unique)",
-                chapters: {
-                    c1: { title: "अध्याय १: डेटाबेस / Chapter 1: Database (MS-Access)", questions: [
-                        { qNp: "MS-Access मा प्रत्येक रेकर्डलाई अनौठो रूपमा चिन्न कुन साँचो प्रयोग गरिन्छ?", qEn: "Which key is used to uniquely identify each record in MS-Access?", options: ["Foreign Key", "Primary Key", "Secondary Key", "Composite Key"], correct: 1 }
+                        { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 }
                     ]}
                 }
             }
@@ -48,19 +28,7 @@ const quizDatabase = {
                 title: "भौतिक विज्ञान / Physics (Pioneer)",
                 chapters: {
                     c1: { title: "अध्याय १: मेकानिक्स (यान्त्रिकी) / Chapter 1: Mechanics", questions: [
-                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "Physics (Mechanics): At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 },
-                        { qNp: "कार्य (Work Done) को विमीय सूत्र (Dimensional Formula) कुन हो?", qEn: "Physics (Mechanics): What is the dimensional formula for Work Done?", options: ["[MLT^-2]", "[ML^2T^-2]", "[ML^-1T^-2]", "[M^2LT^-2]"], correct: 1 }
-                    ]},
-                    c2: { title: "अध्याय २: ताप र थर्मोडायनामिक्स / Chapter 2: Heat & Thermodynamics", questions: [
-                        { qNp: "कुन तापक्रममा सेल्सियस र फरेनहाइट दुवै स्केलले एउटै मान देखाउँछन्?", qEn: "Physics (Heat): At what temperature do both Celsius and Fahrenheit scales read the same value?", options: ["0°", "100°", "-40°", "40°"], correct: 2 }
-                    ]}
-                }
-            },
-            chemistry: {
-                title: "रसायन विज्ञान / Chemistry (Pioneer)",
-                chapters: {
-                    c1: { title: "अध्याय १: परमाणु संरचना / Chapter 1: Atomic Structure", questions: [
-                        { qNp: "कुन सिद्धान्तले भन्छ कि एउटा परमाणुमा दुईवटा इलेक्ट्रोनको चारवटै क्वान्टम संख्या समान हुन सक्दैन?", qEn: "Chemistry: Which principle states that no two electrons in an atom can have the same set of four quantum numbers?", options: ["Aufbau Principle", "Hund's Rule", "Pauli's Exclusion Principle", "Heisenberg Principle"], correct: 2 }
+                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "Physics (Mechanics): At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
                     ]}
                 }
             },
@@ -69,14 +37,6 @@ const quizDatabase = {
                 chapters: {
                     c1: { title: "अध्याय १: बीजगणित / Chapter 1: Algebra", questions: [
                         { qNp: "यदि w एक काल्पनिक एकाइको घनमूल हो भने, 1 + w + w^2 को मान कति हुन्छ?", qEn: "Mathematics: If w is an imaginary cube root of unity, then what is 1 + w + w^2?", options: ["1", "0", "-1", "w"], correct: 1 }
-                    ]}
-                }
-            },
-            computer: {
-                title: "कम्प्युटर विज्ञान / Computer Science (Buddha)",
-                chapters: {
-                    c1: { title: "अध्याय १: कम्प्युटर आर्किटेक्चर / Chapter 1: Computer Architecture", questions: [
-                        { qNp: "कुन लजिक गेटलाई युनिभर्सल गेट (Universal Gate) भनिन्छ?", qEn: "Computer: Which logic gate is known as the universal gate?", options: ["AND gate", "OR gate", "NAND gate", "XOR gate"], correct: 2 }
                     ]}
                 }
             }
@@ -150,7 +110,8 @@ function navigateToSubjects(catKey) {
         let btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = catData.subjects[subKey].title;
-        btn.onclick = function() { navigateToChapters(subKey); };
+        // फिक्स्ड: स्ट्रिङ पास गरेर सुरक्षित क्लिक इभेन्ट बाइन्डिङ
+        btn.setAttribute("onclick", `navigateToChapters('${subKey}')`);
         container.appendChild(btn);
     });
    
@@ -169,7 +130,7 @@ function navigateToChapters(subKey) {
         let btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = subData.chapters[chKey].title;
-        btn.onclick = function() { launchQuizEngine(chKey); };
+        btn.setAttribute("onclick", `launchQuizEngine('${chKey}')`);
         container.appendChild(btn);
     });
 
@@ -188,5 +149,112 @@ function launchQuizEngine(chKey) {
     activePool.sort(() => Math.random() - 0.5);
     gameQuestions = activePool.slice(0, 10);
 
+    currentIndex = 0;
+    score = 0;
+   
+    switchScreen("game-screen");
+    loadQuestion();
+}
+
+function loadQuestion() {
+    killClock();
+    document.getElementById("forward-btn").classList.add("hidden");
+
+    let data = gameQuestions[currentIndex];
+    document.getElementById("q-progress").innerText = `प्रश्न / Question: ${currentIndex + 1}/${gameQuestions.length}`;
+   
+    document.getElementById("display-question-text").innerHTML = `
+        <div style="color: #d35400; font-weight: bold; margin-bottom: 8px;">🇳🇵 ${data.qNp}</div>
+        <div style="color: #2c3e50; font-style: italic;">🇬🇧 ${data.qEn}</div>
+    `;
+
+    let targetBox = document.getElementById("display-options-box");
+    targetBox.innerHTML = "";
+
+    data.options.forEach((opt, index) => {
+        let btn = document.createElement("button");
+        btn.className = "option-item";
+        btn.innerText = opt;
+        btn.setAttribute("onclick", `evaluateChoice(this, ${index}, ${data.correct})`);
+        targetBox.appendChild(btn);
+    });
+
+    triggerClock();
+}
+
+function triggerClock() {
+    let clockEl = document.getElementById("countdown-clock");
+    let audioTrack = document.getElementById("beep-alarm");
+    countdown = 30;
+    clockEl.innerText = countdown;
+
+    timerRef = setInterval(() => {
+        countdown--;
+        clockEl.innerText = countdown;
+
+        if (countdown <= 7) {
+            clockEl.classList.add("critical");
+            try { audioTrack.play(); } catch (err) { }
+        }
+
+        if (countdown <= 0) {
+            clearInterval(timerRef);
+            lockOptionsOnTimeout();
+        }
+    }, 1000);
+}
+
+function evaluateChoice(element, chosenIdx, actualIdx) {
+    clearInterval(timerRef);
+    document.getElementById("beep-alarm").pause();
+
+    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
+    for (let button of list) { button.disabled = true; }
+
+    if (chosenIdx === actualIdx) {
+        element.classList.add("correct-choice");
+        score++;
+    } else {
+        element.classList.add("wrong-choice");
+        list[actualIdx].classList.add("correct-choice");
+    }
+    document.getElementById("forward-btn").classList.remove("hidden");
+}
+
+function lockOptionsOnTimeout() {
+    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
+    let data = gameQuestions[currentIndex];
+    for (let button of list) { button.disabled = true; }
+    list[data.correct].classList.add("correct-choice");
+    document.getElementById("forward-btn").classList.remove("hidden");
+}
+
+function moveToNext() {
+    currentIndex++;
+    if (currentIndex < gameQuestions.length) {
+        loadQuestion();
+    } else {
+        displayFinalResults();
+    }
+}
+
+function killClock() {
+    clearInterval(timerRef);
+    let clockEl = document.getElementById("countdown-clock");
+    clockEl.classList.remove("critical");
+    let audioTrack = document.getElementById("beep-alarm");
+    audioTrack.pause();
+    audioTrack.currentTime = 0;
+}
+
+function displayFinalResults() {
+    switchScreen("score-screen");
+    document.getElementById("total-right").innerText = score;
+    document.getElementById("total-wrong").innerText = gameQuestions.length - score;
+}
+
+function backToCategories() { switchScreen("category-screen"); }
+function backToSubjects() { navigateToSubjects(activeCategory); }
+function resetToHome() { switchScreen("category-screen"); }
 
  
