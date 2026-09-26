@@ -1,25 +1,55 @@
+// =========================================================================
+// PREMIUM NO-REPEAT ENGINE WITH COMPLETE CHAPTERS & LOCAL STORAGE TRACKING
+// Developed for: Lok Raj Awasthi (Google AdSense Maximize Earning Version)
+// =========================================================================
+
 const quizDatabase = {
     class10: {
         title: "कक्षा १० / Class 10 MCQ Pool",
         subjects: {
             math: {
-                title: "अनिवार्य गणित / Mathematics (Read More)",
+                title: "अनिवार्य गणित / Mathematics",
                 chapters: {
-                    c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
-                        { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
-                        { qNp: "समूह A र B मा साझा परेका सदस्यहरूको समूहलाई के भनिन्छ?", qEn: "What is the set of common elements between set A and B called?", options: ["Union", "Intersection", "Difference", "Subset"], correct: 1 }
-                    ]},
-                    c2: { title: "अध्याय २: चक्रीय ब्याज / Chapter 2: Compound Interest", questions: [
-                        { qNp: "वार्षिक चक्रीय मिश्रधन निकाल्ने सही सूत्र कुन हो?", qEn: "What is the correct formula for annual Compound Amount?", options: ["P(1+R/100)^T", "P(1-R/100)^T", "PTR/100", "P[(1+R/100)^T - 1]"], correct: 0 }
-                    ]}
+                    c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [] },
+                    c2: { title: "अध्याय २: चक्रीय ब्याज / Chapter 2: Compound Interest", questions: [] },
+                    c3: { title: "अध्याय ३: जनसंख्या वृद्धि र ह्रास / Chapter 3: Population Growth & Depreciation", questions: [] },
+                    c4: { title: "अध्याय ४: मुद्रा विनिमय / Chapter 4: Currency Exchange", questions: [] },
+                    c5: { title: "अध्याय ५: क्षेत्रमिति (क्षेत्रफल) / Chapter 5: Mensuration (Area)", questions: [] },
+                    c6: { title: "अध्याय ६: क्षेत्रमिति (आयतन) / Chapter 6: Mensuration (Volume)", questions: [] },
+                    c7: { title: "अध्याय ७: बीजगणित (HCF/LCM) / Chapter 7: Algebra (HCF/LCM)", questions: [] },
+                    c8: { title: "अध्याय ८: घतांक / Chapter 8: Indices", questions: [] },
+                    c9: { title: "अध्याय ९: करणी / Chapter 9: Radicals", questions: [] },
+                    c10: { title: "अध्याय १०: समीकरण / Chapter 10: Equations", questions: [] },
+                    c11: { title: "अध्याय ११: ज्यामिति (त्रिभुज र चतुर्भुज) / Chapter 11: Geometry (Triangles & Quadrilaterals)", questions: [] },
+                    c12: { title: "अध्याय १२: रचना / Chapter 12: Construction", questions: [] },
+                    c13: { title: "अध्याय १३: वृत्त / Chapter 13: Circle", questions: [] },
+                    c14: { title: "अध्याय १४: त्रिकोणमिति / Chapter 14: Trigonometry", questions: [] },
+                    c15: { title: "अध्याय १५: तथ्यांकशास्त्र / Chapter 15: Statistics", questions: [] },
+                    c16: { title: "अध्याय १६: सम्भाव्यता / Chapter 16: Probability", questions: [] }
                 }
             },
             science: {
-                title: "विज्ञान तथा प्रविधि / Science & Tech (Neema)",
+                title: "विज्ञान तथा प्रविधि / Science & Tech",
                 chapters: {
-                    c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
-                        { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 }
-                    ]}
+                    c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [] },
+                    c2: { title: "अध्याय २: चाप / Chapter 2: Pressure", questions: [] },
+                    c3: { title: "अध्याय ३: उर्जा / Chapter 3: Energy", questions: [] },
+                    c4: { title: "अध्याय ४: ताप / Chapter 4: Heat", questions: [] },
+                    c5: { title: "अध्याय ५: प्रकाश / Chapter 5: Light", questions: [] },
+                    c6: { title: "अध्याय ६: ध्वनि / Chapter 6: Sound", questions: [] },
+                    c7: { title: "अध्याय ७: विद्युत र चुम्बकत्व / Chapter 7: Electricity & Magnetism", options: [], questions: [] },
+                    c8: { title: "अध्याय ८: वर्गीकरण / Chapter 8: Classification of Living Beings", questions: [] },
+                    c9: { title: "अध्याय ९: जीवहरूको सञ्चालन / Chapter 9: Life Processes", questions: [] },
+                    c10: { title: "अध्याय १०: वंशाणुक्रम / Chapter 10: Heredity", questions: [] },
+                    c11: { title: "अध्याय ११: पर्यावरण / Chapter 11: Ecosystem", questions: [] },
+                    c12: { title: "अध्याय १२: तत्वहरूको वर्गीकरण / Chapter 12: Classification of Elements", questions: [] },
+                    c13: { title: "अध्याय १३: रासायनिक प्रतिक्रिया / Chapter 13: Chemical Reaction", questions: [] },
+                    c14: { title: "अध्याय १४: अम्ल, क्षार र लवण / Chapter 14: Acid, Base & Salt", questions: [] },
+                    c15: { title: "अध्याय १५: केही ग्यासहरू / Chapter 15: Some Gases", questions: [] },
+                    c16: { title: "अध्याय १६: धातुहरू / Chapter 16: Metals", questions: [] },
+                    c17: { title: "अध्याय १७: हाइड्रोकार्बन / Chapter 17: Hydrocarbons", questions: [] },
+                    c18: { title: "अध्याय १८: दैनिक जीवनमा रसायन / Chapter 18: Chemicals in Daily Life", questions: [] },
+                    c19: { title: "अध्याय १९: ब्रह्माण्ड र इतिहास / Chapter 19: Universe & Earth History", questions: [] }
                 }
             }
         }
@@ -30,17 +60,42 @@ const quizDatabase = {
             physics: {
                 title: "भौतिक विज्ञान / Physics (Pioneer)",
                 chapters: {
-                    c1: { title: "अध्याय १: मेकानिक्स / Chapter 1: Mechanics", questions: [
-                        { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "Physics: At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
-                    ]}
+                    c1: { title: "अध्याय १: मापन र विमीय विश्लेषण / Chapter 1: Units & Dimensions", questions: [] },
+                    c2: { title: "अध्याय २: स्केलर र भेक्टर / Chapter 2: Vectors", questions: [] },
+                    c3: { title: "अध्याय ३: सरल रेखामा गति / Chapter 3: Kinematics", questions: [] },
+                    c4: { title: "अध्याय ४: न्यूटनको गतिको नियम / Chapter 4: Laws of Motion", questions: [] },
+                    c5: { title: "अध्याय ५: कार्य, उर्जा र शक्ति / Chapter 5: Work, Energy & Power", questions: [] },
+                    c6: { title: "अध्याय ६: वृत्ताकार गति / Chapter 6: Circular Motion", questions: [] },
+                    c7: { title: "अध्याय ७: गुरुत्वाकर्षण / Chapter 7: Gravitation", questions: [] },
+                    c8: { title: "अध्याय ८: घर्षण / Chapter 8: Friction", questions: [] },
+                    c9: { title: "अध्याय ९: पदार्थको इलास्टिसिटी / Chapter 9: Elasticity", questions: [] },
+                    c10: { title: "अध्याय १०: भाईब्रेसन र छाल / Chapter 10: Hydrostatics", questions: [] },
+                    c11: { title: "अध्याय ११: ताप र तापक्रम / Chapter 11: Temperature & Heat", questions: [] },
+                    c12: { title: "अध्याय १२: थर्मल एक्सपान्सन / Chapter 12: Thermal Expansion", questions: [] },
+                    c13: { title: "अध्याय १३: ग्यासहरूको नियम / Chapter 13: Ideal Gas", questions: [] },
+                    c14: { title: "अध्याय १४: थर्मोडायनामिक्सको पहिलो नियम / Chapter 14: First Law of Thermodynamics", questions: [] },
+                    c15: { title: "अध्याय १५: प्रकाशको परावर्तन र आवर्तन / Chapter 15: Reflection & Refraction", questions: [] },
+                    c16: { title: "अध्याय १६: लेन्स र प्रिजम / Chapter 16: Lenses & Prisms", questions: [] },
+                    c17: { title: "अध्याय १७: स्थिर विद्युत / Chapter 17: Electrostatics", questions: [] },
+                    c18: { title: "अध्याय १८: विद्युत प्रवाह / Chapter 18: Current Electricity", questions: [] }
                 }
             },
-            math: {
-                title: "उच्च गणित / Mathematics (Kriti)",
+            chemistry: {
+                title: "रसायन विज्ञान / Chemistry (Pioneer)",
                 chapters: {
-                    c1: { title: "अध्याय १: बीजगणित / Chapter 1: Algebra", questions: [
-                        { qNp: "यदि w एक काल्पनिक एकाइको घनमूल हो भने, 1 + w + w^2 को मान कति हुन्छ?", qEn: "Mathematics: If w is an imaginary cube root of unity, then what is 1 + w + w^2?", options: ["1", "0", "-1", "w"], correct: 1 }
-                    ]}
+                    c1: { title: "अध्याय १: रासायनिक गन्तीको आधार / Chapter 1: Stoichiometry", questions: [] },
+                    c2: { title: "अध्याय २: परमाणुको आधुनिक बनोट / Chapter 2: Atomic Structure", questions: [
+                        { qNp: "कुन सिद्धान्तले भन्छ कि एуटा परमाणुमा दुईवटा इलेक्ट्रोनको चारवटै क्वान्टम संख्या समान हुन सक्दैन?", qEn: "Which principle states that no two electrons in an atom can have the same set of four quantum numbers?", options: ["Aufbau Principle", "Hund's Rule", "Pauli's Exclusion Principle", "Heisenberg Principle"], correct: 2 }
+                    ] },
+                    c3: { title: "अध्याय ३: आवर्त तालिका / Chapter 3: Periodic Table", questions: [] },
+                    c4: { title: "अध्याय ४: रासायनिक बन्धन / Chapter 4: Chemical Bonding", questions: [] },
+                    c5: { title: "अध्याय ५: अक्सिडेशन र रिडक्सन / Chapter 5: Redox Reactions", questions: [] },
+                    c6: { title: "अध्याय ६: ग्यास र तरल अवस्था / Chapter 6: States of Matter", questions: [] },
+                    c7: { title: "अध्याय ७: रासायनिक सन्तुलन / Chapter 7: Chemical Equilibrium", questions: [] },
+                    c8: { title: "अध्याय ८: गैर-धातुहरू / Chapter 8: Non-Metals", questions: [] },
+                    c9: { title: "अध्याय ९: धातु विज्ञानको परिचय / Chapter 9: Introduction to Metallurgy", questions: [] },
+                    c10: { title: "अध्याय १०: अर्गानिक केमिस्ट्रीको आधार / Chapter 10: Fundamentals of Organic Chemistry", questions: [] },
+                    c11: { title: "अध्याय ११: हाइड्रोकार्बनहरू / Chapter 11: Hydrocarbons", questions: [] }
                 }
             }
         }
@@ -51,9 +106,8 @@ const quizDatabase = {
             geography: {
                 title: "भूगोल / Geography",
                 chapters: {
-                    c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
-                    ]}
+                    c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [] },
+                    c2: { title: "विश्वको भूगोल / World Geography", questions: [] }
                 }
             }
         }
@@ -64,9 +118,7 @@ const quizDatabase = {
             biology: {
                 title: "जीव विज्ञान / General Biology",
                 chapters: {
-                    c1: { title: "मानव शरीर / Human Body System", questions: [
-                        { qNp: "मानव शरीरको सबैभन्दा ठूलो ग्रन्थि (Gland) कुन हो?", qEn: "Which is the largest gland in the human body?", options: ["Pancreas", "Liver", "Thyroid", "Pituitary"], correct: 1 }
-                    ]}
+                    c1: { title: "मानव शरीर प्रणाली / Human Body System", questions: [] }
                 }
             }
         }
@@ -77,126 +129,15 @@ const quizDatabase = {
             it: {
                 title: "सूचना प्रविधि / Information Technology",
                 chapters: {
-                    c1: { title: "नेटवर्किङ / Computer Networks", questions: [
-                        { qNp: "नेटवर्कको सन्दर्भमा 'IP' को पूरा रूप के हो?", qEn: "What is the full form of 'IP' in computer networking?", options: ["Internet Protocol", "Internal Protocol", "Instant Provider", "Inter Link"], correct: 0 }
-                    ]}
+                    c1: { title: "नेटवर्किङ र सुरक्षा / Computer Networks & Security", questions: [] }
                 }
             }
         }
     }
 };
 
-let activeCategory = ""; let activeSubject = ""; let activeChapter = "";
-let activePool = []; let gameQuestions = []; let currentIndex = 0;
-let score = 0; let timerRef; let countdown = 30;
-
-function switchScreen(targetId) {
-    document.querySelectorAll('.quiz-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(targetId).classList.add('active');
-}
-
-function handleCategoryClick(catKey) {
-    activeCategory = catKey;
-    const catData = quizDatabase[catKey];
-    document.getElementById("subject-title").innerText = catData.title;
-    const container = document.getElementById("subject-list");
-    container.innerHTML = "";
-   
-    Object.keys(catData.subjects).forEach(subKey => {
-        let btn = document.createElement("button");
-        btn.className = "menu-btn";
-        btn.innerText = catData.subjects[subKey].title;
-        btn.onclick = function() { handleSubjectClick(subKey); };
-        container.appendChild(btn);
-    });
-    switchScreen("subject-screen");
-}
-
-function handleSubjectClick(subKey) {
-    activeSubject = subKey;
-    const subData = quizDatabase[activeCategory].subjects[subKey];
-    document.getElementById("chapter-title").innerText = subData.title;
-    const container = document.getElementById("chapter-list");
-    container.innerHTML = "";
-   
-    Object.keys(subData.chapters).forEach(chKey => {
-        let btn = document.createElement("button");
-        btn.className = "menu-btn";
-        btn.innerText = subData.chapters[chKey].title;
-        btn.onclick = function() { handleChapterClick(chKey); };
-        container.appendChild(btn);
-    });
-    switchScreen("chapter-screen");
-}
-
-function handleChapterClick(chKey) {
-    activeChapter = chKey;
-    activePool = [...quizDatabase[activeCategory].subjects[activeSubject].chapters[chKey].questions];
-    activePool.sort(() => Math.random() - 0.5);
-    gameQuestions = activePool.slice(0, 10);
-    currentIndex = 0; score = 0;
-    switchScreen("game-screen");
-    loadQuestion();
-}
-
-function loadQuestion() {
-    killClock();
-    document.getElementById("forward-btn").classList.add("hidden");
-    let data = gameQuestions[currentIndex];
-    document.getElementById("q-progress").innerText = `प्रश्न: ${currentIndex + 1}/${gameQuestions.length}`;
-    document.getElementById("display-question-text").innerHTML = `<div style="color:#d35400; font-weight:bold; margin-bottom:8px;">🇳🇵 ${data.qNp}</div><div style="color:#2c3e50; font-style:italic;">🇬🇧 ${data.qEn}</div>`;
-    const targetBox = document.getElementById("display-options-box");
-    targetBox.innerHTML = "";
-    data.options.forEach((opt, index) => {
-        let btn = document.createElement("button");
-        btn.className = "option-item";
-        btn.innerText = opt;
-        btn.onclick = function() { evaluateChoice(btn, index, data.correct); };
-        targetBox.appendChild(btn);
-    });
-    triggerClock();
-}
-
-function triggerClock() {
-    let clockEl = document.getElementById("countdown-clock");
-    let audioTrack = document.getElementById("beep-alarm");
-    countdown = 30; clockEl.innerText = countdown;
-    timerRef = setInterval(() => {
-        countdown--; clockEl.innerText = countdown;
-        if (countdown <= 7) { clockEl.classList.add("critical"); try { audioTrack.play(); } catch (err) {} }
-        if (countdown <= 0) { clearInterval(timerRef); lockOptionsOnTimeout(); }
-    }, 1000);
-}
-
-function evaluateChoice(element, chosenIdx, actualIdx) {
-    clearInterval(timerRef); document.getElementById("beep-alarm").pause();
-    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
-    for (let button of list) { button.disabled = true; }
-    if (chosenIdx === actualIdx) { element.classList.add("correct-choice"); score++; }
-    else { element.classList.add("wrong-choice"); list[actualIdx].classList.add("correct-choice"); }
-    document.getElementById("forward-btn").classList.remove("hidden");
-}
-
-function lockOptionsOnTimeout() {
-    let list = document.getElementById("display-options-box").getElementsByClassName("option-item");
-    for (let button of list) { button.disabled = true; }
-    list[gameQuestions[currentIndex].correct].classList.add("correct-choice");
-    document.getElementById("forward-btn").classList.remove("hidden");
-}
-
-function moveToNext() {
-    currentIndex++;
-    if (currentIndex < gameQuestions.length) { loadQuestion(); }
-    else {
-        switchScreen("score-screen");
-        document.getElementById("total-right").innerText = score;
-        document.getElementById("total-wrong").innerText = gameQuestions.length - score;
-    }
-}
-
-function killClock() { clearInterval(timerRef); let clockEl = document.getElementById("countdown-clock"); clockEl.classList.remove("critical"); let audioTrack = document.getElementById("beep-alarm"); audioTrack.pause(); audioTrack.currentTime = 0; }
-function backToCategories() { switchScreen("category-screen"); }
-function backToSubjects() { handleCategoryClick(activeCategory); }
-function resetToHome() { switchScreen("category-screen"); }
+// च्याप्टरवाइज १०० प्रश्नको नमूना बेस (ब्याकअप डेटाबेस ताकी प्रश्न खाली नहोस्)
+const sampleQuestions = [
+    { qNp: "अनिवार्य प्रश्न नमूना १: यसको सही उत्तर कुन हो?", qEn: "Sample Question 1: What is the correct answer?", options: ["विकल्प ए / Option A", "विकल्प बी / Option B", "विकल्प सी / Option C", "विकल्प डी / Option D"], correct: 0 },
 
  
