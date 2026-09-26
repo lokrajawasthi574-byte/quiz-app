@@ -1,157 +1,396 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔱 हर हर महादेव क्विज प्लेटफर्म 🔱</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #0b0c10; overflow-x: hidden; position: relative; }
-        .mahadev-bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://unsplash.com') no-repeat center center/cover; opacity: 0.22; z-index: -1; }
-        .side-border { position: fixed; top: 0; width: 15px; height: 100%; background: linear-gradient(180deg, #ff4500, #ff8c00, #ffea00, #ff4500); z-index: 99; box-shadow: 0 0 15px rgba(255, 140, 0, 0.8); }
-        .left-border { left: 0; } .right-border { right: 0; }
-        .quiz-main-container { width: 92%; max-width: 680px; background: rgba(255, 255, 255, 0.96); border-radius: 16px; padding: 30px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); border: 3px solid #ff8c00; z-index: 10; text-align: center; }
-        .app-header h1 { color: #e65c00; font-size: 32px; margin-bottom: 20px; }
-        .developer-profile { background: #fff3e0; border-left: 6px solid #e65c00; padding: 15px; border-radius: 6px; text-align: left; margin-bottom: 25px; }
-        .quiz-panel { display: none; } .quiz-panel.active { display: block; }
-        .grid-list { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
-        .menu-btn { background: #ffffff; border: 2px solid #e65c00; padding: 14px 20px; font-size: 16.5px; font-weight: bold; color: #333; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.2s; width: 100%; }
-        .menu-btn:hover { background: #e65c00; color: #fff; transform: translateX(5px); }
-        .back-btn { background: #7f8c8d; color: white; border: none; padding: 10px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .game-status-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; font-size: 19px; font-weight: bold; }
-        .clock-display { background: #27ae60; color: #fff; padding: 6px 18px; border-radius: 30px; min-width: 60px; }
-        .clock-display.critical { background: #d32f2f; animation: pulse 0.8s infinite alternate; }
-        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.08); } }
-        .question-box { margin-bottom: 30px; font-size: 20px; color: #1a1a1a; line-height: 1.6; text-align: left; }
-        .options-vertical-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .option-item { background: #f7f9fa; border: 2px solid #cfd8dc; padding: 14px; font-size: 16.5px; border-radius: 8px; cursor: pointer; text-align: left; font-weight: 500; width: 100%; }
-        .correct-choice { background-color: #2ecc71 !important; color: #ffffff !important; border-color: #27ae60 !important; font-weight: bold; }
-        .wrong-choice { background-color: #e74c3c !important; color: #ffffff !important; border-color: #c0392b !important; font-weight: bold; }
-        .control-btn { background: #e65c00; color: #fff; border: none; padding: 14px 35px; font-size: 17px; font-weight: bold; border-radius: 6px; cursor: pointer; }
-        .hidden { display: none; }
-        .score-board p { font-size: 19px; margin: 12px 0; }
-        .txt-success { color: #27ae60; font-weight: bold; }
-        .txt-danger { color: #c0392b; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quiz Nepal | Learn • Practice • Compete</title>
+
+  <meta
+    name="description"
+    content="Quiz Nepal - Class 10, Class 11, General Knowledge and One vs One Quiz"
+  />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-    <div class="mahadev-bg-overlay"></div>
-    <div class="side-border left-border"></div>
-    <div class="side-border right-border"></div>
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header class="top-header">
 
-    <div class="quiz-main-container">
-        <header class="app-header">
-            <h1>🔱 हर हर महादेव 🔱</h1>
-        </header>
+    <div class="brand-area">
+      <div class="brand-icon">📚</div>
 
-        <!-- स्क्रिन १: गृहपृष्ठ -->
-        <section id="category-screen" class="quiz-panel active">
-            <div class="developer-profile">
-                <h3>👨‍💻 Developer Identity</h3>
-                <p><strong>Name:</strong> Lok Raj Awasthi</p>
-                <p><strong>System:</strong> Master AdSense-Ready Verified Engine</p>
-            </div>
-            <h2>कृपया विधा छनोट गर्नुहोस् / Select Category:</h2>
-            <div class="grid-list">
-                <button class="menu-btn" onclick="navigateToSubjects('class10')">📚 Class 10 MCQ Pool</button>
-                <button class="menu-btn" onclick="navigateToSubjects('class11')">🎓 Class 11 MCQ Pool</button>
-                <button class="menu-btn" onclick="navigateToSubjects('gk')">🌍 सामान्य ज्ञान (Loksewa GK)</button>
-                <button class="menu-btn" onclick="navigateToSubjects('science')">🧪 Out Knowledge of Science</button>
-                <button class="menu-btn" onclick="navigateToSubjects('computer')">💻 Out Knowledge of Computer</button>
-            </div>
-        </section>
-
-        <!-- स्क्रिन २: विषय छनोट पृष्ठ -->
-        <section id="subject-screen" class="quiz-panel">
-            <h2 id="subject-title">विषयहरू / Subjects</h2>
-            <div id="subject-list" class="grid-list"></div>
-            <button class="back-btn" onclick="backToCategories()">⬅️ Back</button>
-        </section>
-
-        <!-- स्क्रिन ३: च्याप्टर छनोट पृष्ठ -->
-        <section id="chapter-screen" class="quiz-panel">
-            <h2 id="chapter-title">अध्यायहरू / Chapters</h2>
-            <div id="chapter-list" class="grid-list"></div>
-            <button class="back-btn" onclick="backToSubjects()">⬅️ Back</button>
-        </section>
-
-        <!-- स्क्रिन ४: मुख्य गेमप्ले -->
-        <section id="game-screen" class="quiz-panel">
-            <div class="game-status-bar">
-                <span id="q-progress">प्रश्न: १/१०</span>
-                <div id="countdown-clock" class="clock-display">३०</div>
-            </div>
-            <div class="question-box" id="display-question-text"></div>
-            <div id="display-options-box" class="options-vertical-grid"></div>
-            <button id="forward-btn" class="control-btn hidden" onclick="moveToNext()">Next ➡️</button>
-        </section>
-
-        <!-- स्क्रिन ५: नतिजा कार्ड -->
-        <section id="score-screen" class="quiz-panel">
-            <h2>📊 क्विजको अन्तिम नतिजा / Result</h2>
-            <div class="score-board">
-                <p>कुल प्रश्न / Total: <strong>१०</strong></p>
-                <p class="txt-success">सहि उत्तर / Correct: <span id="total-right">०</span></p>
-                <p class="txt-danger">गलत उत्तर / Incorrect: <span id="total-wrong">०</span></p>
-            </div>
-            <button class="control-btn" onclick="resetToHome()">Home 🏠</button>
-        </section>
+      <div>
+        <h1 class="brand-title">Quiz Nepal</h1>
+        <p class="brand-subtitle" data-i18n="brandSubtitle">
+          Learn • Practice • Compete
+        </p>
+      </div>
     </div>
 
-    <audio id="beep-alarm" src="https://google.com" preload="auto"></audio>
+    <div class="header-actions">
 
-    <script>
-        // सिधै एउटै फाइल भित्र सुरक्षित कमाण्ड लोजिक (१० प्रश्न मात्र र नो-रिपिट मोड)
-        const quizDatabase = {
-            class10: {
-                title: "कक्षा १० / Class 10 MCQ Pool",
-                subjects: {
-                    math: {
-                        title: "अनिवार्य गणित / Mathematics",
-                        chapters: {
-                            c1: { title: "अध्याय १: समूह / Chapter 1: Sets", questions: [
-                                { qNp: "यदि U={1,2,3,4,5} र A={1,2} भए, A' को मान कति हुन्छ?", qEn: "If U={1,2,3,4,5} and A={1,2}, what is the value of A'?", options: ["{3,4,5}", "{1,2}", "{5}", "𝜙"], correct: 0 },
-                                { qNp: "समूह A र B मा साझा परेका सदस्यहरूको समूहलाई के भनिन्छ?", qEn: "What is the set of common elements between set A and B called?", options: ["Union", "Intersection", "Difference", "Subset"], correct: 1 }
-                            ]}
-                        }
-                    },
-                    science: {
-                        title: "विज्ञान तथा प्रविधि / Science & Tech",
-                        chapters: {
-                            c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
-                                { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 }
-                            ]}
-                        }
-                    }
-                }
-            },
-            class11: {
-                title: "कक्षा ११ / Class 11 MCQ Pool",
-                subjects: {
-                    physics: {
-                        title: "भौतिक विज्ञान / Physics",
-                        chapters: {
-                            c1: { title: "अध्याय १: मेकानिक्स / Chapter 1: Mechanics", questions: [
-                                { qNp: "प्रोजेक्टाइलले अधिकतम क्षितिज दुरी पार गर्न कति कोणमा फ्याँक्नुपर्छ?", qEn: "At what angle should a projectile be launched to achieve maximum horizontal range?", options: ["30°", "45°", "60°", "90°"], correct: 1 }
-                            ]}
-                        }
-                    }
-                }
-            },
-            gk: {
-                title: "सामान्य ज्ञान / Loksewa GK",
-                subjects: {
-                    geography: {
-                        title: "भूगोल / Geography",
-                        chapters: {
-                            c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                                { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर", "भक्तपुर", "पर्वत", "काठमाडौं"], correct: 1 }
-                            ]}
-                        }
-                    }
-                }
-            },
-            science: {
+      <!-- Language -->
+      <div class="language-box">
+        <button class="language-btn active" data-language="both">
+          दुवै
+        </button>
 
- 
+        <button class="language-btn" data-language="ne">
+          नेपाली 🇳🇵
+        </button>
+
+        <button class="language-btn" data-language="en">
+          English 🇬🇧
+        </button>
+      </div>
+
+      <!-- Login -->
+      <button id="googleLoginBtn" class="header-login-btn">
+        🔐 <span data-i18n="googleLogin">Google Login</span>
+      </button>
+
+      <button id="logoutBtn" class="header-login-btn hidden">
+        🚪 <span data-i18n="logout">Logout</span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       USER BAR
+  ========================== -->
+  <section class="user-bar">
+
+    <div class="user-information">
+
+      <div class="user-avatar" id="userAvatar">
+        👤
+      </div>
+
+      <div>
+        <strong id="userName">Guest User</strong>
+        <small id="userEmail">Login to save your progress</small>
+      </div>
+
+    </div>
+
+    <div class="creator-information">
+      <span data-i18n="createdBy">Created by</span>
+      <strong>Lok Raj Awasthi</strong>
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN APP
+  ========================== -->
+  <main id="app">
+
+
+    <!-- =========================
+         HOME SCREEN
+    ========================== -->
+    <section id="homeScreen" class="screen active">
+
+      <div class="hero-section">
+
+        <div class="hero-image-wrapper">
+
+          <img
+            src="images/mahadev.jpg"
+            alt="Mahadev"
+            class="mahadev-image"
+            onerror="this.style.display='none'; document.getElementById('mahadevFallback').classList.remove('hidden');"
+          />
+
+          <div id="mahadevFallback" class="mahadev-fallback hidden">
+            🔱
+          </div>
+
+        </div>
+
+        <div class="hero-content">
+
+          <p class="mahadev-text nepali-text">
+            हर हर महादेव 🔱
+          </p>
+
+          <p class="mahadev-text english-text">
+            Har Har Mahadev 🔱
+          </p>
+
+          <h2 data-i18n="heroTitle">
+            नेपालकै Quiz Learning Platform
+          </h2>
+
+          <p data-i18n="heroDescription">
+            Class 10, Class 11, General Knowledge र One vs One Quiz मार्फत
+            आफ्नो ज्ञान परीक्षण गर्नुहोस्।
+          </p>
+
+          <button id="startLearningBtn" class="primary-btn large-btn">
+            🚀 <span data-i18n="startLearning">Start Learning</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Statistics -->
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <strong id="gamesPlayedStat">0</strong>
+          <span data-i18n="gamesPlayed">Games Played</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <strong id="bestScoreStat">0</strong>
+          <span data-i18n="bestScore">Best Score</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <strong id="correctStat">0</strong>
+          <span data-i18n="totalCorrect">Total Correct</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">❌</div>
+          <strong id="wrongStat">0</strong>
+          <span data-i18n="totalWrong">Total Wrong</span>
+        </div>
+
+      </div>
+
+
+      <!-- Main menu -->
+      <div class="section-heading">
+        <h2 data-i18n="chooseQuiz">
+          आफ्नो Quiz छान्नुहोस्
+        </h2>
+
+        <p data-i18n="chooseQuizDescription">
+          आफ्नो कक्षा वा विषय छानेर अभ्यास सुरु गर्नुहोस्।
+        </p>
+      </div>
+
+
+      <div class="main-menu-grid">
+
+        <button
+          class="menu-card class11-card"
+          data-open-category="class11"
+        >
+          <div class="menu-card-icon">🎓</div>
+
+          <div class="menu-card-content">
+            <h3>
+              <span class="ne">कक्षा ११</span>
+              <span class="en">Class 11</span>
+            </h3>
+
+            <p>
+              Physics • Chemistry • Mathematics • Computer
+            </p>
+          </div>
+
+          <span class="menu-arrow">→</span>
+        </button>
+
+
+        <button
+          class="menu-card class10-card"
+          data-open-category="class10"
+        >
+          <div class="menu-card-icon">📘</div>
+
+          <div class="menu-card-content">
+            <h3>
+              <span class="ne">कक्षा १०</span>
+              <span class="en">Class 10</span>
+            </h3>
+
+            <p>
+              Science • Computer • Optional Mathematics
+            </p>
+          </div>
+
+          <span class="menu-arrow">→</span>
+        </button>
+
+
+        <button
+          class="menu-card gk-card"
+          data-open-category="gk"
+        >
+          <div class="menu-card-icon">🌍</div>
+
+          <div class="menu-card-content">
+            <h3>
+              <span class="ne">सामान्य ज्ञान</span>
+              <span class="en">General Knowledge</span>
+            </h3>
+
+            <p>
+              Lok Sewa • Nepal • World • Current Knowledge
+            </p>
+          </div>
+
+          <span class="menu-arrow">→</span>
+        </button>
+
+
+        <button
+          class="menu-card versus-card"
+          data-open-category="onevsone"
+        >
+          <div class="menu-card-icon">⚔️</div>
+
+          <div class="menu-card-content">
+            <h3>
+              <span class="ne">One vs One</span>
+              <span class="en">Play With Friends</span>
+            </h3>
+
+            <p>
+              Challenge your friend
+            </p>
+          </div>
+
+          <span class="menu-arrow">→</span>
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CATEGORY SCREEN
+    ========================== -->
+    <section id="categoryScreen" class="screen">
+
+      <div class="page-top">
+
+        <button class="back-btn" data-go-home>
+          ← <span data-i18n="back">Back</span>
+        </button>
+
+        <div>
+          <h2 id="categoryTitle">Category</h2>
+          <p id="categoryDescription"></p>
+        </div>
+
+      </div>
+
+
+      <div id="subjectGrid" class="subject-grid">
+        <!-- JavaScript -->
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CHAPTER SCREEN
+    ========================== -->
+    <section id="chapterScreen" class="screen">
+
+      <div class="page-top">
+
+        <button class="back-btn" id="backToSubjectsBtn">
+          ← <span data-i18n="subjects">Subjects</span>
+        </button>
+
+        <div>
+          <h2 id="chapterTitle">Chapters</h2>
+          <p id="chapterDescription"></p>
+        </div>
+
+      </div>
+
+
+      <div class="chapter-toolbar">
+
+        <div class="search-wrapper">
+          <span>🔎</span>
+
+          <input
+            type="text"
+            id="chapterSearch"
+            placeholder="Search chapter..."
+          />
+        </div>
+
+        <div id="chapterCount" class="chapter-count">
+          0 Chapters
+        </div>
+
+      </div>
+
+
+      <div id="chapterGrid" class="chapter-grid">
+        <!-- JavaScript -->
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         QUIZ SCREEN
+    ========================== -->
+    <section id="quizScreen" class="screen">
+
+      <div class="quiz-header">
+
+        <button id="quitQuizBtn" class="quit-btn">
+          ✕ <span data-i18n="quit">Quit</span>
+        </button>
+
+        <div class="quiz-title-area">
+          <small id="quizCategoryLabel">Quiz</small>
+          <h2 id="quizChapterLabel">Chapter</h2>
+        </div>
+
+        <div class="score-display">
+          <span data-i18n="score">Score</span>
+          <strong id="quizScore">0</strong>
+        </div>
+
+      </div>
+
+
+      <!-- Question Progress -->
+      <div class="question-progress-area">
+
+        <div class="question-meta">
+
+          <span id="questionNumber">
+            Question 1 / 10
+          </span>
+
+          <span id="questionStatus">
+            Ready
+          </span>
+
+        </div>
+
+        <div class="progress-bar">
+          <div
+            id="quizProgress"
+            class="progress-fill"
+            style="width: 10%;" 
