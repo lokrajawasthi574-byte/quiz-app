@@ -1,257 +1,218 @@
 /**
-* ==========================================================================
-* AWASTHI QUIZ - APPLICATION ENGINE SYSTEM (PART 3)
+* Awasthi Quiz - Core Application Script
 * Creator & Owner: Lok Raj Awasthi
-* Architectural Framework: Dynamic Multi-Module Front-End Prototype
-* ==========================================================================
 */
 
-// --- Comprehensive Simulated Database (Scalable Architecture Design) ---
-const AWASTHI_QUIZ_DATABASE = {
-    classes: {
-        class10: {
-            science: [
-                {
-                    id: "c10_sci_ch1_1",
-                    question: "हाम्रो ब्रह्माण्डमा गुरुत्वाकर्षण बल (Gravitational Force) वस्तुको पिण्ड र दूरीमा कसरी निर्भर गर्दछ?",
-                    options: [
-                        "पिण्डको गुणनफलसँग समानुपातिक र दूरीको वर्गसँग व्युत्क्रमानुपातिक",
-                        "पिण्डको गुणनफलसँग व्युत्क्रमानुपातिक र दूरीसँग समानुपातिक",
-                        "पिण्ड र दूरी दुवैसँग सधैं समानुपातिक",
-                        "माथिका कुनै पनि भनाइ सत्य छैनन्"
-                    ],
-                    correct: 0,
-                    explanation: "न्युटनको गुरुत्वाकर्षण नियम अनुसार, बल वस्तुहरूको पिण्डको गुणनफलसँग समानुपातिक (Directly Proportional) र तिनीहरूको केन्द्रबीचको दूरीको वर्गसँग व्युत्क्रमानुपातिक (Inversely Proportional) हुन्छ।",
-                    difficulty: "medium"
-                },
-                {
-                    id: "c10_sci_ch1_2",
-                    question: "यदि पृथ्वीको अर्धव्यास (Radius) लाई आधा बनाउने हो भने यसको सतहमा गुरुत्वप्रवेग (g) को मान कति गुणाले परिवर्तन हुन्छ?",
-                    options: ["२ गुणा बढ्छ", "४ गुणा बढ्छ", "२ गुणा घट्छ", "समान रहन्छ"],
-                    correct: 1,
-                    explanation: "गुरुत्वप्रवेग g = GM/R² सूत्र अनुसार, अर्धव्यास (R) आधा गर्दा R² को मान १/४ हुन्छ, जसले गर्दा g को मान ४ गुणाले वृद्धि हुन जान्छ।",
-                    difficulty: "hard"
-                }
-            ],
-            computer: [
-                {
-                    id: "c10_comp_ch1_1",
-                    question: "कम्प्युटर नेटवर्किङमा प्रयोग हुने 'Topology' ले मुख्यतया केलाई बुझाउँछ?",
-                    options: [
-                        "नेटवर्कमा कम्प्युटरहरूको भौतिक वा तार्किक व्यवस्थापन (Layout)",
-                        "इन्टरनेट चलाउने एक विशेष सफ्टवेयर",
-                        "कम्प्युटर भाइरस नष्ट गर्ने एउटा विधि",
-                        "डाटा सेभ गर्ने हार्डडिस्कको प्रकार"
-                    ],
-                    correct: 0,
-                    explanation: "नेटवर्क टोपलोजी (Network Topology) भन्नाले नेटवर्कमा रहेका विभिन्न नोड वा कम्प्युटरहरू एकआपसमा जोडिने भौतिक वा तार्किक ढाँचा (Structure/Layout) लाई बुझाउँछ।",
-                    difficulty: "easy"
-                }
-            ],
-            optmath: []
-        },
-        class11: {
-            physics: [
-                {
-                    id: "c11_phy_ch1_1",
-                    question: "Which of the following dimensions correctly represents the Universal Gravitational Constant (G)?",
-                    options: ["[M⁻¹ L³ T⁻²]", "[M¹ L² T⁻²]", "[M⁻² L³ T⁻¹]", "[M⁻¹ L² T⁻³]"],
-                    correct: 0,
-                    explanation: "Since F = G*m1*m2/r², we have G = F*r²/(m1*m2). Substituting dimensions: [M L T⁻²] * [L²] / [M²] = [M⁻¹ L³ T⁻²].",
-                    difficulty: "hard"
-                }
-            ],
-            chemistry: [],
-            mathematics: [],
-            computer: []
-        }
-    },
-    generalKnowledge: {
-        nepal_history: [
-            {
-                id: "gk_nh_1",
-                question: "नेपालको इतिहासमा 'जनताका संकास्पद राजा' भनेर कुन मल्ल राजालाई चिनिन्छ?",
-                options: ["प्रताप मल्ल", "लक्ष्मीनरसिंह मल्ल", "योगनरेन्द्र मल्ल", "महेन्द्र मल्ल"],
-                correct: 2,
-                explanation: "राजा योगनरेन्द्र मल्ललाई जनताले विभिन्न कालखण्डमा शंकास्पद दृष्टिकोणले हेरेका र䀘 मृत्युको प्रसङ्ग पनि रहस्यमयी भएकाले इतिहासमा उनलाई सो नामले स्मरण गरिन्छ।",
-                difficulty: "medium"
-            }
-        ],
-        nepal_geography: [
-            {
-                id: "gk_ng_1",
-                question: "नेपालको सबैभन्दा गहिरो ताल रारा ताल समुद्र सतहबाट कति उचाइमा अवस्थित छ?",
-                options: ["२,९९० मिटर", "३,२०० मिटर", "२,५०० मिटर", "१,८०० मिटर"],
-                correct: 0,
-                explanation: "नेपालको मुगु जिल्लामा अवस्थित पर्यटकीय तथा प्राकृतिक रूपले महत्त्वपूर्ण रारा ताल समुद्र सतहबाट २,९९० मिटरको उचाइमा रहेको छ।",
-                difficulty: "easy"
-            }
-        ]
-    },
-    lokSewa: {
-        constitution: [
-            {
-                id: "ls_con_1",
-                question: "नेपालको वर्तमान संविधान (२०७२) मा कति वटा भाग, धारा र अनुसूचीहरू रहेका छन्?",
-                options: [
-                    "३५ भाग, ३०८ धारा, ९ अनुसूची",
-                    "३० भाग, ३०० धारा, ७ अनुसूची",
-                    "३२ भाग, ३१५ धारा, ८ अनुसूची",
-                    "३८ भाग, ३२५ धारा, १० अनुसूची"
-                ],
-                correct: 0,
-                explanation: "नेपालको संविधान (२०७२) असोज ३ गते जारी भएको हो, जसमा ३५ भाग, ३०८ धारा र ९ वटा अनुसूचीहरू समावेश गरिएका छन्।",
-                difficulty: "easy"
-            }
-        ]
-    }
+// ==========================================
+// 1. EXTENSIBLE SCALABLE QUESTION BANK DATABASE STRUCTURE
+// ==========================================
+// यहाँ पछि हजारौँ/लाखौँ प्रश्नहरू सजिलै थप्न सकिन्छ।
+const QuestionBank = {
+    class10_science: [
+        { q: "बल (Force) को SI एकाइ के हो?", o: ["Newton", "Pascal", "Joule", "Watt"], a: 0, e: "बलको SI एकाइ न्यूटन (Newton) हो।" },
+        { q: "कुन तत्वको रासायनिक संकेत 'O' हो?", o: ["Gold", "Oxygen", "Osmium", "Iron"], a: 1, e: "Oxygen लाई आवर्त तालिकामा 'O' संकेतले जनाइन्छ।" },
+        { q: "प्रकाश एक माध्यमबाट अर्को माध्यममा जाँदा बाङ्गिने प्रक्रियालाई के भनिन्छ?", o: ["Reflection", "Refraction", "Dispersion", "Absorption"], a: 1, e: "प्रकाशको गतिमा परिवर्तन आउने हुनाले Refraction (अमर्तन) हुन्छ।" }
+    ],
+    class10_computer: [
+        { q: "तलका मध्ये कुन अपरेटिङ सिस्टम हो?", o: ["Windows", "MS Word", "Excel", "Google Chrome"], a: 0, e: "Windows एक लोकप्रिय सिस्टम सफ्टवेयर वा अपरेटिङ सिस्टम हो।" },
+        { q: "Decimal संख्या 5 को Binary मान कति हुन्छ?", o: ["100", "101", "110", "111"], a: 1, e: "5 लाई बाइनरीमा परिवर्तन गर्दा 101 हुन्छ।" }
+    ],
+    class10_optmath: [
+        { q: "यदि म्याट्रिक्स A को अर्डर 2x3 र B को 3x2 छ भने, म्याट्रिक्स AB को अर्डर कति हुन्छ?", o: ["2x2", "3x3", "2x3", "3x2"], a: 0, e: "गुणन गर्दा पहिलोको लहर र दोस्रोको स्तम्भ बाँकी रही 2x2 अर्डर बन्छ।" }
+    ],
+    class11_physics: [
+        { q: "कार्य (Work Done) को आयामी सूत्र (Dimensional Formula) के हो?", o: ["MLT⁻²", "ML²T⁻²", "MLT⁻¹", "ML²T⁻¹"], a: 1, e: "Work = Force x Distance = [MLT⁻²] * [L] = [ML²T⁻²] हुन्छ।" }
+    ],
+    loksewa_gk: [
+        { q: "प्रसिद्ध न्यातपोल मन्दिर कसले निर्माण गरेका हुन्?", o: ["प्रताप मल्ल", "भूपतीन्द्र मल्ल", "जयस्थिति मल्ल", "अंशुवर्मा"], a: 1, e: "भक्तपुरको पाँचतले न्यातपोल मन्दिर राजा भूपतीन्द्र मल्लले बनाएका हुन्।" },
+        { q: "नेपालको सबैभन्दा गहिरो ताल कुन हो?", o: ["रारा ताल", "फेवा ताल", "शे-फोक्सुण्डो ताल", "तिलिचो ताल"], a: 2, e: "शे-फोक्सुण्डो ताल नेपालको सबैभन्दा गहिरो ताल मानिन्छ।" }
+    ]
 };
 
-// --- Application Core Global State ---
-let APP_STATE = {
-    currentUser: null,
-    activeView: "home",
-    isAudioEnabled: true,
-    activeTheme: "dark",
+// यदि कुनै विधामा प्रश्न नभएमा वा खाली भएमा सुरक्षित राख्न ब्याकअप प्रश्न प्रणाली
+function getQuestionsCategory(categoryKey) {
+    if (QuestionBank[categoryKey] && QuestionBank[categoryKey].length > 0) {
+        return QuestionBank[categoryKey];
+    }
+    return [
+        { q: "Awasthi Quiz को Creator र Owner को हुनुहुन्छ?", o: ["Lok Raj Awasthi", "Ram Shrestha", "Hari Awasthi", "None"], a: 0, e: "Awasthi Quiz को सम्पूर्ण स्वामित्व लोक राज अवस्थीसँग रहेको छ।" },
+        { q: "क्विज खेल्दा प्रति प्रश्न कति समय उपलब्ध हुन्छ?", o: ["10s", "20s", "30s", "45s"], a: 2, e: "प्रत्येक प्रश्न मिलाउनका लागि ३० सेकेन्डको समय दिइन्छ।" }
+    ];
+}
+
+// ==========================================
+// 2. STATE MANAGEMENT VARIABLES
+// ==========================================
+let currentQuizQuestions = [];
+let currentQuestionIndex = 0;
+let score = 0;
+let timerInterval = null;
+let timeLeft = 30;
+let isSoundEnabled = true;
+let activeCategoryKey = "";
+
+// Progress Analytics
+let quizStats = { total: 0, correct: 0, incorrect: 0, skipped: 0 };
+let mistakeQuestionsList = [];
+let isMistakeModeActive = false;
+
+// ==========================================
+// 3. SOUND EFFECTS GENERATOR (Web Audio API)
+// ==========================================
+// बाहिरी अडियो फाइल नचाहिने गरी ब्राउजरबाटै चेतावनी र दायाँ/बायाँ उत्तरको बीप साउन्ड सिर्जना गर्छ
+function playTone(frequency, duration, type = "sine") {
+    if (!isSoundEnabled) return;
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.type = type;
+        oscillator.frequency.value = frequency;
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + duration);
+    } catch (e) { console.log("Audio API issue."); }
+}
+
+// ==========================================
+// 4. SCREEN ROUTER CONTROL
+// ==========================================
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active', 'flex-active', 'hidden'));
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
    
-    // Active Quiz Engine Runtime Data
-    quizRuntime: {
-        currentPool: [],
-        currentIndex: 0,
-        score: 0,
-        xpEarned: 0,
-        correctCount: 0,
-        incorrectCount: 0,
-        skippedCount: 0,
-        timerInterval: null,
-        timeLeft: 30,
-        startTime: null,
-        totalTimeSpent: 0,
-        userAnswers: [],
-        bookmarkedQuestions: new Set(),
-        mistakeBook: new Set()
-    },
-   
-    // User Metrics System
-    userProfile: {
-        username: "Guest User",
-        level: 1,
-        xp: 120,
-        points: 450,
-        streak: 3,
-        history: []
+    const target = document.getElementById(screenId);
+    if(screenId === "welcome-screen" || screenId === "auth-screen") {
+        target.classList.add('active');
+        document.getElementById('main-header').classList.add('hidden');
+    } else {
+        target.classList.add('flex-active');
+        document.getElementById('main-header').classList.remove('hidden');
     }
-};
+}
 
-// --- Audio Asset Drivers ---
-const AudioEngine = {
-    playTick: () => { },
-    playAlarm: () => {
-        if (!APP_STATE.isAudioEnabled) return;
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(440, ctx.currentTime);
-        osc.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.15);
-    },
-    playFeedback: (isCorrect) => {
-        if (!APP_STATE.isAudioEnabled) return;
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(isCorrect ? 880 : 220, ctx.currentTime);
-        osc.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.2);
-    }
-};
-
-// --- Initialization & Document DOM Setup ---
+// ==========================================
+// 5. INTERACTIVE EVENT HANDLERS
+// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-    initViewRouter();
-    setupCoreInteractions();
-    loadDemoStatistics();
+   
+    // Welcome Screen Button Trigger
+    document.getElementById("btn-get-started").addEventListener("click", () => {
+        showScreen("auth-screen");
+    });
+
+    // Login/Register Form Switcher
+    document.getElementById("tab-login").addEventListener("click", () => {
+        document.getElementById("tab-login").classList.add("active");
+        document.getElementById("tab-register").classList.remove("active");
+        document.getElementById("form-login").classList.add("active");
+        document.getElementById("form-register").classList.remove("active");
+    });
+
+    document.getElementById("tab-register").addEventListener("click", () => {
+        document.getElementById("tab-register").classList.add("active");
+        document.getElementById("tab-login").classList.remove("active");
+        document.getElementById("form-register").classList.add("active");
+        document.getElementById("form-login").classList.remove("active");
+    });
+
+    // Form Submissions Simulation
+    document.getElementById("form-login").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("login-email").value;
+        document.getElementById("user-display-email").innerText = email.split('@')[0];
+        showScreen("dashboard-screen");
+    });
+
+    document.getElementById("form-register").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("खाता सफलतापूर्वक सिर्जना भयो!");
+        const email = document.getElementById("register-email").value;
+        document.getElementById("user-display-email").innerText = email.split('@')[0];
+        showScreen("dashboard-screen");
+    });
+
+    // Navbar Controls logic
+    document.getElementById("btn-toggle-theme").addEventListener("click", () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const nextTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", nextTheme);
+        document.getElementById("btn-toggle-theme").innerHTML = nextTheme === "dark" ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    });
+
+    document.getElementById("btn-toggle-sound").addEventListener("click", () => {
+        isSoundEnabled = !isSoundEnabled;
+        document.getElementById("btn-toggle-sound").innerHTML = isSoundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+    });
+
+    document.getElementById("btn-logout").addEventListener("click", () => {
+        showScreen("welcome-screen");
+    });
+
+    // Skip/Next Handle
+    document.getElementById("btn-skip").addEventListener("click", () => {
+        clearInterval(timerInterval);
+        quizStats.skipped++;
+        goToNextQuestion();
+    });
+
+    document.getElementById("btn-retry-mistakes").addEventListener("click", () => {
+        if(mistakeQuestionsList.length === 0) {
+            alert("यो गेममा कुनै पनि प्रश्न गलत भएको छैन! राम्रो काम।");
+            return;
+        }
+        isMistakeModeActive = true;
+        currentQuizQuestions = [...mistakeQuestionsList];
+        startQuizSession();
+    });
 });
 
-// --- View Router & Screen Switching Logic ---
-function initViewRouter() {
-    document.querySelectorAll(".nav-link, .user-profile-trigger, .footer-links-col a").forEach(element => {
-        element.addEventListener("click", (e) => {
-            const targetView = element.getAttribute("data-view");
-            if (targetView) {
-                e.preventDefault();
-                switchView(targetView);
-            }
-        });
-    });
+// ==========================================
+// 6. CORE QUIZ FLOW MECHANICS
+// ==========================================
+function startQuizFlow(categoryKey) {
+    activeCategoryKey = categoryKey;
+    isMistakeModeActive = false;
+   
+    let rawQuestions = getQuestionsCategory(categoryKey);
+   
+    // र्‍यान्डम प्रश्न छनोट (Shuffle) गर्ने र बढीमा १० वटा मात्र निकाल्ने व्यवस्था
+    currentQuizQuestions = rawQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
+   
+    startQuizSession();
 }
 
-function switchView(viewId) {
-    if (!APP_STATE.currentUser && (viewId === 'dashboard' || viewId === 'admin')) {
-        viewId = 'auth';
-    }
-
-    APP_STATE.activeView = viewId;
+function startQuizSession() {
+    currentQuestionIndex = 0;
+    score = 0;
+    quizStats = { total: currentQuizQuestions.length, correct: 0, incorrect: 0, skipped: 0 };
+    if(!isMistakeModeActive) mistakeQuestionsList = [];
    
-    document.querySelectorAll(".app-view").forEach(view => {
-        view.classList.remove("active-view");
-    });
-   
-    const targetNode = document.getElementById(`${viewId}-view`);
-    if (targetNode) {
-        targetNode.classList.add("active-view");
-        window.scrollTo(0, 0);
-    }
-   
-    document.querySelectorAll(".nav-link").forEach(link => {
-        if (link.getAttribute("data-view") === viewId) {
-            link.classList.add("active");
-        } else {
-            link.classList.remove("active");
-        }
-    });
-
-    if (viewId === 'dashboard') populateDashboardUI();
-    if (viewId === 'leaderboard') renderLeaderboardData('global');
+    document.getElementById("quiz-category-title").innerText = activeCategoryKey.toUpperCase().replace("_", " ");
+    showScreen("quiz-arena");
+    loadQuestion();
 }
 
-// --- Interaction Handlers Setup ---
-function setupCoreInteractions() {
-    // 1. Entrance Welcome Screen Dismissal
-    const enterBtn = document.getElementById("dismiss-welcome-btn");
-    if (enterBtn) {
-        enterBtn.addEventListener("click", () => {
-            const overlay = document.getElementById("welcome-overlay");
-            const mainApp = document.getElementById("main-app-interface");
-           
-            overlay.style.opacity = "0";
-            overlay.style.visibility = "hidden";
-            mainApp.style.display = "block";
-            setTimeout(() => mainApp.style.opacity = "1", 50);
-            switchView("home");
-        });
-    }
+function loadQuestion() {
+    clearInterval(timerInterval);
+    document.getElementById("explanation-panel").classList.add("hidden");
+    document.getElementById("btn-skip").innerText = "Skip / Next";
+   
+    let currentQ = currentQuizQuestions[currentQuestionIndex];
+    document.getElementById("current-q-num").innerText = `Question ${currentQuestionIndex + 1}/${currentQuizQuestions.length}`;
+    document.getElementById("question-text").innerText = currentQ.q;
+   
+    // Progress Bar Update
+    let progressPct = ((currentQuestionIndex) / currentQuizQuestions.length) * 100;
+    document.getElementById("quiz-progress-bar").style.width = `${progressPct}%`;
 
-    // 2. Authentication Flow Handling
-    const loginForm = document.getElementById("auth-form-element");
-    if (loginForm) {
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const email = document.getElementById("auth-email-input").value;
-           
-            APP_STATE.currentUser = { email: email };
-            APP_STATE.userProfile.username = email.split('@')[0];
-           
-            document.getElementById("header-user-display-name").innerText = APP_STATE.userProfile.username;
-            switchView("dashboard");
-        });
-    }
-
-    // 3. Audio & Theme Toggle Control Switches
-    document.getElementById("audio-toggle-btn").addEventListener("click", () => {
-        APP_STATE.isAudioEnabled = !APP_STATE.isAudioEnabled;
-        const icon = document.getElementById("audio-toggle-btn").querySelector("i");
+    // Render 4 answer Options
+    const optContainer = document.getElementById("options-container");
+    optContainer.innerHTML = "";
+   
+    currentQ.o.forEach((optionText, idx) => {
+        const btn = document.createElement("button");
 
  
