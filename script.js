@@ -1,6 +1,6 @@
 // =========================================================================
 // ANTI-CRASH SINGLE-FILE BILINGUAL ENGINE WITH HIGHEST ISOLATION
-// Developed for: Lok Raj Awasthi
+// Developed for: Lok Raj Awasthi (Zero Bug Edition)
 // =========================================================================
 
 const quizDatabase = {
@@ -150,7 +150,7 @@ function navigateToSubjects(catKey) {
         let btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = catData.subjects[subKey].title;
-        btn.onclick = () => navigateToChapters(subKey);
+        btn.onclick = function() { navigateToChapters(subKey); };
         container.appendChild(btn);
     });
    
@@ -169,7 +169,7 @@ function navigateToChapters(subKey) {
         let btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = subData.chapters[chKey].title;
-        btn.onclick = () => launchQuizEngine(chKey);
+        btn.onclick = function() { launchQuizEngine(chKey); };
         container.appendChild(btn);
     });
 
@@ -188,8 +188,5 @@ function launchQuizEngine(chKey) {
     activePool.sort(() => Math.random() - 0.5);
     gameQuestions = activePool.slice(0, 10);
 
-    currentIndex = 0;
-    score = 0;
 
-   
  

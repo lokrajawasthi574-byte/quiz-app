@@ -8,20 +8,16 @@
 </head>
 <body>
 
-    <!-- पृष्ठभूमि महादेव चित्र ओभरले -->
     <div class="mahadev-bg-overlay"></div>
-
-    <!-- रंगीन आकर्षक साइड डेकोरेसन बोर्डरहरू -->
     <div class="side-border left-border"></div>
     <div class="side-border right-border"></div>
 
     <div class="quiz-main-container">
-        <!-- स्थिर हर हर महादेव ब्रान्डिङ -->
         <header class="app-header">
             <h1>🔱 हर हर महादेव 🔱</h1>
         </header>
 
-        <!-- स्क्रिन १: गृहपृष्ठ (५ वटा क्याटेगोरी र डेभलपर पहिचान) -->
+        <!-- स्क्रिन १: गृहपृष्ठ -->
         <section id="category-screen" class="quiz-panel active">
             <div class="developer-profile">
                 <h3>👨‍💻 Developer Identity</h3>
@@ -38,32 +34,28 @@
             </div>
         </section>
 
-        <!-- स्क्रिन २: विषय छनोट पृष्ठ (Subjects Screen) -->
+        <!-- स्क्रिन २: विषय छनोट पृष्ठ -->
         <section id="subject-screen" class="quiz-panel">
             <h2 id="subject-title">विषयहरू / Subjects</h2>
             <div id="subject-list" class="grid-list"></div>
             <button class="back-btn" onclick="backToCategories()">⬅️ Back</button>
         </section>
 
-        <!-- स्क्रिन ३: च्याप्टर छनोट पृष्ठ (Chapters Screen) -->
+        <!-- स्क्रिन ३: च्याप्टर छनोट पृष्ठ -->
         <section id="chapter-screen" class="quiz-panel">
             <h2 id="chapter-title">अध्यायहरू / Chapters</h2>
             <div id="chapter-list" class="grid-list"></div>
             <button class="back-btn" onclick="backToSubjects()">⬅️ Back</button>
         </section>
 
-        <!-- स्क्रिन ४: मुख्य गेमप्ले स्क्रिन (Bilingual Gameplay) -->
+        <!-- स्क्रिन ४: मुख्य गेमप्ले स्क्रिन -->
         <section id="game-screen" class="quiz-panel">
             <div class="game-status-bar">
                 <span id="q-progress">प्रश्न: १/१०</span>
                 <div id="countdown-clock" class="clock-display">३०</div>
             </div>
-            <div class="question-box" id="display-question-text">
-                <!-- प्रश्नहरू यहाँ लोड हुनेछन् -->
-            </div>
-            <div id="display-options-box" class="options-vertical-grid">
-                <!-- विकल्प बटनहरू -->
-            </div>
+            <div class="question-box" id="display-question-text"></div>
+            <div id="display-options-box" class="options-vertical-grid"></div>
             <button id="forward-btn" class="control-btn hidden" onclick="moveToNext()">Next ➡️</button>
         </section>
 
@@ -79,7 +71,6 @@
         </section>
     </div>
 
-    <!-- अलार्म साउन्ड ट्र्याक (७ सेकेन्ड बाँकी हुँदा बज्ने) -->
     <audio id="beep-alarm" src="https://google.com" preload="auto"></audio>
 
     <script src="script.js"></script>
