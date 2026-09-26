@@ -1,5 +1,5 @@
 // =========================================================================
-// SYSTEM-WIDE MULTI-LEVEL MODULAR DATABASE & ENGINE (100% BUG-FREE FIXED VERSION)
+// ANTI-CRASH SINGLE-FILE BILINGUAL ENGINE WITH HIGHEST ISOLATION
 // Developed for: Lok Raj Awasthi
 // =========================================================================
 
@@ -25,6 +25,9 @@ const quizDatabase = {
                     c1: { title: "अध्याय १: बल र गुरुत्वाकर्षण / Chapter 1: Force & Gravity", questions: [
                         { qNp: "पृथ्वीको सतहमा गुरुत्वप्रवेग (g) को औसत मान कति हुन्छ?", qEn: "What is the average value of acceleration due to gravity (g) on Earth?", options: ["9.8 m/s^2", "1.67 m/s^2", "8.9 m/s^2", "10 m/s^2"], correct: 0 },
                         { qNp: "दुई पिण्डबीचको दुरीलाई दोब्बर बनाउँदा गुरुत्वाकर्षण बलमा के असर पर्छ?", qEn: "What happens to the gravitational force when the distance between two bodies is doubled?", options: ["४ गुणा बढ्छ", "२ गुणा घट्छ", "४ गुणा घट्छ", "२ गुणा बढ्छ"], correct: 2 }
+                    ]},
+                    c2: { title: "अध्याय २: चाप / Chapter 2: Pressure", questions: [
+                        { qNp: "तरल पदार्थको चाप पत्ता लगाउने सही सूत्र कुन हो?", qEn: "What is the correct formula to calculate liquid pressure?", options: ["P = hdg", "P = F/A", "P = m/v", "P = W/t"], correct: 0 }
                     ]}
                 }
             },
@@ -86,7 +89,7 @@ const quizDatabase = {
                 title: "भूगोल / Geography",
                 chapters: {
                     c1: { title: "नेपालको भूगोल / Geography of Nepal", questions: [
-                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानো जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर / Lalitpur", "भक्तपुर / Bhaktapur", "पर्वत / Parbat", "काठमाडौं / Kathmandu"], correct: 1 }
+                        { qNp: "क्षेत्रफलको आधारमा नेपालको सबैभन्दा सानो जिल्ला कुन हो?", qEn: "Which is the smallest district of Nepal by area?", options: ["ललितपुर / Lalitpur", "भक्तपुर / Bhaktapur", "पर्वत / Parbat", "काठमाडौं / Kathmandu"], correct: 1 }
                     ]}
                 }
             }
@@ -187,15 +190,6 @@ function launchQuizEngine(chKey) {
 
     currentIndex = 0;
     score = 0;
+
    
-    switchScreen("game-screen");
-    loadQuestion();
-}
-
-function loadQuestion() {
-    killClock();
-    document.getElementById("forward-btn").classList.add("hidden");
-
-    let data = gameQuestions[currentIndex];
-
  

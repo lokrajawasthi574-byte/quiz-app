@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Har Har Mahadev Bilingual Quiz Platform</title>
+    <title>Har Har Mahadev Modular Quiz Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,14 +42,14 @@
         <section id="subject-screen" class="quiz-panel">
             <h2 id="subject-title">विषयहरू / Subjects</h2>
             <div id="subject-list" class="grid-list"></div>
-            <button class="back-btn" onclick="backToCategories()">⬅️ पछाडि फर्कनुहोस् / Back</button>
+            <button class="back-btn" onclick="backToCategories()">⬅️ Back</button>
         </section>
 
         <!-- स्क्रिन ३: च्याप्टर छनोट पृष्ठ (Chapters Screen) -->
         <section id="chapter-screen" class="quiz-panel">
             <h2 id="chapter-title">अध्यायहरू / Chapters</h2>
             <div id="chapter-list" class="grid-list"></div>
-            <button class="back-btn" onclick="backToSubjects()">⬅️ पछाडि फर्कनुहोस् / Back</button>
+            <button class="back-btn" onclick="backToSubjects()">⬅️ Back</button>
         </section>
 
         <!-- स्क्रिन ४: मुख्य गेमप्ले स्क्रिन (Bilingual Gameplay) -->
@@ -59,12 +59,12 @@
                 <div id="countdown-clock" class="clock-display">३०</div>
             </div>
             <div class="question-box" id="display-question-text">
-                <!-- प्रश्नहरू लोड हुने ठाउँ -->
+                <!-- प्रश्नहरू यहाँ लोड हुनेछन् -->
             </div>
             <div id="display-options-box" class="options-vertical-grid">
                 <!-- विकल्प बटनहरू -->
             </div>
-            <button id="forward-btn" class="control-btn hidden" onclick="moveToNext()">अर्को प्रश्न / Next ➡️</button>
+            <button id="forward-btn" class="control-btn hidden" onclick="moveToNext()">Next ➡️</button>
         </section>
 
         <!-- स्क्रिन ५: नतिजा कार्ड -->
@@ -75,7 +75,7 @@
                 <p class="txt-success">सहि उत्तर / Correct: <span id="total-right">०</span></p>
                 <p class="txt-danger">गलत उत्तर / Incorrect: <span id="total-wrong">०</span></p>
             </div>
-            <button class="control-btn" onclick="resetToHome()">मुख्य पृष्ठ / Home 🏠</button>
+            <button class="control-btn" onclick="resetToHome()">Home 🏠</button>
         </section>
     </div>
 
