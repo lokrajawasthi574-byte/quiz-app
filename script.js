@@ -1,191 +1,274 @@
-// Mock Distributed Database System Structures for Architecture Scaling
-const questionDatabase = {
-    class10: [
-        {
-            q: "पानीको घनत्व कुन तापक्रममा सबैभन्दा धेरै हुन्छ?",
-            options: ["0°C", "4°C", "100°C", "-4°C"],
-            correct: 1,
-            explanation: "पानीको विशिष्ट विशेषताका कारण 4°C मा यसको घनत्व सबैभन्दा उच्च (Maximum Density) हुन्छ।"
-        },
-        {
-            q: "कम्प्युटरको मुख्य प्रोसेसिङ युनिट (Brain) लाई के भनिन्छ?",
-            options: ["RAM", "ALU", "CPU", "Hard Disk"],
-            correct: 2,
-            explanation: "CPU (Central Processing Unit) लाई कम्प्युटरको मष्तिष्क भनिन्छ जसले सबै गणना गर्दछ।"
-        }
-    ],
-    class11: [
-        {
-            q: "What is the dimensional formula for Work Done?",
-            options: ["M¹L¹T⁻²", "M¹L²T⁻²", "M¹L²T⁻¹", "M¹L¹T⁻¹"],
-            correct: 1,
-            explanation: "Work = Force × Distance = [MLT⁻²] × [L] = [ML²T⁻²]."
-        }
-    ],
-    loksewa: [
-        {
-            q: "नेपालको संविधान (२०७२) मा कतिवटा अनुसूचीहरू रहेका छन्?",
-            options: ["७ वटा", "८ वटा", "९ वटा", "१० वटा"],
-            correct: 2,
-            explanation: "नेपालको वर्तमान संविधानमा ३५ भाग, ३०८ धारा र ९ वटा अनुसूचीहरू व्यवस्था गरिएको छ।"
-        }
-    ]
+/**
+* Awasthi Quiz - Core Engine
+* Creator & Owner: Lok Raj Awasthi
+* Responsive, Client-side Randomized Engine for Educational Testing
+*/
+
+// Global App States
+let currentQuestionIndex = 0;
+let quizQuestions = [];
+let score = 0;
+let xpPoints = 0;
+let timerInterval = null;
+let timeLeft = 30;
+let selectedLanguage = 'en';
+let answeredHistory = [];
+
+// Hard-coded architecture pointer for scale demonstration (Will connect to Firebase/Firestore APIs)
+const MOCK_DB_ENDPOINT = "assets/data/questions.json";
+
+// Initial Demo Questions Pool Structure
+const sampleQuestionsPool = [
+    {
+        id: 1,
+        category: "Class 10 - Science",
+        question_en: "Which element has the chemical symbol 'O'?",
+        question_np: "कुन तत्वको रासायनिक संकेत 'O' हो?",
+        options_en: ["Oxygen", "Gold", "Osmium", "Iron"],
+        options_np: ["अक्सिजन", "सुन", "अस्मियम", "फलाम"],
+        correctIndex: 0,
+        explanation_en: "Oxygen is represented by the symbol O and has atomic number 8.",
+        explanation_np: "अक्सिजनलाई संकेत O ले जनाइन्छ र यसको परमाणु संख्या ८ हुन्छ।"
+    },
+    {
+        id: 2,
+        category: "Lok Sewa - Geography",
+        question_en: "Which is the highest peak in the world?",
+        question_np: "विश्वको सर्वोच्च शिखर कुन हो?",
+        options_en: ["K2", "Mount Everest", "Kangchenjunga", "Lhotse"],
+        options_np: ["केटु", "सगरमाथा", "कञ्चनजङ्घा", "लोत्से"],
+        correctIndex: 1,
+        explanation_en: "Mount Everest is Earth's highest mountain above sea level, located in Nepal.",
+        explanation_np: "सगरमाथा पृथ्वीको सबैभन्दा अग्लो हिमाल हो, जुन नेपालमा अवस्थित छ।"
+    }
+];
+
+// Sound Synthesizer System for strict cross-browser accessibility
+const soundControls = {
+    muted: false,
+    playWarning() {
+        if (this.muted) return;
+        // Frequency alert audio simulation for 7 seconds warning
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        gain.gain.setValueAtTime(0.1, ctx.currentTime);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.15);
+    }
 };
 
-let currentQuestions = [];
-let currentQuestionIndex = 0;
-let score = 0;
-let timerInterval;
-let timeLeft = 30;
+document.addEventListener("DOMContentLoaded", () => {
+    setupTheme();
+    setupEventListeners();
+});
 
-// Central Navigation Controller
-function switchTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-   
-    document.getElementById(`${tabId}-tab`).classList.add('active');
-    clearInterval(timerInterval);
+// Theme Toggle Engine
+function setupTheme() {
+    const currentTheme = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    if(themeToggleBtn) {
+        themeToggleBtn.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
+    }
 }
 
-// Quiz Game Engine Launcher
-function startQuiz(category, subjectName) {
-    currentQuestions = questionDatabase[category] || [];
-    if(currentQuestions.length === 0) {
-        alert("This category database is being indexed via Cloud services.");
-        return;
+function toggleTheme() {
+    const activeTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = activeTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.getElementById("theme-toggle").innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+}
+
+// Global Operations Triggers
+function setupEventListeners() {
+    // Landing screen transition
+    const welcomeScreen = document.getElementById("welcome-screen");
+    if (welcomeScreen) {
+        welcomeScreen.addEventListener("click", () => {
+            welcomeScreen.classList.add("hidden");
+            document.getElementById("auth-screen").classList.remove("hidden");
+        });
     }
+
+    // Language Toggle
+    const langBtn = document.getElementById("lang-switch");
+    if(langBtn) {
+        langBtn.addEventListener("click", () => {
+            selectedLanguage = selectedLanguage === 'en' ? 'np' : 'en';
+            langBtn.innerText = selectedLanguage === 'en' ? 'नेपाली' : 'English';
+            // If active in quiz, re-render question node text
+            if(quizQuestions.length > 0 && currentQuestionIndex < quizQuestions.length) {
+                renderCurrentQuestion();
+            }
+        });
+    }
+
+    // Audio Mute System
+    const soundBtn = document.getElementById("sound-toggle");
+    if(soundBtn) {
+        soundBtn.addEventListener("click", () => {
+            soundControls.muted = !soundControls.muted;
+            soundBtn.innerText = soundControls.muted ? "🔇 Sound Off" : "🔊 Sound On";
+        });
+    }
+}
+
+// Authentication Simulator Engine
+function authenticateUser(provider) {
+    console.log(`Authenticating via: ${provider}`);
+    document.getElementById("auth-screen").classList.add("hidden");
+    document.getElementById("main-dashboard").classList.remove("hidden");
+}
+
+function logoutUser() {
+    document.getElementById("main-dashboard").classList.add("hidden");
+    document.getElementById("auth-screen").classList.remove("hidden");
+}
+
+// Dynamic Core Quiz Lifecycle Engine
+function startQuizEngine(category) {
+    console.log(`Initializing question matrix for target: ${category}`);
    
+    // Filter logic or fallback validation mock up
+    quizQuestions = shuffleArray([...sampleQuestionsPool]).slice(0, 10);
     currentQuestionIndex = 0;
     score = 0;
-    switchTab('quiz');
-    document.getElementById('quiz-title').innerText = `${subjectName} Engine`;
-    loadQuestion();
+    xpPoints = 0;
+    answeredHistory = [];
+
+    document.getElementById("main-dashboard").classList.add("hidden");
+    document.getElementById("quiz-playground").classList.remove("hidden");
+    document.getElementById("result-screen").classList.add("hidden");
+   
+    renderCurrentQuestion();
 }
 
-function loadQuestion() {
-    clearInterval(timerInterval);
-    timeLeft = 30;
-    document.getElementById('timer').innerText = timeLeft;
-    document.getElementById('explanation-box').classList.add('hidden');
-   
-    const nextBtn = document.getElementById('next-btn');
-    nextBtn.classList.add('disabled');
-    nextBtn.disabled = true;
+function renderCurrentQuestion() {
+    resetTimer();
+    if (currentQuestionIndex >= quizQuestions.length) {
+        terminateQuizSession();
+        return;
+    }
 
-    const qData = currentQuestions[currentQuestionIndex];
-    document.getElementById('question-text').innerText = qData.q;
-    document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+    const qData = quizQuestions[currentQuestionIndex];
    
-    // Update Graphical Progress Bar
-    const progressPercent = ((currentQuestionIndex) / currentQuestions.length) * 100;
-    document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+    // Update Tracking DOM indicators
+    document.getElementById("current-question-num").innerText = currentQuestionIndex + 1;
+    document.getElementById("total-questions-count").innerText = quizQuestions.length;
+   
+    const progressPercent = ((currentQuestionIndex) / quizQuestions.length) * 100;
+    document.getElementById("quiz-progress-bar").style.width = `${progressPercent}%`;
 
-    const optionsList = document.getElementById('options-list');
-    optionsList.innerHTML = '';
+    // Render Text fields dynamically based on active localization setup
+    document.getElementById("question-text-node").innerText = selectedLanguage === 'en' ? qData.question_en : qData.question_np;
    
-    qData.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerText = opt;
-        btn.onclick = () => selectOption(idx, btn);
-        optionsList.appendChild(btn);
+    const optionsContainer = document.getElementById("options-box-wrapper");
+    optionsContainer.innerHTML = "";
+
+    const operationalOptionsArray = selectedLanguage === 'en' ? qData.options_en : qData.options_np;
+   
+    operationalOptionsArray.forEach((optionText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option glass-panel font-medium text-left p-4 rounded-xl transition-all";
+        btn.innerText = optionText;
+        btn.onclick = () => evaluationSelection(idx, btn);
+        optionsContainer.appendChild(btn);
     });
 
-    startTimer();
+    document.getElementById("explanation-banner").classList.add("hidden");
+    document.getElementById("next-question-trigger").classList.add("hidden");
+   
+    initiateTimerCounter();
 }
 
-function startTimer() {
+// Timer Controller Execution Node
+function initiateTimerCounter() {
+    timeLeft = 30;
+    const timerDisplay = document.getElementById("timer-countdown-text");
+    timerDisplay.classList.remove("warning");
+    timerDisplay.innerText = timeLeft;
+
     timerInterval = setInterval(() => {
         timeLeft--;
-        document.getElementById('timer').innerText = timeLeft;
-       
-        // Critical 7 Seconds Audio Cues logic anchor
-        if(timeLeft <= 7 && timeLeft > 0) {
-            document.getElementById('timer').style.color = '#ef4444';
-        } else {
-            document.getElementById('timer').style.color = 'var(--accent)';
+        timerDisplay.innerText = timeLeft;
+
+        if (timeLeft <= 7) {
+            timerDisplay.classList.add("warning");
+            soundControls.playWarning();
         }
 
-        if(timeLeft <= 0) {
+        if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            autoRevealCorrect();
+            handleTimeoutExceeded();
         }
     }, 1000);
 }
 
-function selectOption(selectedIdx, selectedBtn) {
-    clearInterval(timerInterval);
-    const qData = currentQuestions[currentQuestionIndex];
-    const options = document.getElementById('options-list').children;
+function resetTimer() {
+    if(timerInterval) clearInterval(timerInterval);
+}
+
+function handleTimeoutExceeded() {
+    // Process structural skip upon complete timeout expiry
+    evaluationSelection(-1, null);
+}
+
+// Selection Evaluator Engine
+function evaluationSelection(chosenIndex, targetButtonElement) {
+    resetTimer();
+    const qData = quizQuestions[currentQuestionIndex];
+    const optionsButtons = document.querySelectorAll("#options-box-wrapper .quiz-option");
    
-    if(selectedIdx === qData.correct) {
-        selectedBtn.classList.add('correct');
-        score++;
+    // Disable multiple inputs
+    optionsButtons.forEach(btn => btn.disabled = true);
+
+    const isCorrect = (chosenIndex === qData.correctIndex);
+   
+    if (chosenIndex === -1) {
+        // Skipped configuration
+        answeredHistory.push({ status: 'skipped', questionId: qData.id });
+    } else if (isCorrect) {
+        targetButtonElement.classList.add("correct");
+        score += 10;
+        xpPoints += 15;
+        answeredHistory.push({ status: 'correct', questionId: qData.id });
     } else {
-        selectedBtn.classList.add('incorrect');
-        options[qData.correct].classList.add('correct'); // Highlight answer
+        if(targetButtonElement) targetButtonElement.classList.add("incorrect");
+        optionsButtons[qData.correctIndex].classList.add("correct");
+        answeredHistory.push({ status: 'incorrect', questionId: qData.id });
     }
 
-    // Disable all options post selection
-    for(let btn of options) { btn.disabled = true; }
-   
-    // Reveal Structured Explanation
-    document.getElementById('explanation-text').innerText = qData.explanation;
-    document.getElementById('explanation-box').classList.remove('hidden');
+    // Display Explanatory text feedback matrix block
+    const expBanner = document.getElementById("explanation-banner");
+    const expText = document.getElementById("explanation-content-text");
+    expText.innerText = selectedLanguage === 'en' ? qData.explanation_en : qData.explanation_np;
+    expBanner.classList.remove("hidden");
 
-    const nextBtn = document.getElementById('next-btn');
-    nextBtn.classList.remove('disabled');
-    nextBtn.disabled = false;
+    document.getElementById("next-question-trigger").classList.remove("hidden");
 }
 
-function autoRevealCorrect() {
-    const qData = currentQuestions[currentQuestionIndex];
-    const options = document.getElementById('options-list').children;
-    options[qData.correct].classList.add('correct');
-    for(let btn of options) { btn.disabled = true; }
-    nextQuestion();
-}
-
-function nextQuestion() {
+function advanceNextQuestion() {
     currentQuestionIndex++;
-    if(currentQuestionIndex < currentQuestions.length) {
-        loadQuestion();
-    } else {
-        showResults();
-    }
+    renderCurrentQuestion();
 }
 
-function showResults() {
-    switchTab('result');
-    document.getElementById('res-score').innerText = `${score}/${currentQuestions.length}`;
-    const accuracy = Math.round((score / currentQuestions.length) * 100);
-    document.getElementById('res-accuracy').innerText = `${accuracy}%`;
+function skipActiveQuestion() {
+    evaluationSelection(-1, null);
 }
 
-// Admin Interaction Management
-function handleAdminAdd(event) {
-    event.preventDefault();
-    const cat = document.getElementById('form-cat').value;
-    const q = document.getElementById('form-q').value;
-    const opts = document.getElementById('form-opts').value.split(',').map(s => s.trim());
-    const correct = parseInt(document.getElementById('form-correct').value);
-    const exp = document.getElementById('form-exp').value;
+// Performance Processing Dashboard Termination Node
+function terminateQuizSession() {
+    document.getElementById("quiz-playground").classList.add("hidden");
+    document.getElementById("result-screen").classList.remove("hidden");
 
-    if(opts.length !== 4) {
-        alert("Please enter exactly 4 comma-separated options.");
-        return;
-    }
-
-    questionDatabase[cat].push({ q, options: opts, correct, explanation: exp });
-    alert("New Dynamic Quiz Question compiled into Application Context Memory successfully.");
-    document.getElementById('add-question-form').reset();
-}
-
-// Light & Dark Mode Toggle Action
-function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-    body.classList.toggle('light-mode');
-}
+    const totalQuestions = quizQuestions.length;
+    const corrects = answeredHistory.filter(h => h.status === 'correct').length;
+    const incorrects = answeredHistory.filter(h => h.status === 'incorrect').length;
 
  

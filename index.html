@@ -1,364 +1,123 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en" class="dark-mode">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lok Raj Awasthi - Professional Educational Quiz Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
+    <title>Awasthi Quiz - Premium Educational Platform</title>
+    <!-- Google Fonts & Tailwind CSS CDN -->
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-mode">
+<body class="font-['Poppins'] text-gray-100 min-h-screen bg-slate-950 relative overflow-x-hidden">
 
-    <!-- Mahadev Themed Background Overlay -->
-    <div class="mahadev-bg-overlay"></div>
+    <!-- Premium Mahadev Themed Dynamic Background Layer -->
+    <div class="fixed inset-0 z-0 bg-cover bg-center transition-all duration-700 mesh-bg-overlay"></div>
 
-    <!-- Header Navigation -->
-    <header>
-        <div class="logo-container">
-            <i class="fa-solid fa-om logo-icon"></i>
-            <div>
-                <h1>LRA Quiz Portal</h1>
-                <small>Owner: Lok Raj Awasthi</small>
+    <!-- 1. WELCOME / LANDING SCREEN -->
+    <div id="landing-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="animate-bounce mb-4 text-6xl md:text-8xl drop-shadow-[0_0_25px_rgba(249,115,22,0.6)]">🔱</div>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-cyan-400 mb-6 font-serif drop-shadow-lg">
+            हर हर महादेव
+        </h1>
+        <p class="text-lg md:text-2xl font-light tracking-wide text-gray-300 max-w-xl mx-auto mb-10 px-4">
+            Welcome to <span class="font-semibold text-cyan-400">Awasthi Quiz</span>. A Premium Educational Hub Engineered by Lok Raj Awasthi.
+        </p>
+        <button onclick="transitionToAuth()" class="px-8 py-4 bg-gradient-to-r from-cyan-500 via-purple-600 to-orange-500 rounded-full font-bold text-lg uppercase tracking-widest shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:shadow-[0_0_35px_rgba(6,182,212,0.8)] hover:scale-105 transition-all duration-300 transform">
+            Enter Platform <i class="fas fa-arrow-right ml-2 animate-pulse"></i>
+        </button>
+    </div>
+
+    <!-- 2. LOGIN / SIGN UP AUTHENTICATION SCREEN -->
+    <div id="auth-screen" class="hidden fixed inset-0 z-40 flex items-center justify-center p-4 overflow-y-auto bg-slate-950/50 backdrop-blur-lg">
+        <div class="glass-card w-full max-w-md p-8 rounded-3xl border border-white/10 shadow-2xl relative transition-all duration-500 transform scale-95 opacity-0" id="auth-box">
+            <div class="text-center mb-8">
+                <span class="text-3xl">🔱</span>
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">Awasthi Quiz</h2>
+                <p class="text-gray-400 text-sm mt-1">Sign in to start your learning streak</p>
+            </div>
+           
+            <button onclick="mockLogin('Google User')" class="w-full py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center font-medium transition-all duration-300 mb-4 group">
+                <i class="fab fa-google text-red-500 mr-3 text-lg group-hover:scale-110 transition-transform"></i> Continue with Google
+            </button>
+            <button onclick="toggleEmailAuth()" class="w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl flex items-center justify-center font-medium transition-all duration-300 mb-6 shadow-lg shadow-cyan-900/40">
+                <i class="fas fa-envelope mr-3"></i> Continue with Email
+            </button>
+
+            <!-- Hidden Email Form Block -->
+            <div id="email-form-block" class="hidden space-y-4 mb-4 transition-all duration-500">
+                <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 bg-slate-900/80 border border-white/10 rounded-xl focus:outline-none focus:border-cyan-400 text-white transition-all">
+                <input type="password" placeholder="Password" class="w-full px-4 py-3 bg-slate-900/80 border border-white/10 rounded-xl focus:outline-none focus:border-cyan-400 text-white transition-all">
+                <button onclick="mockLogin('Email User')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold uppercase tracking-wider text-sm">Sign In / Sign Up</button>
+            </div>
+
+            <div class="flex justify-between text-xs text-gray-400 px-1">
+                <a href="#" class="hover:text-cyan-400 transition-colors">Forgot Password?</a>
+                <a href="#" class="hover:text-cyan-400 transition-colors">Account Recovery</a>
             </div>
         </div>
-        <nav>
-            <button class="nav-btn active" onclick="switchTab('home')"><i class="fa-solid fa-house"></i> Home</button>
-            <button class="nav-btn" onclick="switchTab('dashboard')"><i class="fa-solid fa-user"></i> Dashboard</button>
-            <button class="nav-btn" onclick="switchTab('admin')"><i class="fa-solid fa-user-shield"></i> Admin</button>
-            <button id="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-sun"></i></button>
-        </nav>
-    </header>
+    </div>
 
-    <!-- Main Content Containers -->
-    <main class="container">
-       
-        <!-- HOME TAB -->
-        <section id="home-tab" class="tab-content active">
-            <div class="hero-section">
-                <h2>नमस्कार, तयारी सुरु गरौँ!</h2>
-                <p>Fast, Modern र User-Friendly शैक्षिक केन्द्र। आफ्नो कक्षा वा प्रतिस्पर्धात्मक परीक्षा रोज्नुहोस्।</p>
-            </div>
-
-            <!-- Quiz Categories Grid -->
-            <div class="grid-categories">
-                <div class="category-card" onclick="startQuiz('class10', 'Science')">
-                    <i class="fa-solid fa-microscope"></i>
-                    <h3>Class 10 Science</h3>
-                    <p>Physics, Chemistry, Biology MCQ</p>
-                </div>
-                <div class="category-card" onclick="startQuiz('class11', 'Physics')">
-                    <i class="fa-solid fa-atom"></i>
-                    <h3>Class 11 Physics</h3>
-                    <p>Mechanics, Heat, Optics & More</p>
-                </div>
-                <div class="category-card" onclick="startQuiz('loksewa', 'Nepal GK')">
-                    <i class="fa-solid fa-gavel"></i>
-                    <h3>Lok Sewa Preparation</h3>
-                    <p>नेपालको भूगोल, इतिहास र संविधान</p>
-                </div>
-                <div class="category-card" onclick="alert('Multiplayer System Comming Soon in Backend Stage!')">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>One vs Another (1v1)</h3>
-                    <p>साथीहरूसँग रियल-टाइम प्रतिस्पर्धा</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- QUIZ ENGINE INTERFACE -->
-        <section id="quiz-tab" class="tab-content">
-            <div class="quiz-box">
-                <div class="quiz-header">
-                    <span id="quiz-title">Quiz</span>
-                    <div class="timer-box">
-                        <i class="fa-solid fa-hourglass-half"></i> <span id="timer">30</span>s
-                    </div>
-                </div>
-                <div class="progress-bar-container">
-                    <div id="progress-bar"></div>
-                </div>
-               
-                <div class="question-container">
-                    <h3 id="question-text">प्रश्न लोड हुँदैछ...</h3>
-                    <div id="options-list" class="options-grid"></div>
-                </div>
-
-                <div id="explanation-box" class="explanation-box hidden">
-                    <h4><i class="fa-solid fa-circle-info"></i> Explanation:</h4>
-                    <p id="explanation-text"></p>
-                </div>
-
-                <div class="quiz-footer">
-                    <span id="question-counter">Question 1 of 10</span>
-                    <button id="next-btn" class="btn disabled" onclick="nextQuestion()" disabled>Next <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- RESULT PAGE -->
-        <section id="result-tab" class="tab-content">
-            <div class="result-box">
-                <h2><i class="fa-solid fa-trophy"></i> Quiz Result</h2>
-                <div class="result-stats">
-                    <div class="stat-item">
-                        <span class="stat-val" id="res-score">0/0</span>
-                        <span class="stat-lbl">Score</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val" id="res-accuracy">0%</span>
-                        <span class="stat-lbl">Accuracy</span>
-                    </div>
-                </div>
-                <div class="recommendation-box">
-                    <h4><i class="fa-solid fa-lightbulb"></i> Improvement Feedback:</h4>
-                    <p id="feedback-text">प्रयास राम्रो छ! थप सुधारको लागि मुख्य बुँदाहरू रिभ्यु गर्नुहोस्।</p>
-                </div>
-                <button class="btn" onclick="switchTab('home')"><i class="fa-solid fa-rotate-left"></i> Play Again</button>
-            </div>
-        </section>
-
-        <!-- USER DASHBOARD TAB -->
-        <section id="dashboard-tab" class="tab-content">
-            <div class="profile-card">
-                <div class="profile-header">
-                    <div class="avatar">LRA</div>
-                    <div>
-                        <h2>Lok Raj Awasthi</h2>
-                        <p><i class="fa-solid fa-bolt"></i> Level 12 Quiz Master</p>
-                    </div>
-                </div>
-                <div class="streak-badge">
-                    <i class="fa-solid fa-fire"></i> 5 Days Streak!
-                </div>
-            </div>
-        </section>
-
-        <!-- ADMIN PANEL TAB -->
-        <section id="admin-tab" class="tab-content">
-            <div class="admin-box">
-                <h2><i class="fa-solid fa-database"></i> Admin Management Portal</h2>
-                <p>यहाँबाट नयाँ MCQ थप्न र बल्क अपलोड (Bulk JSON System) व्यवस्थापन गर्न सकिन्छ।</p>
-               
-                <form id="add-question-form" onsubmit="handleAdminAdd(event)">
-                    <div class="form-group">
-                        <label>Category/Subject</label>
-                        <select id="form-cat">
-                            <option value="class10">Class 10 Science</option>
-                            <option value="class11">Class 11 Physics</option>
-                            <option value="loksewa">Lok Sewa - Nepal GK</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Question Text</label>
-                        <input type="text" id="form-q" required placeholder="प्रश्न लेख्नुहोस्">
-                    </div>
-                    <div class="form-group">
-                        <label>Options (Comma Separated - 4 Options)</label>
-                        <input type="text" id="form-opts" required placeholder="Option A, Option B, Option C, Option D">
-                    </div>
-                    <div class="form-group">
-                        <label>Correct Answer Index (0 to 3)</label>
-                        <input type="number" id="form-correct" min="0" max="3" required placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <label>Explanation</label>
-                        <textarea id="form-exp" placeholder="सही उत्तर हुनुको कारण..."></textarea>
-                    </div>
-                    <button type="submit" class="btn">Add Question to Live Memory</button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Lok Raj Awasthi Educational Quiz Network. All Rights Reserved. Designed for Excellence.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
- 
-<!DOCTYPE html>
-<html lang="ne">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lok Raj Awasthi - Professional Educational Quiz Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-</head>
-<body class="dark-mode">
-
-    <!-- Mahadev Themed Background Overlay -->
-    <div class="mahadev-bg-overlay"></div>
-
-    <!-- Header Navigation -->
-    <header>
-        <div class="logo-container">
-            <i class="fa-solid fa-om logo-icon"></i>
+    <!-- MAIN INTERFACE HEADER -->
+    <header id="main-header" class="hidden sticky top-0 z-30 w-full glass-card border-b border-white/5 px-4 md:px-8 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">🔱</span>
             <div>
-                <h1>LRA Quiz Portal</h1>
-                <small>Owner: Lok Raj Awasthi</small>
+                <h1 class="text-xl md:text-2xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-orange-400 bg-clip-text text-transparent">Awasthi Quiz</h1>
+                <p class="text-[9px] text-gray-400 tracking-wider uppercase font-medium">Created & Owned by Lok Raj Awasthi</p>
             </div>
         </div>
-        <nav>
-            <button class="nav-btn active" onclick="switchTab('home')"><i class="fa-solid fa-house"></i> Home</button>
-            <button class="nav-btn" onclick="switchTab('dashboard')"><i class="fa-solid fa-user"></i> Dashboard</button>
-            <button class="nav-btn" onclick="switchTab('admin')"><i class="fa-solid fa-user-shield"></i> Admin</button>
-            <button id="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-sun"></i></button>
+       
+        <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-gray-300">
+            <a href="#" onclick="showSection('dashboard-section')" class="hover:text-cyan-400 transition-colors flex items-center"><i class="fas fa-home mr-1.5"></i> Home</a>
+            <a href="#" onclick="showSection('classes-section')" class="hover:text-cyan-400 transition-colors flex items-center"><i class="fas fa-graduation-cap mr-1.5"></i> Classes</a>
+            <a href="#" onclick="showSection('gk-section')" class="hover:text-cyan-400 transition-colors flex items-center"><i class="fas fa-globe mr-1.5"></i> GK & LokSewa</a>
+            <a href="#" onclick="showSection('multiplayer-section')" class="hover:text-cyan-400 transition-colors flex items-center"><i class="fas fa-users mr-1.5"></i> Play with Friends</a>
+            <a href="#" onclick="showSection('leaderboard-section')" class="hover:text-cyan-400 transition-colors flex items-center"><i class="fas fa-trophy mr-1.5"></i> Leaderboard</a>
         </nav>
+
+        <div class="flex items-center space-x-4">
+            <button onclick="toggleLanguage()" id="lang-btn" class="px-2.5 py-1 text-xs font-bold border border-white/20 rounded-md bg-white/5 hover:bg-white/10 transition-all">EN</button>
+            <button onclick="toggleSound()" id="sound-btn" class="text-gray-300 hover:text-cyan-400 transition-colors text-lg"><i class="fas fa-volume-up"></i></button>
+            <button onclick="toggleTheme()" class="text-gray-300 hover:text-cyan-400 transition-colors text-lg"><i class="fas fa-moon"></i></button>
+           
+            <div onclick="showSection('profile-section')" class="flex items-center space-x-2 cursor-pointer group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 p-0.5 shadow-md group-hover:scale-105 transition-all">
+                    <img src="https://unsplash.com" alt="Profile" class="w-full h-full rounded-full object-cover">
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- Main Content Containers -->
-    <main class="container">
+    <!-- MAIN PLATFORM CONTENT WRAPPER -->
+    <main id="main-content" class="hidden max-w-7xl mx-auto px-4 md:px-8 py-8 z-10 relative space-y-12">
        
-        <!-- HOME TAB -->
-        <section id="home-tab" class="tab-content active">
-            <div class="hero-section">
-                <h2>नमस्कार, तयारी सुरु गरौँ!</h2>
-                <p>Fast, Modern र User-Friendly शैक्षिक केन्द्र। आफ्नो कक्षा वा प्रतिस्पर्धात्मक परीक्षा रोज्नुहोस्।</p>
+        <!-- GAMIFICATION STATS BAR -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="glass-card p-4 rounded-2xl flex items-center space-x-3 border border-white/5">
+                <div class="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 text-xl"><i class="fas fa-fire"></i></div>
+                <div><p class="text-xs text-gray-400">Daily Streak</p><p class="text-lg font-bold" id="stat-streak">5 Days</p></div>
             </div>
-
-            <!-- Quiz Categories Grid -->
-            <div class="grid-categories">
-                <div class="category-card" onclick="startQuiz('class10', 'Science')">
-                    <i class="fa-solid fa-microscope"></i>
-                    <h3>Class 10 Science</h3>
-                    <p>Physics, Chemistry, Biology MCQ</p>
-                </div>
-                <div class="category-card" onclick="startQuiz('class11', 'Physics')">
-                    <i class="fa-solid fa-atom"></i>
-                    <h3>Class 11 Physics</h3>
-                    <p>Mechanics, Heat, Optics & More</p>
-                </div>
-                <div class="category-card" onclick="startQuiz('loksewa', 'Nepal GK')">
-                    <i class="fa-solid fa-gavel"></i>
-                    <h3>Lok Sewa Preparation</h3>
-                    <p>नेपालको भूगोल, इतिहास र संविधान</p>
-                </div>
-                <div class="category-card" onclick="alert('Multiplayer System Comming Soon in Backend Stage!')">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>One vs Another (1v1)</h3>
-                    <p>साथीहरूसँग रियल-टाइम प्रतिस्पर्धा</p>
-                </div>
+            <div class="glass-card p-4 rounded-2xl flex items-center space-x-3 border border-white/5">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 text-xl"><i class="fas fa-star"></i></div>
+                <div><p class="text-xs text-gray-400">Total XP Points</p><p class="text-lg font-bold" id="stat-xp">1,250 XP</p></div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl flex items-center space-x-3 border border-white/5">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-xl"><i class="fas fa-shield-alt"></i></div>
+                <div><p class="text-xs text-gray-400">Current Level</p><p class="text-lg font-bold" id="stat-level">Level 12</p></div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl flex items-center space-x-3 border border-white/5">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 text-xl"><i class="fas fa-crown"></i></div>
+                <div><p class="text-xs text-gray-400">Global Rank</p><p class="text-lg font-bold" id="stat-rank">#42</p></div>
             </div>
         </section>
 
-        <!-- QUIZ ENGINE INTERFACE -->
-        <section id="quiz-tab" class="tab-content">
-            <div class="quiz-box">
-                <div class="quiz-header">
-                    <span id="quiz-title">Quiz</span>
-                    <div class="timer-box">
-                        <i class="fa-solid fa-hourglass-half"></i> <span id="timer">30</span>s
-                    </div>
-                </div>
-                <div class="progress-bar-container">
-                    <div id="progress-bar"></div>
-                </div>
-               
-                <div class="question-container">
-                    <h3 id="question-text">प्रश्न लोड हुँदैछ...</h3>
-                    <div id="options-list" class="options-grid"></div>
-                </div>
-
-                <div id="explanation-box" class="explanation-box hidden">
-                    <h4><i class="fa-solid fa-circle-info"></i> Explanation:</h4>
-                    <p id="explanation-text"></p>
-                </div>
-
-                <div class="quiz-footer">
-                    <span id="question-counter">Question 1 of 10</span>
-                    <button id="next-btn" class="btn disabled" onclick="nextQuestion()" disabled>Next <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- RESULT PAGE -->
-        <section id="result-tab" class="tab-content">
-            <div class="result-box">
-                <h2><i class="fa-solid fa-trophy"></i> Quiz Result</h2>
-                <div class="result-stats">
-                    <div class="stat-item">
-                        <span class="stat-val" id="res-score">0/0</span>
-                        <span class="stat-lbl">Score</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-val" id="res-accuracy">0%</span>
-                        <span class="stat-lbl">Accuracy</span>
-                    </div>
-                </div>
-                <div class="recommendation-box">
-                    <h4><i class="fa-solid fa-lightbulb"></i> Improvement Feedback:</h4>
-                    <p id="feedback-text">प्रयास राम्रो छ! थप सुधारको लागि मुख्य बुँदाहरू रिभ्यु गर्नुहोस्।</p>
-                </div>
-                <button class="btn" onclick="switchTab('home')"><i class="fa-solid fa-rotate-left"></i> Play Again</button>
-            </div>
-        </section>
-
-        <!-- USER DASHBOARD TAB -->
-        <section id="dashboard-tab" class="tab-content">
-            <div class="profile-card">
-                <div class="profile-header">
-                    <div class="avatar">LRA</div>
-                    <div>
-                        <h2>Lok Raj Awasthi</h2>
-                        <p><i class="fa-solid fa-bolt"></i> Level 12 Quiz Master</p>
-                    </div>
-                </div>
-                <div class="streak-badge">
-                    <i class="fa-solid fa-fire"></i> 5 Days Streak!
-                </div>
-            </div>
-        </section>
-
-        <!-- ADMIN PANEL TAB -->
-        <section id="admin-tab" class="tab-content">
-            <div class="admin-box">
-                <h2><i class="fa-solid fa-database"></i> Admin Management Portal</h2>
-                <p>यहाँबाट नयाँ MCQ थप्न र बल्क अपलोड (Bulk JSON System) व्यवस्थापन गर्न सकिन्छ।</p>
-               
-                <form id="add-question-form" onsubmit="handleAdminAdd(event)">
-                    <div class="form-group">
-                        <label>Category/Subject</label>
-                        <select id="form-cat">
-                            <option value="class10">Class 10 Science</option>
-                            <option value="class11">Class 11 Physics</option>
-                            <option value="loksewa">Lok Sewa - Nepal GK</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Question Text</label>
-                        <input type="text" id="form-q" required placeholder="प्रश्न लेख्नुहोस्">
-                    </div>
-                    <div class="form-group">
-                        <label>Options (Comma Separated - 4 Options)</label>
-                        <input type="text" id="form-opts" required placeholder="Option A, Option B, Option C, Option D">
-                    </div>
-                    <div class="form-group">
-                        <label>Correct Answer Index (0 to 3)</label>
-                        <input type="number" id="form-correct" min="0" max="3" required placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <label>Explanation</label>
-                        <textarea id="form-exp" placeholder="सही उत्तर हुनुको कारण..."></textarea>
-                    </div>
-                    <button type="submit" class="btn">Add Question to Live Memory</button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Lok Raj Awasthi Educational Quiz Network. All Rights Reserved. Designed for Excellence.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <!-- 3. MAIN DASHBOARD SECTION -->
+        <section id="dashboard-section" class="app-section space-y-8 animate-fade-in">
+            <!-- HERO BLOCK -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-4 max-w-xl z-10">
+                    <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-full text-xs font-bold uppercase tracking-widest">Active Hub</span>
 
  
