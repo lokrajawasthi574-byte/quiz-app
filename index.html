@@ -3,21 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हर हर महादेव - MCQ GAME</title>
+    <title>हर हर महादेव - Awasthi Quiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <!-- Header Section -->
-        <header>
-            <h1 class="main-title">हर हर महादेव 🔱</h1>
-            <h2 class="sub-title">MCQ GAME</h2>
-        </header>
+        <!-- Welcome Screen (Landing Page) -->
+        <div id="welcome-container" class="landing-card">
+            <h1 class="main-title">हर हर महादेव</h1>
+            <div class="trishul-icon">🔱</div>
+            <h2 class="brand-title">Awasthi Quiz</h2>
+            <p class="tagline">An Ultimate Educational Quiz Platform</p>
+           
+            <button id="start-game-btn" class="btn start-btn">Get Started</button>
+           
+            <div class="creator-info">
+                Creator & Owner: Lok Raj Awasthi
+            </div>
+        </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz-container" class="card">
+        <div id="quiz-container" class="card hide">
             <div class="quiz-header">
-                <div class="progress">प्रश्न: <span id="current-question">1</span>/<span id="total-questions">0</span></div>
-                <div class="timer">समय: <span id="time-left">15</span> सेकेन्ड</div>
+                <div class="progress">प्रश्न: <span id="current-question">1</span>/<span id="total-questions">10</span></div>
+                <div class="timer">समय: <span id="time-left">15</span> से.</div>
             </div>
+
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div id="question-text" class="question">लोड हुँदैछ...</div>
+
+            <div id="options-container" class="options-grid">
+                <!-- JavaScript dynamic buttons -->
+            </div>
+
+            <div class="footer-controls">
+                <button id="next-btn" class="btn next-btn hide">अर्को प्रश्न ➔</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-container" class="card hide">
+            <h2>नतिजा (Result) 🎉</h2>
+            <div class="result-score">स्कोर: <span id="score">0</span> / <span id="result-total">10</span></div>
+            <p id="result-message" class="result-message"></p>
+            <button id="restart-btn" class="btn restart-btn">पुनः खेल्नुहोस् ↻</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+ 
