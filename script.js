@@ -1,4 +1,4 @@
-// Lokraj Awasthi QUIZ - Developed by Lokraj Awasthi
+// Lokraj Awasthi Quiz - Developed by Lokraj Awasthi
 
 let questionBank = [];
 let currentQuestions = [];
@@ -6,7 +6,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let userAnswers = [];
 let timerInterval = null;
-let timeLeft = 20; // Changed to 20 seconds
+let timeLeft = 20;
 
 // DOM Elements
 const loginForm = document.getElementById('login-form');
@@ -14,13 +14,13 @@ const homeBtn = document.getElementById('home-btn');
 const reviewBtn = document.getElementById('review-btn');
 const restartBtn = document.getElementById('restart-btn');
 
-// 1. LOGIN LOGIC (Anyone can enter their name)
+// 1. LOGIN LOGIC (अब जसले जे नाम राख्छ, त्यसैले खोल्छ!)
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('access-name').value.trim();
    
-    // Check if name is not empty
-    if (name.length > 0) {
+    // कुनै पनि नाम चेक गर्दैन, खाली छ कि छैन मात्र हेर्छ
+    if (name.length >= 2) {
         document.getElementById('login-screen').classList.remove('active');
         document.getElementById('app-screen').classList.add('active');
         loadQuestions();
@@ -111,7 +111,7 @@ function loadQuestion() {
 }
 
 function startTimer() {
-    timeLeft = 20; // Reset to 20 seconds
+    timeLeft = 20;
     document.getElementById('time-left').textContent = timeLeft;
     const progress = document.getElementById('timer-progress');
     progress.style.width = '100%';
@@ -121,8 +121,8 @@ function startTimer() {
     timerInterval = setInterval(() => {
         timeLeft--;
         document.getElementById('time-left').textContent = timeLeft;
-        progress.style.width = `${(timeLeft / 20) * 100}%`; // Updated calculation for 20 seconds
-        if (timeLeft <= 5) progress.style.background = 'var(--danger)'; // Red when 5 seconds left
+        progress.style.width = `${(timeLeft / 20) * 100}%`;
+        if (timeLeft <= 5) progress.style.background = 'var(--danger)';
         if (timeLeft <= 0) { clearInterval(timerInterval); selectOption(-1); }
     }, 1000);
 }
