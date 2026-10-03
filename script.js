@@ -1,9 +1,6 @@
-// ==========================================
 // Lokraj Awasthi QUIZ - Developed by Lokraj Awasthi
-// ==========================================
 
 let questionBank = [];
-let currentUser = null;
 let currentQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
@@ -11,91 +8,76 @@ let userAnswers = [];
 let timerInterval = null;
 let timeLeft = 10;
 
-const loginScreen = document.getElementById('login-screen');
-const appScreen = document.getElementById('app-screen');
+// DOM Elements
 const loginForm = document.getElementById('login-form');
-const userDisplay = document.getElementById('user-display');
-const logoutBtn = document.getElementById('logout-btn');
+const homeBtn = document.getElementById('home-btn');
+const reviewBtn = document.getElementById('review-btn');
+const restartBtn = document.getElementById('restart-btn');
 
-// Load questions from JSON file
-fetch('questions.json')
-    .then(response => response.json())
-    .then(data => {
-        questionBank = data;
-        console.log(`${questionBank.length} प्रश्नहरू सफलतापूर्वक लोड भयो!`);
-    })
-    .catch(error => {
-        console.error('प्रश्न लोड गर्न समस्या:', error);
-        alert('प्रश्नहरू लोड गर्न समस्या भयो। कृपया questions.json फाइल जाँच गर्नुहोस्।');
-    });
-
-// Login
+// 1. LOGIN LOGIC (Only your name can open)
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const name = document.getElementById('access-name').value.trim().toLowerCase();
+    const allowedNames = ['lokraj', 'lokraj awasthi', 'lokrajawasthi', 'लोक राज अवस्थी'];
    
-    if(email && password.length >= 4) {
-        currentUser = email.split('@')[0];
-        localStorage.setItem('yakQuizUser', currentUser);
-        showApp();
+    if (allowedNames.includes(name)) {
+        document.getElementById('login-screen').classList.remove('active');
+        document.getElementById('app-screen').classList.add('active');
+        loadQuestions();
     } else {
-        alert('कृपया वैध इमेल र कम्तिमा ४ अक्षरको पासवर्ड राख्नुहोस्।');
+        alert('Access Denied! यो वेबसाइट केवल Lokraj Awasthi को लागि हो।');
+        document.getElementById('access-name').value = '';
     }
 });
 
-logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('yakQuizUser');
-    currentUser = null;
-    loginScreen.classList.add('active');
-    appScreen.classList.remove('active');
-});
-
-window.addEventListener('load', () => {
-    const savedUser = localStorage.getItem('yakQuizUser');
-    if(savedUser) {
-        currentUser = savedUser;
-        showApp();
-    }
-});
-
-function showApp() {
-    loginScreen.classList.remove('active');
-    appScreen.classList.add('active');
-    userDisplay.textContent = currentUser;
-    showSection('category-section');
+// Load Questions from JSON
+function loadQuestions() {
+    fetch('questions.json')
+        .then(response => response.json())
+        .then(data => {
+            questionBank = data;
+            console.log(`${questionBank.length} प्रश्न सफलतापूर्वक लोड भयो!`);
+        })
+        .catch(error => { console.error('Error:', error); alert('प्रश्न लोड गर्न समस्या भयो!'); });
 }
+
+// Navigation Logic
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+   
+    if (sectionId === 'category-section') {
+        homeBtn.style.display = 'none';
+    } else {
+        homeBtn.style.display = 'block';
+    }
+}
+
+homeBtn.addEventListener('click', () => showSection('category-section'));
 
 // Category Selection
 document.querySelectorAll('.category-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const category = card.dataset.category;
-        startQuiz(category);
-    });
+    card.addEventListener('click', () => startQuiz(card.dataset.category));
 });
 
+// START QUIZ
 function startQuiz(category) {
-    if(questionBank.length === 0) {
-        alert('प्रश्नहरू लोड हुँदैछन्। कृपया केही समय पर्खनुहोस्।');
-        return;
-    }
+    if(questionBank.length === 0) { alert('प्रश्नहरू लोड हुँदैछन्... कृपया पर्खनुहोस्।'); return; }
 
-    const askedKey = `askedQuestions_${currentUser}`;
+    const askedKey = `asked_${category}`;
     let askedQuestions = JSON.parse(localStorage.getItem(askedKey)) || [];
    
-    let availableQuestions = questionBank.filter(q => {
-        if (category === 'mixed') return !askedQuestions.includes(q.id);
-        return q.category === category && !askedQuestions.includes(q.id);
-    });
+    let available = questionBank.filter(q =>
+        category === 'mixed' ? !askedQuestions.includes(q.id) : q.category === category && !askedQuestions.includes(q.id)
+    );
 
-    if (availableQuestions.length < 10) {
-        alert('यस विषयका सबै नयाँ प्रश्नहरू सकिएका छन्! पुराना प्रश्नहरू फेरि मिसाउँदैछौं।');
+    if (available.length < 10) {
         askedQuestions = [];
-        availableQuestions = questionBank.filter(q => category === 'mixed' ? true : q.category === category);
+        localStorage.removeItem(askedKey);
+        available = questionBank.filter(q => category === 'mixed' ? true : q.category === category);
     }
 
-    currentQuestions = shuffleArray(availableQuestions).slice(0, 10);
-   
+    currentQuestions = shuffleArray(available).slice(0, 10);
     currentQuestions.forEach(q => {
         if(!askedQuestions.includes(q.id)) askedQuestions.push(q.id);
     });
@@ -104,56 +86,45 @@ function startQuiz(category) {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-   
+    document.getElementById('review-container').innerHTML = '';
+
     showSection('quiz-section');
     loadQuestion();
 }
 
 function loadQuestion() {
-    if (currentQuestionIndex >= currentQuestions.length) {
-        endQuiz();
-        return;
-    }
+    if (currentQuestionIndex >= currentQuestions.length) { endQuiz(); return; }
 
     const q = currentQuestions[currentQuestionIndex];
     document.getElementById('question-counter').textContent = `प्रश्न ${currentQuestionIndex + 1}/10`;
     document.getElementById('question-text').textContent = q.question;
    
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
+    const container = document.getElementById('options-container');
+    container.innerHTML = '';
     q.options.forEach((opt, index) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = opt;
         btn.onclick = () => selectOption(index);
-        optionsContainer.appendChild(btn);
+        container.appendChild(btn);
     });
-
     startTimer();
 }
 
 function startTimer() {
     timeLeft = 10;
     document.getElementById('time-left').textContent = timeLeft;
-    document.getElementById('timer-progress').style.width = '100%';
-    document.getElementById('timer-progress').style.background = 'var(--success)';
-
+    const progress = document.getElementById('timer-progress');
+    progress.style.width = '100%';
+    progress.style.background = 'var(--success)';
     clearInterval(timerInterval);
+   
     timerInterval = setInterval(() => {
         timeLeft--;
         document.getElementById('time-left').textContent = timeLeft;
-        const percentage = (timeLeft / 10) * 100;
-        document.getElementById('timer-progress').style.width = `${percentage}%`;
-
-        if (timeLeft <= 3) {
-            document.getElementById('timer-progress').style.background = 'var(--danger)';
-        }
-
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            selectOption(-1);
-        }
+        progress.style.width = `${(timeLeft / 10) * 100}%`;
+        if (timeLeft <= 3) progress.style.background = 'var(--danger)';
+        if (timeLeft <= 0) { clearInterval(timerInterval); selectOption(-1); }
     }, 1000);
 }
 
@@ -161,67 +132,51 @@ function selectOption(selectedIndex) {
     clearInterval(timerInterval);
     const q = currentQuestions[currentQuestionIndex];
     const isCorrect = selectedIndex === q.answer;
-   
     if (isCorrect) score++;
 
     userAnswers.push({
         question: q.question,
         userOption: selectedIndex === -1 ? "समय सकियो" : q.options[selectedIndex],
         correctOption: q.options[q.answer],
-        isCorrect: isCorrect
+        isCorrect
     });
 
     const buttons = document.querySelectorAll('.option-btn');
-    if (selectedIndex !== -1) {
-        buttons[selectedIndex].classList.add(isCorrect ? 'correct' : 'wrong');
-    }
+    if (selectedIndex !== -1) buttons[selectedIndex].classList.add(isCorrect ? 'correct' : 'wrong');
     buttons[q.answer].classList.add('correct');
-
     buttons.forEach(btn => btn.disabled = true);
 
-    setTimeout(() => {
-        currentQuestionIndex++;
-        loadQuestion();
-    }, 1500);
+    setTimeout(() => { currentQuestionIndex++; loadQuestion(); }, 1200);
 }
 
 function endQuiz() {
     showSection('result-section');
     document.getElementById('final-score').textContent = score;
-   
-    let message = "";
-    if (score === 10) message = "अद्भुत! तपाईं एकदमै जानकार हुनुहुन्छ! 🏆";
-    else if (score >= 7) message = "धेरै राम्रो! 👏";
-    else if (score >= 4) message = "ठिकै छ, अझै अभ्यास गर्नुहोस्! 👍";
-    else message = "चिन्ता नगर्नुहोस्, फेरि प्रयास गर्नुहोस्! 💪";
-   
-    document.getElementById('score-message').textContent = message;
-
-    const reviewContainer = document.getElementById('review-container');
-    reviewContainer.innerHTML = '';
-   
-    userAnswers.forEach((ans, idx) => {
-        const div = document.createElement('div');
-        div.className = `review-item ${ans.isCorrect ? 'correct' : 'wrong'}`;
-        div.innerHTML = `
-            <strong>प्रश्न ${idx + 1}:</strong> ${ans.question}<br>
-            <span style="color: ${ans.isCorrect ? 'green' : 'red'}">
-                तपाईंको उत्तर: ${ans.userOption}
-            </span><br>
-            ${!ans.isCorrect ? `<span style="color: green">सही उत्तर: ${ans.correctOption}</span>` : ''}
-        `;
-        reviewContainer.appendChild(div);
-    });
+    let msg = score === 10 ? "अद्भुत! तपाईं एकदमै जानकार हुनुहुन्छ! " :
+              score >= 7 ? "धेरै राम्रो! अझै अलि अभ्यास गर्नुहोस्। 👏" :
+              score >= 4 ? "ठिकै छ, अर्को पटक अझै राम्रो गर्नुहोला! 👍" :
+              "चिन्ता नगर्नुहोस्, फेरि प्रयास गर्नुहोस्! 💪";
+    document.getElementById('score-message').textContent = msg;
 }
 
-document.getElementById('restart-btn').addEventListener('click', () => {
-    showSection('category-section');
+reviewBtn.addEventListener('click', () => {
+    const container = document.getElementById('review-container');
+    if (container.innerHTML === '') {
+        container.innerHTML = userAnswers.map((ans, idx) => `
+            <div class="review-item ${ans.isCorrect ? 'correct' : 'wrong'}">
+                <strong>${idx+1}. ${ans.question}</strong><br>
+                <span style="color:${ans.isCorrect?'green':'red'}">तपाईं: ${ans.userOption}</span><br>
+                ${!ans.isCorrect ? `<span style="color:green">सही: ${ans.correctOption}</span>` : ''}
+            </div>`).join('');
+    } else {
+        container.innerHTML = '';
+    }
 });
 
-function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(sectionId).classList.add('active');
-}
+restartBtn.addEventListener('click', () => {
+    document.getElementById('review-container').innerHTML = '';
+    showSection('category-section');
+});
 
 function shuffleArray(array) {
     const shuffled = [...array];
