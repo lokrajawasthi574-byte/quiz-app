@@ -6,7 +6,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let userAnswers = [];
 let timerInterval = null;
-let timeLeft = 10;
+let timeLeft = 20; // Changed to 20 seconds
 
 // DOM Elements
 const loginForm = document.getElementById('login-form');
@@ -14,19 +14,18 @@ const homeBtn = document.getElementById('home-btn');
 const reviewBtn = document.getElementById('review-btn');
 const restartBtn = document.getElementById('restart-btn');
 
-// 1. LOGIN LOGIC (Only your name can open)
+// 1. LOGIN LOGIC (Anyone can enter their name)
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = document.getElementById('access-name').value.trim().toLowerCase();
-    const allowedNames = ['lokraj', 'lokraj awasthi', 'lokrajawasthi', 'लोक राज अवस्थी'];
+    const name = document.getElementById('access-name').value.trim();
    
-    if (allowedNames.includes(name)) {
+    // Check if name is not empty
+    if (name.length > 0) {
         document.getElementById('login-screen').classList.remove('active');
         document.getElementById('app-screen').classList.add('active');
         loadQuestions();
     } else {
-        alert('Access Denied! यो वेबसाइट केवल Lokraj Awasthi को लागि हो।');
-        document.getElementById('access-name').value = '';
+        alert('कृपया आफ्नो नाम राख्नुहोस्!');
     }
 });
 
@@ -112,7 +111,7 @@ function loadQuestion() {
 }
 
 function startTimer() {
-    timeLeft = 10;
+    timeLeft = 20; // Reset to 20 seconds
     document.getElementById('time-left').textContent = timeLeft;
     const progress = document.getElementById('timer-progress');
     progress.style.width = '100%';
@@ -122,8 +121,8 @@ function startTimer() {
     timerInterval = setInterval(() => {
         timeLeft--;
         document.getElementById('time-left').textContent = timeLeft;
-        progress.style.width = `${(timeLeft / 10) * 100}%`;
-        if (timeLeft <= 3) progress.style.background = 'var(--danger)';
+        progress.style.width = `${(timeLeft / 20) * 100}%`; // Updated calculation for 20 seconds
+        if (timeLeft <= 5) progress.style.background = 'var(--danger)'; // Red when 5 seconds left
         if (timeLeft <= 0) { clearInterval(timerInterval); selectOption(-1); }
     }, 1000);
 }
@@ -152,7 +151,7 @@ function selectOption(selectedIndex) {
 function endQuiz() {
     showSection('result-section');
     document.getElementById('final-score').textContent = score;
-    let msg = score === 10 ? "अद्भुत! तपाईं एकदमै जानकार हुनुहुन्छ! " :
+    let msg = score === 10 ? "अद्भुत! तपाईं एकदमै जानकार हुनुहुन्छ! 🏆" :
               score >= 7 ? "धेरै राम्रो! अझै अलि अभ्यास गर्नुहोस्। 👏" :
               score >= 4 ? "ठिकै छ, अर्को पटक अझै राम्रो गर्नुहोला! 👍" :
               "चिन्ता नगर्नुहोस्, फेरि प्रयास गर्नुहोस्! 💪";

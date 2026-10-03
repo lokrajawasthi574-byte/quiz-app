@@ -11,25 +11,25 @@
 </head>
 <body>
 
-    <!-- 1. LOGIN SCREEN (Only opens with your name) -->
+    <!-- 1. LOGIN SCREEN (Anyone can enter their name) -->
     <div id="login-screen" class="screen active">
         <div class="login-container">
             <div class="mahadev-top">
                 <img src="https://images.unsplash.com/photo-1620072214571-5990423b0907?w=500&q=80" alt="Lord Shiva" class="mahadev-img">
-                <h1 class="mahadev-text">॥ हर हर महादेव ॥</h1>
+                <h1 class="mahadev-text">॥ हर हर महादेव </h1>
             </div>
            
             <h2 class="login-title">स्वागतम्</h2>
-            <p class="login-subtitle">वेबसाइट खोल्न तल आफ्नो नाम राख्नुहोस्</p>
+            <p class="login-subtitle">क्विज खेल्नको लागि तल आफ्नो नाम राख्नुहोस्</p>
            
             <form id="login-form">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="access-name" placeholder="नाम राख्नुहोस् (Lokraj Awasthi)" required autocomplete="off">
+                    <input type="text" id="access-name" placeholder="आफ्नो नाम राख्नुहोस्" required autocomplete="off">
                 </div>
-                <button type="submit" class="btn-primary">वेबसाइट खोल्नुहोस् <i class="fas fa-arrow-right"></i></button>
+                <button type="submit" class="btn-primary">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
             </form>
-            <p class="note">नोट: केवल "Lokraj Awasthi" वा "lokraj" ले मात्र खोल्न मिल्छ।</p>
+            <p class="note">नोट: क्विज खेल्नको लागि आफ्नो नाम अनिवार्य राख्नुहोस्।</p>
         </div>
     </div>
 
@@ -63,8 +63,8 @@
         <!-- Quiz Page -->
         <div id="quiz-section" class="section">
             <div class="quiz-header">
-                <span id="question-counter">प्रश्न /१०</span>
-                <span id="timer-display"><i class="fas fa-clock"></i> <span id="time-left">10</span>s</span>
+                <span id="question-counter">प्रश्न १/१०</span>
+                <span id="timer-display"><i class="fas fa-clock"></i> <span id="time-left">20</span>s</span>
             </div>
             <div class="timer-bar"><div id="timer-progress"></div></div>
            
@@ -89,7 +89,7 @@
             <div id="review-container"></div>
         </div>
 
-        <!-- Footer (Your Name at the very bottom) -->
+        <!-- Footer (Your Name at the bottom) -->
         <footer>
             <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong></p>
         </footer>
