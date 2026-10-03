@@ -1,209 +1,233 @@
-// १. २०० वटा प्रश्नहरू सहजै अट्ने गरी बनाइएको मुख्य भण्डार (नमुनाका लागि ३० वटा राखिएका छन्)
-const allQuestionsBank = [
-    { question: "भगवान शिवको निवास स्थान कहाँ मानिन्छ?", options: ["अमरनाथ", "कैलाश पर्वत", "मुक्तिनाथ", "केदारनाथ"], answer: "कैलाश पर्वत" },
-    { question: "नेपालको सबैभन्दा लामो नदी कुन हो?", options: ["कोशी", "गण्डकी", "कर्णाली", "बागमती"], answer: "कर्णाली" },
-    { question: "सौरमण्डलको सबैभन्दा ठूलो ग्रह कुन हो?", options: ["मंगल", "शनि", "पृथ्वी", "बृहस्पति"], answer: "बृहस्पति" },
-    { question: "भगवान शिवको धनुषको नाम के हो?", options: ["गाण्डिव", "पिनाक", "शार्ङ्ग", "कोदण्ड"], answer: "पिनाक" },
-    { question: "नेपालको राष्ट्रिय चरा कुन हो?", options: ["डाँफे", "मुनाल", "मयूर", "गौंथली"], answer: "डाँफे" },
-    { question: "गौतम बुद्धको जन्म कहाँ भएको हो?", options: ["लुम्बिनी", "जनकपुर", "काठमाडौँ", "पोखरा"], answer: "लुम्बिनी" },
-    { question: "नेपालको राष्ट्रिय झण्डामा कुन कुन रङ छ?", options: ["रातो र हरियो", "सिम्रिक, नीलो र सेतो", "पहेंलो र रातो", "सेतो र नीलो"], answer: "सिम्रिक, नीलो र सेतो" },
-    { question: "संसारको सबैभन्दा अग्लो शिखर कुन हो?", options: ["के२", "कञ्चनजङ्घा", "लहोत्से", "सगरमाथा"], answer: "सगरमाथा" },
-    { question: "एक दिनमा कति घण्टा हुन्छ?", options: ["१२ घण्टा", "२४ घण्टा", "४८ घण्टा", "६० घण्टा"], answer: "२४ घण्टा" },
-    { question: "नेपालको राजधानी कहाँ हो?", options: ["ललितपुर", "भक्तपुर", "काठमाडौँ", "पोखरा"], answer: "काठमाडौँ" },
-    { question: "सूर्यको सबैभन्दा नजिकको ग्रह कुन हो?", options: ["बुध", "शुक्र", "पृथ्वी", "मंगल"], answer: "बुध" },
-    { question: "नेपालको राष्ट्रिय फूल कुन हो?", options: ["गुलाफ", "लालीगुँरास", "सयपत्री", "कमल"], answer: "लालीगुँरास" },
-    { question: "काठमाडौँ उपत्यकाभित्र कतिवटा जिल्ला छन्?", options: ["२ वटा", "३ वटा", "४ वटा", "५ वटा"], answer: "३ वटा" },
-    { question: "क्षेत्रफलको हिसाबले नेपालको सबैभन्दा ठूलो जिल्ला कुन हो?", options: ["हुम्ला", "डोल्पा", "मुस्ताङ", "कैलाली"], answer: "डोल्पा" },
-    { question: "मानव शरीरमा कतिवटा हड्डीहरू हुन्छन्?", options: ["२०६ वटा", "२१0 वटा", "१९५ वटा", "३०० वटा"], answer: "२०६ वटा" },
-    { question: "पानीको रासायनिक सूत्र (Chemical Formula) के हो?", options: ["CO2", "H2O", "O2", "NaCl"], answer: "H2O" },
-    { question: "संसारको सबैभन्दा सानो महादेश कुन हो?", options: ["एशिया", "युरोप", "अष्ट्रेलिया", "अफ्रिका"], answer: "अष्ट्रेलिया" },
-    { question: "नेपाल कुन महादेशमा पर्दछ?", options: ["युरोप", "अफ्रिका", "अन्तर्राष्ट्रिय", "एशिया"], answer: "एशिया" },
-    { question: "क्रिकेट खेलमा एक ओभरमा कति बल हुन्छन्?", options: ["४ बल", "६ बल", "८ बल", "५ बल"], answer: "६ बल" },
-    { question: "कम्प्युटरको दिमाग (Brain) भनेर कसलाई चिनिन्छ?", options: ["RAM", "CPU", "Hard Disk", "Monitor"], answer: "CPU" },
-    { question: "नेपालको राष्ट्रिय जनावर कुन हो?", options: ["बाघ", "हात्ती", "गाई", "एकसिंगे गैँडा"], answer: "गाई" },
-    { question: "पृथ्वीले सूर्यको परिक्रमा गर्न कति समय लगाउँछ?", options: ["२४ घण्टा", "३६५ दिन", "३0 दिन", "१२ महिना"], answer: "३६५ दिन" },
-    { question: "महाकवि देवकोटाको पूरा नाम के हो?", options: ["लक्ष्मीप्रसाद देवकोटा", "लेखनाथ पौड्याल", "भानुभक्त आचार्य", "माधवप्रसाद घिमिरे"], answer: "लक्ष्मीप्रसाद देवकोटा" },
-    { question: "टेलिफोनको आविष्कार कसले गरेका हुन्?", options: ["अल्बर्ट आइन्स्टाइन", "थॉमस एडिसन", "अलेक्जेन्डर ग्राहम बेल", "न्युटन"], answer: "अलेक्जेन्डर ग्राहम बेल" },
-    { question: "नेपालमा कतिवटा प्रदेशहरू छन्?", options: ["५ वटा", "७ वटा", "१४ वटा", "७७ वटा"], answer: "७ वटा" },
-    { question: "फेवा ताल नेपालको कुन सहरमा पर्दछ?", options: ["चितवन", "काठमाडौँ", "पोखरा", "धरान"], answer: "पोखरा" },
-    { question: "भानुभक्त आचार्यको जन्म कहाँ भएको हो?", options: ["तनहुँ", "गोरखा", "कास्की", "लम्जुङ"], answer: "तनहुँ" },
-    { question: "नेपालको वर्तमान मुद्रा के हो?", options: ["भारु", "टका", "डलर", "रुपैयाँ"], answer: "रुपैयाँ" },
-    { question: "अङ्ग्रजी वर्णमाला (Alphabet) मा कतिवटा अक्षर हुन्छन्?", options: ["२१ वटा", "२६ वटा", "५२ वटा", "२४ वटा"], answer: "२६ वटा" },
-    { question: "सगरमाथाको उचाइ कति मिटर छ?", options: ["८८४८.८६", "८८५0", "८०००", "८४४८"], answer: "८८४८.८६" }
-   
-    // तपाईँले यसै गरी अन्तिममा कमा (,) दिँदै २०० वा सोभन्दा बढी प्रश्नहरू थप्न सक्नुहुन्छ।
-];
+// ==========================================
+// Lokraj Awasthi QUIZ - Developed by Lokraj Awasthi
+// ==========================================
 
-// २. गेम लजिक र नो-रिपिट कन्ट्रोलर
-let currentSessionQuestions = [];
+let questionBank = [];
+let currentUser = null;
+let currentQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
-let timer;
-let timeLeft = 15;
-const timeLimit = 15;
-const QUESTIONS_PER_ROUND = 10; // एक पटकमा १० वटा मात्र सोधिने
+let userAnswers = [];
+let timerInterval = null;
+let timeLeft = 10;
 
-// ब्राउजरको लोकल मेमोरीबाट पहिले खेलिसकेका प्रश्नहरूको नम्बर लिने
-let playedQuestionIndexes = JSON.parse(localStorage.getItem('playedQuestions')) || [];
+const loginScreen = document.getElementById('login-screen');
+const appScreen = document.getElementById('app-screen');
+const loginForm = document.getElementById('login-form');
+const userDisplay = document.getElementById('user-display');
+const logoutBtn = document.getElementById('logout-btn');
 
-// DOM Elements
-const welcomeContainer = document.getElementById("welcome-container");
-const quizContainer = document.getElementById("quiz-container");
-const resultContainer = document.getElementById("result-container");
-const startGameBtn = document.getElementById("start-game-btn");
+// Load questions from JSON file
+fetch('questions.json')
+    .then(response => response.json())
+    .then(data => {
+        questionBank = data;
+        console.log(`${questionBank.length} प्रश्नहरू सफलतापूर्वक लोड भयो!`);
+    })
+    .catch(error => {
+        console.error('प्रश्न लोड गर्न समस्या:', error);
+        alert('प्रश्नहरू लोड गर्न समस्या भयो। कृपया questions.json फाइल जाँच गर्नुहोस्।');
+    });
 
-const questionText = document.getElementById("question-text");
-const optionsContainer = document.getElementById("options-container");
-const currentQuestionEl = document.getElementById("current-question");
-const totalQuestionsEl = document.getElementById("total-questions");
-const progressBar = document.getElementById("progress-bar");
-const timeLeftEl = document.getElementById("time-left");
-const nextBtn = document.getElementById("next-btn");
-const scoreEl = document.getElementById("score");
-const resultTotalEl = document.getElementById("result-total");
-const resultMessage = document.getElementById("result-message");
-const restartBtn = document.getElementById("restart-btn");
-
-startGameBtn.addEventListener("click", () => {
-    welcomeContainer.classList.add("hide");
-    setupNewRound();
+// Login
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+   
+    if(email && password.length >= 4) {
+        currentUser = email.split('@')[0];
+        localStorage.setItem('yakQuizUser', currentUser);
+        showApp();
+    } else {
+        alert('कृपया वैध इमेल र कम्तिमा ४ अक्षरको पासवर्ड राख्नुहोस्।');
+    }
 });
 
-// १० वटा नदोहोरिने प्रश्नहरू छान्ने मुख्य फङ्सन
-function setupNewRound() {
-    // यदि सबै प्रश्नहरू खेलिसकेको भए (मेमोरी भरिएपछि) स्वतः रिसेट गर्ने
-    if (playedQuestionIndexes.length >= allQuestionsBank.length) {
-        playedQuestionIndexes = [];
-        localStorage.setItem('playedQuestions', JSON.stringify(playedQuestionIndexes));
+logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('yakQuizUser');
+    currentUser = null;
+    loginScreen.classList.add('active');
+    appScreen.classList.remove('active');
+});
+
+window.addEventListener('load', () => {
+    const savedUser = localStorage.getItem('yakQuizUser');
+    if(savedUser) {
+        currentUser = savedUser;
+        showApp();
     }
+});
 
-    // बाँकी रहेका नखेलिएका प्रश्नहरूको लिस्ट निकाल्ने
-    let unplayedIndexes = [];
-    for (let i = 0; i < allQuestionsBank.length; i++) {
-        if (!playedQuestionIndexes.includes(i)) {
-            unplayedIndexes.push(i);
-        }
-    }
-
-    // बाँकी प्रश्नहरूलाई रेन्डम बनाउने (मिस्रित गर्ने)
-    unplayedIndexes.sort(() => Math.random() - 0.5);
-
-    // यो राउन्डको लागि १० वटा प्रश्न छान्ने
-    let itemsToSelect = Math.min(QUESTIONS_PER_ROUND, unplayedIndexes.length);
-    currentSessionQuestions = [];
-   
-    for (let i = 0; i < itemsToSelect; i++) {
-        let questionIndex = unplayedIndexes[i];
-        currentSessionQuestions.push(allQuestionsBank[questionIndex]);
-        playedQuestionIndexes.push(questionIndex); // खेलेको सूचीमा नम्बर थप्ने
-    }
-
-    // मेमोरीमा सुरक्षित गर्ने ताकि अर्को खेलमा यो नदोहोरियोस्
-    localStorage.setItem('playedQuestions', JSON.stringify(playedQuestionIndexes));
-
-    startQuiz();
+function showApp() {
+    loginScreen.classList.remove('active');
+    appScreen.classList.add('active');
+    userDisplay.textContent = currentUser;
+    showSection('category-section');
 }
 
-function startQuiz() {
+// Category Selection
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const category = card.dataset.category;
+        startQuiz(category);
+    });
+});
+
+function startQuiz(category) {
+    if(questionBank.length === 0) {
+        alert('प्रश्नहरू लोड हुँदैछन्। कृपया केही समय पर्खनुहोस्।');
+        return;
+    }
+
+    const askedKey = `askedQuestions_${currentUser}`;
+    let askedQuestions = JSON.parse(localStorage.getItem(askedKey)) || [];
+   
+    let availableQuestions = questionBank.filter(q => {
+        if (category === 'mixed') return !askedQuestions.includes(q.id);
+        return q.category === category && !askedQuestions.includes(q.id);
+    });
+
+    if (availableQuestions.length < 10) {
+        alert('यस विषयका सबै नयाँ प्रश्नहरू सकिएका छन्! पुराना प्रश्नहरू फेरि मिसाउँदैछौं।');
+        askedQuestions = [];
+        availableQuestions = questionBank.filter(q => category === 'mixed' ? true : q.category === category);
+    }
+
+    currentQuestions = shuffleArray(availableQuestions).slice(0, 10);
+   
+    currentQuestions.forEach(q => {
+        if(!askedQuestions.includes(q.id)) askedQuestions.push(q.id);
+    });
+    localStorage.setItem(askedKey, JSON.stringify(askedQuestions));
+
     currentQuestionIndex = 0;
     score = 0;
-    totalQuestionsEl.textContent = currentSessionQuestions.length;
-    resultContainer.classList.add("hide");
-    quizContainer.classList.remove("hide");
-    showQuestion();
+    userAnswers = [];
+   
+    showSection('quiz-section');
+    loadQuestion();
 }
 
-function showQuestion() {
-    resetState();
+function loadQuestion() {
+    if (currentQuestionIndex >= currentQuestions.length) {
+        endQuiz();
+        return;
+    }
+
+    const q = currentQuestions[currentQuestionIndex];
+    document.getElementById('question-counter').textContent = `प्रश्न ${currentQuestionIndex + 1}/10`;
+    document.getElementById('question-text').textContent = q.question;
    
-    currentQuestionEl.textContent = currentQuestionIndex + 1;
-    const progressPercent = (currentQuestionIndex / currentSessionQuestions.length) * 100;
-    progressBar.style.width = `${progressPercent}%`;
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
 
-    let currentQuestion = currentSessionQuestions[currentQuestionIndex];
-    questionText.textContent = currentQuestion.question;
-
-    currentQuestion.options.forEach(option => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.classList.add("option-btn");
-        button.addEventListener("click", () => selectAnswer(button, currentQuestion.answer));
-        optionsContainer.appendChild(button);
+    q.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt;
+        btn.onclick = () => selectOption(index);
+        optionsContainer.appendChild(btn);
     });
 
     startTimer();
 }
 
-function resetState() {
-    clearInterval(timer);
-    timeLeft = timeLimit;
-    timeLeftEl.textContent = timeLeft;
-    nextBtn.classList.add("hide");
-    optionsContainer.innerHTML = "";
-}
-
 function startTimer() {
-    timer = setInterval(() => {
+    timeLeft = 10;
+    document.getElementById('time-left').textContent = timeLeft;
+    document.getElementById('timer-progress').style.width = '100%';
+    document.getElementById('timer-progress').style.background = 'var(--success)';
+
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
         timeLeft--;
-        timeLeftEl.textContent = timeLeft;
+        document.getElementById('time-left').textContent = timeLeft;
+        const percentage = (timeLeft / 10) * 100;
+        document.getElementById('timer-progress').style.width = `${percentage}%`;
+
+        if (timeLeft <= 3) {
+            document.getElementById('timer-progress').style.background = 'var(--danger)';
+        }
+
         if (timeLeft <= 0) {
-            clearInterval(timer);
-            autoTimeOut();
+            clearInterval(timerInterval);
+            selectOption(-1);
         }
     }, 1000);
 }
 
-function selectAnswer(selectedButton, correctAnswer) {
-    clearInterval(timer);
-    const allButtons = optionsContainer.querySelectorAll(".option-btn");
+function selectOption(selectedIndex) {
+    clearInterval(timerInterval);
+    const q = currentQuestions[currentQuestionIndex];
+    const isCorrect = selectedIndex === q.answer;
    
-    if (selectedButton.textContent === correctAnswer) {
-        selectedButton.classList.add("correct");
-        score++;
-    } else {
-        selectedButton.classList.add("wrong");
-        highlightCorrectAnswer(correctAnswer);
-    }
+    if (isCorrect) score++;
 
-    allButtons.forEach(btn => btn.disabled = true);
-    nextBtn.classList.remove("hide");
+    userAnswers.push({
+        question: q.question,
+        userOption: selectedIndex === -1 ? "समय सकियो" : q.options[selectedIndex],
+        correctOption: q.options[q.answer],
+        isCorrect: isCorrect
+    });
+
+    const buttons = document.querySelectorAll('.option-btn');
+    if (selectedIndex !== -1) {
+        buttons[selectedIndex].classList.add(isCorrect ? 'correct' : 'wrong');
+    }
+    buttons[q.answer].classList.add('correct');
+
+    buttons.forEach(btn => btn.disabled = true);
+
+    setTimeout(() => {
+        currentQuestionIndex++;
+        loadQuestion();
+    }, 1500);
 }
 
-function highlightCorrectAnswer(correctAnswer) {
-    const allButtons = optionsContainer.querySelectorAll(".option-btn");
-    allButtons.forEach(btn => {
-        if (btn.textContent === correctAnswer) {
-            btn.classList.add("correct");
-        }
+function endQuiz() {
+    showSection('result-section');
+    document.getElementById('final-score').textContent = score;
+   
+    let message = "";
+    if (score === 10) message = "अद्भुत! तपाईं एकदमै जानकार हुनुहुन्छ! 🏆";
+    else if (score >= 7) message = "धेरै राम्रो! 👏";
+    else if (score >= 4) message = "ठिकै छ, अझै अभ्यास गर्नुहोस्! 👍";
+    else message = "चिन्ता नगर्नुहोस्, फेरि प्रयास गर्नुहोस्! 💪";
+   
+    document.getElementById('score-message').textContent = message;
+
+    const reviewContainer = document.getElementById('review-container');
+    reviewContainer.innerHTML = '';
+   
+    userAnswers.forEach((ans, idx) => {
+        const div = document.createElement('div');
+        div.className = `review-item ${ans.isCorrect ? 'correct' : 'wrong'}`;
+        div.innerHTML = `
+            <strong>प्रश्न ${idx + 1}:</strong> ${ans.question}<br>
+            <span style="color: ${ans.isCorrect ? 'green' : 'red'}">
+                तपाईंको उत्तर: ${ans.userOption}
+            </span><br>
+            ${!ans.isCorrect ? `<span style="color: green">सही उत्तर: ${ans.correctOption}</span>` : ''}
+        `;
+        reviewContainer.appendChild(div);
     });
 }
 
-function autoTimeOut() {
-    const correctAnswer = currentSessionQuestions[currentQuestionIndex].answer;
-    highlightCorrectAnswer(correctAnswer);
-    const allButtons = optionsContainer.querySelectorAll(".option-btn");
-    allButtons.forEach(btn => btn.disabled = true);
-    nextBtn.classList.remove("hide");
-}
-
-nextBtn.addEventListener("click", () => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < currentSessionQuestions.length) {
-        showQuestion();
-    } else {
-        showResult();
-    }
+document.getElementById('restart-btn').addEventListener('click', () => {
+    showSection('category-section');
 });
 
-function showResult() {
-    progressBar.style.width = "100%";
-    quizContainer.classList.add("hide");
-    resultContainer.classList.remove("hide");
-   
-    scoreEl.textContent = score;
-    resultTotalEl.textContent = currentSessionQuestions.length;
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+}
 
-    const percentage = (score / currentSessionQuestions.length) * 100;
-    if (percentage === 100) {
-
- 
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+} 

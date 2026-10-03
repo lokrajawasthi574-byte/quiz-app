@@ -3,59 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हर हर महादेव - Awasthi Quiz</title>
+    <title>Lokraj AWasthi QUIZ - Lokraj Awasthi | लोकसेवा तयारी</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="container">
-        <!-- Welcome Screen (Landing Page) -->
-        <div id="welcome-container" class="landing-card">
-            <h1 class="main-title">हर हर महादेव</h1>
-            <div class="trishul-icon">🔱</div>
-            <h2 class="brand-title">Awasthi Quiz</h2>
-            <p class="tagline">An Ultimate Educational Quiz Platform</p>
-           
-            <button id="start-game-btn" class="btn start-btn">Get Started</button>
-           
-            <div class="creator-info">
-                Creator & Owner: Lok Raj Awasthi
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <h1 class="logo">YAK QUIZ 🦏</h1>
+            <p class="subtitle">by Lokraj Awasthi</p>
+            <p>क्विज खेल्न कृपया लगइन गर्नुहोस्</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="इमेल वा फोन नम्बर" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="पासवर्ड" required>
+                </div>
+                <button type="submit" class="btn-primary">लगइन गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
+            </form>
+            <p class="note">नोट: यो नि:शुल्क संस्करण हो।</p>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="app-screen" class="screen">
+        <header>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span id="user-display">प्रयोगकर्ता</span>
+            </div>
+            <button id="logout-btn" class="btn-small">लगआउट</button>
+        </header>
+
+        <div class="ad-space">विज्ञापन स्थान (Google AdSense)</div>
+
+        <!-- Category Selection -->
+        <div id="category-section" class="section active">
+            <h2>विषय छान्नुहोस्</h2>
+            <div class="category-grid">
+                <div class="category-card" data-category="constitution">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>संविधान र शासन</h3>
+                </div>
+                <div class="category-card" data-category="geography">
+                    <i class="fas fa-mountain"></i>
+                    <h3>नेपालको भूगोल</h3>
+                </div>
+                <div class="category-card" data-category="history">
+                    <i class="fas fa-landmark"></i>
+                    <h3>इतिहास र संस्कृति</h3>
+                </div>
+                <div class="category-card" data-category="gk">
+                    <i class="fas fa-globe-asia"></i>
+                    <h3>सामान्य ज्ञान</h3>
+                </div>
+                <div class="category-card" data-category="science">
+                    <i class="fas fa-flask"></i>
+                    <h3>विज्ञान</h3>
+                </div>
+                <div class="category-card" data-category="computer">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>कम्प्युटर र प्रविधि</h3>
+                </div>
+                <div class="category-card" data-category="math">
+                    <i class="fas fa-calculator"></i>
+                    <h3>गणित</h3>
+                </div>
+                <div class="category-card" data-category="english">
+                    <i class="fas fa-book"></i>
+                    <h3>अङ्ग्रेजी</h3>
+                </div>
+                <div class="category-card" data-category="nepali">
+                    <i class="fas fa-language"></i>
+                    <h3>नेपाली भाषा</h3>
+                </div>
+                <div class="category-card" data-category="current">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>समसामयिक</h3>
+                </div>
+                <div class="category-card" data-category="mixed">
+                    <i class="fas fa-random"></i>
+                    <h3>मिश्रित (सबै)</h3>
+                </div>
             </div>
         </div>
 
-        <!-- Quiz Screen -->
-        <div id="quiz-container" class="card hide">
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="section">
             <div class="quiz-header">
-                <div class="progress">प्रश्न: <span id="current-question">1</span>/<span id="total-questions">10</span></div>
-                <div class="timer">समय: <span id="time-left">15</span> से.</div>
+                <span id="question-counter">प्रश्न १/१०</span>
+                <span id="timer-display"><i class="fas fa-clock"></i> <span id="time-left">10</span>s</span>
             </div>
-
-            <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-
-            <div id="question-text" class="question">लोड हुँदैछ...</div>
-
-            <div id="options-container" class="options-grid">
-                <!-- JavaScript dynamic buttons -->
-            </div>
-
-            <div class="footer-controls">
-                <button id="next-btn" class="btn next-btn hide">अर्को प्रश्न ➔</button>
-            </div>
+            <div class="timer-bar"><div id="timer-progress"></div></div>
+           
+            <h3 id="question-text">प्रश्न यहाँ देखिनेछ...</h3>
+           
+            <div id="options-container" class="options-grid"></div>
         </div>
 
-        <!-- Result Screen -->
-        <div id="result-container" class="card hide">
-            <h2>नतिजा (Result) 🎉</h2>
-            <div class="result-score">स्कोर: <span id="score">0</span> / <span id="result-total">10</span></div>
-            <p id="result-message" class="result-message"></p>
-            <button id="restart-btn" class="btn restart-btn">पुनः खेल्नुहोस् ↻</button>
+        <!-- Result Section -->
+        <div id="result-section" class="section">
+            <h2>क्विज सम्पन्न!</h2>
+            <div class="score-card">
+                <h3>तपाईंको स्कोर</h3>
+                <div class="score-display"><span id="final-score">0</span> / 10</div>
+                <p id="score-message"></p>
+            </div>
+           
+            <h3>उत्तरहरूको समीक्षा</h3>
+            <div id="review-container"></div>
+           
+            <button id="restart-btn" class="btn-primary">फेरि खेल्नुहोस्</button>
         </div>
+
+        <footer>
+            <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong></p>
+            <p class="mahadev">॥ हर हर महादेव ॥</p>
+            <p class="copyright">© 2026 YAK QUIZ. All Rights Reserved.</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>
-
- 
+</html> 
