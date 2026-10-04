@@ -11,17 +11,20 @@
 </head>
 <body>
 
-    <!-- 1. LOGIN SCREEN (जसले पनि आफ्नो नाम राखेर खोल्न सक्छ) -->
+    <!-- Background Music -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 1. Login Screen -->
     <div id="login-screen" class="screen active">
         <div class="login-container">
             <div class="mahadev-top">
                 <img src="https://images.unsplash.com/photo-1620072214571-5990423b0907?w=500&q=80" alt="Lord Shiva" class="mahadev-img">
-                <h1 class="mahadev-text">॥ हर हर महादेव </h1>
+                <h1 class="mahadev-text">॥ हर हर महादेव ॥</h1>
             </div>
-           
             <h2 class="login-title">स्वागतम्</h2>
             <p class="login-subtitle">क्विज खेल्नको लागि तल आफ्नो नाम राख्नुहोस्</p>
-           
             <form id="login-form">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
@@ -29,11 +32,20 @@
                 </div>
                 <button type="submit" class="btn-primary">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
             </form>
-            <p class="note">नोट: तपाईंको नाम लेखेपछि मात्र क्विज खुल्नेछ।</p>
+            <p class="note">नोट: तपाईंको नाम लेखेपछि भाषा छान्न सक्नुहुनेछ।</p>
         </div>
     </div>
 
-    <!-- 2. MAIN APP SCREEN -->
+    <!-- 2. Language Selection Screen (Hidden initially) -->
+    <div id="lang-screen" class="screen">
+        <div class="lang-container">
+            <h2 class="lang-title">Choose Language / भाषा छान्नुहोस्</h2>
+            <button id="btn-en" class="btn-lang btn-en">🇬🇧 English</button>
+            <button id="btn-np" class="btn-lang btn-np">🇳 नेपाली (Nepali)</button>
+        </div>
+    </div>
+
+    <!-- 3. Main App Screen -->
     <div id="app-screen" class="screen">
         <!-- Header -->
         <header>
@@ -41,21 +53,26 @@
                 <i class="fas fa-om"></i>
                 <span>Lokraj Awasthi Quiz</span>
             </div>
-            <button id="home-btn" class="btn-small"><i class="fas fa-home"></i> होम</button>
+            <div class="header-buttons">
+                <button id="music-toggle" class="btn-music" title="Music On/Off">
+                    <i class="fas fa-volume-up" id="music-icon"></i>
+                </button>
+                <button id="home-btn" class="btn-small"><i class="fas fa-home"></i> होम</button>
+            </div>
         </header>
 
-        <!-- Category Selection Page -->
+        <!-- Category Selection -->
         <div id="category-section" class="section active">
             <h2 class="section-title">विषय छान्नुहोस्</h2>
             <div class="category-grid">
-                <div class="category-card" data-category="constitution"><i class="fas fa-balance-scale"></i><h3>संविधान</h3></div>
-                <div class="category-card" data-category="geography"><i class="fas fa-mountain"></i><h3>भूगोल</h3></div>
-                <div class="category-card" data-category="history"><i class="fas fa-landmark"></i><h3>इतिहास</h3></div>
-                <div class="category-card" data-category="gk"><i class="fas fa-globe-asia"></i><h3>सामान्य ज्ञान</h3></div>
-                <div class="category-card" data-category="science"><i class="fas fa-flask"></i><h3>विज्ञान</h3></div>
-                <div class="category-card" data-category="computer"><i class="fas fa-laptop-code"></i><h3>कम्प्युटर</h3></div>
-                <div class="category-card" data-category="math"><i class="fas fa-calculator"></i><h3>गणित</h3></div>
-                <div class="category-card" data-category="current"><i class="fas fa-newspaper"></i><h3>समसामयिक</h3></div>
+                <div class="category-card" data-category="class9"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
+                <div class="category-card" data-category="class10"><i class="fas fa-graduation-cap"></i><h3>Class 10</h3></div>
+                <div class="category-card" data-category="class11"><i class="fas fa-user-graduate"></i><h3>Class 11</h3></div>
+                <div class="category-card" data-category="class12"><i class="fas fa-award"></i><h3>Class 12</h3></div>
+                <div class="category-card" data-category="science"><i class="fas fa-flask"></i><h3>Science</h3></div>
+                <div class="category-card" data-category="computer"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
+                <div class="category-card" data-category="math"><i class="fas fa-calculator"></i><h3>Math</h3></div>
+                <div class="category-card" data-category="gk"><i class="fas fa-globe-asia"></i><h3>Samanya Gyan</h3></div>
                 <div class="category-card mixed" data-category="mixed"><i class="fas fa-random"></i><h3>मिश्रित (सबै)</h3></div>
             </div>
         </div>
@@ -67,9 +84,7 @@
                 <span id="timer-display"><i class="fas fa-clock"></i> <span id="time-left">20</span>s</span>
             </div>
             <div class="timer-bar"><div id="timer-progress"></div></div>
-           
             <h3 id="question-text">प्रश्न यहाँ देखिनेछ...</h3>
-           
             <div id="options-container" class="options-grid"></div>
         </div>
 
@@ -81,7 +96,6 @@
                 <div class="score-display"><span id="final-score">0</span> / 10</div>
                 <p id="score-message"></p>
             </div>
-           
             <div class="result-actions">
                 <button id="review-btn" class="btn-secondary"><i class="fas fa-list"></i> उत्तर हेर्नुहोस्</button>
                 <button id="restart-btn" class="btn-primary"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
