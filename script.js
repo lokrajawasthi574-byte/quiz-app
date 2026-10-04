@@ -8,7 +8,6 @@ let userAnswers = [];
 let timerInterval = null;
 let timeLeft = 20;
 let musicPlaying = false;
-let selectedLanguage = 'en';
 
 // DOM Elements
 const loginForm = document.getElementById('login-form');
@@ -18,20 +17,8 @@ const restartBtn = document.getElementById('restart-btn');
 const musicToggle = document.getElementById('music-toggle');
 const musicIcon = document.getElementById('music-icon');
 const bgMusic = document.getElementById('bg-music');
-const langScreen = document.getElementById('lang-screen');
-const appScreen = document.getElementById('app-screen');
 const loginScreen = document.getElementById('login-screen');
-const btnEn = document.getElementById('btn-en');
-const btnNp = document.getElementById('btn-np');
-
-// Helper: Get text based on selected language
-function getText(text) {
-    if (text && text.includes('/')) {
-        const parts = text.split('/');
-        return selectedLanguage === 'en' ? parts[0].trim() : (parts[1] ? parts[1].trim() : parts[0].trim());
-    }
-    return text;
-}
+const appScreen = document.getElementById('app-screen');
 
 // Load Questions from JSON
 function loadQuestions() {
@@ -46,45 +33,25 @@ function loadQuestions() {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert("️ प्रश्नहरू लोड हुन सकेन!\n\n1. फाइलको नाम 'questions.json' (सानो अक्षर) छ कि छैन जाँच गर्नुहोस्।\n2. JSON मा कमा (,) को गल्ती छ कि छैन जाँच गर्नुहोस्।");
+            alert("⚠️ प्रश्नहरू लोड हुन सकेन!\n\n. फाइलको नाम 'questions.json' (सानो अक्षर) छ कि छैन जाँच गर्नुहोस्।\n२. JSON मा कमा (,) को गल्ती छ कि छैन जाँच गर्नुहोस्।");
         });
 }
 
-// 1. LOGIN - When user submits name
+// 1. LOGIN - When user submits name, go directly to app
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('access-name').value.trim();
        
         if (name.length >= 2) {
-            // Hide login, show language screen
+            // Hide login, show app directly
             loginScreen.classList.remove('active');
-            langScreen.classList.add('active');
+            appScreen.classList.add('active');
+            loadQuestions();
+            startMusic();
         } else {
             alert('कृपया आफ्नो नाम राख्नुहोस्!');
         }
-    });
-}
-
-// 2. LANGUAGE BUTTONS - English
-if (btnEn) {
-    btnEn.addEventListener('click', () => {
-        selectedLanguage = 'en';
-        langScreen.classList.remove('active');
-        appScreen.classList.add('active');
-        loadQuestions();
-        startMusic();
-    });
-}
-
-// 3. LANGUAGE BUTTONS - Nepali
-if (btnNp) {
-    btnNp.addEventListener('click', () => {
-        selectedLanguage = 'np';
-        langScreen.classList.remove('active');
-        appScreen.classList.add('active');
-        loadQuestions();
-        startMusic();
     });
 }
 
@@ -145,7 +112,7 @@ function startQuiz(category) {
         return;
     }
 
-    const askedKey = `asked_${category}_${selectedLanguage}`;
+    const askedKey = `asked_${category}`;
     let askedQuestions = JSON.parse(localStorage.getItem(askedKey)) || [];
    
     let available = questionBank.filter(q =>
@@ -179,7 +146,7 @@ function startQuiz(category) {
     loadQuestion();
 }
 
-// Load Current Question
+// Load Current Question - Show both English and Nepali
 function loadQuestion() {
     if (currentQuestionIndex >= currentQuestions.length) {
         endQuiz();
@@ -188,22 +155,17 @@ function loadQuestion() {
 
     const q = currentQuestions[currentQuestionIndex];
    
-    // Update counter text based on language
-    const counterText = selectedLanguage === 'en'
-        ? `Question ${currentQuestionIndex + 1}/10`
-        : `प्रश्न ${currentQuestionIndex + 1}/१०`;
-    document.getElementById('question-counter').textContent = counterText;
+    // Show question (already has both languages from JSON)
+    document.getElementById('question-counter').textContent = `प्रश्न ${currentQuestionIndex + 1}/10`;
+    document.getElementById('question-text').textContent = q.question;
    
-    // Show question in selected language
-    document.getElementById('question-text').textContent = getText(q.question);
-   
-    // Create option buttons
+    // Create option buttons - show both languages
     const container = document.getElementById('options-container');
     container.innerHTML = '';
     q.options.forEach((opt, index) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.textContent = getText(opt);
+        btn.textContent = opt; // Options already have both languages
         btn.onclick = () => selectOption(index);
         container.appendChild(btn);
     });
@@ -239,14 +201,10 @@ function selectOption(selectedIndex) {
     const isCorrect = selectedIndex === q.answer;
     if (isCorrect) score++;
 
-    const timeUpText = selectedLanguage === 'en' ? "Time's up" : "समय सकियो";
-    const yourAnsText = selectedLanguage === 'en' ? 'Your Answer' : 'तपाईं';
-    const correctText = selectedLanguage === 'en' ? 'Correct' : 'सही';
-
     userAnswers.push({
-        question: getText(q.question),
-        userOption: selectedIndex === -1 ? timeUpText : getText(q.options[selectedIndex]),
-        correctOption: getText(q.options[q.answer]),
+        question: q.question,
+        userOption: selectedIndex === -1 ? "समय सकियो / Time's up" : q.options[selectedIndex],
+        correctOption: q.options[q.answer],
         isCorrect
     });
 
@@ -266,18 +224,10 @@ function endQuiz() {
     showSection('result-section');
     document.getElementById('final-score').textContent = score;
    
-    let msg = "";
-    if (selectedLanguage === 'en') {
-        msg = score === 10 ? "Amazing! You are a genius! 🏆" :
-              score >= 7 ? "Very Good! Keep practicing. 👏" :
-              score >= 4 ? "Not bad! Try better next time. 👍" :
-              "Don't worry, try again! 💪";
-    } else {
-        msg = score === 10 ? "अद्भुत! तपाईं एकदमै जानकार हुनुहुन्छ! 🏆" :
-              score >= 7 ? "धेरै राम्रो! अझै अलि अभ्यास गर्नुहोस्। 👏" :
-              score >= 4 ? "ठिकै छ, अर्को पटक अझै राम्रो गर्नुहोला! 👍" :
-              "चिन्ता नगर्नुहोस्, फेरि प्रयास गर्नुहोस्! 💪";
-    }
+    let msg = score === 10 ? "अद्भुत! Amazing! 🏆" :
+              score >= 7 ? "धेरै राम्रो! Very Good! 👏" :
+              score >= 4 ? "ठिकै छ! Not bad! 👍" :
+              "फेरि प्रयास गर्नुहोस्! Try again! 💪";
     document.getElementById('score-message').textContent = msg;
 }
 
@@ -285,15 +235,13 @@ function endQuiz() {
 if (reviewBtn) {
     reviewBtn.addEventListener('click', () => {
         const container = document.getElementById('review-container');
-        const yourAnsText = selectedLanguage === 'en' ? 'Your Answer' : 'तपाईं';
-        const correctText = selectedLanguage === 'en' ? 'Correct' : 'सही';
        
         if (container.innerHTML === '') {
             container.innerHTML = userAnswers.map((ans, idx) => `
                 <div class="review-item ${ans.isCorrect ? 'correct' : 'wrong'}">
                     <strong>${idx+1}. ${ans.question}</strong><br>
-                    <span style="color:${ans.isCorrect?'green':'red'}">${yourAnsText}: ${ans.userOption}</span><br>
-                    ${!ans.isCorrect ? `<span style="color:green">${correctText}: ${ans.correctOption}</span>` : ''}
+                    <span style="color:${ans.isCorrect?'green':'red'}">तपाईं/You: ${ans.userOption}</span><br>
+                    ${!ans.isCorrect ? `<span style="color:green">सही/Correct: ${ans.correctOption}</span>` : ''}
                 </div>`).join('');
         } else {
             container.innerHTML = '';
