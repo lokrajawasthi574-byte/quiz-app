@@ -16,72 +16,48 @@
         <source src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 1. Modern Login Screen -->
+    <!-- 1. Login Screen -->
     <div id="login-screen" class="screen active">
-        <div class="login-wrapper">
-            <div class="header-section">
-                <div class="om-symbol">ॐ</div>
-                <h1 class="site-title">Lokraj Awasthi Quiz</h1>
-                <p class="site-subtitle">हर हर महादेव 🙏</p>
+        <div class="login-container">
+            <div class="mahadev-top">
+                <img src="https://images.unsplash.com/photo-1620072214571-5990423b0907?w=500&q=80" alt="Lord Shiva" class="mahadev-img">
+                <h1 class="mahadev-text">॥ हर हर महादेव ॥</h1>
             </div>
-
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
-                <button class="tab-btn" onclick="switchTab('signup')">Sign up</button>
-            </div>
-
-            <div class="login-card">
-                <h2 id="form-title">Login</h2>
-                <p id="form-subtitle">Welcome back! Continue your quiz.</p>
-
-                <form id="login-form" onsubmit="handleLogin(event)">
-                    <input type="text" id="login-name" placeholder="Full Name" required>
-                    <input type="email" id="login-email" placeholder="Email" required>
-                    <input type="password" id="login-password" placeholder="Password" required>
-                    <button type="submit" class="submit-btn" id="submit-btn">Login</button>
-                </form>
-
-                <div class="divider"><span>OR</span></div>
-
-                <button class="google-btn" onclick="alert('Google Login coming soon! 🙏')">
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    Continue with Google
-                </button>
-
-                <p class="toggle-text">
-                    <span id="toggle-msg">Don't have an account? </span>
-                    <a href="#" onclick="toggleMode(event)" id="toggle-link">Sign up</a>
-                </p>
-            </div>
+            <h2 class="login-title">स्वागतम्</h2>
+            <p class="login-subtitle">क्विज खेल्नको लागि तल आफ्नो नाम राख्नुहोस्</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="access-name" placeholder="आफ्नो नाम लेख्नुहोस्..." required autocomplete="off">
+                </div>
+                <button type="submit" class="btn-primary">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
+            </form>
+            <p class="note">नोट: तपाईंको नाम लेखेपछि भाषा छान्न सक्नुहुनेछ।</p>
         </div>
     </div>
 
-    <!-- 2. Language Selection Screen -->
+    <!-- 2. Language Selection Screen (Hidden initially) -->
     <div id="lang-screen" class="screen">
         <div class="lang-container">
             <h2 class="lang-title">Choose Language / भाषा छान्नुहोस्</h2>
-            <button id="btn-en" class="btn-lang btn-en" onclick="setLanguage('en')">🇬🇧 English</button>
-            <button id="btn-np" class="btn-lang btn-np" onclick="setLanguage('np')">🇳 नेपाली (Nepali)</button>
+            <button id="btn-en" class="btn-lang btn-en">🇬🇧 English</button>
+            <button id="btn-np" class="btn-lang btn-np">🇳 नेपाली (Nepali)</button>
         </div>
     </div>
 
     <!-- 3. Main App Screen -->
     <div id="app-screen" class="screen">
+        <!-- Header -->
         <header>
             <div class="user-info">
                 <i class="fas fa-om"></i>
-                <span id="display-username">Lokraj Awasthi Quiz</span>
+                <span>Lokraj Awasthi Quiz</span>
             </div>
             <div class="header-buttons">
-                <button id="music-toggle" class="btn-music" onclick="toggleMusic()">
+                <button id="music-toggle" class="btn-music" title="Music On/Off">
                     <i class="fas fa-volume-up" id="music-icon"></i>
                 </button>
-                <button id="home-btn" class="btn-small" onclick="goHome()"><i class="fas fa-home"></i> होम</button>
+                <button id="home-btn" class="btn-small"><i class="fas fa-home"></i> होम</button>
             </div>
         </header>
 
@@ -89,15 +65,15 @@
         <div id="category-section" class="section active">
             <h2 class="section-title">विषय छान्नुहोस्</h2>
             <div class="category-grid">
-                <div class="category-card" onclick="startQuiz('class9')"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
-                <div class="category-card" onclick="startQuiz('class10')"><i class="fas fa-graduation-cap"></i><h3>Class 10</h3></div>
-                <div class="category-card" onclick="startQuiz('class11')"><i class="fas fa-user-graduate"></i><h3>Class 11</h3></div>
-                <div class="category-card" onclick="startQuiz('class12')"><i class="fas fa-award"></i><h3>Class 12</h3></div>
-                <div class="category-card" onclick="startQuiz('science')"><i class="fas fa-flask"></i><h3>Science</h3></div>
-                <div class="category-card" onclick="startQuiz('computer')"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
-                <div class="category-card" onclick="startQuiz('math')"><i class="fas fa-calculator"></i><h3>Math</h3></div>
-                <div class="category-card" onclick="startQuiz('gk')"><i class="fas fa-globe-asia"></i><h3>Samanya Gyan</h3></div>
-                <div class="category-card mixed" onclick="startQuiz('mixed')"><i class="fas fa-random"></i><h3>मिश्रित (सबै)</h3></div>
+                <div class="category-card" data-category="class9"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
+                <div class="category-card" data-category="class10"><i class="fas fa-graduation-cap"></i><h3>Class 10</h3></div>
+                <div class="category-card" data-category="class11"><i class="fas fa-user-graduate"></i><h3>Class 11</h3></div>
+                <div class="category-card" data-category="class12"><i class="fas fa-award"></i><h3>Class 12</h3></div>
+                <div class="category-card" data-category="science"><i class="fas fa-flask"></i><h3>Science</h3></div>
+                <div class="category-card" data-category="computer"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
+                <div class="category-card" data-category="math"><i class="fas fa-calculator"></i><h3>Math</h3></div>
+                <div class="category-card" data-category="gk"><i class="fas fa-globe-asia"></i><h3>Samanya Gyan</h3></div>
+                <div class="category-card mixed" data-category="mixed"><i class="fas fa-random"></i><h3>मिश्रित (सबै)</h3></div>
             </div>
         </div>
 
@@ -121,12 +97,13 @@
                 <p id="score-message"></p>
             </div>
             <div class="result-actions">
-                <button id="review-btn" class="btn-secondary" onclick="showReview()"><i class="fas fa-list"></i> उत्तर हेर्नुहोस्</button>
-                <button id="restart-btn" class="btn-primary" onclick="goHome()"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
+                <button id="review-btn" class="btn-secondary"><i class="fas fa-list"></i> उत्तर हेर्नुहोस्</button>
+                <button id="restart-btn" class="btn-primary"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
             </div>
             <div id="review-container"></div>
         </div>
 
+        <!-- Footer -->
         <footer>
             <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong></p>
         </footer>
@@ -134,4 +111,4 @@
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
