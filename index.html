@@ -8,15 +8,43 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+<link rel="stylesheet" href="login-style.css"> </head>
 <body>
+<div class="login-container" id="login-container">
+    <div class="header-section">
+        <div class="om-symbol">ॐ</div>
+        <h1 class="site-title">Lokraj Awasthi Quiz</h1>
+        <p class="site-subtitle">हर हर महादेव 🙏</p>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" onclick="switchTab('signup')">Sign up</button>
+    </div>
+    <div class="login-card">
+        <h2 id="form-title">Login</h2>
+        <p id="form-subtitle">Welcome back! Continue your quiz.</p>
+        <form id="auth-form" onsubmit="handleAuth(event)">
+            <input type="text" id="name-input" placeholder="Full Name" style="display: none;">
+            <input type="email" id="email-input" placeholder="Email" required>
+            <input type="password" id="password-input" placeholder="Password" required>
+            <button type="submit" class="submit-btn" id="submit-btn">Login</button>
+        </form>
+        <div class="divider"><span>OR</span></div>
+        <button class="google-btn" onclick="googleLogin()">Continue with Google</button>
+        <p class="toggle-text">
+            <span id="toggle-msg">Don't have an account? </span>
+            <a href="#" onclick="toggleMode(event)" id="toggle-link">Sign up</a>
+        </p>
+    </div>
+</div> 
 
     <!-- Background Music -->
     <audio id="bg-music" loop preload="auto">
         <source src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 1. Login Screen -->
+  <div id="login-screen" class="screen active" style="display: none;"> 
+  <!-- 1. Login Screen -->
     <div id="login-screen" class="screen active">
         <div class="login-container">
             <div class="mahadev-top">
@@ -108,7 +136,7 @@
             <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong></p>
         </footer>
     </div>
-
+ <div id="login-screen" class="screen active" style="display: none;"> 
     <script src="script.js"></script>
 </body>
 </html> 

@@ -249,4 +249,298 @@
 {"id":248,"category":"gk","question":"When is World Environment Day celebrated? / विश्व वातावरण दिवस कहिले मनाइन्छ?","options":["April 22","March 22","June 5","July 11"],"answer":2},
 {"id":249,"category":"gk","question":"What is the official currency of Nepal? / नेपालको आधिकारिक मुद्रा के हो?","options":["Indian Rupee","Dollar","Yuan","Nepalese Rupee"],"answer":3},
 {"id":250,"category":"gk","question":"Which is the tallest building in the world? / विश्वको सबैभन्दा अग्लो भवन कुन हो?","options":["Burj Khalifa","Shanghai Tower","Abraj Al-Bait","Ping An Finance Centre"],"answer":0}
-] 
+  {
+    "id": 251,
+    "category": "computer",
+    "question": "Which one of the following is an input device? / तलका मध्ये कुन input device हो?",
+    "options": ["speaker", "printer", "monitor", "mouse"],
+    "answer": 3
+  },
+  {
+    "id": 252,
+    "category": "computer",
+    "question": "Which of the following is NOT a standard bus type? / तलका मध्ये कुन standard bus type होइन?",
+    "options": ["Address bus", "Data bus", "Memory bus", "Control bus"],
+    "answer": 2
+  },
+  {
+    "id": 253,
+    "category": "computer",
+    "question": "How to represent Boolean F(x,y) = x.y in logic gate? / Boolean F(x,y) = x.y लाई logic gate मा कसरी जनाइन्छ?",
+    "options": ["AND gate", "NAND gate", "OR gate", "XOR gate"],
+    "answer": 0
+  },
+  {
+    "id": 254,
+    "category": "computer",
+    "question": "Which scheduling algorithm allocates the CPU first to the process that requests the CPU first? / कुन scheduling algorithm ले पहिले CPU माग गर्ने process लाई पहिले CPU दिन्छ?",
+    "options": ["first-come, first-served scheduling", "priority scheduling", "shortest job scheduling", "Round robin scheduling"],
+    "answer": 0
+  },
+  {
+    "id": 255,
+    "category": "computer",
+    "question": "Which operator is used to start to enter the formula in Excel cell? / Excel cell मा formula लेख्न सुरु गर्न कुन operator प्रयोग गरिन्छ?",
+    "options": ["$", "@", "=", "+"],
+    "answer": 2
+  },
+  {
+    "id": 256,
+    "category": "computer",
+    "question": "Which looping process checks the test condition at the end of the loop? / कुन looping process ले loop को अन्त्यमा test condition जाँच गर्छ?",
+    "options": ["for", "while", "do-while", "Nested loop"],
+    "answer": 2
+  },
+  {
+    "id": 257,
+    "category": "computer",
+    "question": "How to insert an image in web page using HTML tag? / HTML tag प्रयोग गरेर web page मा image कसरी हाल्ने?",
+    "options": ["<img=...>", "<img source=...>", "<img src=...>", "<img href=...>"],
+    "answer": 2
+  },
+  {
+    "id": 258,
+    "category": "computer",
+    "question": "Which image format is best used for photographs and offers a small file size? / फोटोका लागि कुन image format उत्तम हो र सानो file size दिन्छ?",
+    "options": ["PNG", "GIF", "BMP", "JPEG"],
+    "answer": 3
+  },
+  {
+    "id": 259,
+    "category": "computer",
+    "question": "Which of the following monitors user activity on internet and transmits that information in the background to someone else? / कुनले internet मा user activity monitor गरेर पृष्ठभूमिमा अरूलाई जानकारी पठाउँछ?",
+    "options": ["Malware", "Spyware", "Adware", "Virus"],
+    "answer": 1
+  },
+  {
+    "id": 260,
+    "category": "computer",
+    "question": "The main electronic device used by second-generation computers is. / दोस्रो पुस्ताका कम्प्युटरमा प्रयोग हुने मुख्य electronic device कुन हो?",
+    "options": ["Vacuum tube", "IC chip", "Transistor", "Microprocessor"],
+    "answer": 2
+  },
+  {
+    "id": 261,
+    "category": "computer",
+    "question": "The laptop we use is a type of which of these categories? / हामी प्रयोग गर्ने laptop कुन category को हो?",
+    "options": ["Microcomputer", "Super Computer", "Mini Computer", "All of these"],
+    "answer": 0
+  },
+  {
+    "id": 262,
+    "category": "computer",
+    "question": "The function scanf() is used to / scanf() function को प्रयोग केका लागि गरिन्छ?",
+    "options": ["To exit from program", "Input a set of values", "Display the message or value", "Do mathematical manipulation"],
+    "answer": 1
+  },
+  {
+    "id": 263,
+    "category": "computer",
+    "question": "Which of the following is application software? / तलका मध्ये कुन application software हो?",
+    "options": ["Windows OS", "Language translator", "MS-word", "Device driver"],
+    "answer": 2
+  },
+  {
+    "id": 264,
+    "category": "computer",
+    "question": "Which of the following tags is used for inserting the largest heading in HTML? / HTML मा सबैभन्दा ठूलो heading राख्न कुन tag प्रयोग गरिन्छ?",
+    "options": ["<h3>", "<h1>", "<h5>", "<h6>"],
+    "answer": 1
+  },
+  {
+    "id": 265,
+    "category": "computer",
+    "question": "Putting files to the server from the computer is / कम्प्युटरबाट server मा files पठाउनुलाई के भनिन्छ?",
+    "options": ["Downloading", "Uploading", "Trashing", "Transferring"],
+    "answer": 1
+  },
+  {
+    "id": 266,
+    "category": "computer",
+    "question": "It is an act of stealing (like copying, distributing, modifying, selling) of software that is legally protected. / कानुनी रूपमा सुरक्षित software चोरी गर्ने कार्यलाई के भनिन्छ?",
+    "options": ["Renting", "Software piracy", "Copyright", "Hacking"],
+    "answer": 1
+  },
+  {
+    "id": 267,
+    "category": "computer",
+    "question": "Which of the following expressions is in the sum-of-products (SOP) form? / तलका मध्ये कुन expression sum-of-products (SOP) form मा छ?",
+    "options": ["(A + B)(C + D)", "(A)B(CD)", "AB(CD)", "AB + CD"],
+    "answer": 3
+  },
+  {
+    "id": 268,
+    "category": "computer",
+    "question": "RAM is _______ and _______. / RAM _______ र _______ हुन्छ।",
+    "options": ["volatile, temporary", "non-volatile, temporary", "volatile, permanent", "non-volatile, permanent"],
+    "answer": 0
+  },
+  {
+    "id": 269,
+    "category": "computer",
+    "question": "The main electronic device used by fourth-generation computers is. / चौथो पुस्ताका कम्प्युटरमा प्रयोग हुने मुख्य electronic device कुन हो?",
+    "options": ["Transistor", "Vacuum tube", "IC chip", "Microprocessor"],
+    "answer": 3
+  },
+  {
+    "id": 270,
+    "category": "computer",
+    "question": "Which type of computer can handle analog and digital data? / कुन type को कम्प्युटरले analog र digital दुवै data handle गर्न सक्छ?",
+    "options": ["Digital", "Analog", "Hybrid", "All of these"],
+    "answer": 2
+  },
+  {
+    "id": 271,
+    "category": "computer",
+    "question": "The function printf() is used to / printf() function को प्रयोग केका लागि गरिन्छ?",
+    "options": ["To take a logical direction", "Input a set of values", "Display the message or value", "Do mathematical manipulation"],
+    "answer": 2
+  },
+  {
+    "id": 272,
+    "category": "computer",
+    "question": "Which of the following is a utility software? / तलका मध्ये कुन utility software हो?",
+    "options": ["Windows OS", "Language translator", "Antivirus", "MS-word"],
+    "answer": 2
+  },
+  {
+    "id": 273,
+    "category": "computer",
+    "question": "Which character is used to represent the closing of a tag in HTML? / HTML मा tag बन्द गर्न कुन character प्रयोग गरिन्छ?",
+    "options": ["\\", "!", "/", "."],
+    "answer": 2
+  },
+  {
+    "id": 274,
+    "category": "computer",
+    "question": "The address of a website is also known as / वेबसाइटको address लाई के पनि भनिन्छ?",
+    "options": ["Location", "Mail id", "URL", "None of these"],
+    "answer": 2
+  },
+  {
+    "id": 275,
+    "category": "computer",
+    "question": "Copyright, patents, and trademarks are examples of / Copyright, patents र trademarks कुनका उदाहरण हुन्?",
+    "options": ["Protocols", "Cyber Law", "Ethics", "Intellectual property rights"],
+    "answer": 3
+  },
+  {
+    "id": 276,
+    "category": "computer",
+    "question": "For the output of an EX-NOR gate to be 1, which input combination is correct? / EX-NOR gate को output 1 हुन कुन input combination सही छ?",
+    "options": ["A = 1, B = 0", "A = 0, B = 1", "A = 0, B = 0", "A = 0, B' = 1"],
+    "answer": 2
+  },
+  {
+    "id": 277,
+    "category": "computer",
+    "question": "Which of the following is the lowest in the computer memory hierarchy? / तलका मध्ये कुन computer memory hierarchy मा सबैभन्दा तल्लो (slowest) हो?",
+    "options": ["Cache", "RAM", "Secondary memory", "CPU registers"],
+    "answer": 2
+  },
+  {
+    "id": 278,
+    "category": "computer",
+    "question": "....... is a computer, which accepts, processes and generates continuous data. / ....... यस्तो कम्प्युटर हो जसले continuous data स्वीकार, प्रक्रिया र उत्पादन गर्छ।",
+    "options": ["Analog", "Digital", "Hybrid", "None of the above"],
+    "answer": 0
+  },
+  {
+    "id": 279,
+    "category": "computer",
+    "question": "Which language is the Fourth-generation language of computers? / कम्प्युटरको Fourth-generation language कुन हो?",
+    "options": ["Procedural-oriented language", "Problem-oriented language", "Machine language", "Assembly language"],
+    "answer": 1
+  },
+  {
+    "id": 280,
+    "category": "computer",
+    "question": "Which of the following is malicious software? / तलका मध्ये कुन malicious software हो?",
+    "options": ["OS", "Language translator", "MS-word", "Virus"],
+    "answer": 3
+  },
+  {
+    "id": 281,
+    "category": "computer",
+    "question": "Multimedia is a combination of... / Multimedia को संयोजन के हो?",
+    "options": ["Text, graphics art & animation", "Audio & video", "Both a and b", "All of them"],
+    "answer": 2
+  },
+  {
+    "id": 282,
+    "category": "computer",
+    "question": "Which of the statements is true about BUS architecture? / BUS architecture बारे कुन statement सही छ?",
+    "options": ["A software, which is used to transfer data", "A method of transferring data", "A communication pathway over which information and signals are transferred", "All of the above"],
+    "answer": 2
+  },
+  {
+    "id": 283,
+    "category": "computer",
+    "question": "The decimal equivalent of binary (1011) is ............ / binary (1011) को decimal बराबर मान ............ हो।",
+    "options": ["12", "9", "10", "11"],
+    "answer": 3
+  },
+  {
+    "id": 284,
+    "category": "computer",
+    "question": "Microprocessors as switching devices are for which generation computers? / Microprocessors switching device को रूपमा कुन पुस्ताका कम्प्युटरका लागि हुन्?",
+    "options": ["First Generation", "Second Generation", "Third Generation", "Fourth Generation"],
+    "answer": 3
+  },
+  {
+    "id": 285,
+    "category": "computer",
+    "question": "Data transfer rate of USB 2.0 is ... / USB 2.0 को data transfer rate कति हो?",
+    "options": ["400 Mbps", "450 Mbps", "460 Mbps", "480 Mbps"],
+    "answer": 3
+  },
+  {
+    "id": 286,
+    "category": "computer",
+    "question": "Which gate produces high output when both inputs are the same? / कुन gate ले दुवै input उस्तै हुँदा high output दिन्छ?",
+    "options": ["XOR gate", "XNOR gate", "NOR gate", "None of the above"],
+    "answer": 1
+  },
+  {
+    "id": 287,
+    "category": "computer",
+    "question": "BIOS is used? / BIOS को प्रयोग कसले गर्छ?",
+    "options": ["By operating system", "By compiler", "By interpreter", "By application software"],
+    "answer": 0
+  },
+  {
+    "id": 288,
+    "category": "computer",
+    "question": "The short-cut key for force page break is. / Force page break को shortcut key कुन हो?",
+    "options": ["Down cursor key", "Shift + Enter key", "Enter key", "Ctrl + Enter key"],
+    "answer": 3
+  },
+  {
+    "id": 289,
+    "category": "computer",
+    "question": "How many times does the following loop repeat? while(1) { printf(\"Hello World\"); } / तलको loop कति पटक दोहोरिन्छ?",
+    "options": ["1 times", "0 times", "Non-zero times (infinite)", "None of these"],
+    "answer": 2
+  },
+  {
+    "id": 290,
+    "category": "computer",
+    "question": "What kind of language can a computer understand? / कम्प्युटरले कुन प्रकारको भाषा बुझ्न सक्छ?",
+    "options": ["Natural language", "Machine-level language", "Assembly level language", "High-level language"],
+    "answer": 1
+  },
+  {
+    "id": 291,
+    "category": "computer",
+    "question": "Which of the following is monitoring users' activity on the Internet and transmitting that information in the background to someone else? / कुनले Internet मा users' activity monitor गरेर पृष्ठभूमिमा अरूलाई जानकारी पठाउँछ?",
+    "options": ["Malware", "Spyware", "Adware", "Virus"],
+    "answer": 1
+  },
+  {
+    "id": 292,
+    "category": "computer",
+    "question": "Which of the following is not an image file format? / तलका मध्ये कुन image file format होइन?",
+    "options": ["GIF", "TIFF", "JPEG", "WAV"],
+    "answer": 3
+  } 
+
