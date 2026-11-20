@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lokraj Awasthi Quiz</title>
+    <title>Lokraj Awasthi Quiz - हर हर महादेव</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
@@ -11,53 +11,70 @@
 </head>
 <body>
 
-    <!-- Background Music -->
+    <!-- Divine Sounds -->
+    <audio id="om-sound" preload="auto">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg"> <!-- Short divine bell/om sound -->
+    </audio>
     <audio id="bg-music" loop preload="auto">
         <source src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- Flower Fall Container -->
+    <div id="flower-container"></div>
 
     <!-- 1. Login Screen -->
     <div id="login-screen" class="screen active">
         <div class="login-container">
             <div class="mahadev-top">
-                <img src="https://images.unsplash.com/photo-1620072214571-5990423b0907?w=500&q=80" alt="Lord Shiva" class="mahadev-img">
+                <!-- High Quality Mahadev Image -->
+                <img src="https://images.unsplash.com/photo-1599827051581-6296e4b7b452?q=80&w=500&auto=format&fit=crop" alt="Lord Shiva" class="mahadev-img">
                 <h1 class="mahadev-text">॥ हर हर महादेव ॥</h1>
             </div>
             <h2 class="login-title">स्वागतम्</h2>
             <p class="login-subtitle">क्विज खेल्नको लागि तल आफ्नो नाम राख्नुहोस्</p>
+           
+            <!-- Game Mode Selection -->
+            <div class="mode-selector">
+                <label class="mode-btn active" onclick="setMode('1p')">
+                    <input type="radio" name="mode" value="1p" checked> 👤 1 Player
+                </label>
+                <label class="mode-btn" onclick="setMode('2p')">
+                    <input type="radio" name="mode" value="2p"> 👥 2 Players (Pass & Play)
+                </label>
+            </div>
+
             <form id="login-form">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
                     <input type="text" id="access-name" placeholder="आफ्नो नाम लेख्नुहोस्..." required autocomplete="off">
                 </div>
-                <button type="submit" class="btn-primary">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
+                <button type="submit" class="btn-primary" id="start-btn">क्विज सुरु गर्नुहोस् <i class="fas fa-om"></i></button>
             </form>
-            <p class="note">नोट: तपाईंको नाम लेखेपछि भाषा छान्न सक्नुहुनेछ।</p>
+            <p class="note">नोट: नाम लेखेपछि भाषा छान्न सक्नुहुनेछ।</p>
         </div>
     </div>
 
-    <!-- 2. Language Selection Screen (Hidden initially) -->
+    <!-- 2. Language Selection Screen -->
     <div id="lang-screen" class="screen">
         <div class="lang-container">
             <h2 class="lang-title">Choose Language / भाषा छान्नुहोस्</h2>
-            <button id="btn-en" class="btn-lang btn-en">🇬🇧 English</button>
-            <button id="btn-np" class="btn-lang btn-np">🇳 नेपाली (Nepali)</button>
+            <button class="btn-lang btn-en" onclick="setLanguage('en')">🇬🇧 English</button>
+            <button class="btn-lang btn-np" onclick="setLanguage('np')">🇳 नेपाली (Nepali)</button>
         </div>
     </div>
 
     <!-- 3. Main App Screen -->
     <div id="app-screen" class="screen">
-        <!-- Header -->
         <header>
             <div class="user-info">
                 <i class="fas fa-om"></i>
-                <span>Lokraj Awasthi Quiz</span>
+                <span id="user-display-name">Lokraj Awasthi Quiz</span>
             </div>
             <div class="header-buttons">
                 <button id="music-toggle" class="btn-music" title="Music On/Off">
                     <i class="fas fa-volume-up" id="music-icon"></i>
                 </button>
-                <button id="home-btn" class="btn-small"><i class="fas fa-home"></i> होम</button>
+                <button id="home-btn" class="btn-small" style="display: none;"><i class="fas fa-home"></i> होम</button>
             </div>
         </header>
 
@@ -66,8 +83,8 @@
             <h2 class="section-title">विषय छान्नुहोस्</h2>
             <div class="category-grid">
                 <div class="category-card" data-category="class9"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
-                <div class="category-card" data-category="class10"><i class="fas fa-graduation-cap"></i><h3>Class 10</h3></div>
-                <div class="category-card" data-category="class11"><i class="fas fa-user-graduate"></i><h3>Class 11</h3></div>
+                <div class="category-card" data-category="class10"><i class="fas fa-graduation-cap"></i><h3>Class 10 (SEE)</h3></div>
+                <div class="category-card" data-category="class11"><i class="fas fa-user-graduate"></i><h3>Class 11 (NEB)</h3></div>
                 <div class="category-card" data-category="class12"><i class="fas fa-award"></i><h3>Class 12</h3></div>
                 <div class="category-card" data-category="science"><i class="fas fa-flask"></i><h3>Science</h3></div>
                 <div class="category-card" data-category="computer"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
@@ -75,6 +92,15 @@
                 <div class="category-card" data-category="gk"><i class="fas fa-globe-asia"></i><h3>Samanya Gyan</h3></div>
                 <div class="category-card mixed" data-category="mixed"><i class="fas fa-random"></i><h3>मिश्रित (सबै)</h3></div>
             </div>
+        </div>
+
+        <!-- Chapter Selection Screen -->
+        <div id="chapter-screen" class="section">
+            <button class="btn-small" onclick="showSection('category-section')" style="margin-bottom: 15px; width: auto; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fas fa-arrow-left"></i> फिर्ता / Back
+            </button>
+            <h2 class="section-title" id="chapter-title">अध्याय छान्नुहोस्</h2>
+            <div class="chapter-grid" id="chapter-list"></div>
         </div>
 
         <!-- Quiz Page -->
@@ -91,11 +117,22 @@
         <!-- Result Page -->
         <div id="result-section" class="section">
             <h2 class="section-title">क्विज सम्पन्न!</h2>
-            <div class="score-card">
+           
+            <!-- 2 Player Result Display -->
+            <div id="multiplayer-result" class="score-card" style="display: none;">
+                <h3>🏆 अन्तिम नतिजा 🏆</h3>
+                <p id="p1-final-score" style="font-size: 1.2rem; margin: 10px 0;"></p>
+                <p id="p2-final-score" style="font-size: 1.2rem; margin: 10px 0;"></p>
+                <h2 id="winner-text" style="color: var(--saffron); margin-top: 15px;"></h2>
+            </div>
+
+            <!-- 1 Player Result Display -->
+            <div id="singleplayer-result" class="score-card">
                 <h3>तपाईंको स्कोर</h3>
                 <div class="score-display"><span id="final-score">0</span> / 10</div>
                 <p id="score-message"></p>
             </div>
+
             <div class="result-actions">
                 <button id="review-btn" class="btn-secondary"><i class="fas fa-list"></i> उत्तर हेर्नुहोस्</button>
                 <button id="restart-btn" class="btn-primary"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
@@ -103,12 +140,11 @@
             <div id="review-container"></div>
         </div>
 
-        <!-- Footer -->
         <footer>
-            <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong></p>
+            <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong> 🙏</p>
         </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
