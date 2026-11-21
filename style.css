@@ -12,71 +12,70 @@ body {
 }
 
 /* ==========================================
-   🌸 4-SIDED RECTANGULAR GARLAND
+   🌸 4-SIDED GARLAND (Round flowers, no gaps)
    ========================================== */
 .garland-top, .garland-bottom, .garland-left, .garland-right {
     position: fixed;
     z-index: 9998;
     overflow: hidden;
     pointer-events: none;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .garland-top {
     top: 0; left: 0; right: 0;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    font-size: 1.6rem;
+    height: 45px;
+    font-size: 1.8rem;
     white-space: nowrap;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-    animation: scrollHorizontal 25s linear infinite;
+    animation: scrollLeft 30s linear infinite;
 }
 
 .garland-bottom {
     bottom: 0; left: 0; right: 0;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    font-size: 1.6rem;
+    height: 45px;
+    font-size: 1.8rem;
     white-space: nowrap;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    animation: scrollHorizontal 25s linear infinite reverse;
+    animation: scrollRight 30s linear infinite;
 }
 
 .garland-left {
     top: 0; bottom: 0; left: 0;
-    width: 40px;
-    display: flex;
+    width: 45px;
     flex-direction: column;
-    align-items: center;
-    font-size: 1.6rem;
-    background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
-    animation: scrollVertical 25s linear infinite;
+    font-size: 1.8rem;
+    animation: scrollDown 30s linear infinite;
 }
 
 .garland-right {
     top: 0; bottom: 0; right: 0;
-    width: 40px;
-    display: flex;
+    width: 45px;
     flex-direction: column;
-    align-items: center;
-    font-size: 1.6rem;
-    background: linear-gradient(to left, rgba(0,0,0,0.8), transparent);
-    animation: scrollVertical 25s linear infinite reverse;
+    font-size: 1.8rem;
+    animation: scrollUp 30s linear infinite;
 }
 
-@keyframes scrollHorizontal {
+@keyframes scrollLeft {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-
-@keyframes scrollVertical {
+@keyframes scrollRight {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+@keyframes scrollDown {
     0%   { transform: translateY(0); }
     100% { transform: translateY(-50%); }
 }
+@keyframes scrollUp {
+    0%   { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+}
 
 /* ==========================================
-   🕉️ WELCOME SCREEN (Color Rotate 3s)
+   🕉️ WELCOME SCREEN (3 sec color rotate)
    ========================================== */
 .welcome-card {
     animation: welcomeColor 3s ease-in-out infinite;
@@ -123,7 +122,7 @@ body {
 .app-container {
     width: 100%;
     max-width: 800px;
-    padding: 50px 20px;
+    padding: 60px 20px;
     position: relative;
     z-index: 1;
 }
@@ -296,9 +295,9 @@ button {
    📱 MOBILE RESPONSIVE
    ========================================== */
 @media (max-width: 600px) {
-    .garland-top, .garland-bottom { height: 30px; font-size: 1.2rem; }
-    .garland-left, .garland-right { width: 30px; font-size: 1.2rem; }
-    .app-container { padding: 40px 10px; }
+    .garland-top, .garland-bottom { height: 35px; font-size: 1.4rem; }
+    .garland-left, .garland-right { width: 35px; font-size: 1.4rem; }
+    .app-container { padding: 50px 10px; }
     .card { padding: 25px 20px; }
     .grid-container { grid-template-columns: 1fr 1fr; gap: 12px; }
     .cat-card { padding: 18px 12px; }

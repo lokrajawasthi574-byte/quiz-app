@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokraj Awasthi Quiz - हर हर महादेव 🕉️</title>
+    <title>Lokraj Awasthi Quiz</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- 🌸 4-SIDED RECTANGULAR GARLAND (Flowers + Rudraksha) 🌸 -->
+    <!-- 🌸 4-SIDED GARLAND (No gaps, round flowers) 🌸 -->
     <div class="garland-top" id="garland-top"></div>
     <div class="garland-bottom" id="garland-bottom"></div>
     <div class="garland-left" id="garland-left"></div>
@@ -18,7 +18,7 @@
     <!-- 🕉️ MAIN APP -->
     <div class="app-container">
 
-        <!-- 1. WELCOME SCREEN (3 sec color rotate) -->
+        <!-- 1. WELCOME SCREEN -->
         <div id="welcome-screen" class="screen active">
             <div class="card welcome-card">
                 <div class="om-symbol">ॐ</div>
@@ -40,11 +40,11 @@
                 <h2 id="lang-title">Select Language</h2>
                 <p class="subtitle" id="lang-subtitle">भाषा छान्नुहोस्</p>
                 <div class="lang-buttons">
-                    <button class="btn-lang" onclick="selectLanguage('ne')">
+                    <button class="btn-lang" id="btn-ne" onclick="selectLanguage('ne')">
                         <span class="lang-flag">🇳🇵</span>
                         <span>नेपाली</span>
                     </button>
-                    <button class="btn-lang" onclick="selectLanguage('en')">
+                    <button class="btn-lang" id="btn-en" onclick="selectLanguage('en')">
                         <span class="lang-flag">🇬🇧</span>
                         <span>English</span>
                     </button>
@@ -72,7 +72,7 @@
         <!-- 4. CLASS SELECTION -->
         <div id="category-screen" class="screen">
             <div class="header">
-                <h2 id="greeting-text">Namaste, Student! 🙏</h2>
+                <h2 id="greeting-text">Namaste! 🙏</h2>
                 <p id="select-class-text">Select Your Class</p>
             </div>
             <div class="grid-container" id="class-list"></div>
