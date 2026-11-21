@@ -1,7 +1,71 @@
 "use strict";
 
 // ==========================================
-// 1. SETTINGS
+// 1. TRANSLATIONS (Nepali & English)
+// ==========================================
+const translations = {
+    ne: {
+        greeting: "नमस्ते",
+        selectClass: "आफ्नो Class छान्नुहोस्",
+        back: "पछाडि",
+        subjects: "विषयहरू",
+        chapters: "अध्यायहरू",
+        allChapters: "सबै अध्याय",
+        startQuiz: "क्विज सुरु गर्नुहोस्",
+        quit: "छोड्नुहोस्",
+        result: "नतिजा",
+        correct: "सही",
+        wrong: "गलत",
+        viewAnswers: "उत्तर हेर्नुहोस्",
+        hideAnswers: "लुकाउनुहोस्",
+        playAgain: "पुनः खेल्नुहोस्",
+        exit: "बाहिर निस्कनुहोस्",
+        correctAnswer: "सही उत्तर! +10 अंक 🌸",
+        wrongAnswer: "गलत उत्तर!",
+        timeUp: "समय सकियो!",
+        enterName: "आफ्नो नाम लेख्नुहोस्",
+        namePlaceholder: "तपाईंको नाम...",
+        selectLanguage: "भाषा छान्नुहोस्",
+        excellent: "अद्भुत! Excellent! 🏆",
+        good: "राम्रो! Good Job! 👍",
+        tryAgain: "अझै मेहनत गर्नुहोस्! 💪",
+        newRecord: "नयाँ कीर्तिमान! 🎉 ",
+        quitConfirm: "के तपाईं क्विज छोड्न चाहनुहुन्छ?"
+    },
+    en: {
+        greeting: "Welcome",
+        selectClass: "Select Your Class",
+        back: "Back",
+        subjects: "Subjects",
+        chapters: "Chapters",
+        allChapters: "All Chapters",
+        startQuiz: "Start Quiz",
+        quit: "Quit",
+        result: "Result",
+        correct: "Correct",
+        wrong: "Wrong",
+        viewAnswers: "View Answers",
+        hideAnswers: "Hide Answers",
+        playAgain: "Play Again",
+        exit: "Exit",
+        correctAnswer: "Correct! +10 points 🌸",
+        wrongAnswer: "Wrong Answer!",
+        timeUp: "Time's Up!",
+        enterName: "Enter Your Name",
+        namePlaceholder: "Your name...",
+        selectLanguage: "Select Language",
+        excellent: "Excellent! 🏆",
+        good: "Good Job! 👍",
+        tryAgain: "Keep Trying! 💪",
+        newRecord: "New Record! 🎉 ",
+        quitConfirm: "Do you want to quit the quiz?"
+    }
+};
+
+let currentLang = 'ne'; // Default Nepali
+
+// ==========================================
+// 2. SETTINGS
 // ==========================================
 const classSubjects = {
     class8:  ["Science", "Math", "Optional Math", "Computer"],
@@ -27,7 +91,28 @@ let answered = false;
 const $ = (id) => document.getElementById(id);
 
 // ==========================================
-// 2. 🌺 FALLING FLOWERS (Continuous)
+// 3. 🌸 4-SIDED GARLAND INITIALIZATION
+// ==========================================
+function initGarlands() {
+    const flowerPattern = "🌸🌼🌺🌷🌹🌻";
+    const rudraksha = "📿";
+    const longPattern = (flowerPattern + rudraksha).repeat(8);
+
+    $("garland-top").textContent = longPattern + longPattern;
+    $("garland-bottom").textContent = longPattern + longPattern;
+
+    const verticalPattern = [];
+    for (let i = 0; i < 60; i++) {
+        if (i % 6 === 5) verticalPattern.push(rudraksha);
+        else verticalPattern.push(flowerPattern[i % 6]);
+    }
+    const vText = verticalPattern.join("\n");
+    $("garland-left").innerHTML = vText + "\n" + vText;
+    $("garland-right").innerHTML = vText + "\n" + vText;
+}
+
+// ==========================================
+// 4. 🌺 FALLING FLOWERS
 // ==========================================
 function createFallingFlower() {
     const container = $("flower-container");
@@ -45,11 +130,42 @@ function createFallingFlower() {
     setTimeout(() => flower.remove(), 8000);
 }
 
-// हर 500ms मा एउटा नयाँ फूल खस्छ
 setInterval(createFallingFlower, 500);
 
 // ==========================================
-// 3. LOAD QUESTIONS
+// 5. WELCOME SCREEN (3 sec color rotate)
+// ==========================================
+setTimeout(() => {
+    showScreen("language-screen");
+}, 3000);
+
+// ==========================================
+// 6. LANGUAGE SELECTION
+// ==========================================
+function selectLanguage(lang) {
+    currentLang = lang;
+    updateAllTexts();
+    showScreen("name-screen");
+}
+
+function updateAllTexts() {
+    const t = translations[currentLang];
+    $("name-title").textContent = t.enterName;
+    $("access-name").placeholder = t.namePlaceholder;
+    $("start-btn").innerHTML = `${t.startQuiz} <i class="fas fa-arrow-right"></i>`;
+    $("select-class-text").textContent = t.selectClass;
+    document.querySelectorAll(".back-text").forEach(el => el.textContent = t.back);
+    $("quit-text").textContent = t.quit;
+    $("result-title").textContent = t.result;
+    $("correct-label").textContent = t.correct;
+    $("wrong-label").textContent = t.wrong;
+    $("review-text").textContent = t.viewAnswers;
+    $("replay-text").textContent = t.playAgain;
+    $("exit-text").textContent = t.exit;
+}
+
+// ==========================================
+// 7. LOAD QUESTIONS
 // ==========================================
 async function loadQuestions() {
     try {
@@ -71,12 +187,12 @@ async function loadQuestions() {
         console.log(`Loaded ${allQuestions.length} questions!`);
     } catch (error) {
         console.error(error);
-        alert("प्रश्नहरू लोड हुन सकेनन्! questions.json जाँच गर्नुहोस्।");
+        alert("Questions failed to load! Check questions.json.");
     }
 }
 
 // ==========================================
-// 4. NAVIGATION
+// 8. NAVIGATION
 // ==========================================
 function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -85,26 +201,29 @@ function showScreen(id) {
 }
 
 // ==========================================
-// 5. LOGIN
+// 9. NAME INPUT
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
+    initGarlands();
     loadQuestions();
-    renderClasses();
+    updateAllTexts();
 });
 
-$("login-form").addEventListener("submit", async (e) => {
+$("name-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     userName = $("access-name").value.trim();
-    if (userName.length < 2) return alert("कृपया नाम राख्नुहोस्!");
-    $("display-name").textContent = userName;
+    if (userName.length < 2) return alert(currentLang === 'ne' ? "कृपया नाम राख्नुहोस्!" : "Please enter your name!");
     if (!questionsLoaded) await loadQuestions();
+    renderClasses();
     showScreen("category-screen");
 });
 
 // ==========================================
-// 6. CLASS SELECTION
+// 10. CLASS SELECTION
 // ==========================================
 function renderClasses() {
+    const t = translations[currentLang];
+    $("greeting-text").textContent = `${t.greeting}, ${userName}! 🙏`;
     const list = $("class-list");
     list.innerHTML = "";
     Object.keys(classSubjects).forEach(cls => {
@@ -119,7 +238,7 @@ function renderClasses() {
 
 function selectCategory(category) {
     selectedClass = category;
-    $("subject-title").textContent = `${category.replace('class', 'Class ')} - Subjects`;
+    $("subject-title").textContent = `${category.replace('class', 'Class ')} - ${translations[currentLang].subjects}`;
     const list = $("subject-list");
     list.innerHTML = "";
 
@@ -144,25 +263,26 @@ function selectSubject(subject) {
 }
 
 // ==========================================
-// 7. CHAPTERS
+// 11. CHAPTERS
 // ==========================================
 function loadChapters(category, subject) {
-    if (!questionsLoaded) return alert("प्रश्नहरू लोड हुँदैछन्...");
+    if (!questionsLoaded) return alert("Questions loading...");
 
     const filtered = allQuestions.filter(q =>
         q.category === category.toLowerCase() &&
         q.subject.toLowerCase() === subject.toLowerCase()
     );
 
-    if (filtered.length === 0) return alert("यस विषयमा प्रश्नहरू छैनन्!");
+    if (filtered.length === 0) return alert(currentLang === 'ne' ? "यस विषयमा प्रश्नहरू छैनन्!" : "No questions for this subject!");
 
-    $("chapter-title").textContent = `${subject} - Chapters`;
+    const t = translations[currentLang];
+    $("chapter-title").textContent = `${subject} - ${t.chapters}`;
     const list = $("chapter-list");
     list.innerHTML = "";
 
     const allBtn = document.createElement("button");
     allBtn.className = "chapter-btn";
-    allBtn.textContent = "सबै अध्याय (All Chapters)";
+    allBtn.textContent = t.allChapters;
     allBtn.onclick = () => startQuiz(filtered);
     list.appendChild(allBtn);
 
@@ -177,7 +297,7 @@ function loadChapters(category, subject) {
 }
 
 // ==========================================
-// 8. QUIZ LOGIC
+// 12. QUIZ LOGIC
 // ==========================================
 function shuffle(arr) {
     const a = [...arr];
@@ -238,6 +358,7 @@ function checkAnswer(selected, btn) {
 
     const q = currentQuestions[currentIndex];
     const isCorrect = String(selected) === String(q.answer);
+    const t = translations[currentLang];
 
     document.querySelectorAll(".option-btn").forEach((b, i) => {
         b.disabled = true;
@@ -248,14 +369,14 @@ function checkAnswer(selected, btn) {
     if (isCorrect) {
         score += POINTS_PER_CORRECT;
         $("current-score").textContent = score;
-        $("answer-feedback").textContent = "सही उत्तर! +10 अंक 🌸";
+        $("answer-feedback").textContent = t.correctAnswer;
     } else {
-        $("answer-feedback").textContent = selected === -1 ? "समय सकियो!" : "गलत उत्तर!";
+        $("answer-feedback").textContent = selected === -1 ? t.timeUp : t.wrongAnswer;
     }
 
     userAnswers.push({
         question: q.question,
-        user: selected === -1 ? "समय सकियो" : q.options[selected],
+        user: selected === -1 ? t.timeUp : q.options[selected],
         correct: q.options[q.answer],
         isCorrect
     });
@@ -264,11 +385,13 @@ function checkAnswer(selected, btn) {
 }
 
 // ==========================================
-// 9. RESULT & REVIEW
+// 13. RESULT & REVIEW
 // ==========================================
 function showResult() {
     clearInterval(timer);
     showScreen("result-screen");
+    const t = translations[currentLang];
+
     $("final-score").textContent = score;
     $("total-q").textContent = `/ ${currentQuestions.length * POINTS_PER_CORRECT}`;
 
@@ -277,32 +400,39 @@ function showResult() {
     $("wrong-count").textContent = userAnswers.length - correct;
 
     const pct = (score / (currentQuestions.length * POINTS_PER_CORRECT)) * 100;
-    $("score-message").textContent = pct >= 80 ? "अद्भुत! Excellent! 🏆" : pct >= 50 ? "राम्रो! Good Job! 👍" : "अझै मेहनत गर्नुहोस्! 💪";
+    let msg = pct >= 80 ? t.excellent : pct >= 50 ? t.good : t.tryAgain;
 
     const hs = parseInt(localStorage.getItem('quizHighScore') || 0);
-    if (score > hs) localStorage.setItem('quizHighScore', score);
+    if (score > hs) {
+        localStorage.setItem('quizHighScore', score);
+        msg = t.newRecord + msg;
+    }
+    $("score-message").textContent = msg;
 }
 
 function toggleReview() {
     const box = $("review-container");
     const btn = $("toggle-review-btn");
+    const t = translations[currentLang];
     if (box.classList.contains("hidden")) {
         box.innerHTML = userAnswers.map((a, i) => `
             <div class="review-item ${a.isCorrect ? 'correct' : 'wrong'}">
                 <strong>${i+1}. ${a.question}</strong><br>
-                तपाईंको: ${a.user} ${!a.isCorrect ? `<br>सही: ${a.correct}` : ''}
+                ${currentLang === 'ne' ? 'तपाईंको' : 'Your'}: ${a.user}
+                ${!a.isCorrect ? `<br>${currentLang === 'ne' ? 'सही' : 'Correct'}: ${a.correct}` : ''}
             </div>`).join("");
         box.classList.remove("hidden");
-        btn.innerHTML = '<i class="fas fa-eye-slash"></i> लुकाउनुहोस्';
+        btn.innerHTML = `<i class="fas fa-eye-slash"></i> ${t.hideAnswers}`;
     } else {
         box.classList.add("hidden");
-        btn.innerHTML = '<i class="fas fa-eye"></i> उत्तर हेर्नुहोस्';
+        btn.innerHTML = `<i class="fas fa-eye"></i> ${t.viewAnswers}`;
     }
 }
 
 function restartGame() { showScreen("category-screen"); }
 function quitQuiz() {
-    if (confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?")) {
+    const t = translations[currentLang];
+    if (confirm(t.quitConfirm)) {
         clearInterval(timer);
         showScreen("category-screen");
     }

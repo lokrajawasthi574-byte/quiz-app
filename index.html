@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,65 +9,101 @@
 </head>
 <body>
 
-    <!-- 🌸 SHIVA DECORATION: Flower Garland (4 Layers) + Rudraksha 🌸 -->
-    <div class="shiva-decoration">
-        <div class="garland-layer layer-1">🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼</div>
-        <div class="garland-layer layer-2">🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷</div>
-        <div class="garland-layer layer-3">🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹</div>
-        <div class="garland-layer layer-4">📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿</div>
-        <div class="har-har-mahadev">हर हर महादेव 🕉️💝🕉️</div>
-    </div>
+    <!-- 🌸 4-SIDED FLOWER GARLANDS 🌸 -->
+    <div class="garland garland-top"></div>
+    <div class="garland garland-bottom"></div>
+    <div class="garland garland-left"></div>
+    <div class="garland garland-right"></div>
 
-    <!-- 🌺 FALLING FLOWERS CONTAINER 🌺 -->
+    <!-- 🌺 FALLING FLOWERS 🌺 -->
     <div id="flower-container"></div>
 
     <!-- 🕉️ MAIN APP -->
     <div class="app-container">
 
-        <!-- 1. Login Screen -->
-        <div id="login-screen" class="screen active">
-            <div class="card login-card">
+        <!-- 1. WELCOME SCREEN (3 sec color rotate) -->
+        <div id="welcome-screen" class="screen active">
+            <div class="card welcome-card">
                 <div class="om-symbol">ॐ</div>
                 <h1>Lokraj Awasthi Quiz</h1>
                 <p class="subtitle">हर हर महादेव 🙏</p>
-                <form id="login-form">
+                <p class="welcome-text">Welcome to the Divine Quiz Portal</p>
+                <div class="welcome-loader">
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                    <span class="loader-dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. LANGUAGE SELECTION -->
+        <div id="language-screen" class="screen">
+            <div class="card language-card">
+                <div class="om-symbol small">ॐ</div>
+                <h2>Select Language</h2>
+                <p class="subtitle">भाषा छान्नुहोस्</p>
+                <div class="lang-buttons">
+                    <button class="btn-lang" onclick="selectLanguage('ne')">
+                        <span class="lang-flag">🇳🇵</span>
+                        <span>नेपाली</span>
+                    </button>
+                    <button class="btn-lang" onclick="selectLanguage('en')">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. NAME INPUT -->
+        <div id="name-screen" class="screen">
+            <div class="card name-card">
+                <div class="om-symbol small">ॐ</div>
+                <h2 id="name-title">Enter Your Name</h2>
+                <form id="name-form">
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="access-name" placeholder="तपाईंको नाम लेख्नुहोस्..." required>
+                        <input type="text" id="access-name" placeholder="Enter your name..." required>
                     </div>
-                    <button type="submit" class="btn-primary">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn-primary" id="start-btn">
+                        Start Quiz <i class="fas fa-arrow-right"></i>
+                    </button>
                 </form>
             </div>
         </div>
 
-        <!-- 2. Class Selection Screen -->
+        <!-- 4. CLASS SELECTION -->
         <div id="category-screen" class="screen">
             <div class="header">
-                <h2>नमस्ते, <span id="display-name">Student</span>! 🙏</h2>
-                <p>आफ्नो Class छान्नुहोस्</p>
+                <h2 id="greeting-text">Namaste, Student! 🙏</h2>
+                <p id="select-class-text">Select Your Class</p>
             </div>
             <div class="grid-container" id="class-list"></div>
         </div>
 
-        <!-- 3. Subject Screen -->
+        <!-- 5. SUBJECT SCREEN -->
         <div id="subject-screen" class="screen">
             <div class="header">
-                <button class="btn-back" onclick="showScreen('category-screen')"><i class="fas fa-arrow-left"></i> पछाडि</button>
+                <button class="btn-back" onclick="showScreen('category-screen')">
+                    <i class="fas fa-arrow-left"></i> <span class="back-text">Back</span>
+                </button>
                 <h2 id="subject-title">Subjects</h2>
             </div>
             <div class="grid-container" id="subject-list"></div>
         </div>
 
-        <!-- 4. Chapter Screen -->
+        <!-- 6. CHAPTER SCREEN -->
         <div id="chapter-screen" class="screen">
             <div class="header">
-                <button class="btn-back" onclick="showScreen('subject-screen')"><i class="fas fa-arrow-left"></i> पछाडि</button>
+                <button class="btn-back" onclick="showScreen('subject-screen')">
+                    <i class="fas fa-arrow-left"></i> <span class="back-text">Back</span>
+                </button>
                 <h2 id="chapter-title">Chapters</h2>
             </div>
             <div class="list-container" id="chapter-list"></div>
         </div>
 
-        <!-- 5. Quiz Screen -->
+        <!-- 7. QUIZ SCREEN -->
         <div id="quiz-screen" class="screen">
             <div class="quiz-header">
                 <div class="player-info">
@@ -85,32 +121,44 @@
                 <div class="timer-bar"><div id="timer-progress" class="timer-progress"></div></div>
             </div>
             <div class="question-box">
-                <p id="question-text">प्रश्न यहाँ देखिनेछ...</p>
+                <p id="question-text">Question will appear here...</p>
             </div>
             <div id="options-container" class="options-grid"></div>
             <p id="answer-feedback" class="feedback"></p>
-            <button class="btn-back" onclick="quitQuiz()" style="margin-top:20px;"><i class="fas fa-times"></i> छोड्नुहोस्</button>
+            <button class="btn-back quit-btn" onclick="quitQuiz()">
+                <i class="fas fa-times"></i> <span class="quit-text">Quit</span>
+            </button>
         </div>
 
-        <!-- 6. Result Screen -->
+        <!-- 8. RESULT SCREEN -->
         <div id="result-screen" class="screen">
             <div class="card result-card">
                 <div class="result-icon">🏆</div>
-                <h2>नतिजा</h2>
+                <h2 id="result-title">Result</h2>
                 <div class="score-circle">
                     <span id="final-score">0</span>
                     <span class="total-score" id="total-q">/ 100</span>
                 </div>
                 <p id="score-message" class="message"></p>
                 <div class="stats">
-                    <span class="stat-item text-green"><i class="fas fa-check-circle"></i> सही: <span id="correct-count">0</span></span>
-                    <span class="stat-item text-red"><i class="fas fa-times-circle"></i> गलत: <span id="wrong-count">0</span></span>
+                    <span class="stat-item text-green">
+                        <i class="fas fa-check-circle"></i> <span id="correct-label">Correct</span>: <span id="correct-count">0</span>
+                    </span>
+                    <span class="stat-item text-red">
+                        <i class="fas fa-times-circle"></i> <span id="wrong-label">Wrong</span>: <span id="wrong-count">0</span>
+                    </span>
                 </div>
-                <button id="toggle-review-btn" class="btn-secondary" onclick="toggleReview()"><i class="fas fa-eye"></i> उत्तर हेर्नुहोस्</button>
+                <button id="toggle-review-btn" class="btn-secondary" onclick="toggleReview()">
+                    <i class="fas fa-eye"></i> <span id="review-text">View Answers</span>
+                </button>
                 <div id="review-container" class="hidden review-box"></div>
                 <div class="btn-group">
-                    <button class="btn-primary" onclick="restartGame()"><i class="fas fa-redo"></i> पुनः खेल्नुहोस्</button>
-                    <button class="btn-danger" onclick="quitQuiz()"><i class="fas fa-sign-out-alt"></i> छोड्नुहोस्</button>
+                    <button class="btn-primary" onclick="restartGame()">
+                        <i class="fas fa-redo"></i> <span id="replay-text">Play Again</span>
+                    </button>
+                    <button class="btn-danger" onclick="quitQuiz()">
+                        <i class="fas fa-sign-out-alt"></i> <span id="exit-text">Exit</span>
+                    </button>
                 </div>
             </div>
         </div>
