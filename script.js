@@ -1,5 +1,17 @@
-// Yak Pro Max Quiz - Complete Logic
+// Yak Pro Max Quiz - Complete Logic with Updated Subjects
 // Developed by Lokraj Awasthi
+
+// ===== SUBJECT MAPPING FOR EACH CLASS =====
+const classSubjects = {
+    // Class 8, 9, 10 मा Optional Math, Math, Science, Computer थपियो
+    class8: ["Science", "Math", "Optional Math", "Computer", "Social", "English", "Nepali"],
+    class9: ["Science", "Math", "Optional Math", "Computer", "Social", "English", "Nepali"],
+    class10: ["Science", "Math", "Optional Math", "Computer", "Social", "English", "Nepali"],
+   
+    // Class 11 र 12 मा एउटै विषयहरू
+    class11: ["Physics", "Chemistry", "Biology", "Math", "Computer", "English", "Nepali"],
+    class12: ["Physics", "Chemistry", "Biology", "Math", "Computer", "English", "Nepali"]
+};
 
 // ===== STATE VARIABLES =====
 let allQuestions = [];
@@ -15,30 +27,31 @@ let player1Score = 0;
 let player2Score = 0;
 let currentPlayer = 1;
 let musicPlaying = false;
+let selectedClass = "";
+let selectedSubject = "";
 
 // ===== DOM ELEMENTS =====
 const loginForm = document.getElementById('login-form');
 const bgMusic = document.getElementById('bg-music');
 const omSound = document.getElementById('om-sound');
 
-// ===== LOAD QUESTIONS FROM JSON =====
+// ===== LOAD QUESTIONS =====
 function loadQuestions() {
     fetch('questions.json')
         .then(res => res.json())
         .then(data => {
-            allQuestions = data.map(q => ({
-                ...q,
-                chapter: q.chapter || "General"
-            }));
+            // Ensure every question has a chapter field
+            allQuestions = data.map(q => ({ ...q, chapter: q.chapter || "General" }));
             console.log("Loaded " + allQuestions.length + " questions!");
         })
         .catch(err => {
             console.error("Error loading questions:", err);
-            // Fallback sample questions
+            // Fallback sample questions if JSON fails to load
             allQuestions = [
-                { id: 1, category: "class10", chapter: "Force", question: "SI unit of force is?", options: ["Joule", "Newton", "Watt", "Pascal"], answer: 1 },
-                { id: 2, category: "class10", chapter: "Force", question: "गुरुत्वाकर्षण बल कसमा निर्भर गर्छ?", options: ["पिण्ड र दूरी", "मात्र पिण्ड", "मात्र दूरी", "आयतन"], answer: 0 },
-                { id: 3, category: "gk", chapter: "Nepal", question: "Capital of Nepal?", options: ["Pokhara", "Kathmandu", "Lalitpur", "Bhaktapur"], answer: 1 }
+                { id: 1, category: "class10", subject: "Science", chapter: "Force", question: "SI unit of force?", options: ["Joule", "Newton", "Watt", "Pascal"], answer: 1 },
+                { id: 2, category: "class10", subject: "Math", chapter: "Algebra", question: "Value of pi?", options: ["3.14", "2.14", "3.41", "3.12"], answer: 0 },
+                { id: 3, category: "class11", subject: "Physics", chapter: "Mechanics", question: "Dimension of Force?", options: ["[MLT⁻²]", "[ML²T⁻²]", "[MLT⁻¹]", "[M⁰L⁰T⁰]"], answer: 0 },
+                { id: 4, category: "gk", subject: "General", chapter: "Nepal", question: "Capital of Nepal?", options: ["Pokhara", "Kathmandu", "Lalitpur", "Bhaktapur"], answer: 1 }
             ];
         });
 }
@@ -68,14 +81,13 @@ function createFlowers() {
     }
 }
 
-// ===== GAME MODE =====
+// ===== GAME MODE & LOGIN =====
 function setMode(mode, el) {
     gameMode = mode;
     document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
 }
 
-// ===== LOGIN =====
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -91,12 +103,10 @@ if (loginForm) {
     });
 }
 
-// ===== LANGUAGE =====
 function setLanguage(lang) {
     showScreen('category-screen');
 }
 
-// ===== MUSIC TOGGLE =====
 document.getElementById('music-toggle').addEventListener('click', () => {
     if (musicPlaying) {
         bgMusic.pause();
@@ -115,10 +125,65 @@ function showScreen(id) {
     document.getElementById(id).classList.add('active');
 }
 
-// ===== CATEGORY SELECTION =====
+// ===== CATEGORY (CLASS) SELECTION =====
 function selectCategory(cat) {
-    let filtered = cat === 'mixed' ? allQuestions : allQuestions.filter(q => q.category === cat);
+    // If it's a class (class8, class9, etc.), show subjects
+    if (classSubjects[cat]) {
+        selectedClass = cat;
+        document.getElementById('subject-title').innerText = cat.replace('class', 'Class ') + ' - Subjects';
+        const list = document.getElementById('subject-list');
+        list.innerHTML = '';
+       
+        classSubjects[cat].forEach(sub => {
+            const btn = document.createElement('div');
+            btn.className = 'cat-card';
+           
+            // Icon mapping based on subject name
+            let icon = 'fa-book';
+            if(sub.includes('Science') || sub.includes('Physics') || sub.includes('Chemistry') || sub.includes('Biology')) icon = 'fa-flask';
+            if(sub.includes('Math')) icon = 'fa-calculator';
+            if(sub.includes('Computer')) icon = 'fa-laptop-code';
+            if(sub.includes('Social') || sub.includes('GK')) icon = 'fa-globe-asia';
+            if(sub.includes('English') || sub.includes('Nepali')) icon = 'fa-language';
+
+            btn.innerHTML = `<i class="fas ${icon}"></i><h3>${sub}</h3>`;
+            btn.onclick = () => selectSubject(sub);
+            list.appendChild(btn);
+        });
+        showScreen('subject-screen');
+    }
+    // If it's a general subject (science, math, gk), go directly to chapters
+    else {
+        selectedClass = cat;
+        selectedSubject = cat; // Treat category as subject for general ones
+        loadChapters(cat, cat);
+    }
+}
+
+// ===== SUBJECT SELECTION =====
+function selectSubject(subject) {
+    selectedSubject = subject;
+    loadChapters(selectedClass, subject);
+}
+
+// ===== CHAPTER LOADING =====
+function loadChapters(category, subjectFilter) {
+    // Filter questions by category
+    let filtered = category === 'mixed' ? allQuestions : allQuestions.filter(q => q.category === category);
    
+    // If a specific subject is selected (e.g., "Math" in "class10"), filter by subject if it exists in JSON
+    if (subjectFilter && subjectFilter !== category) {
+        // Try to match subject field, or match if chapter contains subject name
+        const subjectFiltered = filtered.filter(q =>
+            (q.subject && q.subject.toLowerCase() === subjectFilter.toLowerCase()) ||
+            (q.chapter && q.chapter.toLowerCase().includes(subjectFilter.toLowerCase()))
+        );
+        // If we found specific subject matches, use them. Otherwise, use all category questions.
+        if (subjectFiltered.length > 0) {
+            filtered = subjectFiltered;
+        }
+    }
+
     if(filtered.length === 0) {
         alert("यस विषयमा अहिले प्रश्नहरू छैनन्! कृपया अर्को विषय छान्नुहोस्।");
         return;
@@ -129,13 +194,13 @@ function selectCategory(cat) {
     if(chapters.length <= 1) {
         startQuiz(filtered);
     } else {
-        document.getElementById('chapter-title').innerText = `${cat.replace('class', 'Class ')} - Chapters`;
+        document.getElementById('chapter-title').innerText = `${subjectFilter} - Chapters`;
         const list = document.getElementById('chapter-list');
         list.innerHTML = '';
        
         const allBtn = document.createElement('button');
         allBtn.className = 'chapter-btn';
-        allBtn.innerText = 'सबै अध्याय (All Chapters)';
+        allBtn.innerText = 'सबै अध्याय (All)';
         allBtn.onclick = () => startQuiz(filtered);
         list.appendChild(allBtn);
 
@@ -156,15 +221,9 @@ function startQuiz(questions) {
     currentIndex = 0;
     userAnswers = [];
    
-    if (gameMode === '2p' && currentPlayer === 1) {
-        player1Score = 0;
-        score = 0;
-    } else if (gameMode === '2p' && currentPlayer === 2) {
-        player2Score = 0;
-        score = 0;
-    } else {
-        score = 0;
-    }
+    if (gameMode === '2p' && currentPlayer === 1) { player1Score = 0; score = 0; }
+    else if (gameMode === '2p' && currentPlayer === 2) { player2Score = 0; score = 0; }
+    else { score = 0; }
 
     document.getElementById('review-container').innerHTML = '';
     document.getElementById('review-container').classList.add('hidden');
@@ -177,20 +236,12 @@ function startQuiz(questions) {
 function loadQuestion() {
     if(currentIndex >= currentQuestions.length) {
         if (gameMode === '2p' && currentPlayer === 1) {
-            player1Score = score;
-            currentPlayer = 2;
+            player1Score = score; currentPlayer = 2;
             alert("Player 1 सकियो! अब Player 2 को पालो।");
-            currentIndex = 0;
-            startQuiz(currentQuestions);
-            return;
+            currentIndex = 0; startQuiz(currentQuestions); return;
         } else if (gameMode === '2p' && currentPlayer === 2) {
-            player2Score = score;
-            showMultiplayerResult();
-            return;
-        } else {
-            showResult();
-            return;
-        }
+            player2Score = score; showMultiplayerResult(); return;
+        } else { showResult(); return; }
     }
    
     const q = currentQuestions[currentIndex];
@@ -228,12 +279,7 @@ function checkAnswer(selected, btn) {
     const isCorrect = selected === q.answer;
     if(isCorrect) score++;
 
-    userAnswers.push({
-        q: q.question,
-        user: selected === -1 ? 'समय सकियो' : q.options[selected],
-        correct: q.options[q.answer],
-        isCorrect
-    });
+    userAnswers.push({ q: q.question, user: selected === -1 ? 'समय सकियो' : q.options[selected], correct: q.options[q.answer], isCorrect });
 
     const btns = document.querySelectorAll('.option-btn');
     if(selected !== -1) btn.classList.add(isCorrect ? 'correct' : 'wrong');
@@ -277,21 +323,13 @@ function showMultiplayerResult() {
 function toggleReview() {
     const rc = document.getElementById('review-container');
     const btn = document.getElementById('toggle-review-btn');
-    if(rc.classList.contains('hidden')) {
-        rc.classList.remove('hidden');
-        btn.innerText = 'लुकाउनुहोस्';
-    } else {
-        rc.classList.add('hidden');
-        btn.innerText = 'उत्तर हेर्नुहोस्';
-    }
+    if(rc.classList.contains('hidden')) { rc.classList.remove('hidden'); btn.innerText = 'लुकाउनुहोस्'; }
+    else { rc.classList.add('hidden'); btn.innerText = 'उत्तर हेर्नुहोस्'; }
 }
 
 function quitQuiz() {
     clearInterval(timer);
-    if(confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?")) {
-        currentPlayer = 1;
-        showScreen('category-screen');
-    }
+    if(confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?")) { currentPlayer = 1; showScreen('category-screen'); }
 }
 
 // Initialize
