@@ -1,8 +1,11 @@
 "use strict";
 
+// ==========================================
+// 1. SETTINGS
+// ==========================================
 const classSubjects = {
-    class8: ["Science", "Math", "Optional Math", "Computer"],
-    class9: ["Science", "Math", "Optional Math", "Computer"],
+    class8:  ["Science", "Math", "Optional Math", "Computer"],
+    class9:  ["Science", "Math", "Optional Math", "Computer"],
     class10: ["Science", "Math", "Optional Math", "Computer"],
     class11: ["Physics", "Chemistry", "Biology", "Math", "Computer"],
     class12: ["Physics", "Chemistry", "Biology", "Math", "Computer"]
@@ -14,45 +17,76 @@ const POINTS_PER_CORRECT = 10;
 
 let allQuestions = [];
 let currentQuestions = [];
-let matchQuestions = [];
 let currentIndex = 0, score = 0, timer = null, timeLeft = QUESTION_TIME;
 let userAnswers = [];
 let userName = "";
 let selectedClass = "", selectedSubject = "";
 let questionsLoaded = false;
+let answered = false;
 
 const $ = (id) => document.getElementById(id);
 
+// ==========================================
+// 2. 🌺 FALLING FLOWERS (Continuous)
+// ==========================================
+function createFallingFlower() {
+    const container = $("flower-container");
+    if (!container) return;
+
+    const flowers = ["🌸", "🌺", "🌼", "🌷", "🌹", "🪷", "🌻"];
+    const flower = document.createElement("div");
+    flower.className = "falling-flower";
+    flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.fontSize = (Math.random() * 1.5 + 1) + "rem";
+    flower.style.animationDuration = (Math.random() * 4 + 4) + "s";
+    container.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 8000);
+}
+
+// हर 500ms मा एउटा नयाँ फूल खस्छ
+setInterval(createFallingFlower, 500);
+
+// ==========================================
+// 3. LOAD QUESTIONS
+// ==========================================
 async function loadQuestions() {
     try {
         const response = await fetch("questions.json");
         if (!response.ok) throw new Error("File not found");
         const data = await response.json();
-       
-        allQuestions = data.filter(q =>
-            q && typeof q.question === "string" &&
-            Array.isArray(q.options) &&
-            !isNaN(q.answer)
-        ).map((q, i) => ({
-            ...q,
-            category: String(q.category || "").toLowerCase().trim(),
-            subject: String(q.subject || "").trim(),
-            chapter: String(q.chapter || "General").trim()
-        }));
-       
+
+        allQuestions = data
+            .filter(q => q && typeof q.question === "string" && Array.isArray(q.options) && !isNaN(q.answer))
+            .map((q, i) => ({
+                ...q,
+                id: q.id ?? i + 1,
+                category: String(q.category || "").toLowerCase().trim(),
+                subject: String(q.subject || "").trim(),
+                chapter: String(q.chapter || "General").trim()
+            }));
+
         questionsLoaded = true;
         console.log(`Loaded ${allQuestions.length} questions!`);
     } catch (error) {
         console.error(error);
-        alert("प्रश्नहरू लोड हुन सकेनन्! कृपया questions.json फाइल जाँच गर्नुहोस्।");
+        alert("प्रश्नहरू लोड हुन सकेनन्! questions.json जाँच गर्नुहोस्।");
     }
 }
 
+// ==========================================
+// 4. NAVIGATION
+// ==========================================
 function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    $(id).classList.add("active");
+    const target = $(id);
+    if (target) target.classList.add("active");
 }
 
+// ==========================================
+// 5. LOGIN
+// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
     loadQuestions();
     renderClasses();
@@ -67,6 +101,9 @@ $("login-form").addEventListener("submit", async (e) => {
     showScreen("category-screen");
 });
 
+// ==========================================
+// 6. CLASS SELECTION
+// ==========================================
 function renderClasses() {
     const list = $("class-list");
     list.innerHTML = "";
@@ -85,7 +122,7 @@ function selectCategory(category) {
     $("subject-title").textContent = `${category.replace('class', 'Class ')} - Subjects`;
     const list = $("subject-list");
     list.innerHTML = "";
-   
+
     classSubjects[category].forEach(sub => {
         const card = document.createElement("div");
         card.className = "cat-card";
@@ -93,7 +130,7 @@ function selectCategory(category) {
         if (["Science", "Physics", "Chemistry", "Biology"].includes(sub)) icon = "fa-flask";
         if (sub.includes("Math")) icon = "fa-calculator";
         if (sub === "Computer") icon = "fa-laptop-code";
-       
+
         card.innerHTML = `<i class="fas ${icon}"></i><h3>${sub}</h3>`;
         card.onclick = () => selectSubject(sub);
         list.appendChild(card);
@@ -106,9 +143,12 @@ function selectSubject(subject) {
     loadChapters(selectedClass, subject);
 }
 
+// ==========================================
+// 7. CHAPTERS
+// ==========================================
 function loadChapters(category, subject) {
     if (!questionsLoaded) return alert("प्रश्नहरू लोड हुँदैछन्...");
-   
+
     const filtered = allQuestions.filter(q =>
         q.category === category.toLowerCase() &&
         q.subject.toLowerCase() === subject.toLowerCase()
@@ -136,19 +176,21 @@ function loadChapters(category, subject) {
     showScreen("chapter-screen");
 }
 
-function shuffle(array) {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
+// ==========================================
+// 8. QUIZ LOGIC
+// ==========================================
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+        [a[i], a[j]] = [a[j], a[i]];
     }
-    return arr;
+    return a;
 }
 
 function startQuiz(questions) {
-    matchQuestions = shuffle(questions).slice(0, QUESTIONS_PER_GAME);
-    currentQuestions = [...matchQuestions];
-    currentIndex = 0; score = 0; userAnswers = [];
+    currentQuestions = shuffle(questions).slice(0, QUESTIONS_PER_GAME);
+    currentIndex = 0; score = 0; userAnswers = []; answered = false;
     $("current-score").textContent = 0;
     $("current-player").textContent = userName;
     showScreen("quiz-screen");
@@ -159,11 +201,12 @@ function loadQuestion() {
     clearInterval(timer);
     if (currentIndex >= currentQuestions.length) return showResult();
 
+    answered = false;
     const q = currentQuestions[currentIndex];
     $("question-counter").textContent = `${currentIndex + 1}/${currentQuestions.length}`;
     $("question-text").textContent = q.question;
     $("answer-feedback").textContent = "";
-   
+
     const container = $("options-container");
     container.innerHTML = "";
     q.options.forEach((opt, i) => {
@@ -180,7 +223,6 @@ function startTimer() {
     timeLeft = QUESTION_TIME;
     $("time-left").textContent = timeLeft;
     $("timer-progress").style.width = "100%";
-   
     timer = setInterval(() => {
         timeLeft--;
         $("time-left").textContent = timeLeft;
@@ -190,9 +232,13 @@ function startTimer() {
 }
 
 function checkAnswer(selected, btn) {
+    if (answered) return;
+    answered = true;
+    clearInterval(timer);
+
     const q = currentQuestions[currentIndex];
     const isCorrect = String(selected) === String(q.answer);
-   
+
     document.querySelectorAll(".option-btn").forEach((b, i) => {
         b.disabled = true;
         if (String(i) === String(q.answer)) b.classList.add("correct");
@@ -202,30 +248,38 @@ function checkAnswer(selected, btn) {
     if (isCorrect) {
         score += POINTS_PER_CORRECT;
         $("current-score").textContent = score;
-        $("answer-feedback").textContent = "सही उत्तर! +10 अंक";
+        $("answer-feedback").textContent = "सही उत्तर! +10 अंक 🌸";
     } else {
         $("answer-feedback").textContent = selected === -1 ? "समय सकियो!" : "गलत उत्तर!";
     }
 
-    userAnswers.push({ question: q.question, user: selected === -1 ? "समय सकियो" : q.options[selected], correct: q.options[q.answer], isCorrect });
+    userAnswers.push({
+        question: q.question,
+        user: selected === -1 ? "समय सकियो" : q.options[selected],
+        correct: q.options[q.answer],
+        isCorrect
+    });
 
     setTimeout(() => { currentIndex++; loadQuestion(); }, 1500);
 }
 
+// ==========================================
+// 9. RESULT & REVIEW
+// ==========================================
 function showResult() {
     clearInterval(timer);
     showScreen("result-screen");
     $("final-score").textContent = score;
     $("total-q").textContent = `/ ${currentQuestions.length * POINTS_PER_CORRECT}`;
-   
+
     const correct = userAnswers.filter(a => a.isCorrect).length;
     $("correct-count").textContent = correct;
     $("wrong-count").textContent = userAnswers.length - correct;
 
     const pct = (score / (currentQuestions.length * POINTS_PER_CORRECT)) * 100;
     $("score-message").textContent = pct >= 80 ? "अद्भुत! Excellent! 🏆" : pct >= 50 ? "राम्रो! Good Job! 👍" : "अझै मेहनत गर्नुहोस्! 💪";
-   
-    const hs = localStorage.getItem('quizHighScore') || 0;
+
+    const hs = parseInt(localStorage.getItem('quizHighScore') || 0);
     if (score > hs) localStorage.setItem('quizHighScore', score);
 }
 
@@ -247,4 +301,9 @@ function toggleReview() {
 }
 
 function restartGame() { showScreen("category-screen"); }
-function quitQuiz() { if(confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?")) showScreen("category-screen"); } 
+function quitQuiz() {
+    if (confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?")) {
+        clearInterval(timer);
+        showScreen("category-screen");
+    }
+} 

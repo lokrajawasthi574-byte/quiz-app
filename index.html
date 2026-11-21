@@ -3,38 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awasthi Quiz Portal</title>
+    <title>Lokraj Awasthi Quiz - हर हर महादेव 🕉️</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- 🌸 SHIVA DECORATION: Flower Garland (4 Layers) + Rudraksha 🌸 -->
+    <div class="shiva-decoration">
+        <div class="garland-layer layer-1">🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼🌸🌼</div>
+        <div class="garland-layer layer-2">🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷🌺🌷</div>
+        <div class="garland-layer layer-3">🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹🌻🌹</div>
+        <div class="garland-layer layer-4">📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿📿</div>
+        <div class="har-har-mahadev">हर हर महादेव 🕉️💝🕉️</div>
+    </div>
+
+    <!-- 🌺 FALLING FLOWERS CONTAINER 🌺 -->
+    <div id="flower-container"></div>
+
+    <!-- 🕉️ MAIN APP -->
     <div class="app-container">
+
         <!-- 1. Login Screen -->
         <div id="login-screen" class="screen active">
             <div class="card login-card">
-                <div class="logo">🎓</div>
-                <h1>Awasthi Quiz</h1>
-                <p class="subtitle">ज्ञानको परीक्षा दिनुहोस्</p>
+                <div class="om-symbol">ॐ</div>
+                <h1>Lokraj Awasthi Quiz</h1>
+                <p class="subtitle">हर हर महादेव 🙏</p>
                 <form id="login-form">
                     <div class="input-group">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="access-name" placeholder="आफ्नो नाम लेख्नुहोस्..." required>
+                        <input type="text" id="access-name" placeholder="तपाईंको नाम लेख्नुहोस्..." required>
                     </div>
-                    <button type="submit" class="btn-primary">सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn-primary">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
                 </form>
             </div>
         </div>
 
-        <!-- 2. Category (Class) Screen -->
+        <!-- 2. Class Selection Screen -->
         <div id="category-screen" class="screen">
             <div class="header">
-                <h2>नमस्ते, <span id="display-name">Student</span>! 👋</h2>
+                <h2>नमस्ते, <span id="display-name">Student</span>! 🙏</h2>
                 <p>आफ्नो Class छान्नुहोस्</p>
             </div>
-            <div class="grid-container" id="class-list">
-                <!-- Classes loaded by JS -->
-            </div>
+            <div class="grid-container" id="class-list"></div>
         </div>
 
         <!-- 3. Subject Screen -->
@@ -65,7 +77,6 @@
                     <i class="fas fa-star"></i> <span id="current-score">0</span>
                 </div>
             </div>
-           
             <div class="timer-container">
                 <div class="timer-info">
                     <span id="question-counter">1/10</span>
@@ -73,12 +84,12 @@
                 </div>
                 <div class="timer-bar"><div id="timer-progress" class="timer-progress"></div></div>
             </div>
-           
             <div class="question-box">
                 <p id="question-text">प्रश्न यहाँ देखिनेछ...</p>
             </div>
             <div id="options-container" class="options-grid"></div>
             <p id="answer-feedback" class="feedback"></p>
+            <button class="btn-back" onclick="quitQuiz()" style="margin-top:20px;"><i class="fas fa-times"></i> छोड्नुहोस्</button>
         </div>
 
         <!-- 6. Result Screen -->
@@ -95,16 +106,15 @@
                     <span class="stat-item text-green"><i class="fas fa-check-circle"></i> सही: <span id="correct-count">0</span></span>
                     <span class="stat-item text-red"><i class="fas fa-times-circle"></i> गलत: <span id="wrong-count">0</span></span>
                 </div>
-               
                 <button id="toggle-review-btn" class="btn-secondary" onclick="toggleReview()"><i class="fas fa-eye"></i> उत्तर हेर्नुहोस्</button>
                 <div id="review-container" class="hidden review-box"></div>
-               
                 <div class="btn-group">
                     <button class="btn-primary" onclick="restartGame()"><i class="fas fa-redo"></i> पुनः खेल्नुहोस्</button>
                     <button class="btn-danger" onclick="quitQuiz()"><i class="fas fa-sign-out-alt"></i> छोड्नुहोस्</button>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script src="script.js"></script>
