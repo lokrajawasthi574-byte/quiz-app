@@ -12,106 +12,71 @@ body {
 }
 
 /* ==========================================
-   🌸 4-SIDED FLOWER GARLANDS
+   🌸 4-SIDED RECTANGULAR GARLAND
    ========================================== */
-.garland {
+.garland-top, .garland-bottom, .garland-left, .garland-right {
     position: fixed;
     z-index: 9998;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
     overflow: hidden;
-    animation: sway 4s ease-in-out infinite alternate;
-}
-
-@keyframes sway {
-    0%   { transform: translate(0, 0); }
-    100% { transform: translate(0, 3px); }
+    pointer-events: none;
 }
 
 .garland-top {
     top: 0; left: 0; right: 0;
-    height: 35px;
+    height: 40px;
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     white-space: nowrap;
-    animation: scrollLeft 20s linear infinite;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    animation: scrollHorizontal 25s linear infinite;
 }
 
 .garland-bottom {
     bottom: 0; left: 0; right: 0;
-    height: 35px;
+    height: 40px;
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     white-space: nowrap;
-    animation: scrollRight 20s linear infinite;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    animation: scrollHorizontal 25s linear infinite reverse;
 }
 
 .garland-left {
     top: 0; bottom: 0; left: 0;
-    width: 35px;
+    width: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.5rem;
-    animation: scrollDown 20s linear infinite;
+    font-size: 1.6rem;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
+    animation: scrollVertical 25s linear infinite;
 }
 
 .garland-right {
     top: 0; bottom: 0; right: 0;
-    width: 35px;
+    width: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.5rem;
-    animation: scrollUp 20s linear infinite;
+    font-size: 1.6rem;
+    background: linear-gradient(to left, rgba(0,0,0,0.8), transparent);
+    animation: scrollVertical 25s linear infinite reverse;
 }
 
-@keyframes scrollLeft {
+@keyframes scrollHorizontal {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-@keyframes scrollRight {
-    0%   { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
-}
-@keyframes scrollDown {
+
+@keyframes scrollVertical {
     0%   { transform: translateY(0); }
     100% { transform: translateY(-50%); }
 }
-@keyframes scrollUp {
-    0%   { transform: translateY(-50%); }
-    100% { transform: translateY(0); }
-}
 
 /* ==========================================
-   🌺 FALLING FLOWERS
-   ========================================== */
-#flower-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 9997;
-    overflow: hidden;
-}
-
-.falling-flower {
-    position: absolute;
-    top: -50px;
-    font-size: 1.8rem;
-    animation: fall linear forwards;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
-}
-
-@keyframes fall {
-    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
-}
-
-/* ==========================================
-   🕉️ WELCOME SCREEN (Color Rotate)
+   🕉️ WELCOME SCREEN (Color Rotate 3s)
    ========================================== */
 .welcome-card {
     animation: welcomeColor 3s ease-in-out infinite;
@@ -153,9 +118,44 @@ body {
 }
 
 /* ==========================================
-   🕉️ LANGUAGE SCREEN
+   🕉️ MAIN APP
    ========================================== */
-.language-card { max-width: 450px; margin: 0 auto; }
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 50px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.screen { display: none; animation: fadeIn 0.5s ease; }
+.screen.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.card {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    text-align: center;
+    border: 2px solid #FFD700;
+}
+
+.language-card, .name-card { max-width: 450px; margin: 0 auto; }
+
+.om-symbol {
+    font-size: 5rem;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    margin-bottom: 15px;
+    animation: pulseOm 2s ease-in-out infinite;
+}
+.om-symbol.small { font-size: 3.5rem; }
+@keyframes pulseOm { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+h1 { color: #FFD700; margin-bottom: 8px; font-size: 2.2rem; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+h2 { color: #FFD700; margin-bottom: 10px; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+.subtitle { color: #FFD700; margin-bottom: 25px; font-size: 1.2rem; font-style: italic; }
 
 .lang-buttons {
     display: flex;
@@ -190,46 +190,6 @@ body {
 }
 
 .lang-flag { font-size: 2.5rem; }
-
-/* ==========================================
-   🕉️ MAIN APP
-   ========================================== */
-.app-container {
-    width: 100%;
-    max-width: 800px;
-    padding: 40px 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.screen { display: none; animation: fadeIn 0.5s ease; }
-.screen.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-.card {
-    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-    text-align: center;
-    border: 2px solid #FFD700;
-}
-
-.name-card { max-width: 400px; margin: 0 auto; }
-
-.om-symbol {
-    font-size: 5rem;
-    color: #FFD700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    margin-bottom: 15px;
-    animation: pulseOm 2s ease-in-out infinite;
-}
-.om-symbol.small { font-size: 3.5rem; }
-@keyframes pulseOm { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-
-h1 { color: #FFD700; margin-bottom: 8px; font-size: 2.2rem; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
-h2 { color: #FFD700; margin-bottom: 10px; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
-.subtitle { color: #FFD700; margin-bottom: 25px; font-size: 1.2rem; font-style: italic; }
 
 .input-group { position: relative; margin-bottom: 20px; }
 .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #FFD700; }
@@ -336,9 +296,9 @@ button {
    📱 MOBILE RESPONSIVE
    ========================================== */
 @media (max-width: 600px) {
-    .garland-top, .garland-bottom { height: 25px; font-size: 1rem; }
-    .garland-left, .garland-right { width: 25px; font-size: 1rem; }
-    .app-container { padding: 30px 10px; }
+    .garland-top, .garland-bottom { height: 30px; font-size: 1.2rem; }
+    .garland-left, .garland-right { width: 30px; font-size: 1.2rem; }
+    .app-container { padding: 40px 10px; }
     .card { padding: 25px 20px; }
     .grid-container { grid-template-columns: 1fr 1fr; gap: 12px; }
     .cat-card { padding: 18px 12px; }
