@@ -1,11 +1,7 @@
-/* ==================================================
-   AWASTHI QUIZ - COMPLETE JAVASCRIPT
-   ================================================== */
-
 "use strict";
 
 // ==========================================
-// 1. SUBJECTS FOR EACH CLASS
+// 1. SETTINGS & VARIABLES
 // ==========================================
 const classSubjects = {
     class8: ["Science", "Math", "Optional Math", "Computer"],
@@ -15,622 +11,258 @@ const classSubjects = {
     class12: ["Physics", "Chemistry", "Biology", "Math", "Computer"]
 };
 
-// ==========================================
-// 2. GAME SETTINGS
-// ==========================================
 const QUESTIONS_PER_GAME = 10;
 const QUESTION_TIME = 30;
 const POINTS_PER_CORRECT = 10;
 
-// ==========================================
-// 3. GAME VARIABLES
-// ==========================================
 let allQuestions = [];
 let currentQuestions = [];
 let matchQuestions = [];
-
-let currentIndex = 0;
-let score = 0;
-let timer = null;
-let timeLeft = QUESTION_TIME;
-
+let currentIndex = 0, score = 0, timer = null, timeLeft = QUESTION_TIME;
 let userAnswers = [];
-let player1Answers = [];
-let player2Answers = [];
-
 let userName = "";
-let gameMode = "1p";
-
-let player1Score = 0;
-let player2Score = 0;
-let currentPlayer = 1;
-
-let answered = false;
+let selectedClass = "", selectedSubject = "";
 let questionsLoaded = false;
 
-let selectedClass = "";
-let selectedSubject = "";
-let selectedChapter = "";
-
-// ==========================================
-// 4. DOM ELEMENTS
-// ==========================================
 const $ = (id) => document.getElementById(id);
 
-const loginForm = $("login-form");
-
 // ==========================================
-// 5. LOAD QUESTIONS FROM JSON
+// 2. LOAD QUESTIONS
 // ==========================================
 async function loadQuestions() {
-    questionsLoaded = false;
-
     try {
         const response = await fetch("questions.json");
-        if (!response.ok) {
-            throw new Error("Questions file not found");
-        }
-
+        if (!response.ok) throw new Error("File not found");
         const data = await response.json();
-        if (!Array.isArray(data)) {
-            throw new Error("Invalid questions format");
-        }
-
-        allQuestions = data
-            .filter(q =>
-                q &&
-                typeof q.question === "string" &&
-                Array.isArray(q.options) &&
-                q.options.length >= 2 &&
-                !isNaN(q.answer) &&
-                Number(q.answer) >= 0 &&
-                Number(q.answer) < q.options.length
-            )
-            .map((q, index) => ({
-                ...q,
-                id: q.id ?? index + 1,
-                category: String(q.category || "").toLowerCase().trim(),
-                subject: String(q.subject || "").trim(),
-                chapter: String(q.chapter || "General").trim()
-            }));
-
-        questionsLoaded = true;
-        console.log(`Successfully loaded ${allQuestions.length} questions!`);
-
-    } catch (error) {
-        console.error("Question loading error:", error);
-        allQuestions = [];
-        questionsLoaded = false;
-        alert("प्रश्नहरू लोड हुन सकेनन्। कृपया questions.json फाइल जाँच गर्नुहोस्।");
-    }
-}
-
-// ==========================================
-// 6. GAME MODE
-// ==========================================
-function setMode(mode, element) {
-    gameMode = mode === "2p" ? "2p" : "1p";
-    currentPlayer = 1;
-    document.querySelectorAll(".mode-btn").forEach(button => {
-        button.classList.remove("active");
-    });
-    if (element) {
-        element.classList.add("active");
-    }
-}
-
-// ==========================================
-// 7. LOGIN
-// ==========================================
-if (loginForm) {
-    loginForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const nameInput = $("access-name");
-        userName = nameInput ? nameInput.value.trim() : "";
-
-        if (userName.length < 2) {
-            alert("कृपया आफ्नो नाम राख्नुहोस्!");
-            return;
-        }
-
-        const displayName = $("display-name");
-        if (displayName) {
-            displayName.textContent = userName;
-        }
-
-        if (!questionsLoaded) {
-            await loadQuestions();
-        }
        
-        showScreen("lang-screen");
-    });
+        allQuestions = data.filter(q =>
+            q && typeof q.question === "string" &&
+            Array.isArray(q.options) &&
+            !isNaN(q.answer)
+        ).map((q, i) => ({
+            ...q,
+            category: String(q.category || "").toLowerCase().trim(),
+            subject: String(q.subject || "").trim(),
+            chapter: String(q.chapter || "General").trim()
+        }));
+       
+        questionsLoaded = true;
+        console.log(`Loaded ${allQuestions.length} questions!`);
+    } catch (error) {
+        console.error(error);
+        alert("प्रश्नहरू लोड हुन सकेनन्! कृपया questions.json फाइल जाँच गर्नुहोस्।");
+    }
 }
 
 // ==========================================
-// 8. SCREEN NAVIGATION
+// 3. SCREEN NAVIGATION
 // ==========================================
 function showScreen(id) {
-    document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
-    });
-    const target = $(id);
-    if (target) {
-        target.classList.add("active");
-    } else {
-        console.error("Screen not found:", id);
-    }
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    $(id).classList.add("active");
 }
 
 // ==========================================
-// 9. CLASS SELECTION
+// 4. LOGIN & CLASS SELECTION
 // ==========================================
-function selectCategory(category) {
-    console.log("Class selected:", category);
-   
-    if (!classSubjects[category]) {
-        alert("कृपया सही Class छान्नुहोस्!");
-        return;
-    }
-    selectedClass = category;
-    const title = $("subject-title");
-    if (title) {
-        title.textContent = category.replace("class", "Class ") + " - Subjects";
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    loadQuestions();
+    renderClasses();
+});
 
-    const list = $("subject-list");
-    if (!list) {
-        console.error("subject-list not found!");
-        return;
-    }
+$("login-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    userName = $("access-name").value.trim();
+    if (userName.length < 2) return alert("कृपया नाम राख्नुहोस्!");
+    $("display-name").textContent = userName;
+    if (!questionsLoaded) await loadQuestions();
+    showScreen("category-screen");
+});
+
+function renderClasses() {
+    const list = $("class-list");
     list.innerHTML = "";
+    Object.keys(classSubjects).forEach(cls => {
+        const card = document.createElement("div");
+        card.className = "cat-card";
+        const isHigh = cls.includes("11") || cls.includes("12");
+        card.innerHTML = `<i class="fas ${isHigh ? 'fa-graduation-cap' : 'fa-school'}"></i><h3>${cls.replace('class', 'Class ')}</h3>`;
+        card.onclick = () => selectCategory(cls);
+        list.appendChild(card);
+    });
+}
 
-    classSubjects[category].forEach(subject => {
+function selectCategory(category) {
+    selectedClass = category;
+    $("subject-title").textContent = `${category.replace('class', 'Class ')} - Subjects`;
+    const list = $("subject-list");
+    list.innerHTML = "";
+   
+    classSubjects[category].forEach(sub => {
         const card = document.createElement("div");
         card.className = "cat-card";
         let icon = "fa-book";
-
-        if (["Science", "Physics", "Chemistry", "Biology"].includes(subject)) icon = "fa-flask";
-        if (subject.includes("Math")) icon = "fa-calculator";
-        if (subject === "Computer") icon = "fa-laptop-code";
-
-        card.innerHTML = `<i class="fas ${icon}"></i><h3>${subject}</h3>`;
+        if (["Science", "Physics", "Chemistry", "Biology"].includes(sub)) icon = "fa-flask";
+        if (sub.includes("Math")) icon = "fa-calculator";
+        if (sub === "Computer") icon = "fa-laptop-code";
        
-        card.onclick = function() {
-            console.log("Subject clicked:", subject);
-            selectSubject(subject);
-        };
-       
+        card.innerHTML = `<i class="fas ${icon}"></i><h3>${sub}</h3>`;
+        card.onclick = () => selectSubject(sub);
         list.appendChild(card);
     });
-
     showScreen("subject-screen");
 }
 
-// ==========================================
-// 10. SUBJECT SELECTION
-// ==========================================
 function selectSubject(subject) {
-    console.log("Subject selected:", subject);
-   
-    if (!classSubjects[selectedClass]?.includes(subject)) {
-        alert("Invalid subject!");
-        return;
-    }
     selectedSubject = subject;
     loadChapters(selectedClass, subject);
 }
 
-// ==========================================
-// 11. CHAPTER LOADING
-// ==========================================
 function loadChapters(category, subject) {
-    if (!questionsLoaded) {
-        alert("प्रश्नहरू लोड हुँदैछन्। केही समयपछि प्रयास गर्नुहोस्।");
-        return;
-    }
-
+    if (!questionsLoaded) return alert("प्रश्नहरू लोड हुँदैछन्...");
+   
     const filtered = allQuestions.filter(q =>
         q.category === category.toLowerCase() &&
         q.subject.toLowerCase() === subject.toLowerCase()
     );
 
-    if (filtered.length === 0) {
-        alert("यस विषयमा अहिले प्रश्नहरू उपलब्ध छैनन्!");
-        return;
-    }
+    if (filtered.length === 0) return alert("यस विषयमा प्रश्नहरू छैनन्!");
 
-    const chapters = [...new Set(filtered.map(q => q.chapter))];
-    const title = $("chapter-title");
-    if (title) title.textContent = `${subject} - Chapters`;
-
+    $("chapter-title").textContent = `${subject} - Chapters`;
     const list = $("chapter-list");
-    if (!list) return;
     list.innerHTML = "";
 
-    const allButton = document.createElement("button");
-    allButton.className = "chapter-btn";
-    allButton.textContent = "सबै अध्याय (All Chapters)";
-    allButton.onclick = () => {
-        selectedChapter = "All Chapters";
-        startQuiz(filtered);
-    };
-    list.appendChild(allButton);
+    const allBtn = document.createElement("button");
+    allBtn.className = "chapter-btn";
+    allBtn.textContent = "सबै अध्याय (All Chapters)";
+    allBtn.onclick = () => startQuiz(filtered);
+    list.appendChild(allBtn);
 
-    chapters.forEach(chapter => {
-        const button = document.createElement("button");
-        button.className = "chapter-btn";
-        button.textContent = chapter;
-        button.onclick = () => {
-            selectedChapter = chapter;
-            const chapterQuestions = filtered.filter(q => q.chapter === chapter);
-            startQuiz(chapterQuestions);
-        };
-        list.appendChild(button);
+    [...new Set(filtered.map(q => q.chapter))].forEach(chap => {
+        const btn = document.createElement("button");
+        btn.className = "chapter-btn";
+        btn.textContent = chap;
+        btn.onclick = () => startQuiz(filtered.filter(q => q.chapter === chap));
+        list.appendChild(btn);
     });
-
     showScreen("chapter-screen");
 }
 
 // ==========================================
-// 12. SHUFFLE QUESTIONS
+// 5. QUIZ LOGIC
 // ==========================================
-function shuffleQuestions(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    return shuffled;
+    return arr;
 }
 
-// ==========================================
-// 13. START QUIZ
-// ==========================================
 function startQuiz(questions) {
-    if (!questions || questions.length === 0) {
-        alert("कुनै प्रश्न उपलब्ध छैन!");
-        return;
-    }
-
-    clearInterval(timer);
-    matchQuestions = shuffleQuestions(questions).slice(0, QUESTIONS_PER_GAME);
+    matchQuestions = shuffle(questions).slice(0, QUESTIONS_PER_GAME);
     currentQuestions = [...matchQuestions];
-    currentIndex = 0;
-    currentPlayer = 1;
-    score = 0;
-    player1Score = 0;
-    player2Score = 0;
-    userAnswers = [];
-    player1Answers = [];
-    player2Answers = [];
-    answered = false;
-
-    const review = $("review-container");
-    if (review) {
-        review.innerHTML = "";
-        review.classList.add("hidden");
-    }
-
-    const reviewButton = $("toggle-review-btn");
-    if (reviewButton) reviewButton.textContent = "उत्तर हेर्नुहोस्";
-
+    currentIndex = 0; score = 0; userAnswers = [];
+    $("current-score").textContent = 0;
+    $("current-player").textContent = userName;
     showScreen("quiz-screen");
-    updatePlayerDisplay();
     loadQuestion();
 }
 
-// ==========================================
-// 14. PLAYER DISPLAY
-// ==========================================
-function updatePlayerDisplay() {
-    const playerDisplay = $("current-player");
-    if (playerDisplay) {
-        playerDisplay.textContent = gameMode === "2p" ? `Player ${currentPlayer}` : userName;
-    }
-}
-
-// ==========================================
-// 15. LOAD QUESTION
-// ==========================================
 function loadQuestion() {
     clearInterval(timer);
-    if (currentIndex >= currentQuestions.length) {
-        finishRound();
-        return;
-    }
+    if (currentIndex >= currentQuestions.length) return showResult();
 
-    answered = false;
     const q = currentQuestions[currentIndex];
-    const counter = $("question-counter");
-    const questionText = $("question-text");
+    $("question-counter").textContent = `${currentIndex + 1}/${currentQuestions.length}`;
+    $("question-text").textContent = q.question;
+    $("answer-feedback").textContent = "";
+   
     const container = $("options-container");
-
-    if (!counter || !questionText || !container) {
-        console.error("Quiz HTML elements are missing!");
-        return;
-    }
-
-    counter.textContent = `प्रश्न ${currentIndex + 1} / ${currentQuestions.length}`;
-    questionText.textContent = q.question;
     container.innerHTML = "";
-
-    q.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.className = "option-btn";
-        button.textContent = option;
-        button.onclick = () => checkAnswer(index, button);
-        container.appendChild(button);
+    q.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i, btn);
+        container.appendChild(btn);
     });
-
     startTimer();
 }
 
-// ==========================================
-// 16. QUESTION TIMER
-// ==========================================
 function startTimer() {
-    clearInterval(timer);
     timeLeft = QUESTION_TIME;
-    const timeDisplay = $("time-left");
-    const progress = $("timer-progress");
-
-    if (timeDisplay) timeDisplay.textContent = timeLeft;
-    if (progress) progress.style.width = "100%";
-
+    $("time-left").textContent = timeLeft;
+    $("timer-progress").style.width = "100%";
+   
     timer = setInterval(() => {
         timeLeft--;
-        if (timeDisplay) timeDisplay.textContent = timeLeft;
-        if (progress) progress.style.width = ((timeLeft / QUESTION_TIME) * 100) + "%";
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            checkAnswer(-1, null);
-        }
+        $("time-left").textContent = timeLeft;
+        $("timer-progress").style.width = `${(timeLeft / QUESTION_TIME) * 100}%`;
+        if (timeLeft <= 0) { clearInterval(timer); checkAnswer(-1, null); }
     }, 1000);
 }
 
-// ==========================================
-// 17. CHECK ANSWER
-// ==========================================
-function checkAnswer(selected, button) {
-    if (answered) return;
-    answered = true;
-    clearInterval(timer);
-
+function checkAnswer(selected, btn) {
     const q = currentQuestions[currentIndex];
     const isCorrect = String(selected) === String(q.answer);
+   
+    document.querySelectorAll(".option-btn").forEach((b, i) => {
+        b.disabled = true;
+        if (String(i) === String(q.answer)) b.classList.add("correct");
+    });
+    if (btn && !isCorrect) btn.classList.add("wrong");
 
     if (isCorrect) {
         score += POINTS_PER_CORRECT;
+        $("current-score").textContent = score;
+        $("answer-feedback").textContent = "सही उत्तर! +10 अंक";
+    } else {
+        $("answer-feedback").textContent = selected === -1 ? "समय सकियो!" : "गलत उत्तर!";
     }
 
-    const userAnswer = selected === -1 ? "समय सकियो" : q.options[selected];
-    userAnswers.push({
-        question: q.question,
-        user: userAnswer,
-        correct: q.options[q.answer],
-        isCorrect: isCorrect
-    });
+    userAnswers.push({ question: q.question, user: selected === -1 ? "समय सकियो" : q.options[selected], correct: q.options[q.answer], isCorrect });
 
-    const buttons = document.querySelectorAll(".option-btn");
-    buttons.forEach((btn, index) => {
-        btn.disabled = true;
-        if (String(index) === String(q.answer)) {
-            btn.classList.add("correct");
-        }
-    });
-
-    if (button && !isCorrect) {
-        button.classList.add("wrong");
-    }
-
-    const scoreDisplay = $("current-score");
-    if (scoreDisplay) scoreDisplay.textContent = score;
-
-    const feedback = $("answer-feedback");
-    if (feedback) {
-        feedback.textContent = isCorrect ? "सही उत्तर! +10 अंक" : (selected === -1 ? "समय सकियो!" : "गलत उत्तर!");
-    }
-
-    setTimeout(() => {
-        currentIndex++;
-        loadQuestion();
-    }, 1500);
+    setTimeout(() => { currentIndex++; loadQuestion(); }, 1500);
 }
 
 // ==========================================
-// 18. FINISH PLAYER ROUND
-// ==========================================
-function finishRound() {
-    clearInterval(timer);
-
-    if (gameMode === "2p") {
-        if (currentPlayer === 1) {
-            player1Score = score;
-            player1Answers = [...userAnswers];
-            currentPlayer = 2;
-            score = 0;
-            userAnswers = [];
-            currentIndex = 0;
-            currentQuestions = [...matchQuestions];
-
-            const scoreDisplay = $("current-score");
-            if (scoreDisplay) scoreDisplay.textContent = 0;
-
-            showPlayerTransitionOverlay(2);
-            return;
-        }
-
-        if (currentPlayer === 2) {
-            player2Score = score;
-            player2Answers = [...userAnswers];
-            showMultiplayerResult();
-            return;
-        }
-    }
-
-    showResult();
-}
-
-function showPlayerTransitionOverlay(playerNum) {
-    const overlay = document.createElement("div");
-    overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;";
-    overlay.innerHTML = `
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Player ${playerNum} को पालो!</h2>
-        <p style="font-size: 1.2rem;">कृपया डिभाइस Player ${playerNum} लाई दिनुहोस्।</p>
-        <p style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">स्वचालित रूपमा सुरु हुँदैछ...</p>
-    `;
-    document.body.appendChild(overlay);
-
-    setTimeout(() => {
-        overlay.remove();
-        updatePlayerDisplay();
-        loadQuestion();
-    }, 2500);
-}
-
-// ==========================================
-// 19. SINGLE PLAYER RESULT
+// 6. RESULT & REVIEW
 // ==========================================
 function showResult() {
     clearInterval(timer);
     showScreen("result-screen");
+    $("final-score").textContent = score;
+    $("total-q").textContent = `/ ${currentQuestions.length * POINTS_PER_CORRECT}`;
+   
+    const correct = userAnswers.filter(a => a.isCorrect).length;
+    $("correct-count").textContent = correct;
+    $("wrong-count").textContent = userAnswers.length - correct;
 
-    const single = $("singleplayer-result");
-    const multi = $("multiplayer-result");
-    if (single) single.style.display = "block";
-    if (multi) multi.style.display = "none";
-
-    const finalScore = $("final-score");
-    const total = $("total-q");
-    if (finalScore) finalScore.textContent = score;
-    if (total) total.textContent = `/ ${currentQuestions.length * POINTS_PER_CORRECT}`;
-
-    const savedHighScore = localStorage.getItem('awasthiQuizHighScore') || 0;
-    if (score > savedHighScore) {
-        localStorage.setItem('awasthiQuizHighScore', score);
-    }
-    const highScoreDisplay = $("high-score-display");
-    if (highScoreDisplay) {
-        highScoreDisplay.textContent = `सर्वोच्च स्कोर: ${Math.max(score, savedHighScore)}`;
-    }
-
-    const percentage = currentQuestions.length > 0
-        ? (score / (currentQuestions.length * POINTS_PER_CORRECT)) * 100
-        : 0;
-
-    let message;
-    if (percentage >= 80) message = "अद्भुत! Excellent! 🏆";
-    else if (percentage >= 50) message = "राम्रो! Good Job! 👍";
-    else message = "अझै मेहनत गर्नुहोस्! 💪";
-
-    const messageElement = $("score-message");
-    if (messageElement) {
-        messageElement.textContent = (score > savedHighScore && score > 0) ? "नयाँ कीर्तिमान! 🎉 " + message : message;
-    }
-
-    const correctCount = userAnswers.filter(a => a.isCorrect).length;
-    const wrongCount = userAnswers.length - correctCount;
-
-    if ($("correct-count")) $("correct-count").textContent = correctCount;
-    if ($("wrong-count")) $("wrong-count").textContent = wrongCount;
-
-    showAnswerReview(userAnswers);
+    const pct = (score / (currentQuestions.length * POINTS_PER_CORRECT)) * 100;
+    $("score-message").textContent = pct >= 80 ? "अद्भुत! Excellent! 🏆" : pct >= 50 ? "राम्रो! Good Job! 👍" : "अझै मेहनत गर्नुहोस्! 💪";
+   
+    const hs = localStorage.getItem('quizHighScore') || 0;
+    if (score > hs) localStorage.setItem('quizHighScore', score);
 }
 
-// ==========================================
-// 20. ANSWER REVIEW
-// ==========================================
-function showAnswerReview(answers) {
-    const container = $("review-container");
-    if (!container) return;
-
-    container.innerHTML = answers.map((answer, index) => `
-        <div class="review-item ${answer.isCorrect ? 'correct' : 'wrong'}">
-            <strong>${index + 1}. ${answer.question}</strong>
-            <p>तपाईंको उत्तर: ${answer.user}</p>
-            ${!answer.isCorrect ? `<p>सही उत्तर: ${answer.correct}</p>` : ''}
-        </div>
-    `).join('');
-}
-
-// ==========================================
-// 21. MULTIPLAYER RESULT
-// ==========================================
-function showMultiplayerResult() {
-    clearInterval(timer);
-    showScreen("result-screen");
-
-    const single = $("singleplayer-result");
-    const multi = $("multiplayer-result");
-    if (single) single.style.display = "none";
-    if (multi) multi.style.display = "block";
-
-    const p1 = $("p1-final-score");
-    const p2 = $("p2-final-score");
-    if (p1) p1.textContent = `Player 1: ${player1Score}`;
-    if (p2) p2.textContent = `Player 2: ${player2Score}`;
-
-    let winner;
-    if (player1Score > player2Score) winner = "Player 1 विजयी! 🏆";
-    else if (player2Score > player1Score) winner = "Player 2 विजयी! 🏆";
-    else winner = "खेल बराबर भयो! 🤝";
-
-    const winnerText = $("winner-text");
-    if (winnerText) winnerText.textContent = winner;
-}
-
-// ==========================================
-// 22. TOGGLE ANSWER REVIEW
-// ==========================================
 function toggleReview() {
-    const container = $("review-container");
-    const button = $("toggle-review-btn");
-    if (!container || !button) return;
-
-    if (container.classList.contains("hidden")) {
-        container.classList.remove("hidden");
-        button.textContent = "लुकाउनुहोस्";
+    const box = $("review-container");
+    const btn = $("toggle-review-btn");
+    if (box.classList.contains("hidden")) {
+        box.innerHTML = userAnswers.map((a, i) => `
+            <div class="review-item ${a.isCorrect ? 'correct' : 'wrong'}">
+                <strong>${i+1}. ${a.question}</strong><br>
+                तपाईंको: ${a.user} ${!a.isCorrect ? `<br>सही: ${a.correct}` : ''}
+            </div>`).join("");
+        box.classList.remove("hidden");
+        btn.innerHTML = '<i class="fas fa-eye-slash"></i> लुकाउनुहोस्';
     } else {
-        container.classList.add("hidden");
-        button.textContent = "उत्तर हेर्नुहोस्";
+        box.classList.add("hidden");
+        btn.innerHTML = '<i class="fas fa-eye"></i> उत्तर हेर्नुहोस्';
     }
 }
 
-// ==========================================
-// 23. RESTART QUIZ
-// ==========================================
-function restartGame() {
-    clearInterval(timer);
-    currentIndex = 0;
-    score = 0;
-    player1Score = 0;
-    player2Score = 0;
-    currentPlayer = 1;
-    userAnswers = [];
-    player1Answers = [];
-    player2Answers = [];
-    showScreen("category-screen");
-}
-
-// ==========================================
-// 24. QUIT QUIZ
-// ==========================================
-function quitQuiz() {
-    const confirmQuit = confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?");
-    if (!confirmQuit) return;
-
-    clearInterval(timer);
-    currentIndex = 0;
-    score = 0;
-    currentPlayer = 1;
-    userAnswers = [];
-    showScreen("category-screen");
-}
-
-// ==========================================
-// 25. INITIALIZE
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Awasthi Quiz initialized!");
-}); 
+function restartGame() { showScreen("category-screen"); }
+function quitQuiz() { if(confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?")) showScreen("category-screen"); } 
