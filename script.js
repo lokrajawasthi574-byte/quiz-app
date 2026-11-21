@@ -1,6 +1,5 @@
 /* ==================================================
-   AWASTHI QUIZ - COMPLETE JAVASCRIPT (BUG FIXED & OPTIMIZED)
-   Developed by: Lok Raj Awasthi
+   AWASTHI QUIZ - COMPLETE JAVASCRIPT
    ================================================== */
 
 "use strict";
@@ -46,7 +45,6 @@ let player1Score = 0;
 let player2Score = 0;
 let currentPlayer = 1;
 
-let musicPlaying = false;
 let answered = false;
 let questionsLoaded = false;
 
@@ -60,11 +58,9 @@ let selectedChapter = "";
 const $ = (id) => document.getElementById(id);
 
 const loginForm = $("login-form");
-const bgMusic = $("bg-music");
-const omSound = $("om-sound");
 
 // ==========================================
-// 5. LOAD QUESTIONS FROM JSON (BUG FIXED: Error handling improved)
+// 5. LOAD QUESTIONS FROM JSON
 // ==========================================
 async function loadQuestions() {
     questionsLoaded = false;
@@ -104,55 +100,13 @@ async function loadQuestions() {
     } catch (error) {
         console.error("Question loading error:", error);
         allQuestions = [];
-        questionsLoaded = false; // BUG FIX: Set to false on error
+        questionsLoaded = false;
         alert("प्रश्नहरू लोड हुन सकेनन्। कृपया questions.json फाइल जाँच गर्नुहोस्।");
     }
 }
 
 // ==========================================
-// 6. DIVINE EFFECTS
-// ==========================================
-function playDivineEffects() {
-    if (omSound) {
-        omSound.volume = 0.5;
-        omSound.play().catch(() => {});
-    }
-
-    if (bgMusic) {
-        bgMusic.volume = 0.2;
-        bgMusic.play()
-            .then(() => {
-                musicPlaying = true;
-                updateMusicIcon();
-            })
-            .catch(() => {});
-    }
-    createFlowers();
-}
-
-// ==========================================
-// 7. FLOWER ANIMATION
-// ==========================================
-function createFlowers() {
-    const container = $("flower-container");
-    if (!container) return;
-
-    const flowers = ["🌸", "🌺", "🌼", "🪷"];
-    for (let i = 0; i < 20; i++) {
-        setTimeout(() => {
-            const flower = document.createElement("div");
-            flower.className = "flower";
-            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-            flower.style.left = Math.random() * 100 + "vw";
-            flower.style.animationDuration = (Math.random() * 3 + 2) + "s";
-            container.appendChild(flower);
-            setTimeout(() => flower.remove(), 5000);
-        }, i * 150);
-    }
-}
-
-// ==========================================
-// 8. GAME MODE
+// 6. GAME MODE
 // ==========================================
 function setMode(mode, element) {
     gameMode = mode === "2p" ? "2p" : "1p";
@@ -166,7 +120,7 @@ function setMode(mode, element) {
 }
 
 // ==========================================
-// 9. LOGIN / NORMAL ENTRY
+// 7. LOGIN
 // ==========================================
 if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
@@ -184,50 +138,16 @@ if (loginForm) {
             displayName.textContent = userName;
         }
 
-        // BUG FIX: Only load if not already loaded
         if (!questionsLoaded) {
             await loadQuestions();
         }
        
-        playDivineEffects();
         showScreen("lang-screen");
     });
 }
 
 // ==========================================
-// 10. LANGUAGE SELECTION
-// ==========================================
-function setLanguage(lang) {
-    showScreen("category-screen");
-}
-
-// ==========================================
-// 11. MUSIC CONTROL
-// ==========================================
-function updateMusicIcon() {
-    const icon = $("music-icon");
-    if (!icon) return;
-    icon.className = musicPlaying ? "fas fa-volume-up" : "fas fa-volume-mute";
-}
-
-const musicToggle = $("music-toggle");
-if (musicToggle) {
-    musicToggle.addEventListener("click", () => {
-        if (!bgMusic) return;
-        if (musicPlaying) {
-            bgMusic.pause();
-            musicPlaying = false;
-        } else {
-            bgMusic.play()
-                .then(() => { musicPlaying = true; })
-                .catch(() => { musicPlaying = false; });
-        }
-        updateMusicIcon();
-    });
-}
-
-// ==========================================
-// 12. SCREEN NAVIGATION
+// 8. SCREEN NAVIGATION
 // ==========================================
 function showScreen(id) {
     document.querySelectorAll(".screen").forEach(screen => {
@@ -242,9 +162,11 @@ function showScreen(id) {
 }
 
 // ==========================================
-// 13. CLASS SELECTION
+// 9. CLASS SELECTION
 // ==========================================
 function selectCategory(category) {
+    console.log("Class selected:", category);
+   
     if (!classSubjects[category]) {
         alert("कृपया सही Class छान्नुहोस्!");
         return;
@@ -256,7 +178,10 @@ function selectCategory(category) {
     }
 
     const list = $("subject-list");
-    if (!list) return;
+    if (!list) {
+        console.error("subject-list not found!");
+        return;
+    }
     list.innerHTML = "";
 
     classSubjects[category].forEach(subject => {
@@ -268,9 +193,13 @@ function selectCategory(category) {
         if (subject.includes("Math")) icon = "fa-calculator";
         if (subject === "Computer") icon = "fa-laptop-code";
 
-        // BUG FIX: Cleaner innerHTML assignment
         card.innerHTML = `<i class="fas ${icon}"></i><h3>${subject}</h3>`;
-        card.addEventListener("click", () => selectSubject(subject));
+       
+        card.onclick = function() {
+            console.log("Subject clicked:", subject);
+            selectSubject(subject);
+        };
+       
         list.appendChild(card);
     });
 
@@ -278,9 +207,11 @@ function selectCategory(category) {
 }
 
 // ==========================================
-// 14. SUBJECT SELECTION
+// 10. SUBJECT SELECTION
 // ==========================================
 function selectSubject(subject) {
+    console.log("Subject selected:", subject);
+   
     if (!classSubjects[selectedClass]?.includes(subject)) {
         alert("Invalid subject!");
         return;
@@ -290,7 +221,7 @@ function selectSubject(subject) {
 }
 
 // ==========================================
-// 15. CHAPTER LOADING
+// 11. CHAPTER LOADING
 // ==========================================
 function loadChapters(category, subject) {
     if (!questionsLoaded) {
@@ -319,21 +250,21 @@ function loadChapters(category, subject) {
     const allButton = document.createElement("button");
     allButton.className = "chapter-btn";
     allButton.textContent = "सबै अध्याय (All Chapters)";
-    allButton.addEventListener("click", () => {
+    allButton.onclick = () => {
         selectedChapter = "All Chapters";
         startQuiz(filtered);
-    });
+    };
     list.appendChild(allButton);
 
     chapters.forEach(chapter => {
         const button = document.createElement("button");
         button.className = "chapter-btn";
         button.textContent = chapter;
-        button.addEventListener("click", () => {
+        button.onclick = () => {
             selectedChapter = chapter;
             const chapterQuestions = filtered.filter(q => q.chapter === chapter);
             startQuiz(chapterQuestions);
-        });
+        };
         list.appendChild(button);
     });
 
@@ -341,7 +272,7 @@ function loadChapters(category, subject) {
 }
 
 // ==========================================
-// 16. SHUFFLE QUESTIONS
+// 12. SHUFFLE QUESTIONS
 // ==========================================
 function shuffleQuestions(array) {
     const shuffled = [...array];
@@ -353,7 +284,7 @@ function shuffleQuestions(array) {
 }
 
 // ==========================================
-// 17. START QUIZ
+// 13. START QUIZ
 // ==========================================
 function startQuiz(questions) {
     if (!questions || questions.length === 0) {
@@ -389,7 +320,7 @@ function startQuiz(questions) {
 }
 
 // ==========================================
-// 18. PLAYER DISPLAY
+// 14. PLAYER DISPLAY
 // ==========================================
 function updatePlayerDisplay() {
     const playerDisplay = $("current-player");
@@ -399,7 +330,7 @@ function updatePlayerDisplay() {
 }
 
 // ==========================================
-// 19. LOAD QUESTION
+// 15. LOAD QUESTION
 // ==========================================
 function loadQuestion() {
     clearInterval(timer);
@@ -427,7 +358,7 @@ function loadQuestion() {
         const button = document.createElement("button");
         button.className = "option-btn";
         button.textContent = option;
-        button.addEventListener("click", () => checkAnswer(index, button));
+        button.onclick = () => checkAnswer(index, button);
         container.appendChild(button);
     });
 
@@ -435,7 +366,7 @@ function loadQuestion() {
 }
 
 // ==========================================
-// 20. QUESTION TIMER
+// 16. QUESTION TIMER
 // ==========================================
 function startTimer() {
     clearInterval(timer);
@@ -459,7 +390,7 @@ function startTimer() {
 }
 
 // ==========================================
-// 21. CHECK ANSWER (BUG FIXED: Strict equality issue resolved)
+// 17. CHECK ANSWER
 // ==========================================
 function checkAnswer(selected, button) {
     if (answered) return;
@@ -467,7 +398,6 @@ function checkAnswer(selected, button) {
     clearInterval(timer);
 
     const q = currentQuestions[currentIndex];
-    // BUG FIX: Use String comparison to avoid type mismatch (e.g., "0" vs 0)
     const isCorrect = String(selected) === String(q.answer);
 
     if (isCorrect) {
@@ -505,11 +435,11 @@ function checkAnswer(selected, button) {
     setTimeout(() => {
         currentIndex++;
         loadQuestion();
-    }, 1500); // Increased slightly for better readability
+    }, 1500);
 }
 
 // ==========================================
-// 22. FINISH PLAYER ROUND (BUG FIXED: Replaced annoying alert with smooth UI)
+// 18. FINISH PLAYER ROUND
 // ==========================================
 function finishRound() {
     clearInterval(timer);
@@ -522,12 +452,11 @@ function finishRound() {
             score = 0;
             userAnswers = [];
             currentIndex = 0;
-            currentQuestions = [...matchQuestions]; // Reset to same questions for Player 2
+            currentQuestions = [...matchQuestions];
 
             const scoreDisplay = $("current-score");
             if (scoreDisplay) scoreDisplay.textContent = 0;
 
-            // BUG FIX: Smooth transition instead of alert()
             showPlayerTransitionOverlay(2);
             return;
         }
@@ -543,7 +472,6 @@ function finishRound() {
     showResult();
 }
 
-// NEW: Smooth overlay for 2-player transition
 function showPlayerTransitionOverlay(playerNum) {
     const overlay = document.createElement("div");
     overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;";
@@ -558,11 +486,11 @@ function showPlayerTransitionOverlay(playerNum) {
         overlay.remove();
         updatePlayerDisplay();
         loadQuestion();
-    }, 2500); // 2.5 seconds to hand over the device
+    }, 2500);
 }
 
 // ==========================================
-// 23. SINGLE PLAYER RESULT (BUG FIXED: Added High Score Logic)
+// 19. SINGLE PLAYER RESULT
 // ==========================================
 function showResult() {
     clearInterval(timer);
@@ -578,7 +506,6 @@ function showResult() {
     if (finalScore) finalScore.textContent = score;
     if (total) total.textContent = `/ ${currentQuestions.length * POINTS_PER_CORRECT}`;
 
-    // HIGH SCORE LOGIC
     const savedHighScore = localStorage.getItem('awasthiQuizHighScore') || 0;
     if (score > savedHighScore) {
         localStorage.setItem('awasthiQuizHighScore', score);
@@ -612,13 +539,12 @@ function showResult() {
 }
 
 // ==========================================
-// 24. ANSWER REVIEW (BUG FIXED: Replaced outerHTML with clean Template Literals)
+// 20. ANSWER REVIEW
 // ==========================================
 function showAnswerReview(answers) {
     const container = $("review-container");
     if (!container) return;
 
-    // BUG FIX: Direct template literal mapping is faster and prevents DOM issues
     container.innerHTML = answers.map((answer, index) => `
         <div class="review-item ${answer.isCorrect ? 'correct' : 'wrong'}">
             <strong>${index + 1}. ${answer.question}</strong>
@@ -629,7 +555,7 @@ function showAnswerReview(answers) {
 }
 
 // ==========================================
-// 25. MULTIPLAYER RESULT
+// 21. MULTIPLAYER RESULT
 // ==========================================
 function showMultiplayerResult() {
     clearInterval(timer);
@@ -655,7 +581,7 @@ function showMultiplayerResult() {
 }
 
 // ==========================================
-// 26. TOGGLE ANSWER REVIEW
+// 22. TOGGLE ANSWER REVIEW
 // ==========================================
 function toggleReview() {
     const container = $("review-container");
@@ -672,7 +598,7 @@ function toggleReview() {
 }
 
 // ==========================================
-// 27. RESTART QUIZ
+// 23. RESTART QUIZ
 // ==========================================
 function restartGame() {
     clearInterval(timer);
@@ -688,7 +614,7 @@ function restartGame() {
 }
 
 // ==========================================
-// 28. QUIT QUIZ
+// 24. QUIT QUIZ
 // ==========================================
 function quitQuiz() {
     const confirmQuit = confirm("के तपाईं क्विज छोड्न चाहनुहुन्छ?");
@@ -703,10 +629,8 @@ function quitQuiz() {
 }
 
 // ==========================================
-// 29. INITIALIZE WEBSITE
+// 25. INITIALIZE
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-    // Pre-load questions silently in the background
-    loadQuestions();
-    console.log("Awasthi Quiz initialized successfully!");
+    console.log("Awasthi Quiz initialized!");
 }); 

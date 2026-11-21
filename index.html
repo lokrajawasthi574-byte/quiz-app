@@ -3,139 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yak Pro Max Quiz - Lokraj Awasthi</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135768.png">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
+    <title>Awasthi Quiz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .cat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cat-card:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+            border-color: #764ba2;
+        }
+
+        .cat-card i {
+            font-size: 2rem;
+        }
+
+        .cat-card h3 {
+            font-size: 1.3rem;
+        }
+
+        .chapter-btn {
+            width: 100%;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .chapter-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .timer-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .timer-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 1s linear;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            color: #333;
+            text-align: left;
+            border: 2px solid #ddd;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option-btn.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .option-btn.wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .result-card h2 {
+            color: #667eea;
+            font-size: 2rem;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .review-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+
+        .review-item.correct {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .review-item.wrong {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-group button {
+            flex: 1;
+        }
+
+        #flower-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .flower {
+            position: absolute;
+            top: -50px;
+            font-size: 2rem;
+            animation: fall linear;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Divine Sounds -->
-    <audio id="om-sound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" preload="auto"></audio>
-    <audio id="bg-music" loop src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" preload="auto"></audio>
-
-    <!-- Flower Animation Container -->
-    <div id="flower-container"></div>
-
-    <!-- 1. LOGIN SCREEN -->
-    <div id="login-screen" class="screen active">
-        <div class="divine-card">
-            <div class="om-glow">ॐ</div>
-            <img src="https://images.unsplash.com/photo-1620072214571-5990423b0907?w=500&q=80" alt="Mahadev" class="mahadev-img">
-            <h1 class="divine-title">Lokraj Awasthi Quiz</h1>
-            <p class="divine-subtitle">हर हर महादेव 🙏</p>
-
-            <div class="mode-selector">
-                <div class="mode-btn active" onclick="setMode('1p', this)">
-                    <i class="fas fa-user"></i> 1 Player
-                </div>
-                <div class="mode-btn" onclick="setMode('2p', this)">
-                    <i class="fas fa-user-friends"></i> 2 Players
-                </div>
-            </div>
-
+    <div class="container">
+        <!-- LOGIN SCREEN -->
+        <div id="login-screen" class="screen active">
+            <h1>🙏 Awasthi Quiz</h1>
             <form id="login-form">
-                <div class="input-box">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="access-name" placeholder="तपाईंको नाम लेख्नुहोस्..." required>
-                </div>
-                <button type="submit" class="btn-divine">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
+                <input type="text" id="access-name" placeholder="आफ्नो नाम लेख्नुहोस्" required>
+                <button type="submit" class="btn-full">सुरु गर्नुहोस्</button>
             </form>
         </div>
-    </div>
 
-    <!-- 2. LANGUAGE SCREEN -->
-    <div id="lang-screen" class="screen">
-        <div class="divine-card">
-            <h2 class="divine-title">भाषा छान्नुहोस्</h2>
-            <p class="divine-subtitle">Choose Language</p>
-            <button class="btn-lang" onclick="setLanguage('np')">🇳🇵 नेपाली</button>
-            <button class="btn-lang" onclick="setLanguage('en')">🇬🇧 English</button>
+        <!-- LANGUAGE SCREEN -->
+        <div id="lang-screen" class="screen">
+            <h1>नमस्ते, <span id="display-name"></span>!</h1>
+            <h2>Game Mode छान्नुहोस्</h2>
+            <button class="mode-btn btn-full" onclick="setMode('1p', this)">1 Player</button>
+            <button class="mode-btn btn-full" onclick="setMode('2p', this)" style="margin-top: 10px;">2 Players</button>
+            <button class="btn-full" onclick="showScreen('category-screen')" style="margin-top: 20px;">अगाडि बढ्नुहोस्</button>
         </div>
-    </div>
 
-    <!-- 3. CATEGORY SCREEN -->
-    <div id="category-screen" class="screen">
-        <div class="divine-card">
-            <header class="app-header">
-                <div class="user-info">
-                    <i class="fas fa-om"></i>
-                    <span id="display-name">Quiz Master</span>
-                </div>
-                <div class="header-actions">
-                    <button id="music-toggle" class="icon-btn"><i class="fas fa-volume-up" id="music-icon"></i></button>
-                </div>
-            </header>
-            <h2 class="divine-title">विषय छान्नुहोस्</h2>
-            <div class="category-grid">
-                <div class="cat-card" onclick="selectCategory('class8')"><i class="fas fa-book"></i><h3>Class 8</h3></div>
-                <div class="cat-card" onclick="selectCategory('class9')"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
-                <div class="cat-card" onclick="selectCategory('class10')"><i class="fas fa-graduation-cap"></i><h3>Class 10</h3></div>
-                <div class="cat-card" onclick="selectCategory('class11')"><i class="fas fa-user-graduate"></i><h3>Class 11</h3></div>
-                <div class="cat-card" onclick="selectCategory('class12')"><i class="fas fa-award"></i><h3>Class 12</h3></div>
-                <div class="cat-card" onclick="selectCategory('science')"><i class="fas fa-flask"></i><h3>Science</h3></div>
-                <div class="cat-card" onclick="selectCategory('computer')"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
-                <div class="cat-card" onclick="selectCategory('math')"><i class="fas fa-calculator"></i><h3>Math</h3></div>
-                <div class="cat-card" onclick="selectCategory('gk')"><i class="fas fa-globe-asia"></i><h3>GK</h3></div>
-                <div class="cat-card mixed" onclick="selectCategory('mixed')"><i class="fas fa-random"></i><h3>मिश्रित (सबै)</h3></div>
+        <!-- CATEGORY SCREEN -->
+        <div id="category-screen" class="screen">
+            <h2>Class छान्नुहोस्</h2>
+            <div class="cat-card" onclick="selectCategory('class8')">
+                <i class="fas fa-school"></i>
+                <h3>Class 8</h3>
+            </div>
+            <div class="cat-card" onclick="selectCategory('class9')">
+                <i class="fas fa-school"></i>
+                <h3>Class 9</h3>
+            </div>
+            <div class="cat-card" onclick="selectCategory('class10')">
+                <i class="fas fa-school"></i>
+                <h3>Class 10</h3>
+            </div>
+            <div class="cat-card" onclick="selectCategory('class11')">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Class 11</h3>
+            </div>
+            <div class="cat-card" onclick="selectCategory('class12')">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Class 12</h3>
             </div>
         </div>
-    </div>
 
-    <!-- 4. CHAPTER SCREEN -->
-    <div id="chapter-screen" class="screen">
-        <div class="divine-card">
-            <button class="btn-back" onclick="showScreen('category-screen')"><i class="fas fa-arrow-left"></i> फिर्ता</button>
-            <h2 class="divine-title" id="chapter-title">अध्याय छान्नुहोस्</h2>
-            <div class="chapter-grid" id="chapter-list"></div>
+        <!-- SUBJECT SCREEN -->
+        <div id="subject-screen" class="screen">
+            <h2 id="subject-title">Subjects</h2>
+            <div id="subject-list"></div>
+            <button class="btn-full" onclick="showScreen('category-screen')" style="margin-top: 20px;">पछाडि</button>
         </div>
-    </div>
 
-    <!-- 5. QUIZ SCREEN -->
-    <div id="quiz-screen" class="screen">
-        <div class="divine-card">
-            <button class="btn-back" onclick="quitQuiz()"><i class="fas fa-times"></i> छोड्नुहोस्</button>
+        <!-- CHAPTER SCREEN -->
+        <div id="chapter-screen" class="screen">
+            <h2 id="chapter-title">Chapters</h2>
+            <div id="chapter-list"></div>
+            <button class="btn-full" onclick="showScreen('subject-screen')" style="margin-top: 20px;">पछाडि</button>
+        </div>
+
+        <!-- QUIZ SCREEN -->
+        <div id="quiz-screen" class="screen">
             <div class="quiz-header">
-                <span id="question-counter">प्रश्न १/१०</span>
-                <span><i class="fas fa-clock"></i> <span id="time-left">20</span>s</span>
+                <span id="current-player">Player</span>
+                <span id="question-counter">प्रश्न 1/10</span>
+                <span>स्कोर: <span id="current-score">0</span></span>
             </div>
-            <div class="timer-bar"><div id="timer-progress"></div></div>
-            <div class="question-box"><h3 id="question-text">प्रश्न लोड हुँदैछ...</h3></div>
-            <div id="options-container" class="options-grid"></div>
+            <div class="timer-bar">
+                <div id="timer-progress" class="timer-progress"></div>
+            </div>
+            <p id="time-left" style="text-align: right; margin-bottom: 10px;">30</p>
+            <div class="question-text" id="question-text">प्रश्न यहाँ आउँछ</div>
+            <div id="options-container"></div>
+            <p id="answer-feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></p>
         </div>
-    </div>
 
-    <!-- 6. RESULT SCREEN -->
-    <div id="result-screen" class="screen">
-        <div class="divine-card">
-            <h2 class="divine-title">नतिजा</h2>
-           
+        <!-- RESULT SCREEN -->
+        <div id="result-screen" class="screen">
+            <!-- Single Player Result -->
             <div id="singleplayer-result">
-                <div class="score-circle">
-                    <span id="final-score">0</span>
-                    <small id="total-q">/ 10</small>
+                <div class="result-card">
+                    <h2>🎉 खेल सकियो!</h2>
+                    <p id="high-score-display" style="color: gold; font-weight: bold; font-size: 1.2rem;"></p>
+                    <div class="score-display">
+                        <span id="final-score">0</span>
+                        <span id="total-q">/ 100</span>
+                    </div>
+                    <p id="score-message" style="font-size: 1.3rem; margin: 20px 0;"></p>
+                    <p>सही: <span id="correct-count">0</span> | गलत: <span id="wrong-count">0</span></p>
                 </div>
-                <p id="score-message"></p>
+                <button id="toggle-review-btn" class="btn-full" onclick="toggleReview()">उत्तर हेर्नुहोस्</button>
+                <div id="review-container" class="hidden" style="margin-top: 20px;"></div>
+                <div class="btn-group">
+                    <button onclick="restartGame()">पुनः खेल्नुहोस्</button>
+                    <button onclick="quitQuiz()">छोड्नुहोस्</button>
+                </div>
             </div>
 
-            <div id="multiplayer-result" style="display:none;">
-                <div class="mp-score">
-                    <p id="p1-final-score">Player 1: 0</p>
-                    <p id="p2-final-score">Player 2: 0</p>
+            <!-- Multiplayer Result -->
+            <div id="multiplayer-result" style="display: none;">
+                <div class="result-card">
+                    <h2>🏆 नतिजा</h2>
+                    <p id="p1-final-score" style="font-size: 1.5rem; margin: 10px 0;"></p>
+                    <p id="p2-final-score" style="font-size: 1.5rem; margin: 10px 0;"></p>
+                    <p id="winner-text" style="font-size: 2rem; color: #667eea; margin: 20px 0;"></p>
                 </div>
-                <h3 id="winner-text" class="winner-text"></h3>
+                <div class="btn-group">
+                    <button onclick="restartGame()">पुनः खेल्नुहोस्</button>
+                    <button onclick="quitQuiz()">छोड्नुहोस्</button>
+                </div>
             </div>
-
-            <div class="review-list hidden" id="review-container"></div>
-            <button class="btn-divine" id="toggle-review-btn" style="margin:15px 0; background:transparent; border:2px solid var(--primary); color:var(--primary);" onclick="toggleReview()">उत्तर हेर्नुहोस्</button>
-            <button class="btn-divine" onclick="showScreen('category-screen')">फेरि खेल्नुहोस्</button>
         </div>
     </div>
 
-    <footer>
-        <p>Designed & Developed by <strong>Lokraj Awasthi</strong> 🙏</p>
-    </footer>
+    <div id="flower-container"></div>
 
     <script src="script.js"></script>
 </body>
