@@ -1,8 +1,5 @@
 "use strict";
 
-// ==========================================
-// 1. SETTINGS & VARIABLES
-// ==========================================
 const classSubjects = {
     class8: ["Science", "Math", "Optional Math", "Computer"],
     class9: ["Science", "Math", "Optional Math", "Computer"],
@@ -26,9 +23,6 @@ let questionsLoaded = false;
 
 const $ = (id) => document.getElementById(id);
 
-// ==========================================
-// 2. LOAD QUESTIONS
-// ==========================================
 async function loadQuestions() {
     try {
         const response = await fetch("questions.json");
@@ -54,17 +48,11 @@ async function loadQuestions() {
     }
 }
 
-// ==========================================
-// 3. SCREEN NAVIGATION
-// ==========================================
 function showScreen(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     $(id).classList.add("active");
 }
 
-// ==========================================
-// 4. LOGIN & CLASS SELECTION
-// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
     loadQuestions();
     renderClasses();
@@ -148,9 +136,6 @@ function loadChapters(category, subject) {
     showScreen("chapter-screen");
 }
 
-// ==========================================
-// 5. QUIZ LOGIC
-// ==========================================
 function shuffle(array) {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -227,9 +212,6 @@ function checkAnswer(selected, btn) {
     setTimeout(() => { currentIndex++; loadQuestion(); }, 1500);
 }
 
-// ==========================================
-// 6. RESULT & REVIEW
-// ==========================================
 function showResult() {
     clearInterval(timer);
     showScreen("result-screen");
