@@ -1,204 +1,198 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yak Quiz - Lokraj Awasthi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --primary: #FFD700; --secondary: #FF8C00; --text: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-       
-        body {
-            background: linear-gradient(rgba(5, 5, 16, 0.85), rgba(10, 5, 30, 0.9)),
-                        url('https://images.unsplash.com/photo-1620072214571-5990423b0907?w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .divine-card {
-            background: rgba(255, 215, 0, 0.08);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 25px;
-            padding: 35px 25px;
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2), 0 8px 32px rgba(0,0,0,0.5);
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-
-        .om-glow {
-            font-size: 3.5rem; color: var(--primary); font-family: 'Rozha One', serif;
-            text-shadow: 0 0 30px var(--primary); margin-bottom: 15px;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-
-        .mahadev-img {
-            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-            margin-bottom: 20px;
-        }
-
-        .divine-title { font-size: 1.6rem; color: var(--primary); margin-bottom: 8px; font-weight: 800; }
-        .divine-subtitle { font-size: 1rem; color: #ffed4e; margin-bottom: 25px; font-style: italic; }
-
-        .input-box { position: relative; margin-bottom: 25px; }
-        .input-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
-        .input-box input {
-            width: 100%; padding: 14px 14px 14px 45px; border-radius: 12px;
-            border: 2px solid rgba(255, 215, 0, 0.3); background: rgba(0,0,0,0.4);
-            color: white; font-size: 1rem; outline: none;
-        }
-        .input-box input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-
-        .btn-divine {
-            width: 100%; padding: 14px; border: none; border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #000; font-weight: bold; font-size: 1.1rem; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
-        }
-        .btn-divine:active { transform: scale(0.98); }
-
-        /* Quiz Section (Hidden initially) */
-        #quiz-section { display: none; width: 100%; max-width: 600px; }
-        .quiz-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: var(--primary); font-size: 1.1rem; }
-        .timer-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-bottom: 25px; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.3); }
-        #timer-progress { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); width: 100%; transition: width 1s linear; }
-       
-        .question-box {
-            background: rgba(255, 215, 0, 0.1); backdrop-filter: blur(15px); padding: 25px;
-            border-radius: 18px; margin-bottom: 25px; text-align: center; border: 2px solid rgba(255, 215, 0, 0.3);
-        }
-        .question-box h3 { font-size: 1.2rem; line-height: 1.6; color: white; }
-       
-        .options-grid { display: grid; gap: 12px; }
-        .option-btn {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.3); color: white; padding: 16px;
-            border-radius: 12px; text-align: left; cursor: pointer; font-size: 1.05rem;
-        }
-        .option-btn:hover { border-color: var(--primary); background: rgba(255, 215, 0, 0.15); }
-        .option-btn.correct { background: rgba(0, 230, 118, 0.3); border-color: #00E676; color: white; font-weight: bold; }
-        .option-btn.wrong { background: rgba(255, 82, 82, 0.3); border-color: #FF5252; }
-
-        .btn-back { background: rgba(255, 215, 0, 0.2); border: 2px solid var(--primary); color: var(--primary); padding: 10px 18px; border-radius: 25px; margin-bottom: 20px; cursor: pointer; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lokraj Awasthi Quiz — Class 8–12 Bilingual Pro Quiz</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bg-backdrop" aria-hidden="true"></div>
+  <div class="bg-scrim" aria-hidden="true"></div>
 
-    <!-- Login Screen -->
-    <div id="login-screen" class="divine-card">
-        <div class="om-glow">ॐ</div>
-        <img src="https://images.unsplash.com/photo-1620072214571-5990423b0907?w=500&q=80" alt="Lord Shiva" class="mahadev-img">
-        <h1 class="divine-title">Lokraj Awasthi Quiz</h1>
-        <p class="divine-subtitle">हर हर महादेव 🙏</p>
+  <!-- Step 1 & 2: Language Modal + Lokraj Awasthi Welcome Card -->
+  <div id="onboardingOverlay" class="onboarding-overlay">
+    <div id="petalsLayer" class="petals-layer" aria-hidden="true"></div>
 
-        <form id="login-form">
-            <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="text" id="access-name" placeholder="तपाईंको नाम लेख्नुहोस्..." required>
+    <section id="languageStepCard" class="lang-modal-card" aria-labelledby="langModalTitle">
+      <h1 id="langModalTitle" class="lang-modal-title">Choose Language / भाषा छान्नुहोस्</h1>
+      <p class="lang-modal-subtitle">Select your preferred quiz language</p>
+      <div class="lang-modal-actions">
+        <button type="button" class="lang-choice-btn lang-choice-en" data-pick-lang="en">
+          EN · English
+        </button>
+        <button type="button" class="lang-choice-btn lang-choice-ne" data-pick-lang="ne">
+          NE · नेपाली (Nepali)
+        </button>
+        <button type="button" class="lang-choice-btn lang-choice-both" data-pick-lang="both">
+          Both (English + नेपाली)
+        </button>
+      </div>
+    </section>
+
+    <section id="welcomeStepCard" class="welcome-card hidden" aria-labelledby="welcomeTitle">
+      <div class="welcome-om">ॐ</div>
+      <div class="shiva-avatar-wrap">
+        <img
+          id="shivaAvatarImg"
+          src="mahadev-water.jpg"
+          alt="Lord Shiva Mahadev"
+          class="shiva-avatar-img"
+        />
+        <div id="shivaAvatarFallback" class="shiva-avatar-fallback hidden">ॐ</div>
+      </div>
+      <h1 id="welcomeTitle" class="welcome-title">Lokraj Awasthi Quiz</h1>
+      <p id="welcomeSubtitle" class="welcome-subtitle">हर हर महादेव</p>
+
+      <form id="welcomeForm" class="welcome-form">
+        <label class="welcome-input-wrap">
+          <span class="welcome-user-icon" aria-hidden="true">👤</span>
+          <input
+            type="text"
+            id="playerNameInput"
+            maxlength="28"
+            placeholder="तपाईंको नाम लेख्नुहोस्..."
+            aria-label="Player name"
+          />
+        </label>
+        <button type="submit" id="startWelcomeBtn" class="welcome-start-btn">
+          क्विज सुरु गर्नुहोस् →
+        </button>
+      </form>
+
+      <div class="welcome-links">
+        <button type="button" id="backToLangBtn" class="welcome-link-btn">← Change Language</button>
+        <button type="button" id="skipWelcomeBtn" class="welcome-link-btn">Skip</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main Quiz App Shell -->
+  <div id="appShell" class="hidden">
+    <header class="top-bar">
+      <div class="top-bar-inner">
+        <a href="#home" id="brandHome" class="brand">ॐ Lokraj</a>
+        <nav class="nav-links" aria-label="Primary">
+          <button type="button" class="nav-link active" data-view="home">Categories</button>
+          <button type="button" class="nav-link" data-view="leaderboard">Leaderboard</button>
+        </nav>
+        <button type="button" id="mixQuizBtn" class="btn-primary">Mix Quiz</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="toolbar">
+        <div class="lang-switch" role="group" aria-label="Language mode">
+          <button type="button" class="lang-btn" data-lang="en">English</button>
+          <button type="button" class="lang-btn" data-lang="ne">नेपाली</button>
+          <button type="button" class="lang-btn active" data-lang="both">Both</button>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" id="modeToggleBtn" class="btn-outline">Mode: Timed (25s)</button>
+          <button type="button" id="autoNextToggleBtn" class="btn-outline">Auto-Next: ON</button>
+          <button type="button" id="soundToggleBtn" class="btn-outline" aria-label="Toggle sound">Sound: ON</button>
+          <button type="button" id="openWelcomeBtn" class="btn-outline">ॐ Welcome</button>
+        </div>
+      </section>
+
+      <!-- Categories / Drill-down View -->
+      <section id="homeView" class="view">
+        <div class="hero-card">
+          <div class="hero-top">
+            <div>
+              <p id="breadcrumbText" class="breadcrumb">All Categories</p>
+              <h1 id="screenTitle" class="screen-title">विषय छान्नुहोस्</h1>
+              <p id="screenSubtitle" class="screen-subtitle">
+                Click a Class to pick Subject and Chapter, or choose a standalone topic.
+              </p>
             </div>
-            <button type="submit" class="btn-divine">क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i></button>
-        </form>
-    </div>
+            <input
+              type="search"
+              id="searchInput"
+              class="search-input"
+              placeholder="Search class, subject, chapter..."
+              aria-label="Search class, subject, or chapter"
+            />
+          </div>
+          <div id="heroStats" class="hero-stats"></div>
+        </div>
 
-    <!-- Quiz Screen -->
-    <div id="quiz-section" class="divine-card">
-        <button class="btn-back" onclick="goHome()"><i class="fas fa-arrow-left"></i> फिर्ता</button>
+        <div id="gridContainer" class="card-grid"></div>
+        <button type="button" id="homeMixBar" class="mix-banner">
+          <span class="mix-icon" aria-hidden="true">🔀</span>
+          <span id="homeMixLabel">Mix / Random Challenge · मिश्रित चुनौती</span>
+        </button>
+      </section>
+
+      <!-- Quiz Stage View -->
+      <section id="quizView" class="view hidden">
         <div class="quiz-header">
-            <span id="question-counter">प्रश्न १/३</span>
-            <span id="timer-display"><i class="fas fa-clock"></i> <span id="time-left">20</span>s</span>
+          <div>
+            <p id="quizMeta" class="quiz-meta"></p>
+            <p id="quizCounter" class="quiz-counter">01 / 04</p>
+          </div>
+          <div class="quiz-controls">
+            <span id="timerDisplay" class="timer-readout">25s</span>
+            <button type="button" id="pauseQuizBtn" class="btn-outline">Pause</button>
+            <button type="button" id="exitQuizBtn" class="btn-outline">Exit</button>
+          </div>
         </div>
-        <div class="timer-bar"><div id="timer-progress"></div></div>
-        <div class="question-box">
-            <h3 id="question-text">प्रश्न लोड हुँदैछ...</h3>
-        </div>
-        <div id="options-container" class="options-grid"></div>
-    </div>
 
-    <script>
-        // Sample Questions (Testing ko lagi matra)
-        const questions = [
-            { q: "नेपालको राष्ट्रिय पक्षी कुन हो?", options: ["पर्यटक", "डाँफे", "बगुला", "चिल"], ans: 1 },
-            { q: "H2O को रासायनिक नाम के हो?", options: ["नून", "पानी", "अम्ल", "क्षार"], ans: 1 },
-            { q: "सगरमाथाको उचाइ कति छ?", options: ["8848.86 m", "8848 m", "8850 m", "8840 m"], ans: 0 }
-        ];
+        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
 
-        let currentQ = 0;
-        let timer;
+        <article class="quiz-card">
+          <h2 id="questionPrompt" class="question-prompt"></h2>
+          <div id="optionsList" class="options-list"></div>
 
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('quiz-section').style.display = 'block';
-            loadQuestion();
-        });
+          <div class="lifeline-row">
+            <div class="lifeline-btns">
+              <button type="button" id="hint5050Btn" class="btn-outline">50/50 Hint</button>
+              <button type="button" id="skipBtn" class="btn-outline">Skip</button>
+            </div>
+            <span id="streakDisplay" class="streak-text">Streak: 0</span>
+          </div>
 
-        function loadQuestion() {
-            if(currentQ >= questions.length) {
-                alert("क्विज सम्पन्न! तपाईंले राम्रो गर्नुभयो। 🙏");
-                goHome();
-                return;
-            }
-            const q = questions[currentQ];
-            document.getElementById('question-counter').innerText = `प्रश्न ${currentQ + 1}/${questions.length}`;
-            document.getElementById('question-text').innerText = q.q;
-           
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            q.options.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(i, btn);
-                container.appendChild(btn);
-            });
-            startTimer();
-        }
+          <div id="explanationBox" class="explanation-box hidden">
+            <p id="feedbackLabel" class="feedback-label"></p>
+            <p id="explanationText" class="explanation-text"></p>
+            <button type="button" id="nextQuestionBtn" class="btn-primary">Next Question →</button>
+          </div>
+        </article>
+      </section>
 
-        function startTimer() {
-            let time = 20;
-            document.getElementById('time-left').innerText = time;
-            document.getElementById('timer-progress').style.width = '100%';
-            clearInterval(timer);
-            timer = setInterval(() => {
-                time--;
-                document.getElementById('time-left').innerText = time;
-                document.getElementById('timer-progress').style.width = (time/20*100) + '%';
-                if(time <= 0) { clearInterval(timer); checkAnswer(-1, null); }
-            }, 1000);
-        }
+      <!-- Result & Mistake Review View -->
+      <section id="resultView" class="view hidden">
+        <article class="quiz-card">
+          <h2 id="resultRankTitle" class="screen-title">Quiz Complete</h2>
+          <div class="stats-grid">
+            <div class="stat-box"><strong id="finalScore">0/0</strong><span>Score</span></div>
+            <div class="stat-box"><strong id="finalAccuracy">0%</strong><span>Accuracy</span></div>
+            <div class="stat-box"><strong id="finalXp">0</strong><span>XP Earned</span></div>
+            <div class="stat-box"><strong id="finalStreak">0</strong><span>Best Streak</span></div>
+          </div>
+          <div class="result-actions">
+            <button type="button" id="playAgainBtn" class="btn-primary">Play Again</button>
+            <button type="button" id="retryWrongBtn" class="btn-outline hidden">Retry Missed Questions</button>
+            <button type="button" id="backHomeBtn" class="btn-outline">Back to Categories</button>
+          </div>
+          <div id="reviewList" class="review-list"></div>
+        </article>
+      </section>
 
-        function checkAnswer(selected, btn) {
-            clearInterval(timer);
-            const q = questions[currentQ];
-            const btns = document.querySelectorAll('.option-btn');
-           
-            if(selected !== -1) btn.classList.add(selected === q.ans ? 'correct' : 'wrong');
-            btns[q.ans].classList.add('correct');
-            btns.forEach(b => b.disabled = true);
+      <!-- Leaderboard View -->
+      <section id="leaderboardView" class="view hidden">
+        <article class="quiz-card">
+          <div class="quiz-header">
+            <h2 class="screen-title">Leaderboard &amp; History</h2>
+            <button type="button" id="clearHistoryBtn" class="btn-outline">Clear</button>
+          </div>
+          <div id="leaderboardList" class="leaderboard-list"></div>
+        </article>
+      </section>
+    </main>
+  </div>
 
-            setTimeout(() => { currentQ++; loadQuestion(); }, 1500);
-        }
-
-        function goHome() {
-            currentQ = 0;
-            document.getElementById('quiz-section').style.display = 'none';
-            document.getElementById('login-screen').style.display = 'block';
-        }
-    </script>
+  <script src="script.js"></script>
 </body>
 </html> 
 
