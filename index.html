@@ -3,78 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lokraj Awasthi Quiz - हर हर महादेव</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" type="image/png">
+    <title>Yak Quiz - Lokraj Awasthi</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135768.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rozha+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <!-- Divine Sounds -->
-    <audio id="om-sound" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg"> <!-- Short divine bell/om sound -->
-    </audio>
-    <audio id="bg-music" loop preload="auto">
-        <source src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="om-sound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" preload="auto"></audio>
+    <audio id="bg-music" loop src="https://ia801507.us.archive.org/24/items/OmNamahShivayaChant/Om%20Namah%20Shivaya%20Chant.mp3" preload="auto"></audio>
 
     <!-- Flower Fall Container -->
     <div id="flower-container"></div>
 
     <!-- 1. Login Screen -->
     <div id="login-screen" class="screen active">
-        <div class="login-container">
-            <div class="mahadev-top">
-                <!-- High Quality Mahadev Image -->
-                <img src="https://images.unsplash.com/photo-1599827051581-6296e4b7b452?q=80&w=500&auto=format&fit=crop" alt="Lord Shiva" class="mahadev-img">
-                <h1 class="mahadev-text">॥ हर हर महादेव ॥</h1>
-            </div>
-            <h2 class="login-title">स्वागतम्</h2>
-            <p class="login-subtitle">क्विज खेल्नको लागि तल आफ्नो नाम राख्नुहोस्</p>
-           
-            <!-- Game Mode Selection -->
+        <div class="glass-card login-card">
+            <div class="om-glow">ॐ</div>
+            <img src="https://images.unsplash.com/photo-1609619385076-36a873425636?w=400&q=80" alt="Mahadev" class="mahadev-img">
+            <h1 class="divine-title">Lokraj Awasthi Quiz</h1>
+            <p class="divine-subtitle">हर हर महादेव 🙏</p>
+
             <div class="mode-selector">
-                <label class="mode-btn active" onclick="setMode('1p')">
-                    <input type="radio" name="mode" value="1p" checked> 👤 1 Player
-                </label>
-                <label class="mode-btn" onclick="setMode('2p')">
-                    <input type="radio" name="mode" value="2p"> 👥 2 Players (Pass & Play)
-                </label>
+                <div class="mode-btn active" onclick="setMode('1p', this)">
+                    <i class="fas fa-user"></i> 1 Player
+                </div>
+                <div class="mode-btn" onclick="setMode('2p', this)">
+                    <i class="fas fa-user-friends"></i> 2 Players
+                </div>
             </div>
 
             <form id="login-form">
-                <div class="input-group">
+                <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="access-name" placeholder="आफ्नो नाम लेख्नुहोस्..." required autocomplete="off">
+                    <input type="text" id="access-name" placeholder="तपाईंको नाम लेख्नुहोस्..." required>
                 </div>
-                <button type="submit" class="btn-primary" id="start-btn">क्विज सुरु गर्नुहोस् <i class="fas fa-om"></i></button>
+                <button type="submit" class="btn-divine">
+                    क्विज सुरु गर्नुहोस् <i class="fas fa-arrow-right"></i>
+                </button>
             </form>
-            <p class="note">नोट: नाम लेखेपछि भाषा छान्न सक्नुहुनेछ।</p>
         </div>
     </div>
 
-    <!-- 2. Language Selection Screen -->
+    <!-- 2. Language Screen -->
     <div id="lang-screen" class="screen">
-        <div class="lang-container">
-            <h2 class="lang-title">Choose Language / भाषा छान्नुहोस्</h2>
-            <button class="btn-lang btn-en" onclick="setLanguage('en')">🇬🇧 English</button>
-            <button class="btn-lang btn-np" onclick="setLanguage('np')">🇳 नेपाली (Nepali)</button>
+        <div class="glass-card lang-card">
+            <h2 class="divine-title" style="font-size: 1.8rem;">भाषा छान्नुहोस्</h2>
+            <button class="btn-lang" onclick="setLanguage('np')">🇳🇵 नेपाली</button>
+            <button class="btn-lang" onclick="setLanguage('en')">🇬🇧 English</button>
         </div>
     </div>
 
-    <!-- 3. Main App Screen -->
+    <!-- 3. Main App -->
     <div id="app-screen" class="screen">
-        <header>
+        <header class="app-header">
             <div class="user-info">
                 <i class="fas fa-om"></i>
-                <span id="user-display-name">Lokraj Awasthi Quiz</span>
+                <span id="user-display-name">Quiz Master</span>
             </div>
-            <div class="header-buttons">
-                <button id="music-toggle" class="btn-music" title="Music On/Off">
-                    <i class="fas fa-volume-up" id="music-icon"></i>
-                </button>
-                <button id="home-btn" class="btn-small" style="display: none;"><i class="fas fa-home"></i> होम</button>
+            <div class="header-actions">
+                <button id="music-toggle" class="icon-btn"><i class="fas fa-volume-up" id="music-icon"></i></button>
+                <button id="home-btn" class="icon-btn" style="display:none;"><i class="fas fa-home"></i></button>
             </div>
         </header>
 
@@ -82,69 +73,76 @@
         <div id="category-section" class="section active">
             <h2 class="section-title">विषय छान्नुहोस्</h2>
             <div class="category-grid">
-                <div class="category-card" data-category="class9"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
-                <div class="category-card" data-category="class10"><i class="fas fa-graduation-cap"></i><h3>Class 10 (SEE)</h3></div>
-                <div class="category-card" data-category="class11"><i class="fas fa-user-graduate"></i><h3>Class 11 (NEB)</h3></div>
-                <div class="category-card" data-category="class12"><i class="fas fa-award"></i><h3>Class 12</h3></div>
-                <div class="category-card" data-category="science"><i class="fas fa-flask"></i><h3>Science</h3></div>
-                <div class="category-card" data-category="computer"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
-                <div class="category-card" data-category="math"><i class="fas fa-calculator"></i><h3>Math</h3></div>
-                <div class="category-card" data-category="gk"><i class="fas fa-globe-asia"></i><h3>Samanya Gyan</h3></div>
-                <div class="category-card mixed" data-category="mixed"><i class="fas fa-random"></i><h3>मिश्रित (सबै)</h3></div>
+                <div class="cat-card" onclick="selectCategory('class8')"><i class="fas fa-book"></i><h3>Class 8</h3></div>
+                <div class="cat-card" onclick="selectCategory('class9')"><i class="fas fa-book-open"></i><h3>Class 9</h3></div>
+                <div class="cat-card" onclick="selectCategory('class10')"><i class="fas fa-graduation-cap"></i><h3>Class 10</h3></div>
+                <div class="cat-card" onclick="selectCategory('class11')"><i class="fas fa-user-graduate"></i><h3>Class 11</h3></div>
+                <div class="cat-card" onclick="selectCategory('class12')"><i class="fas fa-award"></i><h3>Class 12</h3></div>
+                <div class="cat-card" onclick="selectCategory('science')"><i class="fas fa-flask"></i><h3>Science</h3></div>
+                <div class="cat-card" onclick="selectCategory('computer')"><i class="fas fa-laptop-code"></i><h3>Computer</h3></div>
+                <div class="cat-card" onclick="selectCategory('math')"><i class="fas fa-calculator"></i><h3>Math</h3></div>
+                <div class="cat-card" onclick="selectCategory('gk')"><i class="fas fa-globe-asia"></i><h3>GK</h3></div>
+                <div class="cat-card mixed" onclick="selectCategory('mixed')"><i class="fas fa-random"></i><h3>मिश्रित</h3></div>
             </div>
         </div>
 
-        <!-- Chapter Selection Screen -->
+        <!-- Chapter Selection -->
         <div id="chapter-screen" class="section">
-            <button class="btn-small" onclick="showSection('category-section')" style="margin-bottom: 15px; width: auto; display: inline-flex; align-items: center; gap: 5px;">
-                <i class="fas fa-arrow-left"></i> फिर्ता / Back
-            </button>
+            <button class="btn-back" onclick="showSection('category-section')"><i class="fas fa-arrow-left"></i> फिर्ता</button>
             <h2 class="section-title" id="chapter-title">अध्याय छान्नुहोस्</h2>
             <div class="chapter-grid" id="chapter-list"></div>
         </div>
 
-        <!-- Quiz Page -->
+        <!-- Quiz Screen -->
         <div id="quiz-section" class="section">
             <div class="quiz-header">
                 <span id="question-counter">प्रश्न १/१०</span>
                 <span id="timer-display"><i class="fas fa-clock"></i> <span id="time-left">20</span>s</span>
             </div>
             <div class="timer-bar"><div id="timer-progress"></div></div>
-            <h3 id="question-text">प्रश्न यहाँ देखिनेछ...</h3>
+            <div class="question-box">
+                <h3 id="question-text">प्रश्न लोड हुँदैछ...</h3>
+            </div>
             <div id="options-container" class="options-grid"></div>
         </div>
 
-        <!-- Result Page -->
+        <!-- Result Screen -->
         <div id="result-section" class="section">
-            <h2 class="section-title">क्विज सम्पन्न!</h2>
-           
-            <!-- 2 Player Result Display -->
-            <div id="multiplayer-result" class="score-card" style="display: none;">
-                <h3>🏆 अन्तिम नतिजा 🏆</h3>
-                <p id="p1-final-score" style="font-size: 1.2rem; margin: 10px 0;"></p>
-                <p id="p2-final-score" style="font-size: 1.2rem; margin: 10px 0;"></p>
-                <h2 id="winner-text" style="color: var(--saffron); margin-top: 15px;"></h2>
-            </div>
+            <div class="glass-card result-card">
+                <h2 class="divine-title" style="font-size: 2rem;">नतिजा</h2>
+               
+                <div id="singleplayer-result">
+                    <div class="score-circle">
+                        <span id="final-score">0</span>
+                        <small>/ 10</small>
+                    </div>
+                    <p id="score-message"></p>
+                </div>
 
-            <!-- 1 Player Result Display -->
-            <div id="singleplayer-result" class="score-card">
-                <h3>तपाईंको स्कोर</h3>
-                <div class="score-display"><span id="final-score">0</span> / 10</div>
-                <p id="score-message"></p>
-            </div>
+                <div id="multiplayer-result" style="display:none;">
+                    <div class="mp-score">
+                        <p id="p1-final-score">Player 1: 0</p>
+                        <p id="p2-final-score">Player 2: 0</p>
+                    </div>
+                    <h3 id="winner-text" class="winner-text"></h3>
+                </div>
 
-            <div class="result-actions">
-                <button id="review-btn" class="btn-secondary"><i class="fas fa-list"></i> उत्तर हेर्नुहोस्</button>
-                <button id="restart-btn" class="btn-primary"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
+                <div class="result-actions">
+                    <button id="review-btn" class="btn-outline"><i class="fas fa-list"></i> हेर्नुहोस्</button>
+                    <button id="restart-btn" class="btn-divine"><i class="fas fa-redo"></i> फेरि खेल्नुहोस्</button>
+                </div>
+                <div id="review-container"></div>
             </div>
-            <div id="review-container"></div>
         </div>
 
         <footer>
-            <p class="creator">Designed & Developed by <strong>Lokraj Awasthi</strong> 🙏</p>
+            <p>Designed by <strong>Lokraj Awasthi</strong> 🙏</p>
         </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html> 
+
+
+
