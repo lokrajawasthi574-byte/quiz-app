@@ -114,7 +114,6 @@
             background: #fbbf24; color: #0a0e27; transform: translateY(-3px);
         }
 
-        /* QUIZ SCREEN */
         #quiz-screen { max-width: 600px; }
 
         .quiz-top-bar {
@@ -144,7 +143,6 @@
             transition: width 1s linear; border-radius: 5px;
         }
 
-        /* QUESTION - GOLDEN */
         .question-box {
             background: rgba(10, 14, 39, 0.9);
             border: 3px solid #fbbf24; border-radius: 15px;
@@ -153,7 +151,6 @@
         }
         #question-text { font-size: 1.25rem; line-height: 1.6; color: #fbbf24; font-weight: 600; }
 
-        /* OPTIONS - CYAN (Golden होइन) */
         .options-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-bottom: 20px; }
         .options-grid button {
             background: rgba(10, 14, 39, 0.9);
@@ -210,7 +207,6 @@
 <body>
     <div class="app-container">
 
-        <!-- WELCOME -->
         <div id="welcome-screen" class="screen active">
             <div class="card">
                 <div class="om-symbol">ॐ</div>
@@ -223,7 +219,6 @@
             </div>
         </div>
 
-        <!-- LANGUAGE -->
         <div id="language-screen" class="screen">
             <div class="card">
                 <div class="om-symbol small">ॐ</div>
@@ -240,7 +235,6 @@
             </div>
         </div>
 
-        <!-- NAME -->
         <div id="name-screen" class="screen">
             <div class="card">
                 <div class="om-symbol small">ॐ</div>
@@ -257,7 +251,6 @@
             </div>
         </div>
 
-        <!-- CLASS -->
         <div id="category-screen" class="screen">
             <div class="header">
                 <button class="btn-back" onclick="showScreen('welcome-screen')">
@@ -269,7 +262,6 @@
             <div class="grid-container" id="class-list"></div>
         </div>
 
-        <!-- SUBJECT -->
         <div id="subject-screen" class="screen">
             <div class="header">
                 <button class="btn-back" onclick="showScreen('category-screen')">
@@ -280,7 +272,6 @@
             <div class="grid-container" id="subject-list"></div>
         </div>
 
-        <!-- QUIZ -->
         <div id="quiz-screen" class="screen">
             <div class="quiz-top-bar">
                 <div class="player-name">
@@ -319,7 +310,6 @@
             <p class="creator-credit">🙏 Created by Mahadev Bhakt Lokraj Awasthi & Bal Krishna Awasthi 🙏</p>
         </div>
 
-        <!-- RESULT -->
         <div id="result-screen" class="screen">
             <div class="card result-card">
                 <div class="result-icon">🏆</div>
@@ -351,7 +341,6 @@
     </div>
 
     <script>
-        // ================= TRANSLATIONS =================
         const T = {
             en: {
                 welcomeTitle: 'Lokraj Gyan Hub',
@@ -381,7 +370,8 @@
                 practice: 'Keep practicing! 💪',
                 tryAgain: 'Try again! 📚',
                 remaining: 'questions left to play',
-                allDone: '🎉 You played ALL questions! Quiz will restart from beginning.'
+                allDone: '🎉 You played ALL questions! Quiz will restart from beginning.',
+                availableSubjects: 'Available subjects in this class:'
             },
             ne: {
                 welcomeTitle: 'लोकराज ज्ञान हब',
@@ -411,11 +401,11 @@
                 practice: 'अभ्यास गरिरहनुहोस्! 💪',
                 tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚',
                 remaining: 'वटा प्रश्न बाँकी छन्',
-                allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।'
+                allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।',
+                availableSubjects: 'यस कक्षामा उपलब्ध विषयहरू:'
             }
         };
 
-        // ================= SUBJECTS (हजुरले भन्नुभएको जस्तै ठ्याक्कै) =================
         const SUBJECTS = {
             class8:  ['Math', 'Science', 'Computer'],
             class9:  ['Science', 'Math', 'Optional Math', 'Computer'],
@@ -429,7 +419,6 @@
             ne: { class8: 'कक्षा ८', class9: 'कक्षा ९', class10: 'कक्षा १०', class11: 'कक्षा ११', class12: 'कक्षा १२' }
         };
 
-        // ================= STATE =================
         const QUESTIONS_PER_ROUND = 10;
         let currentLang = 'en';
         let questions = [];
@@ -445,7 +434,7 @@
         let currentSubjectName = '';
 
         function getPlayedKey() {
-            return `played_${currentClassId}_${currentSubjectName}_${currentLang}`;
+            return `played_${currentClassId}_${currentSubjectName}`;
         }
         function getPlayedIds() {
             try { return JSON.parse(localStorage.getItem(getPlayedKey())) || []; }
@@ -455,12 +444,6 @@
             localStorage.setItem(getPlayedKey(), JSON.stringify(ids));
         }
 
-        // नेपाली अक्षर (Devanagari) चेक गर्ने function
-        function isNepaliText(text) {
-            return /[\u0900-\u097F]/.test(text);
-        }
-
-        // ================= APPLY LANGUAGE =================
         function applyLanguage() {
             const t = T[currentLang];
             document.getElementById('welcome-title').textContent = t.welcomeTitle;
@@ -504,7 +487,6 @@
             }
         });
 
-        // ================= CLASSES =================
         function loadClasses() {
             const container = document.getElementById('class-list');
             container.innerHTML = '';
@@ -516,7 +498,6 @@
             });
         }
 
-        // ================= SUBJECTS =================
         function loadSubjects(classId) {
             const container = document.getElementById('subject-list');
             container.innerHTML = '';
@@ -529,7 +510,12 @@
             showScreen('subject-screen');
         }
 
-        // ================= START QUIZ (10 only, no repeat, language filtered) =================
+        // 🔧 CASE-INSENSITIVE MATCH (ठूलो/सानो अक्षर फरक पर्दैन)
+        function normalizeText(text) {
+            if (!text) return '';
+            return text.toString().toLowerCase().trim().replace(/\s+/g, ' ');
+        }
+
         async function startQuiz(classId, subject) {
             currentClassId = classId;
             currentSubjectName = subject;
@@ -540,36 +526,53 @@
                     allQuestionsData = await response.json();
                 }
 
-                // 1. Class र Subject अनुसार filter
-                let pool = allQuestionsData.filter(q =>
-                    q.category && q.category.toLowerCase() === classId &&
-                    q.subject === subject
-                );
+                const normClassId = normalizeText(classId);
+                const normSubject = normalizeText(subject);
 
-                // 2. LANGUAGE अनुसार filter (English छाने English मात्र, Nepali छाने Nepali मात्र)
-                if (currentLang === 'ne') {
-                    pool = pool.filter(q => isNepaliText(q.question));
-                } else {
-                    pool = pool.filter(q => !isNepaliText(q.question));
-                }
+                // 🔧 Case-insensitive filter
+                let pool = allQuestionsData.filter(q => {
+                    const qCat = normalizeText(q.category);
+                    const qSub = normalizeText(q.subject);
+                    return qCat === normClassId && qSub === normSubject;
+                });
 
+                // यदि match भएन भने, debug info देखाउने
                 if (pool.length === 0) {
-                    alert(T[currentLang].noQuestions);
+                    // JSON मा यस class का कुन subjects छन् हेर्ने
+                    const availableInClass = [...new Set(
+                        allQuestionsData
+                            .filter(q => normalizeText(q.category) === normClassId)
+                            .map(q => q.subject)
+                    )];
+                   
+                    const allCategories = [...new Set(
+                        allQuestionsData.map(q => q.category)
+                    )];
+
+                    let errorMsg = T[currentLang].noQuestions + '\n\n';
+                    errorMsg += `Looking for: class="${classId}", subject="${subject}"\n\n`;
+                   
+                    if (availableInClass.length > 0) {
+                        errorMsg += `${T[currentLang].availableSubjects}\n`;
+                        errorMsg += availableInClass.join(', ');
+                    } else {
+                        errorMsg += `No questions for class "${classId}" at all.\n`;
+                        errorMsg += `Available classes in JSON:\n${allCategories.join(', ')}`;
+                    }
+                   
+                    alert(errorMsg);
                     return;
                 }
 
-                // 3. Play भइसकेका प्रश्न हटाउने (No Repeat)
                 const playedIds = getPlayedIds();
                 let fresh = pool.filter(q => !playedIds.includes(q.id));
 
-                // 4. सबै सकिए भने reset गर्ने
                 if (fresh.length === 0) {
                     alert(T[currentLang].allDone);
                     savePlayedIds([]);
                     fresh = pool;
                 }
 
-                // 5. Shuffle गरेर 10 वटा मात्र लिने
                 fresh = fresh.sort(() => Math.random() - 0.5);
                 questions = fresh.slice(0, QUESTIONS_PER_ROUND);
 
@@ -588,7 +591,6 @@
             }
         }
 
-        // ================= SHOW QUESTION =================
         function showQuestion() {
             const q = questions[currentQuestion];
             document.getElementById('question-counter').textContent = `${currentQuestion + 1}/${questions.length}`;
@@ -626,7 +628,6 @@
             }, 1000);
         }
 
-        // ================= ANSWER =================
         function markAsPlayed(q) {
             const ids = getPlayedIds();
             if (!ids.includes(q.id)) {
@@ -682,7 +683,6 @@
             }, 1500);
         }
 
-        // ================= RESULT =================
         function showResult() {
             const t = T[currentLang];
             document.getElementById('final-score').textContent = score;
@@ -698,21 +698,18 @@
 
             document.getElementById('score-message').textContent = message;
 
-            // बाँकी प्रश्न देखाउने
             const playedCount = getPlayedIds().length;
-            const totalForLang = allQuestionsData.filter(q =>
-                q.category && q.category.toLowerCase() === currentClassId &&
-                q.subject === currentSubjectName &&
-                (currentLang === 'ne' ? isNepaliText(q.question) : !isNepaliText(q.question))
+            const totalForSubject = allQuestionsData.filter(q =>
+                normalizeText(q.category) === normalizeText(currentClassId) &&
+                normalizeText(q.subject) === normalizeText(currentSubjectName)
             ).length;
-            const remaining = Math.max(0, totalForLang - playedCount);
+            const remaining = Math.max(0, totalForSubject - playedCount);
             document.getElementById('remaining-info').textContent =
                 remaining > 0 ? `📝 ${remaining} ${t.remaining}` : t.allDone;
 
             showScreen('result-screen');
         }
 
-        // ================= PLAY AGAIN =================
         function playAgain() {
             startQuiz(currentClassId, currentSubjectName);
         }
@@ -727,7 +724,6 @@
             showScreen('category-screen');
         }
 
-        // ================= INIT =================
         window.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.garland, .garland-top, .garland-bottom, .garland-left, .garland-right')
                 .forEach(el => el.remove());
