@@ -92,7 +92,6 @@
 </head>
 <body>
     <div class="app-container">
-
         <div id="welcome-screen" class="screen active">
             <div class="card">
                 <div class="om-symbol">ॐ</div>
@@ -135,9 +134,7 @@
 
         <div id="category-screen" class="screen">
             <div class="header">
-                <button class="btn-back" onclick="showScreen('welcome-screen')">
-                    <i class="fas fa-arrow-left"></i> <span class="back-text">Back</span>
-                </button>
+                <button class="btn-back" onclick="showScreen('welcome-screen')"><i class="fas fa-arrow-left"></i> <span class="back-text">Back</span></button>
                 <h2 id="greeting-text">Welcome, Lokraj Gyan Hub! 🙏</h2>
                 <p id="select-class-text">Select Your Class</p>
             </div>
@@ -146,9 +143,7 @@
 
         <div id="subject-screen" class="screen">
             <div class="header">
-                <button class="btn-back" onclick="showScreen('category-screen')">
-                    <i class="fas fa-arrow-left"></i> <span class="back-text">Back</span>
-                </button>
+                <button class="btn-back" onclick="showScreen('category-screen')"><i class="fas fa-arrow-left"></i> <span class="back-text">Back</span></button>
                 <h2 id="subject-title">Subjects</h2>
             </div>
             <div class="grid-container" id="subject-list"></div>
@@ -201,7 +196,7 @@
                 nameTitle: 'Enter Your Name', namePlaceholder: 'Enter your name...', startQuiz: 'Start Quiz',
                 selectClass: 'Select Your Class', subjects: 'Subjects', back: 'Back', quit: 'Quit',
                 correct: 'Correct', wrong: 'Wrong', resultTitle: 'Quiz Complete!', playAgain: 'Play Again',
-                exit: 'Exit', noQuestions: 'No questions found for this subject!',
+                exit: 'Exit', noQuestions: 'No questions found for this subject in the selected language!',
                 loadFailed: 'Questions failed to load!', correctMsg: '✓ Correct!', wrongMsg: '✗ Wrong!',
                 timeUp: '⏰ Time up!', excellent: 'Excellent! 🌟', good: 'Good job! 👍',
                 practice: 'Keep practicing! 💪', tryAgain: 'Try again! 📚',
@@ -213,7 +208,7 @@
                 nameTitle: 'तपाईंको नाम लेख्नुहोस्', namePlaceholder: 'तपाईंको नाम लेख्नुहोस्...', startQuiz: 'क्विज सुरु गर्नुहोस्',
                 selectClass: 'आफ्नो कक्षा छान्नुहोस्', subjects: 'विषयहरू', back: 'पछाडि', quit: 'छोड्नुहोस्',
                 correct: 'सही', wrong: 'गलत', resultTitle: 'क्विज सकियो!', playAgain: 'फेरि खेल्नुहोस्',
-                exit: 'बाहिर निस्कनुहोस्', noQuestions: 'यस विषयको प्रश्न फेला परेन!',
+                exit: 'बाहिर निस्कनुहोस्', noQuestions: 'छानिएको भाषामा यस विषयका प्रश्नहरू फेला परेनन्!',
                 loadFailed: 'प्रश्न लोड हुन सकेन!', correctMsg: '✓ सही!', wrongMsg: '✗ गलत!',
                 timeUp: '⏰ समय सकियो!', excellent: 'उत्कृष्ट! 🌟', good: 'राम्रो! 👍',
                 practice: 'अभ्यास गरिरहनुहोस्! 💪', tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚',
@@ -244,7 +239,7 @@
         let allQuestionsData = [];
         let currentClassId = '', currentSubjectName = '';
 
-        // ✅ भाषा पहिचान: Devanagari अक्षर भए = Nepali
+        // ✅ नेपाली अक्षर (Devanagari) चेक गर्ने Function
         function isNepaliText(text) {
             return /[\u0900-\u097F]/.test(text || '');
         }
@@ -254,7 +249,6 @@
             return text.toString().toLowerCase().trim().replace(/\s+/g, ' ');
         }
 
-        // Played tracking — language अनुसार अलग (English र Nepali को history छुट्टै)
         function getPlayedKey() {
             return `played_${currentClassId}_${currentSubjectName}_${currentLang}`;
         }
@@ -332,7 +326,7 @@
             showScreen('subject-screen');
         }
 
-        // 🔥 SMART LANGUAGE FILTER + FALLBACK
+        // 🔥 STRICT LANGUAGE FILTER (No Fallback)
         async function startQuiz(classId, subject) {
             currentClassId = classId;
             currentSubjectName = subject;
@@ -346,7 +340,7 @@
                 const normClassId = normalizeText(classId);
                 const normSubject = normalizeText(subject);
 
-                // 1. Class + Subject filter (case-insensitive)
+                // 1. Class + Subject filter
                 let pool = allQuestionsData.filter(q =>
                     normalizeText(q.category) === normClassId &&
                     normalizeText(q.subject) === normSubject
@@ -357,7 +351,7 @@
                     return;
                 }
 
-                // 2. ✅ भाषा अनुसार filter — तर fallback सहित!
+                // 2. ✅ STRICT Language Filter (Fallback हटाइयो)
                 let langPool;
                 if (currentLang === 'ne') {
                     langPool = pool.filter(q => isNepaliText(q.question));
@@ -365,12 +359,13 @@
                     langPool = pool.filter(q => !isNepaliText(q.question));
                 }
 
-                // यदि त्यो भाषाका प्रश्न छैनन् → fallback: सबै प्रश्न देखाउ (No questions error आउँदैन!)
+                // 3. यदि छानिएको भाषाको प्रश्न छैन भने, सिधै Alert देखाउने (गलत प्रश्न देखाउँदैन)
                 if (langPool.length === 0) {
-                    langPool = pool;
+                    alert(T[currentLang].noQuestions);
+                    return;
                 }
 
-                // 3. Played हटाउने (No Repeat)
+                // 4. Played हटाउने (No Repeat)
                 const playedIds = getPlayedIds();
                 let fresh = langPool.filter(q => !playedIds.includes(q.id));
 
@@ -380,7 +375,7 @@
                     fresh = langPool;
                 }
 
-                // 4. Shuffle + 10 मात्र
+                // 5. Shuffle + 10 मात्र
                 fresh = fresh.sort(() => Math.random() - 0.5);
                 questions = fresh.slice(0, QUESTIONS_PER_ROUND);
 
