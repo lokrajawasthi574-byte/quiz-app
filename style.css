@@ -1,144 +1,94 @@
-/* ===== GLOBAL BACKGROUND (GOLDEN THEME) ===== */
+/* ===== BACKGROUND GOLDEN ===== */
 body {
   background: linear-gradient(135deg, #B8860B 0%, #DAA520 50%, #FFD700 100%);
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #1a1a1a;
 }
 
-/* ===== WELCOME PAGE (फूलहरू देखाउने) ===== */
+/* ===== WELCOME PAGE - Flowers देखाउने ===== */
 .welcome-container {
   position: relative;
-  background: rgba(0, 0, 0, 0.85);
   border: 3px solid #FFD700;
   border-radius: 20px;
   padding: 40px;
-  text-align: center;
-  max-width: 600px;
-  margin: 50px auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .welcome-flowers {
-  display: block !important; /* Welcome page मा फूल देखाउने */
+  display: block;
   position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   pointer-events: none;
-  z-index: -1;
 }
 
-.welcome-container h1 {
-  color: #FFD700;
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-  margin-bottom: 20px;
-}
-
-/* ===== QUIZ PAGE (फूलहरू लुकाउने) ===== */
+/* ===== QUIZ PAGE - Flowers हटाउने ===== */
 .quiz-page .side-flowers,
-.quiz-page .flower-border,
-.quiz-page .flower-decoration {
-  display: none !important; /* Quiz चलाउँदा side मा फूल नदेखाउने */
+.quiz-page .flower-border {
+  display: none !important;
 }
 
 .quiz-container {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.7);
   border: 3px solid #FFD700;
   border-radius: 20px;
   padding: 30px;
-  max-width: 800px;
-  margin: 30px auto;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.quiz-container h2, .quiz-container h3 {
+/* ===== TEXT COLORS ===== */
+h1, h2, h3 {
   color: #FFD700;
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.question-text {
+p, .question-text {
   color: #FFFFFF;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 25px;
-  text-align: center;
-  line-height: 1.5;
+  font-size: 18px;
 }
 
-/* ===== BUTTONS & OPTIONS ===== */
-.btn-primary, .option-btn {
+/* ===== BUTTONS ===== */
+.btn-primary {
   background: #FFD700;
   color: #1a1a1a;
-  border: 2px solid #B8860B;
-  padding: 12px 20px;
+  border: none;
+  padding: 12px 30px;
   border-radius: 10px;
-  font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  margin: 10px 0;
-  text-align: left;
 }
 
-.btn-primary:hover, .option-btn:hover {
+.btn-primary:hover {
   background: #FFA500;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+  transform: scale(1.05);
+}
+
+/* ===== OPTIONS ===== */
+.option-btn {
+  background: rgba(255, 215, 0, 0.2);
+  border: 2px solid #FFD700;
+  color: #FFFFFF;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option-btn:hover {
+  background: #FFD700;
+  color: #1a1a1a;
+  transform: translateX(10px);
 }
 
 .option-btn.correct {
-  background: #4CAF50 !important;
-  color: white !important;
-  border-color: #4CAF50 !important;
+  background: #4CAF50;
+  border-color: #4CAF50;
 }
 
 .option-btn.wrong {
-  background: #f44336 !important;
-  color: white !important;
-  border-color: #f44336 !important;
-}
-
-/* ===== PROGRESS BAR ===== */
-.progress-bar {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  height: 10px;
-  margin: 20px 0;
-  overflow: hidden;
-}
-
-.progress-fill {
-  background: #FFD700;
-  height: 100%;
-  width: 0%;
-  transition: width 0.5s ease;
-}
-
-/* ===== RESULT PAGE ===== */
-.result-container {
-  background: rgba(0, 0, 0, 0.85);
-  border: 3px solid #FFD700;
-  border-radius: 20px;
-  padding: 40px;
-  text-align: center;
-  max-width: 500px;
-  margin: 50px auto;
-}
-
-.result-container h2 {
-  color: #FFD700;
-  font-size: 2rem;
-}
-
-.score-text {
-  color: #FFFFFF;
-  font-size: 1.5rem;
-  margin: 20px 0;
+  background: #f44336;
+  border-color: #f44336;
 } 
