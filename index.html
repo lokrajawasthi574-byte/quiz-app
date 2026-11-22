@@ -195,9 +195,7 @@
         .btn-group { display: flex; gap: 12px; margin-top: 15px; }
         .btn-group button { flex: 1; }
 
-        .remaining-info {
-            font-size: 0.9rem; opacity: 0.7; margin-top: 10px;
-        }
+        .remaining-info { font-size: 0.9rem; opacity: 0.7; margin-top: 10px; }
 
         @media (max-width: 480px) {
             .app-container { padding: 15px; }
@@ -383,8 +381,7 @@
                 practice: 'Keep practicing! 💪',
                 tryAgain: 'Try again! 📚',
                 remaining: 'questions left to play',
-                allDone: '🎉 You played ALL questions! Quiz will restart from beginning.',
-                restart: 'Restart Quiz'
+                allDone: '🎉 You played ALL questions! Quiz will restart from beginning.'
             },
             ne: {
                 welcomeTitle: 'लोकराज ज्ञान हब',
@@ -414,16 +411,15 @@
                 practice: 'अभ्यास गरिरहनुहोस्! 💪',
                 tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚',
                 remaining: 'वटा प्रश्न बाँकी छन्',
-                allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।',
-                restart: 'क्विज फेरि सुरु गर्नुहोस्'
+                allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।'
             }
         };
 
-        // ================= SUBJECTS (5+ per class) =================
+        // ================= SUBJECTS (हजुरले भन्नुभएको जस्तै ठ्याक्कै) =================
         const SUBJECTS = {
-            class8:  ['Science', 'Math', 'Computer', 'Social Studies', 'English'],
-            class9:  ['Science', 'Math', 'Computer', 'Social Studies', 'English', 'Nepali'],
-            class10: ['Science', 'Math', 'Computer', 'Social Studies', 'English', 'Nepali', 'Optional Math'],
+            class8:  ['Math', 'Science', 'Computer'],
+            class9:  ['Science', 'Math', 'Optional Math', 'Computer'],
+            class10: ['Science', 'Math', 'Optional Math', 'Computer'],
             class11: ['Physics', 'Chemistry', 'Biology', 'Math', 'Computer'],
             class12: ['Physics', 'Chemistry', 'Biology', 'Math', 'Computer']
         };
@@ -436,7 +432,7 @@
         // ================= STATE =================
         const QUESTIONS_PER_ROUND = 10;
         let currentLang = 'en';
-        let questions = [];          // current round ko 10 questions
+        let questions = [];
         let currentQuestion = 0;
         let score = 0;
         let correctCount = 0;
@@ -448,21 +444,18 @@
         let currentClassId = '';
         let currentSubjectName = '';
 
-        // Played questions track (localStorage = browser forget gardaina)
         function getPlayedKey() {
             return `played_${currentClassId}_${currentSubjectName}_${currentLang}`;
         }
         function getPlayedIds() {
-            try {
-                return JSON.parse(localStorage.getItem(getPlayedKey())) || [];
-            } catch (e) { return []; }
+            try { return JSON.parse(localStorage.getItem(getPlayedKey())) || []; }
+            catch (e) { return []; }
         }
         function savePlayedIds(ids) {
             localStorage.setItem(getPlayedKey(), JSON.stringify(ids));
         }
 
-        // ================= LANGUAGE DETECTION =================
-        // Nepali = Devanagari characters (०-९, अ-ज्ञ)
+        // नेपाली अक्षर (Devanagari) चेक गर्ने function
         function isNepaliText(text) {
             return /[\u0900-\u097F]/.test(text);
         }
@@ -536,7 +529,7 @@
             showScreen('subject-screen');
         }
 
-        // ================= START QUIZ (10 only, no repeat) =================
+        // ================= START QUIZ (10 only, no repeat, language filtered) =================
         async function startQuiz(classId, subject) {
             currentClassId = classId;
             currentSubjectName = subject;
@@ -547,13 +540,13 @@
                     allQuestionsData = await response.json();
                 }
 
-                // STEP 1: class + subject filter
+                // 1. Class र Subject अनुसार filter
                 let pool = allQuestionsData.filter(q =>
                     q.category && q.category.toLowerCase() === classId &&
                     q.subject === subject
                 );
 
-                // STEP 2: LANGUAGE filter (yo ho main fix!)
+                // 2. LANGUAGE अनुसार filter (English छाने English मात्र, Nepali छाने Nepali मात्र)
                 if (currentLang === 'ne') {
                     pool = pool.filter(q => isNepaliText(q.question));
                 } else {
@@ -565,18 +558,18 @@
                     return;
                 }
 
-                // STEP 3: played questions remove (no repeat!)
+                // 3. Play भइसकेका प्रश्न हटाउने (No Repeat)
                 const playedIds = getPlayedIds();
                 let fresh = pool.filter(q => !playedIds.includes(q.id));
 
-                // STEP 4: all finished? → reset
+                // 4. सबै सकिए भने reset गर्ने
                 if (fresh.length === 0) {
                     alert(T[currentLang].allDone);
                     savePlayedIds([]);
                     fresh = pool;
                 }
 
-                // STEP 5: shuffle + take 10
+                // 5. Shuffle गरेर 10 वटा मात्र लिने
                 fresh = fresh.sort(() => Math.random() - 0.5);
                 questions = fresh.slice(0, QUESTIONS_PER_ROUND);
 
@@ -598,8 +591,7 @@
         // ================= SHOW QUESTION =================
         function showQuestion() {
             const q = questions[currentQuestion];
-            document.getElementById('question-counter').textContent =
-                `${currentQuestion + 1}/${questions.length}`;
+            document.getElementById('question-counter').textContent = `${currentQuestion + 1}/${questions.length}`;
             document.getElementById('question-text').textContent = q.question;
             document.getElementById('answer-feedback').textContent = '';
 
@@ -625,8 +617,7 @@
             timer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('time-left').textContent = timeLeft;
-                document.getElementById('timer-progress').style.width =
-                    `${(timeLeft / 30) * 100}%`;
+                document.getElementById('timer-progress').style.width = `${(timeLeft / 30) * 100}%`;
 
                 if (timeLeft <= 0) {
                     clearInterval(timer);
@@ -707,7 +698,7 @@
 
             document.getElementById('score-message').textContent = message;
 
-            // remaining count dekhau
+            // बाँकी प्रश्न देखाउने
             const playedCount = getPlayedIds().length;
             const totalForLang = allQuestionsData.filter(q =>
                 q.category && q.category.toLowerCase() === currentClassId &&
@@ -721,7 +712,7 @@
             showScreen('result-screen');
         }
 
-        // ================= PLAY AGAIN (10 new questions) =================
+        // ================= PLAY AGAIN =================
         function playAgain() {
             startQuiz(currentClassId, currentSubjectName);
         }
