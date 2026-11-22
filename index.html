@@ -61,18 +61,6 @@
         .subtitle { font-size: 1rem; color: #fbbf24; opacity: 0.9; margin-bottom: 8px; }
         .welcome-text { font-size: 0.95rem; color: #fbbf24; opacity: 0.8; margin-bottom: 20px; }
 
-        .welcome-loader { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-        .loader-dot {
-            width: 12px; height: 12px; background: #fbbf24;
-            border-radius: 50%; animation: bounce 1.4s infinite;
-        }
-        .loader-dot:nth-child(1){ animation-delay:-0.32s; }
-        .loader-dot:nth-child(2){ animation-delay:-0.16s; }
-        @keyframes bounce {
-            0%,80%,100% { transform: scale(0); }
-            40% { transform: scale(1); }
-        }
-
         .lang-buttons { width: 100%; margin-top: 20px; }
 
         .btn-lang, .btn-primary, .btn-secondary, .btn-danger, .btn-back {
@@ -117,161 +105,99 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 15px; width: 100%;
         }
-        .list-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-        .grid-container button, .list-container button {
+        .grid-container button {
             background: rgba(10, 14, 39, 0.9); border: 2px solid #fbbf24; color: #fbbf24;
             padding: 18px; border-radius: 12px; font-size: 1rem; font-weight: bold;
             cursor: pointer; transition: all 0.3s; text-align: center;
         }
-        .grid-container button:hover, .list-container button:hover {
+        .grid-container button:hover {
             background: #fbbf24; color: #0a0e27; transform: translateY(-3px);
         }
 
-        /* ========== QUIZ SCREEN - Picture 4 जस्तै ========== */
+        /* QUIZ SCREEN */
         #quiz-screen { max-width: 600px; }
-       
+
         .quiz-top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(251,191,36,0.3);
-            margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            width: 100%; padding-bottom: 15px;
+            border-bottom: 2px solid rgba(251,191,36,0.3); margin-bottom: 20px;
         }
-       
-        .player-name {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #fbbf24;
-        }
+        .player-name { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: bold; }
         .player-name i { font-size: 1.5rem; }
-       
-        .score-display {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #fbbf24;
-        }
-        .score-display i { color: #fbbf24; font-size: 1.5rem; }
-       
+        .score-display { display: flex; align-items: center; gap: 8px; font-size: 1.3rem; font-weight: bold; }
+        .score-display i { font-size: 1.5rem; }
+
         .quiz-info-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #fbbf24;
+            display: flex; justify-content: space-between; align-items: center;
+            width: 100%; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold;
         }
-       
-        .timer-display {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fbbf24;
-        }
-        .timer-display i { color: #fbbf24; }
-       
+        .timer-display { display: flex; align-items: center; gap: 8px; }
+
         .timer-bar-container {
-            width: 100%;
-            height: 10px;
-            background: rgba(251,191,36,0.2);
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 25px;
+            width: 100%; height: 10px;
+            background: rgba(251,191,36,0.2); border-radius: 5px;
+            overflow: hidden; margin-bottom: 25px;
         }
         .timer-bar-fill {
-            height: 100%;
+            height: 100%; width: 100%;
             background: linear-gradient(90deg, #fbbf24, #f59e0b);
-            width: 100%;
-            transition: width 1s linear;
-            border-radius: 5px;
+            transition: width 1s linear; border-radius: 5px;
         }
 
-        /* ❓ QUESTION BOX - GOLDEN (Picture 4 जस्तै) */
+        /* QUESTION - GOLDEN */
         .question-box {
             background: rgba(10, 14, 39, 0.9);
-            border: 3px solid #fbbf24;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            text-align: center;
-            width: 100%;
+            border: 3px solid #fbbf24; border-radius: 15px;
+            padding: 25px; margin-bottom: 25px; text-align: center; width: 100%;
             box-shadow: 0 0 20px rgba(251,191,36,0.3);
         }
-        #question-text {
-            font-size: 1.25rem;
-            line-height: 1.6;
-            color: #fbbf24;
-            font-weight: 600;
-        }
+        #question-text { font-size: 1.25rem; line-height: 1.6; color: #fbbf24; font-weight: 600; }
 
-        /* 🔘 OPTIONS - CYAN/TEAL रंग (Golden भन्दा फरक) */
+        /* OPTIONS - CYAN (Golden होइन) */
         .options-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-bottom: 20px; }
         .options-grid button {
             background: rgba(10, 14, 39, 0.9);
-            border: 2px solid #06b6d4;
-            color: #67e8f9;
-            padding: 16px 20px;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.3s;
-            font-weight: 500;
+            border: 2px solid #06b6d4; color: #67e8f9;
+            padding: 16px 20px; border-radius: 12px; font-size: 1.1rem;
+            cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;
         }
         .options-grid button:hover:not(:disabled) {
-            background: rgba(6, 182, 212, 0.15);
-            border-color: #22d3ee;
-            transform: translateX(5px);
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+            background: rgba(6, 182, 212, 0.15); border-color: #22d3ee;
+            transform: translateX(5px); box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
         }
-        .options-grid button.correct {
-            background: #22c55e !important;
-            border-color: #22c55e !important;
-            color: white !important;
-        }
-        .options-grid button.wrong {
-            background: #ef4444 !important;
-            border-color: #ef4444 !important;
-            color: white !important;
-        }
+        .options-grid button.correct { background: #22c55e !important; border-color: #22c55e !important; color: white !important; }
+        .options-grid button.wrong { background: #ef4444 !important; border-color: #ef4444 !important; color: white !important; }
         .options-grid button:disabled { cursor: not-allowed; opacity: 0.8; }
 
-        .feedback { text-align: center; font-weight: bold; margin-bottom: 15px; min-height: 22px; color: #fbbf24; font-size: 1.1rem; }
+        .feedback { text-align: center; font-weight: bold; margin-bottom: 15px; min-height: 22px; font-size: 1.1rem; }
         .quit-btn { width: auto; align-self: center; }
 
         .creator-credit {
             text-align: center; font-size: 0.85rem; opacity: 0.8;
-            margin-top: 20px; color: #fbbf24; padding: 10px;
+            margin-top: 20px; padding: 10px;
         }
 
-        .result-card { background: rgba(10, 14, 39, 0.9); border: 3px solid #fbbf24; color: #fbbf24; }
+        .result-card { background: rgba(10, 14, 39, 0.9); border: 3px solid #fbbf24; }
         .result-icon { font-size: 4rem; margin-bottom: 10px; }
-        .result-card h2 { color: #fbbf24; }
         .score-circle {
             width: 130px; height: 130px; margin: 20px auto;
             border: 4px solid #fbbf24; border-radius: 50%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             background: rgba(251,191,36,0.2);
         }
-        #final-score { font-size: 3rem; font-weight: bold; color: #fbbf24; line-height: 1; }
-        .total-score { font-size: 1rem; color: #fbbf24; opacity: 0.9; }
-        .message { font-size: 1.1rem; margin-bottom: 20px; color: #fbbf24; }
+        #final-score { font-size: 3rem; font-weight: bold; line-height: 1; }
+        .total-score { font-size: 1rem; opacity: 0.9; }
+        .message { font-size: 1.1rem; margin-bottom: 20px; }
         .stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
-        .stat-item { display: flex; align-items: center; gap: 8px; font-weight: bold; color: #fbbf24; }
+        .stat-item { display: flex; align-items: center; gap: 8px; font-weight: bold; }
         .text-green { color: #86efac; }
         .text-red { color: #fca5a5; }
         .btn-group { display: flex; gap: 12px; margin-top: 15px; }
         .btn-group button { flex: 1; }
-        .hidden { display: none !important; }
+
+        .remaining-info {
+            font-size: 0.9rem; opacity: 0.7; margin-top: 10px;
+        }
 
         @media (max-width: 480px) {
             .app-container { padding: 15px; }
@@ -285,6 +211,7 @@
 </head>
 <body>
     <div class="app-container">
+
         <!-- WELCOME -->
         <div id="welcome-screen" class="screen active">
             <div class="card">
@@ -306,10 +233,10 @@
                 <p class="subtitle" id="lang-subtitle">भाषा छान्नुहोस्</p>
                 <div class="lang-buttons">
                     <button class="btn-lang" onclick="selectLanguage('ne')">
-                        <span class="lang-flag">🇳🇵</span> <span id="nepali-text">नेपाली</span>
+                        <span class="lang-flag">🇳🇵</span> नेपाली
                     </button>
                     <button class="btn-lang" onclick="selectLanguage('en')">
-                        <span class="lang-flag">🇬🇧</span> <span id="english-text">English</span>
+                        <span class="lang-flag">🇬🇧</span> English
                     </button>
                 </div>
             </div>
@@ -344,7 +271,7 @@
             <div class="grid-container" id="class-list"></div>
         </div>
 
-        <!-- SUBJECT (Chapter हटाइयो - सिधै Quiz) -->
+        <!-- SUBJECT -->
         <div id="subject-screen" class="screen">
             <div class="header">
                 <button class="btn-back" onclick="showScreen('category-screen')">
@@ -355,7 +282,7 @@
             <div class="grid-container" id="subject-list"></div>
         </div>
 
-        <!-- QUIZ - Picture 4 जस्तै design -->
+        <!-- QUIZ -->
         <div id="quiz-screen" class="screen">
             <div class="quiz-top-bar">
                 <div class="player-name">
@@ -367,7 +294,7 @@
                     <span id="current-score">0</span>
                 </div>
             </div>
-           
+
             <div class="quiz-info-bar">
                 <span id="question-counter">1/10</span>
                 <div class="timer-display">
@@ -375,22 +302,22 @@
                     <span id="time-left">30</span>s
                 </div>
             </div>
-           
+
             <div class="timer-bar-container">
                 <div id="timer-progress" class="timer-bar-fill"></div>
             </div>
-           
+
             <div class="question-box">
                 <p id="question-text">Question will appear here...</p>
             </div>
-           
+
             <div id="options-container" class="options-grid"></div>
             <p id="answer-feedback" class="feedback"></p>
-           
+
             <button class="btn-back quit-btn" onclick="quitQuiz()">
                 <i class="fas fa-times"></i> <span id="quit-text">Quit</span>
             </button>
-           
+
             <p class="creator-credit">🙏 Created by Mahadev Bhakt Lokraj Awasthi & Bal Krishna Awasthi 🙏</p>
         </div>
 
@@ -412,11 +339,12 @@
                         <i class="fas fa-times-circle"></i> <span id="wrong-label">Wrong</span>: <span id="wrong-count">0</span>
                     </span>
                 </div>
+                <p class="remaining-info" id="remaining-info"></p>
                 <div class="btn-group">
-                    <button class="btn-primary" onclick="restartGame()">
+                    <button class="btn-primary" onclick="playAgain()">
                         <i class="fas fa-redo"></i> <span id="replay-text">Play Again</span>
                     </button>
-                    <button class="btn-danger" onclick="quitQuiz()">
+                    <button class="btn-danger" onclick="goHome()">
                         <i class="fas fa-sign-out-alt"></i> <span id="exit-text">Exit</span>
                     </button>
                 </div>
@@ -425,8 +353,8 @@
     </div>
 
     <script>
-        // ========== LANGUAGE TRANSLATIONS ==========
-        const translations = {
+        // ================= TRANSLATIONS =================
+        const T = {
             en: {
                 welcomeTitle: 'Lokraj Gyan Hub',
                 welcomeSubtitle: 'Welcome to the Divine Quiz Portal',
@@ -436,7 +364,6 @@
                 nameTitle: 'Enter Your Name',
                 namePlaceholder: 'Enter your name...',
                 startQuiz: 'Start Quiz',
-                greeting: 'Welcome',
                 selectClass: 'Select Your Class',
                 subjects: 'Subjects',
                 back: 'Back',
@@ -454,7 +381,10 @@
                 excellent: 'Excellent! 🌟',
                 good: 'Good job! 👍',
                 practice: 'Keep practicing! 💪',
-                tryAgain: 'Try again! 📚'
+                tryAgain: 'Try again! 📚',
+                remaining: 'questions left to play',
+                allDone: '🎉 You played ALL questions! Quiz will restart from beginning.',
+                restart: 'Restart Quiz'
             },
             ne: {
                 welcomeTitle: 'लोकराज ज्ञान हब',
@@ -465,7 +395,6 @@
                 nameTitle: 'तपाईंको नाम लेख्नुहोस्',
                 namePlaceholder: 'तपाईंको नाम लेख्नुहोस्...',
                 startQuiz: 'क्विज सुरु गर्नुहोस्',
-                greeting: 'स्वागत छ',
                 selectClass: 'आफ्नो कक्षा छान्नुहोस्',
                 subjects: 'विषयहरू',
                 back: 'पछाडि',
@@ -483,12 +412,31 @@
                 excellent: 'उत्कृष्ट! 🌟',
                 good: 'राम्रो! 👍',
                 practice: 'अभ्यास गरिरहनुहोस्! 💪',
-                tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚'
+                tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚',
+                remaining: 'वटा प्रश्न बाँकी छन्',
+                allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।',
+                restart: 'क्विज फेरि सुरु गर्नुहोस्'
             }
         };
 
+        // ================= SUBJECTS (5+ per class) =================
+        const SUBJECTS = {
+            class8:  ['Science', 'Math', 'Computer', 'Social Studies', 'English'],
+            class9:  ['Science', 'Math', 'Computer', 'Social Studies', 'English', 'Nepali'],
+            class10: ['Science', 'Math', 'Computer', 'Social Studies', 'English', 'Nepali', 'Optional Math'],
+            class11: ['Physics', 'Chemistry', 'Biology', 'Math', 'Computer'],
+            class12: ['Physics', 'Chemistry', 'Biology', 'Math', 'Computer']
+        };
+
+        const CLASS_NAMES = {
+            en: { class8: 'Class 8', class9: 'Class 9', class10: 'Class 10', class11: 'Class 11', class12: 'Class 12' },
+            ne: { class8: 'कक्षा ८', class9: 'कक्षा ९', class10: 'कक्षा १०', class11: 'कक्षा ११', class12: 'कक्षा १२' }
+        };
+
+        // ================= STATE =================
+        const QUESTIONS_PER_ROUND = 10;
         let currentLang = 'en';
-        let questions = [];
+        let questions = [];          // current round ko 10 questions
         let currentQuestion = 0;
         let score = 0;
         let correctCount = 0;
@@ -497,10 +445,31 @@
         let timer;
         let timeLeft = 30;
         let allQuestionsData = [];
+        let currentClassId = '';
+        let currentSubjectName = '';
 
-        // ========== LANGUAGE APPLY ==========
+        // Played questions track (localStorage = browser forget gardaina)
+        function getPlayedKey() {
+            return `played_${currentClassId}_${currentSubjectName}_${currentLang}`;
+        }
+        function getPlayedIds() {
+            try {
+                return JSON.parse(localStorage.getItem(getPlayedKey())) || [];
+            } catch (e) { return []; }
+        }
+        function savePlayedIds(ids) {
+            localStorage.setItem(getPlayedKey(), JSON.stringify(ids));
+        }
+
+        // ================= LANGUAGE DETECTION =================
+        // Nepali = Devanagari characters (०-९, अ-ज्ञ)
+        function isNepaliText(text) {
+            return /[\u0900-\u097F]/.test(text);
+        }
+
+        // ================= APPLY LANGUAGE =================
         function applyLanguage() {
-            const t = translations[currentLang];
+            const t = T[currentLang];
             document.getElementById('welcome-title').textContent = t.welcomeTitle;
             document.getElementById('welcome-subtitle').textContent = t.welcomeSubtitle;
             document.getElementById('start-btn-text').textContent = t.startBtn;
@@ -512,18 +481,18 @@
             document.getElementById('select-class-text').textContent = t.selectClass;
             document.getElementById('subject-title').textContent = t.subjects;
             document.getElementById('quit-text').textContent = t.quit;
+            document.getElementById('result-title').textContent = t.resultTitle;
             document.getElementById('correct-label').textContent = t.correct;
             document.getElementById('wrong-label').textContent = t.wrong;
-            document.getElementById('result-title').textContent = t.resultTitle;
             document.getElementById('replay-text').textContent = t.playAgain;
             document.getElementById('exit-text').textContent = t.exit;
-           
             document.querySelectorAll('.back-text').forEach(el => el.textContent = t.back);
         }
 
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
+            applyLanguage();
         }
 
         function selectLanguage(lang) {
@@ -542,110 +511,108 @@
             }
         });
 
-        // ========== LOAD CLASSES ==========
+        // ================= CLASSES =================
         function loadClasses() {
-            const classes = [
-                { id: 'class8', name: currentLang === 'ne' ? 'कक्षा ८' : 'Class 8' },
-                { id: 'class9', name: currentLang === 'ne' ? 'कक्षा ९' : 'Class 9' },
-                { id: 'class10', name: currentLang === 'ne' ? 'कक्षा १०' : 'Class 10' },
-                { id: 'class11', name: currentLang === 'ne' ? 'कक्षा ११' : 'Class 11' },
-                { id: 'class12', name: currentLang === 'ne' ? 'कक्षा १२' : 'Class 12' }
-            ];
             const container = document.getElementById('class-list');
             container.innerHTML = '';
-            classes.forEach(cls => {
+            ['class8', 'class9', 'class10', 'class11', 'class12'].forEach(cls => {
                 const btn = document.createElement('button');
-                btn.textContent = cls.name;
-                btn.onclick = () => loadSubjects(cls.id, cls.name);
+                btn.textContent = CLASS_NAMES[currentLang][cls];
+                btn.onclick = () => loadSubjects(cls);
                 container.appendChild(btn);
             });
         }
 
-        // ========== LOAD SUBJECTS (JSON बाट dynamic) ==========
-        async function loadSubjects(classId, className) {
-            try {
-                if (allQuestionsData.length === 0) {
-                    const response = await fetch('questions.json');
-                    allQuestionsData = await response.json();
-                }
-               
-                // यस class का subjects निकाल्ने
-                const subjects = [...new Set(
-                    allQuestionsData
-                        .filter(q => q.category && q.category.toLowerCase() === classId)
-                        .map(q => q.subject)
-                )];
-               
-                if (subjects.length === 0) {
-                    alert(translations[currentLang].noQuestions);
-                    return;
-                }
-               
-                const container = document.getElementById('subject-list');
-                container.innerHTML = '';
-                subjects.forEach(sub => {
-                    const btn = document.createElement('button');
-                    btn.textContent = sub;
-                    btn.onclick = () => startQuiz(classId, sub);
-                    container.appendChild(btn);
-                });
-                showScreen('subject-screen');
-            } catch (error) {
-                alert(translations[currentLang].loadFailed);
-                console.error(error);
-            }
+        // ================= SUBJECTS =================
+        function loadSubjects(classId) {
+            const container = document.getElementById('subject-list');
+            container.innerHTML = '';
+            (SUBJECTS[classId] || []).forEach(sub => {
+                const btn = document.createElement('button');
+                btn.textContent = sub;
+                btn.onclick = () => startQuiz(classId, sub);
+                container.appendChild(btn);
+            });
+            showScreen('subject-screen');
         }
 
-        // ========== START QUIZ (Chapter हटाइयो - सिधै) ==========
+        // ================= START QUIZ (10 only, no repeat) =================
         async function startQuiz(classId, subject) {
+            currentClassId = classId;
+            currentSubjectName = subject;
+
             try {
                 if (allQuestionsData.length === 0) {
                     const response = await fetch('questions.json');
                     allQuestionsData = await response.json();
                 }
-               
-                questions = allQuestionsData.filter(q =>
+
+                // STEP 1: class + subject filter
+                let pool = allQuestionsData.filter(q =>
                     q.category && q.category.toLowerCase() === classId &&
                     q.subject === subject
                 );
-               
-                if (questions.length === 0) {
-                    alert(translations[currentLang].noQuestions);
+
+                // STEP 2: LANGUAGE filter (yo ho main fix!)
+                if (currentLang === 'ne') {
+                    pool = pool.filter(q => isNepaliText(q.question));
+                } else {
+                    pool = pool.filter(q => !isNepaliText(q.question));
+                }
+
+                if (pool.length === 0) {
+                    alert(T[currentLang].noQuestions);
                     return;
                 }
-               
+
+                // STEP 3: played questions remove (no repeat!)
+                const playedIds = getPlayedIds();
+                let fresh = pool.filter(q => !playedIds.includes(q.id));
+
+                // STEP 4: all finished? → reset
+                if (fresh.length === 0) {
+                    alert(T[currentLang].allDone);
+                    savePlayedIds([]);
+                    fresh = pool;
+                }
+
+                // STEP 5: shuffle + take 10
+                fresh = fresh.sort(() => Math.random() - 0.5);
+                questions = fresh.slice(0, QUESTIONS_PER_ROUND);
+
                 currentQuestion = 0;
                 score = 0;
                 correctCount = 0;
                 wrongCount = 0;
                 document.getElementById('total-q').textContent = questions.length;
                 document.getElementById('current-score').textContent = '0';
-               
+
                 showScreen('quiz-screen');
                 showQuestion();
             } catch (error) {
-                alert(translations[currentLang].loadFailed);
+                alert(T[currentLang].loadFailed);
                 console.error(error);
             }
         }
 
+        // ================= SHOW QUESTION =================
         function showQuestion() {
             const q = questions[currentQuestion];
             document.getElementById('question-counter').textContent =
                 `${currentQuestion + 1}/${questions.length}`;
             document.getElementById('question-text').textContent = q.question;
             document.getElementById('answer-feedback').textContent = '';
-           
+
             const container = document.getElementById('options-container');
             container.innerHTML = '';
-           
+
             q.options.forEach((opt, index) => {
                 const btn = document.createElement('button');
                 btn.textContent = opt;
                 btn.onclick = () => selectAnswer(index, btn);
                 container.appendChild(btn);
             });
-           
+
             startTimer();
         }
 
@@ -653,14 +620,14 @@
             timeLeft = 30;
             document.getElementById('time-left').textContent = timeLeft;
             document.getElementById('timer-progress').style.width = '100%';
-           
+
             clearInterval(timer);
             timer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('time-left').textContent = timeLeft;
                 document.getElementById('timer-progress').style.width =
                     `${(timeLeft / 30) * 100}%`;
-               
+
                 if (timeLeft <= 0) {
                     clearInterval(timer);
                     autoAnswer();
@@ -668,14 +635,24 @@
             }, 1000);
         }
 
+        // ================= ANSWER =================
+        function markAsPlayed(q) {
+            const ids = getPlayedIds();
+            if (!ids.includes(q.id)) {
+                ids.push(q.id);
+                savePlayedIds(ids);
+            }
+        }
+
         function selectAnswer(index, btn) {
             clearInterval(timer);
             const q = questions[currentQuestion];
             const allBtns = document.querySelectorAll('.options-grid button');
-           
             allBtns.forEach(b => b.disabled = true);
-           
-            const t = translations[currentLang];
+
+            markAsPlayed(q);
+
+            const t = T[currentLang];
             if (index === q.answer) {
                 btn.classList.add('correct');
                 score++;
@@ -687,17 +664,9 @@
                 wrongCount++;
                 document.getElementById('answer-feedback').textContent = t.wrongMsg;
             }
-           
+
             document.getElementById('current-score').textContent = score;
-           
-            setTimeout(() => {
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    showQuestion();
-                } else {
-                    showResult();
-                }
-            }, 1500);
+            nextAfterDelay();
         }
 
         function autoAnswer() {
@@ -706,9 +675,12 @@
             allBtns.forEach(b => b.disabled = true);
             allBtns[q.answer].classList.add('correct');
             wrongCount++;
-            document.getElementById('answer-feedback').textContent =
-                translations[currentLang].timeUp;
-           
+            markAsPlayed(q);
+            document.getElementById('answer-feedback').textContent = T[currentLang].timeUp;
+            nextAfterDelay();
+        }
+
+        function nextAfterDelay() {
             setTimeout(() => {
                 currentQuestion++;
                 if (currentQuestion < questions.length) {
@@ -719,24 +691,43 @@
             }, 1500);
         }
 
+        // ================= RESULT =================
         function showResult() {
-            const t = translations[currentLang];
+            const t = T[currentLang];
             document.getElementById('final-score').textContent = score;
             document.getElementById('correct-count').textContent = correctCount;
             document.getElementById('wrong-count').textContent = wrongCount;
-           
+
             const percentage = (score / questions.length) * 100;
             let message = '';
             if (percentage >= 80) message = t.excellent;
             else if (percentage >= 60) message = t.good;
             else if (percentage >= 40) message = t.practice;
             else message = t.tryAgain;
-           
+
             document.getElementById('score-message').textContent = message;
+
+            // remaining count dekhau
+            const playedCount = getPlayedIds().length;
+            const totalForLang = allQuestionsData.filter(q =>
+                q.category && q.category.toLowerCase() === currentClassId &&
+                q.subject === currentSubjectName &&
+                (currentLang === 'ne' ? isNepaliText(q.question) : !isNepaliText(q.question))
+            ).length;
+            const remaining = Math.max(0, totalForLang - playedCount);
+            document.getElementById('remaining-info').textContent =
+                remaining > 0 ? `📝 ${remaining} ${t.remaining}` : t.allDone;
+
             showScreen('result-screen');
         }
 
-        function restartGame() {
+        // ================= PLAY AGAIN (10 new questions) =================
+        function playAgain() {
+            startQuiz(currentClassId, currentSubjectName);
+        }
+
+        function goHome() {
+            clearInterval(timer);
             showScreen('category-screen');
         }
 
@@ -745,7 +736,7 @@
             showScreen('category-screen');
         }
 
-        // ========== INIT ==========
+        // ================= INIT =================
         window.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.garland, .garland-top, .garland-bottom, .garland-left, .garland-right')
                 .forEach(el => el.remove());
