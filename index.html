@@ -7,181 +7,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background: #0a0e27;
-            color: #fbbf24;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            min-height: 100vh;
-        }
-
+        body { background: #0a0e27; color: #fbbf24; font-family: 'Segoe UI', Tahoma, sans-serif; min-height: 100vh; }
         .garland, .garland-top, .garland-bottom, .garland-left, .garland-right { display: none !important; }
-
-        .app-container {
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        .app-container { padding: 20px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
         .screen { display: none; width: 100%; max-width: 500px; }
-        .screen.active {
-            display: flex; flex-direction: column; align-items: center;
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card {
-            background: rgba(10, 14, 39, 0.95);
-            border: 3px solid #fbbf24;
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-
-        .om-symbol {
-            font-size: 4rem; color: #fbbf24; margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(251,191,36,0.8);
-            animation: glow 2s infinite alternate;
-        }
+        .screen.active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: rgba(10, 14, 39, 0.95); border: 3px solid #fbbf24; border-radius: 20px; padding: 30px; width: 100%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .om-symbol { font-size: 4rem; color: #fbbf24; margin-bottom: 15px; text-shadow: 0 0 30px rgba(251,191,36,0.8); animation: glow 2s infinite alternate; }
         .om-symbol.small { font-size: 2.5rem; }
-        @keyframes glow {
-            from { text-shadow: 0 0 15px rgba(251,191,36,0.5); }
-            to { text-shadow: 0 0 35px rgba(251,191,36,1); }
-        }
-
+        @keyframes glow { from { text-shadow: 0 0 15px rgba(251,191,36,0.5); } to { text-shadow: 0 0 35px rgba(251,191,36,1); } }
         h1 { font-size: 2rem; color: #fbbf24; margin-bottom: 10px; }
         h2 { font-size: 1.5rem; color: #fbbf24; margin-bottom: 15px; }
         .subtitle { font-size: 1rem; color: #fbbf24; opacity: 0.9; margin-bottom: 8px; }
         .welcome-text { font-size: 0.95rem; color: #fbbf24; opacity: 0.8; margin-bottom: 20px; }
-
         .lang-buttons { width: 100%; margin-top: 20px; }
-
         .btn-lang, .btn-primary, .btn-secondary, .btn-danger, .btn-back {
             width: 100%; padding: 15px; border-radius: 12px; font-size: 1.1rem; font-weight: bold;
-            cursor: pointer; border: 2px solid #fbbf24;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            margin-bottom: 12px; transition: all 0.3s;
+            cursor: pointer; border: 2px solid #fbbf24; display: flex; align-items: center;
+            justify-content: center; gap: 10px; margin-bottom: 12px; transition: all 0.3s;
         }
         .btn-lang, .btn-primary { background: #fbbf24; color: #0a0e27; }
-        .btn-lang:hover, .btn-primary:hover {
-            background: #f59e0b; transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(251,191,36,0.5);
-        }
+        .btn-lang:hover, .btn-primary:hover { background: #f59e0b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(251,191,36,0.5); }
         .btn-secondary { background: transparent; color: #fbbf24; }
         .btn-secondary:hover { background: rgba(251,191,36,0.2); }
         .btn-danger { background: #ef4444; border-color: #ef4444; color: white; }
         .btn-danger:hover { background: #dc2626; }
-        .btn-back {
-            width: auto; padding: 10px 20px; font-size: 0.95rem;
-            background: transparent; color: #fbbf24; align-self: flex-start; margin-bottom: 20px;
-        }
+        .btn-back { width: auto; padding: 10px 20px; font-size: 0.95rem; background: transparent; color: #fbbf24; align-self: flex-start; margin-bottom: 20px; }
         .btn-back:hover { background: rgba(251,191,36,0.2); }
         .lang-flag { font-size: 1.5rem; }
-
         .input-group { position: relative; margin-bottom: 25px; }
-        .input-group i {
-            position: absolute; left: 15px; top: 50%;
-            transform: translateY(-50%); color: #fbbf24; font-size: 1.2rem;
-        }
-        .input-group input {
-            width: 100%; padding: 15px 15px 15px 45px;
-            background: #0a0e27; border: 2px solid #fbbf24; border-radius: 12px;
-            color: #fbbf24; font-size: 1.1rem; outline: none;
-        }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #fbbf24; font-size: 1.2rem; }
+        .input-group input { width: 100%; padding: 15px 15px 15px 45px; background: #0a0e27; border: 2px solid #fbbf24; border-radius: 12px; color: #fbbf24; font-size: 1.1rem; outline: none; }
         .input-group input:focus { box-shadow: 0 0 15px rgba(251,191,36,0.4); }
         .input-group input::placeholder { color: rgba(251,191,36,0.6); }
-
         .header { width: 100%; text-align: center; margin-bottom: 20px; }
         #greeting-text { font-size: 1.6rem; color: #fbbf24; }
-
-        .grid-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 15px; width: 100%;
-        }
-        .grid-container button {
-            background: rgba(10, 14, 39, 0.9); border: 2px solid #fbbf24; color: #fbbf24;
-            padding: 18px; border-radius: 12px; font-size: 1rem; font-weight: bold;
-            cursor: pointer; transition: all 0.3s; text-align: center;
-        }
-        .grid-container button:hover {
-            background: #fbbf24; color: #0a0e27; transform: translateY(-3px);
-        }
-
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; width: 100%; }
+        .grid-container button { background: rgba(10, 14, 39, 0.9); border: 2px solid #fbbf24; color: #fbbf24; padding: 18px; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; text-align: center; }
+        .grid-container button:hover { background: #fbbf24; color: #0a0e27; transform: translateY(-3px); }
         #quiz-screen { max-width: 600px; }
-
-        .quiz-top-bar {
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%; padding-bottom: 15px;
-            border-bottom: 2px solid rgba(251,191,36,0.3); margin-bottom: 20px;
-        }
+        .quiz-top-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 15px; border-bottom: 2px solid rgba(251,191,36,0.3); margin-bottom: 20px; }
         .player-name { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: bold; }
         .player-name i { font-size: 1.5rem; }
         .score-display { display: flex; align-items: center; gap: 8px; font-size: 1.3rem; font-weight: bold; }
         .score-display i { font-size: 1.5rem; }
-
-        .quiz-info-bar {
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold;
-        }
+        .quiz-info-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold; }
         .timer-display { display: flex; align-items: center; gap: 8px; }
-
-        .timer-bar-container {
-            width: 100%; height: 10px;
-            background: rgba(251,191,36,0.2); border-radius: 5px;
-            overflow: hidden; margin-bottom: 25px;
-        }
-        .timer-bar-fill {
-            height: 100%; width: 100%;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
-            transition: width 1s linear; border-radius: 5px;
-        }
-
-        .question-box {
-            background: rgba(10, 14, 39, 0.9);
-            border: 3px solid #fbbf24; border-radius: 15px;
-            padding: 25px; margin-bottom: 25px; text-align: center; width: 100%;
-            box-shadow: 0 0 20px rgba(251,191,36,0.3);
-        }
+        .timer-bar-container { width: 100%; height: 10px; background: rgba(251,191,36,0.2); border-radius: 5px; overflow: hidden; margin-bottom: 25px; }
+        .timer-bar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #fbbf24, #f59e0b); transition: width 1s linear; border-radius: 5px; }
+        .question-box { background: rgba(10, 14, 39, 0.9); border: 3px solid #fbbf24; border-radius: 15px; padding: 25px; margin-bottom: 25px; text-align: center; width: 100%; box-shadow: 0 0 20px rgba(251,191,36,0.3); }
         #question-text { font-size: 1.25rem; line-height: 1.6; color: #fbbf24; font-weight: 600; }
-
         .options-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-bottom: 20px; }
-        .options-grid button {
-            background: rgba(10, 14, 39, 0.9);
-            border: 2px solid #06b6d4; color: #67e8f9;
-            padding: 16px 20px; border-radius: 12px; font-size: 1.1rem;
-            cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500;
-        }
-        .options-grid button:hover:not(:disabled) {
-            background: rgba(6, 182, 212, 0.15); border-color: #22d3ee;
-            transform: translateX(5px); box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
-        }
+        .options-grid button { background: rgba(10, 14, 39, 0.9); border: 2px solid #06b6d4; color: #67e8f9; padding: 16px 20px; border-radius: 12px; font-size: 1.1rem; cursor: pointer; text-align: left; transition: all 0.3s; font-weight: 500; }
+        .options-grid button:hover:not(:disabled) { background: rgba(6, 182, 212, 0.15); border-color: #22d3ee; transform: translateX(5px); box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
         .options-grid button.correct { background: #22c55e !important; border-color: #22c55e !important; color: white !important; }
         .options-grid button.wrong { background: #ef4444 !important; border-color: #ef4444 !important; color: white !important; }
         .options-grid button:disabled { cursor: not-allowed; opacity: 0.8; }
-
         .feedback { text-align: center; font-weight: bold; margin-bottom: 15px; min-height: 22px; font-size: 1.1rem; }
         .quit-btn { width: auto; align-self: center; }
-
-        .creator-credit {
-            text-align: center; font-size: 0.85rem; opacity: 0.8;
-            margin-top: 20px; padding: 10px;
-        }
-
+        .creator-credit { text-align: center; font-size: 0.85rem; opacity: 0.8; margin-top: 20px; padding: 10px; }
         .result-card { background: rgba(10, 14, 39, 0.9); border: 3px solid #fbbf24; }
         .result-icon { font-size: 4rem; margin-bottom: 10px; }
-        .score-circle {
-            width: 130px; height: 130px; margin: 20px auto;
-            border: 4px solid #fbbf24; border-radius: 50%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: rgba(251,191,36,0.2);
-        }
+        .score-circle { width: 130px; height: 130px; margin: 20px auto; border: 4px solid #fbbf24; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(251,191,36,0.2); }
         #final-score { font-size: 3rem; font-weight: bold; line-height: 1; }
         .total-score { font-size: 1rem; opacity: 0.9; }
         .message { font-size: 1.1rem; margin-bottom: 20px; }
@@ -191,9 +79,7 @@
         .text-red { color: #fca5a5; }
         .btn-group { display: flex; gap: 12px; margin-top: 15px; }
         .btn-group button { flex: 1; }
-
         .remaining-info { font-size: 0.9rem; opacity: 0.7; margin-top: 10px; }
-
         @media (max-width: 480px) {
             .app-container { padding: 15px; }
             .card { padding: 20px; }
@@ -225,12 +111,8 @@
                 <h2 id="lang-title">Select Language</h2>
                 <p class="subtitle" id="lang-subtitle">भाषा छान्नुहोस्</p>
                 <div class="lang-buttons">
-                    <button class="btn-lang" onclick="selectLanguage('ne')">
-                        <span class="lang-flag">🇳🇵</span> नेपाली
-                    </button>
-                    <button class="btn-lang" onclick="selectLanguage('en')">
-                        <span class="lang-flag">🇬🇧</span> English
-                    </button>
+                    <button class="btn-lang" onclick="selectLanguage('ne')"><span class="lang-flag">🇳🇵</span> नेपाली</button>
+                    <button class="btn-lang" onclick="selectLanguage('en')"><span class="lang-flag">🇬🇧</span> English</button>
                 </div>
             </div>
         </div>
@@ -274,39 +156,18 @@
 
         <div id="quiz-screen" class="screen">
             <div class="quiz-top-bar">
-                <div class="player-name">
-                    <i class="fas fa-user-circle"></i>
-                    <span id="current-player">Player</span>
-                </div>
-                <div class="score-display">
-                    <i class="fas fa-star"></i>
-                    <span id="current-score">0</span>
-                </div>
+                <div class="player-name"><i class="fas fa-user-circle"></i> <span id="current-player">Player</span></div>
+                <div class="score-display"><i class="fas fa-star"></i> <span id="current-score">0</span></div>
             </div>
-
             <div class="quiz-info-bar">
                 <span id="question-counter">1/10</span>
-                <div class="timer-display">
-                    <i class="fas fa-clock"></i>
-                    <span id="time-left">30</span>s
-                </div>
+                <div class="timer-display"><i class="fas fa-clock"></i> <span id="time-left">30</span>s</div>
             </div>
-
-            <div class="timer-bar-container">
-                <div id="timer-progress" class="timer-bar-fill"></div>
-            </div>
-
-            <div class="question-box">
-                <p id="question-text">Question will appear here...</p>
-            </div>
-
+            <div class="timer-bar-container"><div id="timer-progress" class="timer-bar-fill"></div></div>
+            <div class="question-box"><p id="question-text">Question will appear here...</p></div>
             <div id="options-container" class="options-grid"></div>
             <p id="answer-feedback" class="feedback"></p>
-
-            <button class="btn-back quit-btn" onclick="quitQuiz()">
-                <i class="fas fa-times"></i> <span id="quit-text">Quit</span>
-            </button>
-
+            <button class="btn-back quit-btn" onclick="quitQuiz()"><i class="fas fa-times"></i> <span id="quit-text">Quit</span></button>
             <p class="creator-credit">🙏 Created by Mahadev Bhakt Lokraj Awasthi & Bal Krishna Awasthi 🙏</p>
         </div>
 
@@ -320,21 +181,13 @@
                 </div>
                 <p id="score-message" class="message"></p>
                 <div class="stats">
-                    <span class="stat-item text-green">
-                        <i class="fas fa-check-circle"></i> <span id="correct-label">Correct</span>: <span id="correct-count">0</span>
-                    </span>
-                    <span class="stat-item text-red">
-                        <i class="fas fa-times-circle"></i> <span id="wrong-label">Wrong</span>: <span id="wrong-count">0</span>
-                    </span>
+                    <span class="stat-item text-green"><i class="fas fa-check-circle"></i> <span id="correct-label">Correct</span>: <span id="correct-count">0</span></span>
+                    <span class="stat-item text-red"><i class="fas fa-times-circle"></i> <span id="wrong-label">Wrong</span>: <span id="wrong-count">0</span></span>
                 </div>
                 <p class="remaining-info" id="remaining-info"></p>
                 <div class="btn-group">
-                    <button class="btn-primary" onclick="playAgain()">
-                        <i class="fas fa-redo"></i> <span id="replay-text">Play Again</span>
-                    </button>
-                    <button class="btn-danger" onclick="goHome()">
-                        <i class="fas fa-sign-out-alt"></i> <span id="exit-text">Exit</span>
-                    </button>
+                    <button class="btn-primary" onclick="playAgain()"><i class="fas fa-redo"></i> <span id="replay-text">Play Again</span></button>
+                    <button class="btn-danger" onclick="goHome()"><i class="fas fa-sign-out-alt"></i> <span id="exit-text">Exit</span></button>
                 </div>
             </div>
         </div>
@@ -343,66 +196,28 @@
     <script>
         const T = {
             en: {
-                welcomeTitle: 'Lokraj Gyan Hub',
-                welcomeSubtitle: 'Welcome to the Divine Quiz Portal',
-                startBtn: 'Start Quiz',
-                langTitle: 'Select Language',
-                langSubtitle: 'Choose your language',
-                nameTitle: 'Enter Your Name',
-                namePlaceholder: 'Enter your name...',
-                startQuiz: 'Start Quiz',
-                selectClass: 'Select Your Class',
-                subjects: 'Subjects',
-                back: 'Back',
-                quit: 'Quit',
-                correct: 'Correct',
-                wrong: 'Wrong',
-                resultTitle: 'Quiz Complete!',
-                playAgain: 'Play Again',
-                exit: 'Exit',
-                noQuestions: 'No questions found for this subject!',
-                loadFailed: 'Questions failed to load!',
-                correctMsg: '✓ Correct!',
-                wrongMsg: '✗ Wrong!',
-                timeUp: '⏰ Time up!',
-                excellent: 'Excellent! 🌟',
-                good: 'Good job! 👍',
-                practice: 'Keep practicing! 💪',
-                tryAgain: 'Try again! 📚',
-                remaining: 'questions left to play',
-                allDone: '🎉 You played ALL questions! Quiz will restart from beginning.',
-                availableSubjects: 'Available subjects in this class:'
+                welcomeTitle: 'Lokraj Gyan Hub', welcomeSubtitle: 'Welcome to the Divine Quiz Portal',
+                startBtn: 'Start Quiz', langTitle: 'Select Language', langSubtitle: 'Choose your language',
+                nameTitle: 'Enter Your Name', namePlaceholder: 'Enter your name...', startQuiz: 'Start Quiz',
+                selectClass: 'Select Your Class', subjects: 'Subjects', back: 'Back', quit: 'Quit',
+                correct: 'Correct', wrong: 'Wrong', resultTitle: 'Quiz Complete!', playAgain: 'Play Again',
+                exit: 'Exit', noQuestions: 'No questions found for this subject!',
+                loadFailed: 'Questions failed to load!', correctMsg: '✓ Correct!', wrongMsg: '✗ Wrong!',
+                timeUp: '⏰ Time up!', excellent: 'Excellent! 🌟', good: 'Good job! 👍',
+                practice: 'Keep practicing! 💪', tryAgain: 'Try again! 📚',
+                remaining: 'questions left to play', allDone: '🎉 You played ALL questions! Quiz will restart.'
             },
             ne: {
-                welcomeTitle: 'लोकराज ज्ञान हब',
-                welcomeSubtitle: 'दिव्य क्विज पोर्टलमा स्वागत छ',
-                startBtn: 'क्विज सुरु गर्नुहोस्',
-                langTitle: 'भाषा छान्नुहोस्',
-                langSubtitle: 'आफ्नो भाषा छान्नुहोस्',
-                nameTitle: 'तपाईंको नाम लेख्नुहोस्',
-                namePlaceholder: 'तपाईंको नाम लेख्नुहोस्...',
-                startQuiz: 'क्विज सुरु गर्नुहोस्',
-                selectClass: 'आफ्नो कक्षा छान्नुहोस्',
-                subjects: 'विषयहरू',
-                back: 'पछाडि',
-                quit: 'छोड्नुहोस्',
-                correct: 'सही',
-                wrong: 'गलत',
-                resultTitle: 'क्विज सकियो!',
-                playAgain: 'फेरि खेल्नुहोस्',
-                exit: 'बाहिर निस्कनुहोस्',
-                noQuestions: 'यस विषयको प्रश्न फेला परेन!',
-                loadFailed: 'प्रश्न लोड हुन सकेन!',
-                correctMsg: '✓ सही!',
-                wrongMsg: '✗ गलत!',
-                timeUp: '⏰ समय सकियो!',
-                excellent: 'उत्कृष्ट! 🌟',
-                good: 'राम्रो! 👍',
-                practice: 'अभ्यास गरिरहनुहोस्! 💪',
-                tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚',
-                remaining: 'वटा प्रश्न बाँकी छन्',
-                allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।',
-                availableSubjects: 'यस कक्षामा उपलब्ध विषयहरू:'
+                welcomeTitle: 'लोकराज ज्ञान हब', welcomeSubtitle: 'दिव्य क्विज पोर्टलमा स्वागत छ',
+                startBtn: 'क्विज सुरु गर्नुहोस्', langTitle: 'भाषा छान्नुहोस्', langSubtitle: 'आफ्नो भाषा छान्नुहोस्',
+                nameTitle: 'तपाईंको नाम लेख्नुहोस्', namePlaceholder: 'तपाईंको नाम लेख्नुहोस्...', startQuiz: 'क्विज सुरु गर्नुहोस्',
+                selectClass: 'आफ्नो कक्षा छान्नुहोस्', subjects: 'विषयहरू', back: 'पछाडि', quit: 'छोड्नुहोस्',
+                correct: 'सही', wrong: 'गलत', resultTitle: 'क्विज सकियो!', playAgain: 'फेरि खेल्नुहोस्',
+                exit: 'बाहिर निस्कनुहोस्', noQuestions: 'यस विषयको प्रश्न फेला परेन!',
+                loadFailed: 'प्रश्न लोड हुन सकेन!', correctMsg: '✓ सही!', wrongMsg: '✗ गलत!',
+                timeUp: '⏰ समय सकियो!', excellent: 'उत्कृष्ट! 🌟', good: 'राम्रो! 👍',
+                practice: 'अभ्यास गरिरहनुहोस्! 💪', tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚',
+                remaining: 'वटा प्रश्न बाँकी छन्', allDone: '🎉 तपाईंले सबै प्रश्न खेल्नुभयो! क्विज फेरि सुरु हुन्छ।'
             }
         };
 
@@ -423,18 +238,25 @@
         let currentLang = 'en';
         let questions = [];
         let currentQuestion = 0;
-        let score = 0;
-        let correctCount = 0;
-        let wrongCount = 0;
+        let score = 0, correctCount = 0, wrongCount = 0;
         let playerName = '';
-        let timer;
-        let timeLeft = 30;
+        let timer, timeLeft = 30;
         let allQuestionsData = [];
-        let currentClassId = '';
-        let currentSubjectName = '';
+        let currentClassId = '', currentSubjectName = '';
 
+        // ✅ भाषा पहिचान: Devanagari अक्षर भए = Nepali
+        function isNepaliText(text) {
+            return /[\u0900-\u097F]/.test(text || '');
+        }
+
+        function normalizeText(text) {
+            if (!text) return '';
+            return text.toString().toLowerCase().trim().replace(/\s+/g, ' ');
+        }
+
+        // Played tracking — language अनुसार अलग (English र Nepali को history छुट्टै)
         function getPlayedKey() {
-            return `played_${currentClassId}_${currentSubjectName}`;
+            return `played_${currentClassId}_${currentSubjectName}_${currentLang}`;
         }
         function getPlayedIds() {
             try { return JSON.parse(localStorage.getItem(getPlayedKey())) || []; }
@@ -510,12 +332,7 @@
             showScreen('subject-screen');
         }
 
-        // 🔧 CASE-INSENSITIVE MATCH (ठूलो/सानो अक्षर फरक पर्दैन)
-        function normalizeText(text) {
-            if (!text) return '';
-            return text.toString().toLowerCase().trim().replace(/\s+/g, ' ');
-        }
-
+        // 🔥 SMART LANGUAGE FILTER + FALLBACK
         async function startQuiz(classId, subject) {
             currentClassId = classId;
             currentSubjectName = subject;
@@ -529,57 +346,46 @@
                 const normClassId = normalizeText(classId);
                 const normSubject = normalizeText(subject);
 
-                // 🔧 Case-insensitive filter
-                let pool = allQuestionsData.filter(q => {
-                    const qCat = normalizeText(q.category);
-                    const qSub = normalizeText(q.subject);
-                    return qCat === normClassId && qSub === normSubject;
-                });
+                // 1. Class + Subject filter (case-insensitive)
+                let pool = allQuestionsData.filter(q =>
+                    normalizeText(q.category) === normClassId &&
+                    normalizeText(q.subject) === normSubject
+                );
 
-                // यदि match भएन भने, debug info देखाउने
                 if (pool.length === 0) {
-                    // JSON मा यस class का कुन subjects छन् हेर्ने
-                    const availableInClass = [...new Set(
-                        allQuestionsData
-                            .filter(q => normalizeText(q.category) === normClassId)
-                            .map(q => q.subject)
-                    )];
-                   
-                    const allCategories = [...new Set(
-                        allQuestionsData.map(q => q.category)
-                    )];
-
-                    let errorMsg = T[currentLang].noQuestions + '\n\n';
-                    errorMsg += `Looking for: class="${classId}", subject="${subject}"\n\n`;
-                   
-                    if (availableInClass.length > 0) {
-                        errorMsg += `${T[currentLang].availableSubjects}\n`;
-                        errorMsg += availableInClass.join(', ');
-                    } else {
-                        errorMsg += `No questions for class "${classId}" at all.\n`;
-                        errorMsg += `Available classes in JSON:\n${allCategories.join(', ')}`;
-                    }
-                   
-                    alert(errorMsg);
+                    alert(T[currentLang].noQuestions);
                     return;
                 }
 
+                // 2. ✅ भाषा अनुसार filter — तर fallback सहित!
+                let langPool;
+                if (currentLang === 'ne') {
+                    langPool = pool.filter(q => isNepaliText(q.question));
+                } else {
+                    langPool = pool.filter(q => !isNepaliText(q.question));
+                }
+
+                // यदि त्यो भाषाका प्रश्न छैनन् → fallback: सबै प्रश्न देखाउ (No questions error आउँदैन!)
+                if (langPool.length === 0) {
+                    langPool = pool;
+                }
+
+                // 3. Played हटाउने (No Repeat)
                 const playedIds = getPlayedIds();
-                let fresh = pool.filter(q => !playedIds.includes(q.id));
+                let fresh = langPool.filter(q => !playedIds.includes(q.id));
 
                 if (fresh.length === 0) {
                     alert(T[currentLang].allDone);
                     savePlayedIds([]);
-                    fresh = pool;
+                    fresh = langPool;
                 }
 
+                // 4. Shuffle + 10 मात्र
                 fresh = fresh.sort(() => Math.random() - 0.5);
                 questions = fresh.slice(0, QUESTIONS_PER_ROUND);
 
                 currentQuestion = 0;
-                score = 0;
-                correctCount = 0;
-                wrongCount = 0;
+                score = 0; correctCount = 0; wrongCount = 0;
                 document.getElementById('total-q').textContent = questions.length;
                 document.getElementById('current-score').textContent = '0';
 
@@ -599,14 +405,12 @@
 
             const container = document.getElementById('options-container');
             container.innerHTML = '';
-
             q.options.forEach((opt, index) => {
                 const btn = document.createElement('button');
                 btn.textContent = opt;
                 btn.onclick = () => selectAnswer(index, btn);
                 container.appendChild(btn);
             });
-
             startTimer();
         }
 
@@ -614,26 +418,18 @@
             timeLeft = 30;
             document.getElementById('time-left').textContent = timeLeft;
             document.getElementById('timer-progress').style.width = '100%';
-
             clearInterval(timer);
             timer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('time-left').textContent = timeLeft;
                 document.getElementById('timer-progress').style.width = `${(timeLeft / 30) * 100}%`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    autoAnswer();
-                }
+                if (timeLeft <= 0) { clearInterval(timer); autoAnswer(); }
             }, 1000);
         }
 
         function markAsPlayed(q) {
             const ids = getPlayedIds();
-            if (!ids.includes(q.id)) {
-                ids.push(q.id);
-                savePlayedIds(ids);
-            }
+            if (!ids.includes(q.id)) { ids.push(q.id); savePlayedIds(ids); }
         }
 
         function selectAnswer(index, btn) {
@@ -641,22 +437,15 @@
             const q = questions[currentQuestion];
             const allBtns = document.querySelectorAll('.options-grid button');
             allBtns.forEach(b => b.disabled = true);
-
             markAsPlayed(q);
-
             const t = T[currentLang];
             if (index === q.answer) {
-                btn.classList.add('correct');
-                score++;
-                correctCount++;
+                btn.classList.add('correct'); score++; correctCount++;
                 document.getElementById('answer-feedback').textContent = t.correctMsg;
             } else {
-                btn.classList.add('wrong');
-                allBtns[q.answer].classList.add('correct');
-                wrongCount++;
+                btn.classList.add('wrong'); allBtns[q.answer].classList.add('correct'); wrongCount++;
                 document.getElementById('answer-feedback').textContent = t.wrongMsg;
             }
-
             document.getElementById('current-score').textContent = score;
             nextAfterDelay();
         }
@@ -666,8 +455,7 @@
             const allBtns = document.querySelectorAll('.options-grid button');
             allBtns.forEach(b => b.disabled = true);
             allBtns[q.answer].classList.add('correct');
-            wrongCount++;
-            markAsPlayed(q);
+            wrongCount++; markAsPlayed(q);
             document.getElementById('answer-feedback').textContent = T[currentLang].timeUp;
             nextAfterDelay();
         }
@@ -675,11 +463,8 @@
         function nextAfterDelay() {
             setTimeout(() => {
                 currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    showQuestion();
-                } else {
-                    showResult();
-                }
+                if (currentQuestion < questions.length) showQuestion();
+                else showResult();
             }, 1500);
         }
 
@@ -688,14 +473,12 @@
             document.getElementById('final-score').textContent = score;
             document.getElementById('correct-count').textContent = correctCount;
             document.getElementById('wrong-count').textContent = wrongCount;
-
             const percentage = (score / questions.length) * 100;
             let message = '';
             if (percentage >= 80) message = t.excellent;
             else if (percentage >= 60) message = t.good;
             else if (percentage >= 40) message = t.practice;
             else message = t.tryAgain;
-
             document.getElementById('score-message').textContent = message;
 
             const playedCount = getPlayedIds().length;
@@ -710,19 +493,9 @@
             showScreen('result-screen');
         }
 
-        function playAgain() {
-            startQuiz(currentClassId, currentSubjectName);
-        }
-
-        function goHome() {
-            clearInterval(timer);
-            showScreen('category-screen');
-        }
-
-        function quitQuiz() {
-            clearInterval(timer);
-            showScreen('category-screen');
-        }
+        function playAgain() { startQuiz(currentClassId, currentSubjectName); }
+        function goHome() { clearInterval(timer); showScreen('category-screen'); }
+        function quitQuiz() { clearInterval(timer); showScreen('category-screen'); }
 
         window.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.garland, .garland-top, .garland-bottom, .garland-left, .garland-right')
