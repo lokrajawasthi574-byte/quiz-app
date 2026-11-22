@@ -15,9 +15,7 @@
             min-height: 100vh;
         }
 
-        .garland, .garland-top, .garland-bottom, .garland-left, .garland-right {
-            display: none !important;
-        }
+        .garland, .garland-top, .garland-bottom, .garland-left, .garland-right { display: none !important; }
 
         .app-container {
             padding: 20px;
@@ -129,60 +127,111 @@
             background: #fbbf24; color: #0a0e27; transform: translateY(-3px);
         }
 
+        /* ========== QUIZ SCREEN - Picture 4 जस्तै ========== */
         #quiz-screen { max-width: 600px; }
-        .quiz-header {
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%; margin-bottom: 20px; padding-bottom: 15px;
-            border-bottom: 2px solid rgba(251,191,36,0.5);
+       
+        .quiz-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(251,191,36,0.3);
+            margin-bottom: 20px;
         }
-        .player-info, .score-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; color: #fbbf24; }
-
-        .timer-container { width: 100%; margin-bottom: 25px; }
-        .timer-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: #fbbf24; }
-        .timer-bar { height: 8px; background: rgba(251,191,36,0.2); border-radius: 4px; overflow: hidden; }
-        .timer-progress {
-            height: 100%; width: 100%;
+       
+        .player-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+        .player-name i { font-size: 1.5rem; }
+       
+        .score-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+        .score-display i { color: #fbbf24; font-size: 1.5rem; }
+       
+        .quiz-info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+       
+        .timer-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fbbf24;
+        }
+        .timer-display i { color: #fbbf24; }
+       
+        .timer-bar-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(251,191,36,0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        .timer-bar-fill {
+            height: 100%;
             background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            width: 100%;
             transition: width 1s linear;
+            border-radius: 5px;
         }
 
-        /* ❓ QUESTION BOX - नयाँ Warm Orange/Amber रंग */
+        /* ❓ QUESTION BOX - GOLDEN (Picture 4 जस्तै) */
         .question-box {
-            background: linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #c2410c 100%);
-            border: 2px solid #fb923c;
+            background: rgba(10, 14, 39, 0.9);
+            border: 3px solid #fbbf24;
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 25px;
             text-align: center;
             width: 100%;
-            box-shadow: 0 0 25px rgba(251, 146, 60, 0.4);
+            box-shadow: 0 0 20px rgba(251,191,36,0.3);
         }
         #question-text {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             line-height: 1.6;
-            color: #fff7ed;
+            color: #fbbf24;
             font-weight: 600;
         }
 
-        /* 🔘 OPTIONS - Purple/Violet रंग */
+        /* 🔘 OPTIONS - CYAN/TEAL रंग (Golden भन्दा फरक) */
         .options-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-bottom: 20px; }
         .options-grid button {
-            background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 100%);
-            border: 2px solid #8b5cf6;
-            color: #e9d5ff;
-            padding: 15px;
+            background: rgba(10, 14, 39, 0.9);
+            border: 2px solid #06b6d4;
+            color: #67e8f9;
+            padding: 16px 20px;
             border-radius: 12px;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             cursor: pointer;
             text-align: left;
             transition: all 0.3s;
             font-weight: 500;
         }
         .options-grid button:hover:not(:disabled) {
-            background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%);
-            border-color: #a78bfa;
+            background: rgba(6, 182, 212, 0.15);
+            border-color: #22d3ee;
             transform: translateX(5px);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
         }
         .options-grid button.correct {
             background: #22c55e !important;
@@ -196,7 +245,7 @@
         }
         .options-grid button:disabled { cursor: not-allowed; opacity: 0.8; }
 
-        .feedback { text-align: center; font-weight: bold; margin-bottom: 15px; min-height: 22px; color: #fbbf24; }
+        .feedback { text-align: center; font-weight: bold; margin-bottom: 15px; min-height: 22px; color: #fbbf24; font-size: 1.1rem; }
         .quit-btn { width: auto; align-self: center; }
 
         .creator-credit {
@@ -236,119 +285,209 @@
 </head>
 <body>
     <div class="app-container">
+        <!-- WELCOME -->
         <div id="welcome-screen" class="screen active">
             <div class="card">
                 <div class="om-symbol">ॐ</div>
-                <h1>Lokraj Gyan Hub</h1>
+                <h1 id="welcome-title">Lokraj Gyan Hub</h1>
                 <p class="subtitle">हर हर महादेव 🙏</p>
-                <p class="welcome-text">Welcome to the Divine Quiz Portal</p>
-                <button class="btn-primary" onclick="showScreen('language-screen')" style="margin-top: 20px;">
-                    Start Quiz <i class="fas fa-arrow-right"></i>
+                <p class="welcome-text" id="welcome-subtitle">Welcome to the Divine Quiz Portal</p>
+                <button class="btn-primary" onclick="showScreen('language-screen')">
+                    <span id="start-btn-text">Start Quiz</span> <i class="fas fa-arrow-right"></i>
                 </button>
-                <div class="welcome-loader">
-                    <span class="loader-dot"></span>
-                    <span class="loader-dot"></span>
-                    <span class="loader-dot"></span>
-                </div>
             </div>
         </div>
 
+        <!-- LANGUAGE -->
         <div id="language-screen" class="screen">
             <div class="card">
                 <div class="om-symbol small">ॐ</div>
-                <h2>Select Language</h2>
-                <p class="subtitle">भाषा छान्नुहोस्</p>
+                <h2 id="lang-title">Select Language</h2>
+                <p class="subtitle" id="lang-subtitle">भाषा छान्नुहोस्</p>
                 <div class="lang-buttons">
-                    <button class="btn-lang" onclick="selectLanguage('ne')"><span class="lang-flag">🇳🇵</span> नेपाली</button>
-                    <button class="btn-lang" onclick="selectLanguage('en')"><span class="lang-flag">🇬🇧</span> English</button>
+                    <button class="btn-lang" onclick="selectLanguage('ne')">
+                        <span class="lang-flag">🇳🇵</span> <span id="nepali-text">नेपाली</span>
+                    </button>
+                    <button class="btn-lang" onclick="selectLanguage('en')">
+                        <span class="lang-flag">🇬🇧</span> <span id="english-text">English</span>
+                    </button>
                 </div>
             </div>
         </div>
 
+        <!-- NAME -->
         <div id="name-screen" class="screen">
             <div class="card">
                 <div class="om-symbol small">ॐ</div>
-                <h2>Enter Your Name</h2>
+                <h2 id="name-title">Enter Your Name</h2>
                 <form id="name-form">
                     <div class="input-group">
                         <i class="fas fa-user"></i>
                         <input type="text" id="access-name" placeholder="Enter your name..." required>
                     </div>
-                    <button type="submit" class="btn-primary">Start Quiz <i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn-primary">
+                        <span id="start-quiz-text">Start Quiz</span> <i class="fas fa-arrow-right"></i>
+                    </button>
                 </form>
             </div>
         </div>
 
+        <!-- CLASS -->
         <div id="category-screen" class="screen">
             <div class="header">
-                <button class="btn-back" onclick="showScreen('welcome-screen')"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-back" onclick="showScreen('welcome-screen')">
+                    <i class="fas fa-arrow-left"></i> <span class="back-text">Back</span>
+                </button>
                 <h2 id="greeting-text">Welcome, Lokraj Gyan Hub! 🙏</h2>
-                <p>Select Your Class</p>
+                <p id="select-class-text">Select Your Class</p>
             </div>
             <div class="grid-container" id="class-list"></div>
         </div>
 
+        <!-- SUBJECT (Chapter हटाइयो - सिधै Quiz) -->
         <div id="subject-screen" class="screen">
             <div class="header">
-                <button class="btn-back" onclick="showScreen('category-screen')"><i class="fas fa-arrow-left"></i> Back</button>
-                <h2>Subjects</h2>
+                <button class="btn-back" onclick="showScreen('category-screen')">
+                    <i class="fas fa-arrow-left"></i> <span class="back-text">Back</span>
+                </button>
+                <h2 id="subject-title">Subjects</h2>
             </div>
             <div class="grid-container" id="subject-list"></div>
         </div>
 
-        <div id="chapter-screen" class="screen">
-            <div class="header">
-                <button class="btn-back" onclick="showScreen('subject-screen')"><i class="fas fa-arrow-left"></i> Back</button>
-                <h2>Chapters</h2>
-            </div>
-            <div class="list-container" id="chapter-list"></div>
-        </div>
-
+        <!-- QUIZ - Picture 4 जस्तै design -->
         <div id="quiz-screen" class="screen">
-            <div class="quiz-header">
-                <div class="player-info"><i class="fas fa-user-circle"></i> <span id="current-player">Player</span></div>
-                <div class="score-badge"><i class="fas fa-star"></i> <span id="current-score">0</span></div>
-            </div>
-            <div class="timer-container">
-                <div class="timer-info">
-                    <span id="question-counter">1/10</span>
-                    <span class="timer-badge"><i class="fas fa-clock"></i> <span id="time-left">30</span>s</span>
+            <div class="quiz-top-bar">
+                <div class="player-name">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="current-player">Player</span>
                 </div>
-                <div class="timer-bar"><div id="timer-progress" class="timer-progress"></div></div>
+                <div class="score-display">
+                    <i class="fas fa-star"></i>
+                    <span id="current-score">0</span>
+                </div>
             </div>
-            <div class="question-box"><p id="question-text">Question will appear here...</p></div>
+           
+            <div class="quiz-info-bar">
+                <span id="question-counter">1/10</span>
+                <div class="timer-display">
+                    <i class="fas fa-clock"></i>
+                    <span id="time-left">30</span>s
+                </div>
+            </div>
+           
+            <div class="timer-bar-container">
+                <div id="timer-progress" class="timer-bar-fill"></div>
+            </div>
+           
+            <div class="question-box">
+                <p id="question-text">Question will appear here...</p>
+            </div>
+           
             <div id="options-container" class="options-grid"></div>
             <p id="answer-feedback" class="feedback"></p>
-            <button class="btn-back quit-btn" onclick="quitQuiz()"><i class="fas fa-times"></i> Quit</button>
+           
+            <button class="btn-back quit-btn" onclick="quitQuiz()">
+                <i class="fas fa-times"></i> <span id="quit-text">Quit</span>
+            </button>
+           
             <p class="creator-credit">🙏 Created by Mahadev Bhakt Lokraj Awasthi & Bal Krishna Awasthi 🙏</p>
         </div>
 
+        <!-- RESULT -->
         <div id="result-screen" class="screen">
             <div class="card result-card">
                 <div class="result-icon">🏆</div>
-                <h2>Quiz Complete!</h2>
+                <h2 id="result-title">Quiz Complete!</h2>
                 <div class="score-circle">
                     <span id="final-score">0</span>
                     <span class="total-score">/ <span id="total-q">10</span></span>
                 </div>
                 <p id="score-message" class="message"></p>
                 <div class="stats">
-                    <span class="stat-item text-green"><i class="fas fa-check-circle"></i> Correct: <span id="correct-count">0</span></span>
-                    <span class="stat-item text-red"><i class="fas fa-times-circle"></i> Wrong: <span id="wrong-count">0</span></span>
+                    <span class="stat-item text-green">
+                        <i class="fas fa-check-circle"></i> <span id="correct-label">Correct</span>: <span id="correct-count">0</span>
+                    </span>
+                    <span class="stat-item text-red">
+                        <i class="fas fa-times-circle"></i> <span id="wrong-label">Wrong</span>: <span id="wrong-count">0</span>
+                    </span>
                 </div>
                 <div class="btn-group">
-                    <button class="btn-primary" onclick="restartGame()"><i class="fas fa-redo"></i> Play Again</button>
-                    <button class="btn-danger" onclick="quitQuiz()"><i class="fas fa-sign-out-alt"></i> Exit</button>
+                    <button class="btn-primary" onclick="restartGame()">
+                        <i class="fas fa-redo"></i> <span id="replay-text">Play Again</span>
+                    </button>
+                    <button class="btn-danger" onclick="quitQuiz()">
+                        <i class="fas fa-sign-out-alt"></i> <span id="exit-text">Exit</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.garland, .garland-top, .garland-bottom, .garland-left, .garland-right').forEach(el => el.remove());
-        });
+        // ========== LANGUAGE TRANSLATIONS ==========
+        const translations = {
+            en: {
+                welcomeTitle: 'Lokraj Gyan Hub',
+                welcomeSubtitle: 'Welcome to the Divine Quiz Portal',
+                startBtn: 'Start Quiz',
+                langTitle: 'Select Language',
+                langSubtitle: 'Choose your language',
+                nameTitle: 'Enter Your Name',
+                namePlaceholder: 'Enter your name...',
+                startQuiz: 'Start Quiz',
+                greeting: 'Welcome',
+                selectClass: 'Select Your Class',
+                subjects: 'Subjects',
+                back: 'Back',
+                quit: 'Quit',
+                correct: 'Correct',
+                wrong: 'Wrong',
+                resultTitle: 'Quiz Complete!',
+                playAgain: 'Play Again',
+                exit: 'Exit',
+                noQuestions: 'No questions found for this subject!',
+                loadFailed: 'Questions failed to load!',
+                correctMsg: '✓ Correct!',
+                wrongMsg: '✗ Wrong!',
+                timeUp: '⏰ Time up!',
+                excellent: 'Excellent! 🌟',
+                good: 'Good job! 👍',
+                practice: 'Keep practicing! 💪',
+                tryAgain: 'Try again! 📚'
+            },
+            ne: {
+                welcomeTitle: 'लोकराज ज्ञान हब',
+                welcomeSubtitle: 'दिव्य क्विज पोर्टलमा स्वागत छ',
+                startBtn: 'क्विज सुरु गर्नुहोस्',
+                langTitle: 'भाषा छान्नुहोस्',
+                langSubtitle: 'आफ्नो भाषा छान्नुहोस्',
+                nameTitle: 'तपाईंको नाम लेख्नुहोस्',
+                namePlaceholder: 'तपाईंको नाम लेख्नुहोस्...',
+                startQuiz: 'क्विज सुरु गर्नुहोस्',
+                greeting: 'स्वागत छ',
+                selectClass: 'आफ्नो कक्षा छान्नुहोस्',
+                subjects: 'विषयहरू',
+                back: 'पछाडि',
+                quit: 'छोड्नुहोस्',
+                correct: 'सही',
+                wrong: 'गलत',
+                resultTitle: 'क्विज सकियो!',
+                playAgain: 'फेरि खेल्नुहोस्',
+                exit: 'बाहिर निस्कनुहोस्',
+                noQuestions: 'यस विषयको प्रश्न फेला परेन!',
+                loadFailed: 'प्रश्न लोड हुन सकेन!',
+                correctMsg: '✓ सही!',
+                wrongMsg: '✗ गलत!',
+                timeUp: '⏰ समय सकियो!',
+                excellent: 'उत्कृष्ट! 🌟',
+                good: 'राम्रो! 👍',
+                practice: 'अभ्यास गरिरहनुहोस्! 💪',
+                tryAgain: 'फेरि प्रयास गर्नुहोस्! 📚'
+            }
+        };
 
+        let currentLang = 'en';
         let questions = [];
         let currentQuestion = 0;
         let score = 0;
@@ -357,6 +496,30 @@
         let playerName = '';
         let timer;
         let timeLeft = 30;
+        let allQuestionsData = [];
+
+        // ========== LANGUAGE APPLY ==========
+        function applyLanguage() {
+            const t = translations[currentLang];
+            document.getElementById('welcome-title').textContent = t.welcomeTitle;
+            document.getElementById('welcome-subtitle').textContent = t.welcomeSubtitle;
+            document.getElementById('start-btn-text').textContent = t.startBtn;
+            document.getElementById('lang-title').textContent = t.langTitle;
+            document.getElementById('lang-subtitle').textContent = t.langSubtitle;
+            document.getElementById('name-title').textContent = t.nameTitle;
+            document.getElementById('access-name').placeholder = t.namePlaceholder;
+            document.getElementById('start-quiz-text').textContent = t.startQuiz;
+            document.getElementById('select-class-text').textContent = t.selectClass;
+            document.getElementById('subject-title').textContent = t.subjects;
+            document.getElementById('quit-text').textContent = t.quit;
+            document.getElementById('correct-label').textContent = t.correct;
+            document.getElementById('wrong-label').textContent = t.wrong;
+            document.getElementById('result-title').textContent = t.resultTitle;
+            document.getElementById('replay-text').textContent = t.playAgain;
+            document.getElementById('exit-text').textContent = t.exit;
+           
+            document.querySelectorAll('.back-text').forEach(el => el.textContent = t.back);
+        }
 
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -364,6 +527,8 @@
         }
 
         function selectLanguage(lang) {
+            currentLang = lang;
+            applyLanguage();
             showScreen('name-screen');
         }
 
@@ -377,62 +542,75 @@
             }
         });
 
+        // ========== LOAD CLASSES ==========
         function loadClasses() {
-            const classes = ['Class 8', 'Class 9', 'Class 10', 'Class 11', 'Class 12'];
+            const classes = [
+                { id: 'class8', name: currentLang === 'ne' ? 'कक्षा ८' : 'Class 8' },
+                { id: 'class9', name: currentLang === 'ne' ? 'कक्षा ९' : 'Class 9' },
+                { id: 'class10', name: currentLang === 'ne' ? 'कक्षा १०' : 'Class 10' },
+                { id: 'class11', name: currentLang === 'ne' ? 'कक्षा ११' : 'Class 11' },
+                { id: 'class12', name: currentLang === 'ne' ? 'कक्षा १२' : 'Class 12' }
+            ];
             const container = document.getElementById('class-list');
             container.innerHTML = '';
             classes.forEach(cls => {
                 const btn = document.createElement('button');
-                btn.textContent = cls;
-                btn.onclick = () => loadSubjects(cls);
+                btn.textContent = cls.name;
+                btn.onclick = () => loadSubjects(cls.id, cls.name);
                 container.appendChild(btn);
             });
         }
 
-        function loadSubjects(className) {
-            const subjects = {
-                'Class 8': ['Science', 'Math', 'Computer'],
-                'Class 9': ['Science', 'Math', 'Computer'],
-                'Class 10': ['Science', 'Math', 'Computer'],
-                'Class 11': ['Physics', 'Chemistry', 'Biology', 'Math'],
-                'Class 12': ['Physics', 'Chemistry', 'Biology', 'Math']
-            };
-            const container = document.getElementById('subject-list');
-            container.innerHTML = '';
-            subjects[className].forEach(sub => {
-                const btn = document.createElement('button');
-                btn.textContent = sub;
-                btn.onclick = () => loadChapters(className, sub);
-                container.appendChild(btn);
-            });
-            showScreen('subject-screen');
-        }
-
-        function loadChapters(className, subject) {
-            const chapters = ['Chapter 1', 'Chapter 2', 'Chapter 3'];
-            const container = document.getElementById('chapter-list');
-            container.innerHTML = '';
-            chapters.forEach(chap => {
-                const btn = document.createElement('button');
-                btn.textContent = chap;
-                btn.onclick = () => startQuiz(className, subject, chap);
-                container.appendChild(btn);
-            });
-            showScreen('chapter-screen');
-        }
-
-        async function startQuiz(className, subject, chapter) {
+        // ========== LOAD SUBJECTS (JSON बाट dynamic) ==========
+        async function loadSubjects(classId, className) {
             try {
-                const response = await fetch('questions.json');
-                const allQuestions = await response.json();
+                if (allQuestionsData.length === 0) {
+                    const response = await fetch('questions.json');
+                    allQuestionsData = await response.json();
+                }
                
-                questions = allQuestions.filter(q =>
-                    q.category === className.toLowerCase().replace(' ', '') &&
+                // यस class का subjects निकाल्ने
+                const subjects = [...new Set(
+                    allQuestionsData
+                        .filter(q => q.category && q.category.toLowerCase() === classId)
+                        .map(q => q.subject)
+                )];
+               
+                if (subjects.length === 0) {
+                    alert(translations[currentLang].noQuestions);
+                    return;
+                }
+               
+                const container = document.getElementById('subject-list');
+                container.innerHTML = '';
+                subjects.forEach(sub => {
+                    const btn = document.createElement('button');
+                    btn.textContent = sub;
+                    btn.onclick = () => startQuiz(classId, sub);
+                    container.appendChild(btn);
+                });
+                showScreen('subject-screen');
+            } catch (error) {
+                alert(translations[currentLang].loadFailed);
+                console.error(error);
+            }
+        }
+
+        // ========== START QUIZ (Chapter हटाइयो - सिधै) ==========
+        async function startQuiz(classId, subject) {
+            try {
+                if (allQuestionsData.length === 0) {
+                    const response = await fetch('questions.json');
+                    allQuestionsData = await response.json();
+                }
+               
+                questions = allQuestionsData.filter(q =>
+                    q.category && q.category.toLowerCase() === classId &&
                     q.subject === subject
                 );
                
                 if (questions.length === 0) {
-                    alert('No questions found!');
+                    alert(translations[currentLang].noQuestions);
                     return;
                 }
                
@@ -446,14 +624,15 @@
                 showScreen('quiz-screen');
                 showQuestion();
             } catch (error) {
-                alert('Questions failed to load!');
+                alert(translations[currentLang].loadFailed);
                 console.error(error);
             }
         }
 
         function showQuestion() {
             const q = questions[currentQuestion];
-            document.getElementById('question-counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+            document.getElementById('question-counter').textContent =
+                `${currentQuestion + 1}/${questions.length}`;
             document.getElementById('question-text').textContent = q.question;
             document.getElementById('answer-feedback').textContent = '';
            
@@ -479,7 +658,8 @@
             timer = setInterval(() => {
                 timeLeft--;
                 document.getElementById('time-left').textContent = timeLeft;
-                document.getElementById('timer-progress').style.width = `${(timeLeft / 30) * 100}%`;
+                document.getElementById('timer-progress').style.width =
+                    `${(timeLeft / 30) * 100}%`;
                
                 if (timeLeft <= 0) {
                     clearInterval(timer);
@@ -495,16 +675,17 @@
            
             allBtns.forEach(b => b.disabled = true);
            
+            const t = translations[currentLang];
             if (index === q.answer) {
                 btn.classList.add('correct');
                 score++;
                 correctCount++;
-                document.getElementById('answer-feedback').textContent = '✓ Correct!';
+                document.getElementById('answer-feedback').textContent = t.correctMsg;
             } else {
                 btn.classList.add('wrong');
                 allBtns[q.answer].classList.add('correct');
                 wrongCount++;
-                document.getElementById('answer-feedback').textContent = '✗ Wrong!';
+                document.getElementById('answer-feedback').textContent = t.wrongMsg;
             }
            
             document.getElementById('current-score').textContent = score;
@@ -525,7 +706,8 @@
             allBtns.forEach(b => b.disabled = true);
             allBtns[q.answer].classList.add('correct');
             wrongCount++;
-            document.getElementById('answer-feedback').textContent = '⏰ Time up!';
+            document.getElementById('answer-feedback').textContent =
+                translations[currentLang].timeUp;
            
             setTimeout(() => {
                 currentQuestion++;
@@ -538,16 +720,17 @@
         }
 
         function showResult() {
+            const t = translations[currentLang];
             document.getElementById('final-score').textContent = score;
             document.getElementById('correct-count').textContent = correctCount;
             document.getElementById('wrong-count').textContent = wrongCount;
            
             const percentage = (score / questions.length) * 100;
             let message = '';
-            if (percentage >= 80) message = 'Excellent! 🌟';
-            else if (percentage >= 60) message = 'Good job! 👍';
-            else if (percentage >= 40) message = 'Keep practicing! 💪';
-            else message = 'Try again! 📚';
+            if (percentage >= 80) message = t.excellent;
+            else if (percentage >= 60) message = t.good;
+            else if (percentage >= 40) message = t.practice;
+            else message = t.tryAgain;
            
             document.getElementById('score-message').textContent = message;
             showScreen('result-screen');
@@ -559,10 +742,15 @@
 
         function quitQuiz() {
             clearInterval(timer);
-            showScreen('welcome-screen');
+            showScreen('category-screen');
         }
 
-        showScreen('welcome-screen');
+        // ========== INIT ==========
+        window.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.garland, .garland-top, .garland-bottom, .garland-left, .garland-right')
+                .forEach(el => el.remove());
+            applyLanguage();
+        });
     </script>
 </body>
 </html> 
